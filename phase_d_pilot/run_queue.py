@@ -30,6 +30,9 @@ LOGS = QDIR / "logs"
 SNAP_SHA_FILE = ROOT / "dist" / "stage06_frozen_snapshot_v2.sha256"
 SHA = SNAP_SHA_FILE.read_text(encoding="utf-8").splitlines()[1].split()[0] if SNAP_SHA_FILE.exists() else "NOT-FROZEN-YET"
 BASE = ["--frozen-root", str(ROOT), "--snapshot", str(ROOT / "dist/stage06_frozen_snapshot_v2.zip"), "--manifest-sha", SHA]
+# Environments that differ from the frozen one (e.g. Linux) need a passing `qualify` report; set PHASE_D_QUALIFICATION to its path.
+if os.environ.get("PHASE_D_QUALIFICATION"):
+    BASE += ["--qualification", os.environ["PHASE_D_QUALIFICATION"]]
 REF = str(WORK / "ref_w4" / "ckpt")
 H = [sys.executable, "-u", str(HERE / "pilot_harness.py")]
 

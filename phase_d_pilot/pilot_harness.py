@@ -106,8 +106,14 @@ def compare_ckpt(ctx: Ctx, ref_parent: Path, test_parent: Path) -> dict:
         except (ValueError, OSError):
             res["meta_differs"].append(f"{n}:unreadable_json")
             continue
+        # v2 unit schema: each record carries record_sha256 over the whole record INCLUDING `seconds`. Check that every record is
+        # self-consistent, then compare without the two timing-dependent fields (seconds; record_sha256, a function of them).
+        for tag, d in (("ref", a), ("test", b)):
+            if d.get("record_sha256") != P.record_checksum(d):
+                res["meta_differs"].append(f"{n}:record_checksum_invalid_{tag}")
         for d in (a, b):
             d.pop("seconds", None)
+            d.pop("record_sha256", None)
         if a != b:
             res["meta_differs"].append(n)
         if (ref / f"{n}.npz").read_bytes() != (tst / f"{n}.npz").read_bytes():
@@ -323,7 +329,9 @@ def t_corruption_tests(ctx: Ctx, a):
         r1 = ctx.run_sync(ctx.runner("run", base / "ckpt", base / "runs", 1), base / "resume1.log", 1)
         txt = (base / "resume1.log").read_text(encoding="utf-8", errors="replace")
         info.update({"first_resume_rc": r1["rc"], "first_resume_tail": tail(base / "resume1.log", 2),
-                     "refused_cleanly": "REFUSED:" in txt, "uncaught_exception": "Traceback" in txt,
+                     # v2 taxonomy: corrupt data -> `CORRUPT:` (exit 4), policy/guard failures -> `REFUSED:` (exit 3)
+                     "refused_cleanly": ("REFUSED:" in txt or "CORRUPT:" in txt) and r1["rc"] in (3, 4),
+                     "uncaught_exception": "Traceback" in txt,
                      "finished_without_error": r1["rc"] == 0})
         cm = compare_ckpt(ctx, ref, base / "ckpt")
         info["identical_after_first_resume"] = cm["identical_to_reference"]
@@ -369,7 +377,7 @@ def t_restart_emulation(ctx: Ctx, a):
     with zipfile.ZipFile(ctx.snapshot) as z:
         z.extractall(fresh)
     a2 = argparse.Namespace(frozen_root=str(fresh), snapshot=str(ctx.snapshot), manifest_sha=ctx.sha, work=str(base / "work2"),
-                            durable=None)
+                            durable=None, qualification=str(ctx.qualification) if ctx.qualification else None)
     ctx2 = Ctx(a2)
     ctx2.log_phase("restart-emulation:resume_from_fresh_extraction", cpu_note="same machine (emulation)")
     r = ctx2.run_sync(ctx2.runner("run", durable, base / "runs_b", 2), base / "b.log", 1)
@@ -634,10 +642,22 @@ def extract_copy(ctx: Ctx, name: str) -> Path:
 def rebuild_manifest(copy: Path) -> str:
     """Throwaway copies only: re-hash the copy's manifest so a deliberate edit passes the manifest gate and reaches the gate
     under test. NEVER used on the workspace."""
+    workspace = PC._ROOT[0] or PC.HERE.parent
+    if Path(copy).resolve() == Path(workspace).resolve():
+        raise RuntimeError("rebuild_manifest refuses to touch the frozen workspace")
+    # v2: build_manifest takes the freeze Version, the copy already holds the v2 manifest (write_manifest never overwrites, so the
+    # COPY's file is removed first), and v2 hashes the v1 manifest and v1 snapshot ("supersedes"), which a snapshot extraction
+    # does not contain: they are copied from the workspace into the copy's dist/ and docs/ (read-only use).
+    for rel in ("dist/stage06_frozen_snapshot.zip", "docs/FREEZE_MANIFEST_STAGE06.json"):
+        src, dst = Path(workspace) / rel, Path(copy) / rel
+        if src.is_file() and not dst.exists():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(src, dst)
     code = ("import sys; sys.path.insert(0, sys.argv[1]); from pathlib import Path; "
             "from dynaicl.experiments import stage06_freeze as F; from dynaicl.config.stage06_schema import load_stage06_config; "
-            "r=Path(sys.argv[1]); m=F.build_manifest(r, load_stage06_config(r/'config/stage06.yaml').tier2.stage05_run); "
-            "print(F.write_manifest(r, m, 'docs/FREEZE_MANIFEST_STAGE06.json')[1])")
+            "r=Path(sys.argv[1]); v=F.VERSIONS['v2']; "
+            "m=F.build_manifest(r, load_stage06_config(r/'config/stage06.yaml').tier2.stage05_run, v); "
+            "(r/v.manifest).unlink(missing_ok=True); print(F.write_manifest(r, m, v.manifest)[1])")
     out = subprocess.run([sys.executable, "-c", code, str(copy)], cwd=copy, capture_output=True, text=True,
                          env=PC.child_env(copy))
     if out.returncode:
