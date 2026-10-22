@@ -106,8 +106,14 @@ def compare_ckpt(ctx: Ctx, ref_parent: Path, test_parent: Path) -> dict:
         except (ValueError, OSError):
             res["meta_differs"].append(f"{n}:unreadable_json")
             continue
+        # v2 unit schema: each record carries record_sha256 over the whole record INCLUDING `seconds`. Check that every record is
+        # self-consistent, then compare without the two timing-dependent fields (seconds; record_sha256, a function of them).
+        for tag, d in (("ref", a), ("test", b)):
+            if d.get("record_sha256") != P.record_checksum(d):
+                res["meta_differs"].append(f"{n}:record_checksum_invalid_{tag}")
         for d in (a, b):
             d.pop("seconds", None)
+            d.pop("record_sha256", None)
         if a != b:
             res["meta_differs"].append(n)
         if (ref / f"{n}.npz").read_bytes() != (tst / f"{n}.npz").read_bytes():
@@ -323,7 +329,9 @@ def t_corruption_tests(ctx: Ctx, a):
         r1 = ctx.run_sync(ctx.runner("run", base / "ckpt", base / "runs", 1), base / "resume1.log", 1)
         txt = (base / "resume1.log").read_text(encoding="utf-8", errors="replace")
         info.update({"first_resume_rc": r1["rc"], "first_resume_tail": tail(base / "resume1.log", 2),
-                     "refused_cleanly": "REFUSED:" in txt, "uncaught_exception": "Traceback" in txt,
+                     # v2 taxonomy: corrupt data -> `CORRUPT:` (exit 4), policy/guard failures -> `REFUSED:` (exit 3)
+                     "refused_cleanly": ("REFUSED:" in txt or "CORRUPT:" in txt) and r1["rc"] in (3, 4),
+                     "uncaught_exception": "Traceback" in txt,
                      "finished_without_error": r1["rc"] == 0})
         cm = compare_ckpt(ctx, ref, base / "ckpt")
         info["identical_after_first_resume"] = cm["identical_to_reference"]
@@ -369,7 +377,7 @@ def t_restart_emulation(ctx: Ctx, a):
     with zipfile.ZipFile(ctx.snapshot) as z:
         z.extractall(fresh)
     a2 = argparse.Namespace(frozen_root=str(fresh), snapshot=str(ctx.snapshot), manifest_sha=ctx.sha, work=str(base / "work2"),
-                            durable=None)
+                            durable=None, qualification=str(ctx.qualification) if ctx.qualification else None)
     ctx2 = Ctx(a2)
     ctx2.log_phase("restart-emulation:resume_from_fresh_extraction", cpu_note="same machine (emulation)")
     r = ctx2.run_sync(ctx2.runner("run", durable, base / "runs_b", 2), base / "b.log", 1)
