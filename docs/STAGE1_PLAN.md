@@ -183,8 +183,17 @@ s in {0.005, 0.01, 0.02, 0.03, 0.05} and M in {8, 16, 32, 64}: probability of ea
 real analysis code. Targets (hypotheses): P(wrong class) <= alpha^2 = 0.0025 at every setting; P(correct) >= 0.8 at s <= 0.02, M = 64, e <= 0.005.
 The same for Q2 classes and the controls. Results go into the pre-registration.
 
-## 9. Compute (GPU; ASSUMED until hardware facts and J0)
+## 9. Compute (hardware REPORTED by the box session 2026-10-22; throughput ASSUMED until J0)
 
+* **Box (REPORTED):** 1 x NVIDIA RTX A4000, 16 GiB, driver 580.178.04 (supports CUDA up to 13.0; system `nvcc` 11.5, irrelevant for pip wheels,
+  which bundle their own CUDA runtime); Intel i9-14900K, 32 threads; 62 GiB RAM (about 21 GiB available at the check); 85 GB disk free (81% used).
+  Repo at `/home/rama_11187/projects/dynacl` (branch `results-stage06-confirmatory-20261022`, `18d34b0`); venv `.venv/bin/python` 3.13.5 with the
+  frozen numpy/scipy/pyyaml/pytest versions; **torch not installed** in the venv.
+* **The GPU is shared:** at the check a process not started by us held 422 MiB at 50% utilisation and 91 C. Consequences: (i) J0 must be run
+  when the GPU is free, and repeated, or the timings mislead; (ii) GPU temperature and utilisation are logged with every job; (iii) throughput,
+  not correctness, is affected (determinism is tested per run).
+* One GPU means wall-clock, not GPU-hours, is the constraint: the 64-per-arm cap is kept only if J0 shows the primary family fits in about
+  1-2 days of GPU time; otherwise secondary factors shrink first, never the primary family.
 * Training is many tiny models: run several per GPU (multiple processes or `torch.func` model batching). J0 measures seconds per step for
   S, M and L on the box, single and batched.
 * Planning guess (ASSUMED): M-size model, 100k steps, about 5 GPU-min single; about 100-200 models per GPU-hour when batched.
@@ -199,6 +208,10 @@ The same for Q2 classes and the controls. Results go into the pre-registration.
 * New, unfrozen locations only: `dynaicl_neural/` (data, models, training, adapter, evaluation, analysis), `dynaicl_families/` (F1, F2 references),
   `tests_stage1/`, `config/stage1*.yaml`, `scripts/stage1_*.py`, `docs/PREREG_stage1*.md`, `docs/MATH_F1.md`, `docs/MATH_F2.md`, Stage 1 freeze manifests.
   The whole `dynaicl/` package, `tests/`, `requirements.txt` and `pyproject.toml` are frozen (Stage 0.6 v2 manifest) and are only imported or read.
+* **Separate venv for Stage 1 (proposal):** `.venv-stage1` with the same pinned numpy/scipy/pyyaml/pytest plus torch, so that installing torch
+  and its dependencies can never alter the environment the Stage 0.6 runner and its qualification report were checked against (`.venv` stays untouched).
+  CUDA build: a CUDA 12.x wheel from the official PyTorch index (the driver supports up to CUDA 13.0); the exact version is whatever installs
+  for Python 3.13.5 there, then pinned. Installation needs your approval (it is part of step 3).
 * PyTorch pinned in `requirements-stage1.txt` to the exact version on the box (CUDA build if a GPU exists), recorded in
   `docs/STAGE1_ENVIRONMENT_MANIFEST.json` (torch, CUDA, cuDNN, driver, GPU model). Deterministic settings: `torch.use_deterministic_algorithms(True)`,
   CUBLAS workspace config; GPU bitwise reproducibility across runs on the same hardware is tested, not assumed. References and scoring stay numpy/scipy float64.
@@ -227,6 +240,6 @@ results; (4) breadth (architectures, sizes) and possibly an evaluation of public
 
 ## 13. Hardware check and names (pending your input)
 
-* Hardware: VERIFIED for the laptop only (Python 3.13.5, no `nvidia-smi`). The box is UNVERIFIED until you paste the output of the read-only block given in
-  the session message.
+* Hardware: laptop VERIFIED (Python 3.13.5, no `nvidia-smi`); box REPORTED by the box session (section 9). My first command block used a wrong
+  repo path (`~/DynalCL`) and assumed `python` on the PATH; the user's supplement corrected both.
 * Name options are in the session message; you choose before any paper drafting.
