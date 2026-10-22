@@ -11,6 +11,26 @@ a journal-ref, or the arXiv comments; "venue unverified" otherwise. **Claim** is
 **Use** says how the item bears on DynaICL. Legend: (i) continuous-prior Bayes reference, (ii) finite-pool (memorising) posterior,
 (iii) context-only estimator.
 
+## 0. Quote check against the PDFs (2026-10-22, after review)
+
+The quotes that `GAP_AND_NOVELTY.md` relies on were re-checked against the **raw PDF text**, not the fetch summariser: each arXiv PDF was
+downloaded with curl, converted with `pdftotext`, and searched for the exact phrase after whitespace and line-break hyphen normalisation
+(script `quote_check.py`, kept outside the repo in the session scratchpad; it runs nothing from the downloads). **21 of 21 papers, every
+quote FOUND verbatim:**
+entries 1, 2, 3, 7, 8, 9, 11, 16, 19, 39, 40, 45, 46, 51, 57, 65, 70, 73, 84, 86, 89 (for entry 51 only the phrase "statistical induction
+heads" was searched; its other quoted claims were not PDF-checked).
+
+* **Entry 39 (Cole et al.), the point you raised:** the abstract says "a family of noisy linear dynamical systems". The phrase "noisy
+  one-dimensional linear dynamical systems" is **in the body**, in the experiments section ("we train transformers of varying depth to
+  in-context learn noisy one-dimensional linear dynamical systems of the form (2)"). The one-dimensional analysis case is x_t = w x_{t-1} + xi_t with x_0 = 0.
+  The bibliography entry is correct as a body quote; it must not be cited as an abstract quote.
+* Entry 84 (Agarwal et al.): the PDF reads "as few as N = 10 runs" (with spaces); corrected below.
+* Entry 7 (Gibson et al.): "Identification is more sample efficient than generalization (i.e., needs a shorter sequence to predict well)",
+  "drawn once from a symmetric Dirichlet ensemble", and "evaluated over 16 different model seeds" are all in the PDF.
+* Entry 73 (Simulacrum): "The reference AR models are correctly specified according to the simulation mechanism" and the comparator list
+  (AR-BURG, AR-YW, AR-OLS, AR-MLE) are in the PDF.
+* Not re-checked against PDFs (not relied on by the gap analysis): the remaining entries keep the abstract-level verification described above.
+
 ## 1. Memorisation vs generalisation, task diversity, finite vs continuous pretraining priors
 
 | # | Reference | ID | Claim (checked) | Use |
@@ -68,7 +88,7 @@ a journal-ref, or the arXiv comments; "venue unverified" otherwise. **Claim** is
 | 36 | Sander, Giryes, Suzuki, Blondel, Peyré (2024). How do Transformers perform In-Context Autoregressive Learning? ICML 2024. | 2402.05787 | "a trained one-layer linear Transformer implements one step of gradient descent". Noiseless, orthogonal W. | Mechanism for AR; no Bayes reference. |
 | 37 | Zheng, Huang, Wang, Wu, Zhu, Li (2024). On Mesa-Optimization in Autoregressively Trained Transformers: Emergence and Capability. NeurIPS 2024. | 2405.16845 | Implements "one step of gradient descent to minimize an ordinary least squares (OLS) problem". | (iii) OLS; initial-state distribution matters. |
 | 38 | von Oswald, Schlegel, Meulemans, et al. (2023). Uncovering mesa-optimization algorithms in Transformers. arXiv preprint (venue unverified). | 2309.05858 | "next-token prediction error minimization gives rise to a subsidiary learning algorithm". | Mechanism. |
-| 39 | Cole, Zhao, Lu, Zhang (2025). In-Context Learning of Linear Dynamical Systems with Transformers: Approximation Bounds and Depth-Separation. NeurIPS 2025. | 2502.08136 | Log-depth transformers reach "error bounds comparable with those of the least-squares estimator"; experiments on "noisy one-dimensional linear dynamical systems". | **Nearly our setting (d = 1, noisy)**; reference is least squares (theory); no baseline in experiments; L2. |
+| 39 | Cole, Zhao, Lu, Zhang (2025). In-Context Learning of Linear Dynamical Systems with Transformers: Approximation Bounds and Depth-Separation. NeurIPS 2025. | 2502.08136 | Abstract: log-depth transformers reach "error bounds comparable with those of the least-squares estimator" for "noisy linear dynamical systems". Body (experiments, PDF-checked): "noisy one-dimensional linear dynamical systems". | **Nearly our setting (d = 1, noisy)**; reference is least squares (theory); no baseline in experiments; L2. |
 | 40 | Zhou, Wang, Goel, Zhang (2025). Why Do Transformers Fail to Forecast Time Series In-Context? arXiv preprint. | 2510.09776 | Linear self-attention "cannot achieve lower expected MSE than classical linear models"; gap shrinks no faster than 1/n. 7 seeds, SEM. | AR(p) with OLS and known-coefficient oracle; MSE. Direction agrees with our vanishing long-context gap. |
 | 41 | Tseran, Imaizumi (2026). Optimal In-Context Learning of Autoregressive Processes under Heterogeneous Second-Order Moments of the Prompts. NeurIPS 2026 (poster abstract only; fetched https://neurips.cc/virtual/2026/poster/153067). | no arXiv id found | Convergence to an "optimal second-order moment-based AR(1) estimator" (part of this phrase came from a search summary). | Scalar AR(1) target is context-only (iii). Only the abstract verified. |
 | 42 | Ziemann, Matni, Pappas (2025). State space models, emergence, and ergodicity. L4DC 2025, PMLR 283. | 2409.13421 | A "critical threshold" in parameters for non-ergodic linear systems. | Theory. |
@@ -133,7 +153,7 @@ a journal-ref, or the arXiv comments; "venue unverified" otherwise. **Claim** is
 | 81 | Bouthillier, Delaunay, Bronzi, et al. (2021). Accounting for Variance in Machine Learning Benchmarks. MLSys 2021. | 2103.03098 | "variance due to data sampling, parameter initialization and hyperparameter choice impact markedly the results". | Randomise init, data order and data per replicate. |
 | 82 | Dodge, Ilharco, Schwartz, Farhadi, Hajishirzi, Smith (2020). Fine-Tuning Pretrained Language Models: Weight Initializations, Data Orders, and Early Stopping. arXiv preprint. | 2002.06305 | "distinct random seeds can lead to substantially different results". | Seed components. |
 | 83 | Picard (2021). Torch.manual_seed(3407) is all you need. arXiv preprint. | 2109.08203 | "it is surprisingly easy to find an outlier". | Against best-seed reporting. |
-| 84 | Agarwal, Schwarzer, Castro, Courville, Bellemare (2021). Deep Reinforcement Learning at the Edge of the Statistical Precipice. NeurIPS 2021 (venue from arXiv comments). | 2108.13264 | Stratified bootstrap CIs; "percentile CIs provide good interval estimates for as few as N=10 runs". | Run-level bootstrap. |
+| 84 | Agarwal, Schwarzer, Castro, Courville, Bellemare (2021). Deep Reinforcement Learning at the Edge of the Statistical Precipice. NeurIPS 2021 (venue from arXiv comments). | 2108.13264 | Stratified bootstrap CIs; "percentile CIs provide good interval estimates for as few as N = 10 runs" (PDF-checked). | Run-level bootstrap. |
 | 85 | Madaan, Singh, Schaeffer, et al. (2024). Quantifying Variance in Evaluation Benchmarks. arXiv preprint. | 2406.10229 | Measures "seed variance across initialisations". | Report seed variance. |
 | 86 | Sellam, Yadlowsky, Wei, et al. (2022). The MultiBERTs: BERT Reproductions for Robustness Analysis. ICLR 2022. | 2106.16163 | The Multi-Bootstrap, "a non-parametric bootstrap method" over models and test data. | **Matches our seeds x items design.** |
 | 87 | Henderson, Islam, Bachman, Pineau, Precup, Meger (2018). Deep Reinforcement Learning that Matters. AAAI 2018. | 1709.06560 | "variance intrinsic to the methods". | Background. |

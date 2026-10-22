@@ -76,7 +76,7 @@ DERIVED (my reasoning from those sources or from our result files), UNVERIFIED.
   deliberately simple family. They are closer to a methods or workshop note than to a main-track result unless Stage 1 adds a clear neural
   finding or the analysis extends to a family with more room (for example VAR(1) with structured coupling). I make no publishability claim.
 
-## 6. Consequences for the Stage 1 design (DERIVED; folded into docs/STAGE1_PLAN.md section 12)
+## 6. Consequences for the Stage 1 design (DERIVED; folded into docs/STAGE1_PLAN.md v2 sections 4-6)
 
 1. Behaviour can change over training ([5], [9], [14], [2]): fix the classification checkpoint in the pre-registration and report the training trajectory descriptively.
 2. Seeds x items inference: use a hierarchical (multi-)bootstrap over models and systems ([86]); about 10 or more runs per arm are a reasonable floor ([84]).
@@ -84,3 +84,21 @@ DERIVED (my reasoning from those sources or from our result files), UNVERIFIED.
 4. Randomise initialisation, data order and data per model ([81], [82]).
 5. Include the K = 2 library arm only if Q2 is in scope. K >= 4 is unidentifiable by score in this family (our Stage 0.5 result), so the visible transition reported in the K-sweep literature should not be expected here.
 6. Rename before writing the paper: "DynaICL" is taken ([89]).
+
+## 7. What would make this main-track (honest odds; my judgement, UNVERIFIED by any reviewer)
+
+What reviewers at a main-track venue (NeurIPS, ICML, ICLR) would likely expect, based on the closest verified work ([1], [3], [7], [9]): a clear finding
+about trained models, a mechanism or predictive account, and breadth. Our current assets are rigour (pre-registration, validated references) and a
+negative separability result in one simple family. Rigour alone rarely carries a main-track paper.
+
+| Scenario | Contents | Realistic tier | Main risk |
+|---|---|---|---|
+| S0 (now) | Scalar AR(1) reference analysis: separability map, Stage 0.5 REVISE, Stage 0.6 STOP | Workshop paper (ICL or time-series workshop at NeurIPS/ICML/ICLR) or a short TMLR methods/negative-result paper | Seen as obvious or too narrow |
+| S1 | S0 + Stage 1A neural study (Q1 in the n <= 3 window; Q2 only via probe / out-of-support sets) | TMLR; main track unlikely | Narrow window; the answer may be INCONCLUSIVE or simply "matches Bayes", which [1], [9], [19] would lead one to expect |
+| S2 | S1 + F1 (unknown sigma) with Q1 and Q2 identifiable over wider ranges, a K sweep and the size/architecture ablations | TMLR likely; main track possible if the K sweep shows something not seen in regression or Markov chains | Findings may replicate [1], [7] in a new family without new insight |
+| S3 | S2 + F2 (VAR(1)) + a separability theory that predicts the transition K* and the context-length window from parameter dimension, confirmed by the neural results; optionally public time-series foundation models scored against the references | Main track is a realistic target; JMLR for a long version | Requires a positive, predictive result we cannot know in advance; more compute and calendar time |
+
+Plainly: **the AR(1)-only study is not main-track material.** A main-track paper needs S3-level content, and even then acceptance is not assured.
+What most raises the odds is item (3) of plan section 12: a quantitative prediction (from the references alone, before training) of where trained models
+switch from memorising to generalising, then confirmed. That would be new relative to [1], [3] and [7], which report the transition empirically.
+I make no publishability claim.

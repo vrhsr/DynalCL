@@ -1,225 +1,232 @@
-# Stage 1 plan: do trained models behave like population Bayes or like the context-only comparator? (DRAFT for approval)
+# Stage 1 program plan, v2 (identifiability first; DRAFT for approval at checkpoint 1)
 
-Status: **PLAN ONLY. Nothing is implemented, nothing is trained, no seed below has been used.** Every number here is a proposal and a
-hypothesis. The pre-registration (`docs/PREREG_stage1.md`) is written only after you approve this plan, and training starts only after you
-have reviewed and frozen it. Labels: VERIFIED (read or recomputed from a result file), DERIVED (reasoning or algebra stated here or in
-docs/MATH*.md), ASSUMED (a planning guess to be measured), UNVERIFIED.
+Status: **PLAN ONLY.** Nothing implemented, nothing trained, no Stage 1 seed used. v1 of this plan is in git history (branch
+`stage1-planning`, commit `28990d0`). Every number is a proposal and a hypothesis until the pre-registration freezes it. Labels:
+VERIFIED (read or recomputed from a result file), DERIVED (reasoning or algebra stated here), ASSUMED (planning guess, to be measured),
+UNVERIFIED. Your checkpoint-A answers are applied: scope Q1 + Q2 with LIB-K arms and the probe set; two-phase pre-registered pilot
+plus an allowed UNIF-only engineering smoke test; J0 before the freeze; sizes S, M, L as a pre-registered factor; PyTorch pinned from the box.
 
-## 0. What Stage 1 inherits (VERIFIED from the results files)
+## 0. Program at a glance
 
-| Fact | Source |
-|---|---|
-| Population-specific gap Delta = LS(pop Bayes) - LS(stability Bayes), E-CONT, h = 1: r = 1: +0.042 / +0.044 (n = 1), +0.041 / +0.048 (n = 2), +0.046 / +0.040 (n = 3), R1 / R2 | `runs/...stage05.../results/item_contrasts.npy` (recomputed, script in section 11) |
-| Same at r = 0.25: +0.044 / +0.046, +0.048 / +0.053, +0.053 / +0.046. At r = 4: +0.020 to +0.027 (INCONCLUSIVE in Stage 0.5) | same |
-| Per-item sd of that realized-target contrast: 0.24-0.31 (n = 1..3, r <= 1) | same |
-| At h = 5 the gap is <= 0.014; at n >= 10 it is <= 0.019; with observation noise the long-context gap is < 0.0077 (Stage 0.6 STOP) | STAGE05_RESULTS.md, STAGE06_RESULTS.md |
-| Library K = 2 vs continuous on held-out systems (E-CONT): r = 1: -0.016 to -0.042 (n = 1..3), -0.048 to -0.087 (n = 5..20); r = 4: -0.10 to -0.24 (n <= 3). K = 4, 8: within +/-0.017 everywhere | item_contrasts.npy |
-| The strongest context-only reference is generic-stability Bayes (prior U(-0.999, 0.999)) in all 144 Stage 0.5 cells | STAGE05_RESULTS.md section 4 |
+| Stage | Family | CPU reference work (before any network) | Neural work | Gate to start neural work |
+|---|---|---|---|---|
+| 1A | Scalar AR(1), known sigma (Stages 0-0.6 references, frozen) | Separability map (section 2) | Q1, Q2 (where identifiable), ablations | Map done + Stage 1A pre-registration frozen |
+| 2 | **F1: AR(1), unknown noise scale** (population prior on (a, sigma)) | New references, Stage-0-style validation, separability map, own pre-registration | Q1, Q2, K sweep | Reference validation passes + its own freeze |
+| 3 | **F2: VAR(1), d = 2, matrix-normal-inverse-Wishart (MNIW) prior, stability-truncated** | Same | Same | Same |
+| (map only) | F3: Stage 0.6 noisy-observation AR(1), short context | Separability map from the frozen Kalman references (no new reference) | Only if the map shows a window beyond 1A | Map + decision |
+| (deferred) | F4: nonlinear / chaotic, particle-filter reference | Not started | Not planned | Needs a written justification and your decision (section 3.4) |
 
-Consequence (DERIVED): a neural classification can only be attempted where the two references differ by about 2 delta (h = 1, n <= 3,
-r <= 1). There the target signal is about 0.044 nats. Any model error or seed-to-seed spread of that size erases it. The whole design below is
-built around that constraint.
+The common rule: **compute where the Bayes references differ by at least delta first (references only, CPU); train and classify only
+there; report everything else as UNIDENTIFIABLE.**
 
-## 1. Questions (you choose the scope; recommendation in section 10)
+## 1. What Stage 1A inherits (VERIFIED, recomputed from `runs/...stage05.../results/item_contrasts.npy`)
 
-* **Q1 (primary, your candidate).** A model pretrained on the population prior P (P-STABLE truncated normal, mean 0.4, sd 0.3, |a| < 0.95),
-  scored on held-out systems from P at short context: does it behave like population-aware Bayes (pop reference) or like the
-  context-only comparator (stability reference)?
-* **Q2 (secondary, memorisation vs generalisation).** A model pretrained on a finite library of K systems drawn from P, scored on held-out
-  systems: does it behave like the K-atom library posterior (memorises) or like a continuous-prior / context-only reference (generalises)?
-  Stage 0.5 shows the references differ by >= delta only for K = 2 (and K = 1, trivially), so for K >= 4 the score-based question is
-  **unidentifiable in this family** (DERIVED from the table above). A designed probe set (section 3.4) may identify it by KL; this is
-  secondary and descriptive unless the planning computation shows enough separation.
+* Population-specific gap Delta = LS(pop) - LS(stab), E-CONT, h = 1, R1 / R2: r = 1: +0.042 / +0.044 (n = 1), +0.041 / +0.048 (n = 2),
+  +0.046 / +0.040 (n = 3); r = 0.25: +0.044 / +0.046, +0.048 / +0.053, +0.053 / +0.046; r = 4: +0.020 to +0.027. Per-item sd 0.24-0.31.
+* Library K = 2 vs continuous on held-out systems: r = 1: -0.016 to -0.042 (n = 1..3), -0.048 to -0.087 (n = 5..20); K = 4, 8: within +/-0.017.
+* Stage 0.6: with observation noise the long-context gap is < 0.0077 nats in all cells.
 
-Out of scope: h > 1 (gap negligible), the noisy-observation family (Stage 0.6 STOP), long context, other dynamical families, novelty claims.
+## 2. Identifiability first: the separability map (CPU, references only)
 
-## 2. Pretraining arms (each arm differs only in the distribution of a)
+### 2.1 Definition
+For a family F, an evaluation distribution D, a cell c (context length n, horizon h, initial scale r, and family-specific factors) and
+a pair of references (A, B):
+* **Truth-matched pairs** (D is the prior of A, so A is Bayes on D): gap_AB(c) = E_D[LS(A) - LS(B)] = E_D[KL(p_A || p_B)] (DERIVED: law of
+  total expectation, because y | context ~ p_A exactly). Estimated by per-context quadrature in y (Rao-Blackwellised, no target noise) and
+  cross-checked against realized targets.
+* **Probe and out-of-distribution sets** (no reference is true): behavioural divergence min(E[KL(A || B)], E[KL(B || A)]).
+* **Identifiable** for (A, B) in cell c if the simultaneous 95% lower bound of the gap (studentized max over the map's cells, as in Stage
+  0.6) is >= delta = 0.02. **Unidentifiable** if the upper bound is < delta. Otherwise **borderline** (not classified; reported).
+* Precision: N per map cell set so the half-width is <= delta/10 (references are cheap; N up to 10^5).
+* **No double dipping:** the map uses its own `selection` seeds. Cells are chosen from the map, then models are evaluated on fresh
+  evaluation seeds. The selection rule (which cells, which K) is mechanical and frozen before any model is evaluated.
 
-| Arm | Pretraining distribution of a | Bayes-optimal predictor for that distribution (DERIVED) | Role |
-|---|---|---|---|
-| CONT | P (the population prior) | pop reference (matched P-STABLE Bayes) | Q1 test arm |
-| UNIF | U(-0.999, 0.999) | stability reference (the locked context-only comparator) | **positive control** for "context-only behaviour"; also the capability control |
-| LIB-K, K in {1, 2, 4, 16} | uniform over K atoms drawn from P (atoms drawn per model seed) | finite-library posterior over that model's own atoms | Q2 |
+### 2.2 Pairs mapped in every family
+Q1: (pop, ctx-only). Q2: (lib_K, cont) and (lib_K, ctx-only), for K in {1, 2, 4, 8, 16, 32, 64, 128, 256, 1024}, on (i) held-out
+systems from the population prior, (ii) in-library systems, (iii) the probe set (parameter grid), (iv) out-of-support systems.
+Library atoms are random; the map averages over 64 independent library draws per K and reports the spread across draws.
 
-* x_0 ~ N(0, r^2) with r drawn uniformly from {0.25, 1, 4} per training sequence. **DERIVED:** the likelihood is conditional on x_0 and
-  x_0 is independent of a (CLAUDE.md section 4), so the Bayes predictor does not depend on the x_0 distribution; mixing r leaves every
-  arm's Bayes target unchanged and lets one model be scored at every r.
-* sigma = 1, known and shared (as in Stages 0-0.5). Trajectories x_0..x_20 start at x_0 (no burn-in, invariant 1).
-* Fresh sequences every step (online sampling), so CONT and UNIF see unlimited systems; LIB-K reuses its atoms with fresh noise and x_0.
-* **Common random numbers across arms (proposal):** model seed index i uses the same initialisation, data order, x_0 and noise streams in
-  every arm. Only a differs, drawn by the arm's inverse CDF from the same uniforms. Contrasts between arms are then paired by seed.
+### 2.3 Honest assessment of "separability-first" as a contribution
+* It is an identifiability and power analysis done before training. That is standard practice in statistics and experimental design; the
+  idea itself is not new.
+* In the ICL literature we retrieved, no paper maps whether the competing Bayes references are separable before classifying models (gap
+  G3 in docs/literature/GAP_AND_NOVELTY.md). Its value is that it **changes conclusions**. In scalar AR(1) it predicts that a Raventós-style K sweep
+  cannot show memorisation for K >= 4 by score, so any such claim there would be uninterpretable.
+* Alone it is a methods or workshop-level contribution. It becomes part of a stronger paper only together with a family where the
+  references separate widely (section 3) and a clear neural finding.
 
-## 3. Models, training and evaluation
+## 3. Richer families (each a separate stage with its own spec, validation and pre-registration)
 
-### 3.1 Model (ASSUMED sizes; justified below)
-* Causal decoder-only transformer over the scalar sequence, linear input embedding, learned positions (n is position), pre-LayerNorm.
-* Output head: a Gaussian mixture density for x_{n+1} (proposal: 4 components). Trained by negative log likelihood at every position
-  n = 0..19. The model is therefore a full density predictor and is scored with log score (never point-only; CLAUDE.md section 4).
-* Sizes: **S** (2 layers, d = 32, about 30k params) and **M** (4 layers, d = 64, about 200k params). Justification (DERIVED): the h = 1
-  Bayes predictive is a fixed function of three statistics (sum x_{t-1}^2, sum x_{t-1} x_t, x_n). The task needs averaging plus a smooth
-  nonlinearity, which small attention models can represent; two sizes test whether capacity changes the classification. A larger size is
-  added only if the capability gate fails (new decision, not in this plan).
-* Training: AdamW, lr 1e-3 with warmup and cosine decay, batch 256 sequences, float32. Step budget: chosen in the pilot by a frozen rule
-  (section 6), from {25k, 50k, 100k, 200k}, using training-distribution validation loss only.
-* Evaluation runs in float64. The adapter receives an immutable `ContextWindow` from `harness.make_context` only, casts it to float32 for
-  the network, and returns a float64 `GaussianMixturePredictive` (existing class). Ground truth never enters the adapter (invariant 3).
+### 3.1 Why scalar AR(1) cannot identify Q2 for K >= 4 (DERIVED heuristic; the map will measure it)
+On held-out systems, a K-atom library posterior concentrates on the atom nearest the true a. Its excess log loss over the continuous
+posterior then **saturates** at about E[(a - a_near)^2 x_n^2] / (2 sigma^2), while the continuous posterior's own excess decays like 1/n.
+With one parameter, the squared nearest-atom distance scales like (prior sd / K)^2: for K = 4 that is about 0.01 nats or less, below delta at any
+n. This matches Stage 0.5 (K = 4 within 0.017 through n = 20). In a d-dimensional parameter space it scales like K^(-2/d) (DERIVED,
+nearest-neighbour scaling), so **more parameters keep libraries distinguishable at larger K**.
 
-### 3.2 Head-family floor (planning computation, CPU, before the pre-registration)
-The pop predictive at h = 1 is a continuous scale-location mixture, not a 4-component mixture. Before freezing I compute, for each
-(n, r) cell, the smallest KL(pop || best m-component mixture) for m in {1, 2, 4, 8} on 2000 reference contexts. The head is accepted only
-if this floor is <= epsilon / 10 = 0.001 nats (section 5). Otherwise m increases. This is reference-only arithmetic, not training.
+### 3.2 Preference order and identifiability of Q2
 
-### 3.3 Evaluation (held-out systems, existing references only)
-* Systems: fresh from evaluation seed streams (disjoint from all training streams by construction; continuous a, so no atom coincides
-  with probability 1; tested). Contexts are cut only by `dynaicl.evaluation.harness.make_context`.
-* Cells: E-CONT, h = 1, n in {1, 2, 3} x r in {0.25, 1} = **6 primary cells**. Descriptive: n in {5, 10, 20}, r = 4, in-distribution scores.
-* References (all existing, frozen, imported read-only): `MatchedReference` / quadrature P-STABLE (pop), `StabilityPriorBayesPredictor`
-  (stab), `FiniteLibraryPredictor` (each LIB model's own atoms), known-a oracle (descriptive).
-* N = 40 000 systems per replicate. With per-item sd <= 0.31, the item-level SE of a realized-target contrast is <= 0.0016 = delta/13
-  (DERIVED). Model inference is cheap, so N is set to make item noise negligible next to seed noise.
-* **Estimators.** (a) Realized-target paired log score (the Stage 0.5 / 0.6 estimator). (b) A Rao-Blackwellised version: per context,
-  E_{y ~ pop}[log p_pop(y) - log p_model(y)] = KL(pop || model), computed by quadrature in y. **DERIVED:** on held-out systems from P the
-  target given the context is distributed exactly as the pop predictive, so (a) and (b) estimate the same quantity, and (b) has no target
-  noise. Their agreement is a critical correctness check. KL integrals are "numerically approximated with verified convergence" (node
-  doubling; closed-form Gaussian-Gaussian check).
+| Family | Parameters | References (planned) | Q1 window (DERIVED expectation) | Q2 identifiable by log score for K >= 4? |
+|---|---|---|---|---|
+| **F1 AR(1), unknown sigma** | 2: (a, log sigma) | Population: stability-truncated NIG-type prior; sigma^2 integrates analytically for fixed a, leaving 1-D quadrature in a (extends the Stage 0 P-NIG h = 1 conjugate code). Context-only: U(-0.999, 0.999) x scale-invariant prior on sigma over a wide bounded range. Library: closed-form finite mixture. | Likely longer: log sigma is learned at about 1/2 nat of Fisher information per step, so population knowledge of sigma helps for many more steps than knowledge of a. | **Likely yes up to some K (to be mapped):** a library in (a, log sigma) has 2-D atom spacing, and a misplaced log-scale atom costs about (Delta log sigma)^2 per step, which does not vanish with n. |
+| **F2 VAR(1), d = 2, MNIW** | 7: A (4) + Sigma (3) | Population: MNIW truncated to spectral radius < 0.95; predictive = conjugate matrix-t posterior reweighted by the stability indicator (self-normalised importance sampling from the closed-form posterior; Monte Carlo error measured). Context-only: vague MNIW truncated to spectral radius < 0.999. Library: closed form. | Expected longest: 7 parameters identified slowly. | **Yes, most strongly** (7-D atom spacing). |
+| F3 noisy-observation AR(1), short context | 1: a (noise known) | Frozen Stage 0.6 Kalman quadrature references (validated) | To be mapped at n = 2..9 | **No (DERIVED):** one parameter, and noise widens the posterior, which makes atoms relatively denser. |
+| F4 nonlinear / chaotic | many | Particle filter with validated convergence | Unknown | Unknown; validation cost high |
 
-### 3.4 Probe set (Q2, secondary)
-Designed contexts with a on a fixed grid over (-0.95, 0.95) and n in {3, 5, 10, 20}, chosen to separate library, continuous and stability
-references. For these, only behavioural distances KL(ref || model) are defined (no reference is "true"). Used only if the planning
-computation shows that the reference KLs on the grid exceed delta for K = 4 or 16; otherwise Q2 for K >= 4 is reported as unidentifiable.
+**Recommendation:** F1 next (cheapest; partly built on validated Stage 0 code), F2 in parallel on CPU as soon as F1's references pass.
+F3 needs only a map from existing references. F4 only if F1-F2 leave a question that needs nonlinearity, with a written justification.
 
-## 4. Estimands (per replicate; the unit of inference is the trained model)
+### 3.3 Validation each new family needs before any network is trained on it (Stage-0 style)
+Closed forms where they exist (the conjugate untruncated parts, library mixtures). Quadrature or importance sampling with measured
+convergence (node doubling or Monte Carlo SE, target <= delta/100 per item). Independent 2-D or grid oracles. Calibration (PIT KS, SBC, coverage)
+of the matched reference. Optimality checks (no context-only reference beats the matched one in expectation). Mutation matrix (wrong prior,
+off-by-one likelihood, leaked target, unmatched reference, wrong truncation). Invariants unchanged: contexts only from `make_context`,
+likelihood conditional on x_0, float64, `NamedStreams`. Each family gets `docs/MATH_<family>.md`, a validation report, a separability map, and its own
+pre-registration and freeze before neural training.
 
-For model m and cell c, with the expectation over held-out P systems:
-* **R_pop(m, c) = E[LS(pop) - LS(m)]** (regret against population Bayes; >= 0 in expectation, DERIVED: pop is Bayes on P).
-* **Delta(c) = E[LS(pop) - LS(stab)]** on the same items (reference gap, about 0.044).
-* **Arm estimand:** R_pop(A, c) = mean over the arm's models. Nearest-reference midpoint Delta(c)/2.
-* **Transfer contrast:** G(c) = E[LS(m_CONT,i) - LS(m_UNIF,i)], paired by seed index i (CRN). If both arms are Bayes for their own priors,
-  G = Delta. If CONT ignores population knowledge, G is about 0. Shared approximation error cancels in G (DERIVED to first order).
-* Controls (not the hypothesis): **C1** UNIF regret against stab on held-out **U** systems at n in {1, 2, 3} (its own distribution);
-  **C2** every arm's regret against its own Bayes reference at n = 20 on its own distribution (all references nearly coincide there).
-* Q2: R_lib(m, c) and R_cont(m, c) for LIB-K models on held-out P systems at n in {3, 5, 10, 20}, r in {1, 4}, and on in-library systems.
+### 3.4 F4 justification test
+F4 is started only if (i) F1 and F2 are done, (ii) a specific question cannot be answered in linear-Gaussian families, and (iii) a
+particle-filter reference can be validated to <= delta/100 per item at affordable cost. Otherwise it stays out.
 
-## 5. Thresholds (all hypotheses; justification stated)
+## 4. Stage 1A design (scalar AR(1), known sigma)
 
-| Symbol | Value | Justification |
+### 4.1 Arms (differ only in the law of a; common random numbers by seed index)
+CONT (population prior P: truncated normal, mean 0.4, sd 0.3, |a| < 0.95); UNIF (U(-0.999, 0.999): its Bayes predictor is the context-only
+reference, so it is the positive control); LIB-K for each K that the map marks identifiable on at least one evaluation set (K = 1 and 2 at least;
+larger K only through probe or out-of-support sets). Library atoms drawn per model seed. x_0 ~ N(0, r^2), r uniform on {0.25, 1, 4} (DERIVED:
+the Bayes predictor does not depend on the x_0 law, because the likelihood is conditional on x_0 and x_0 is independent of a).
+
+### 4.2 Models and factors
+* Causal transformer, Gaussian-mixture output head (component count fixed by the head-floor computation: KL(ref || best m-mixture) <= 0.001 nats).
+  Trained by NLL on every position n = 0..19. Density predictor, scored by log score (never point-only).
+* **Size factor (pre-registered):** S (2 layers, d = 32, about 30k params), M (4 x 64, about 200k), L (8 x 128, about 1.6M). ASSUMED sizes; justification:
+  the h = 1 Bayes predictor depends on three sufficient statistics, and Cole et al. show depth matters for least-squares-like estimation.
+* **Training-length factor (pre-registered):** base budget B (set in the pilot from {25k, 50k, 100k, 200k} steps by the capability rule) and 4B.
+* **Classification checkpoint (fixed):** the final step of each budget. Checkpoints at B/4 and B/2 are reported descriptively only.
+
+### 4.3 Evaluation sets
+(i) held-out systems from P (primary for Q1); (ii) in-library systems (Q2); (iii) probe grid of a in (-0.95, 0.95); (iv) out-of-support
+systems (a in [0.95, 0.999) and its negative, outside P's support; the population reference cannot adapt there, the context-only one can: a
+strong behavioural discriminator); (v) context lengths n = 21..80, beyond the training length. N = 40 000 systems per replicate for (i)-(ii)
+(item SE <= 0.0016, about delta/13); probe and out-of-support sets sized by the map.
+
+### 4.4 Estimands and classification (per replicate; two replicates must agree)
+* R_pop = E[LS(pop) - LS(model)] (regret; >= 0 in expectation on P); G = E[LS(CONT_i) - LS(UNIF_i)], paired by seed index;
+  behavioural distances D_X = E[KL(X || model)] for each reference X.
+* **Q1 classes (CONT models):** POP-LIKE (upper bound of R_pop < Delta/2 and lower bound of G > Delta/2); STAB-LIKE (lower bound of R_pop >
+  Delta/2 and |G| upper bound < Delta/2); WORSE-THAN-STAB (lower bound of R_pop > Delta + epsilon); INCONCLUSIVE otherwise.
+* **Q2 classes (LIB-K models), only in identifiable cells:** LIB-LIKE, CONT-LIKE, CTX-LIKE by nearest reference in D_X, required to be
+  separated by a margin of delta/2 at the simultaneous bounds; INCONCLUSIVE otherwise.
+* **Controls (BLOCKED if they fail):** C1 UNIF regret against stab on its own distribution at short context < epsilon = 0.01; C2 every arm's
+  regret against its own Bayes reference at n = 20 on its own distribution < epsilon. A capability failure is reported as such, not as a
+  scientific finding.
+
+### 4.5 Task-diversity sweep (where identifiable)
+K from 1 through continuous: K in {1, 2, 4, 8, 16, 32, 64, 256, 1024, CONT}, restricted per evaluation set to the K the map marks identifiable.
+Pre-registered estimand: the class of each K; the transition point K* = the smallest K classified CONT-LIKE (or CTX-LIKE) in both replicates,
+with all larger identifiable K also not LIB-LIKE. A fitted mixture weight between library and continuous predictors (the Wurgaft et al. style) is EXPLORATORY.
+
+## 5. Robustness and ablations (each with its purpose; each either pre-registered as a secondary family or EXPLORATORY)
+
+| Ablation | Purpose | Status |
 |---|---|---|
-| delta | 0.02 nats | Unchanged since Stage 0 (fixed before any result). |
-| Midpoint | Delta(c)/2, about 0.021-0.025 | A model is "nearer pop" than "nearer stab" in expected log score iff R_pop < Delta/2. Uses the measured Delta in the same items, so no free number. |
-| epsilon (capability) | delta/2 = 0.01 | A model whose own-distribution regret exceeds 0.01 has an error of half the target signal; it cannot be classified reliably. The pop and stab equivalence regions of width epsilon are then separated by about Delta - 2 epsilon, about 0.024 >= delta. |
-| Target SE of an arm estimand | delta/4 = 0.005 | Same rule as Stage 0.5 (target SE <= delta/4). With a simultaneous critical value of about 2.5 the half-width is about 0.0125, leaving about 0.009 below the midpoint for the model's own regret. |
-| Familywise alpha | 0.05 per replicate, two replicates must agree | Same structure as Stages 0.5/0.6; false classification requires two independent errors (<= alpha^2 for a fixed claim). |
+| Size S / M / L | Does capacity change the classification? (approximation error vs prior use) | Pre-registered secondary family |
+| Depth vs width at matched parameter count (2 x 128 vs 8 x 64, about the same params) | Theory says depth matters for in-context least squares (Cole et al.); separates "too shallow to infer" from "uses the prior" | Pre-registered secondary |
+| Training length B vs 4B; descriptive checkpoints B/4, B/2 | ICL can be transient (Singh et al.; Carroll et al.; Panwar et al.); the verdict must not depend on an arbitrary stopping point | Pre-registered secondary (B vs 4B); trajectory descriptive |
+| Architecture family: transformer vs GRU vs a diagonal linear state-space model (written in plain PyTorch, no new dependency) | Is the behaviour attention-specific? Recurrent models carry sufficient statistics naturally | Pre-registered secondary (CONT and UNIF only) |
+| Out-of-support systems | Discriminates prior use from context use where in-support gaps are small | Pre-registered secondary (Q1 and Q2) |
+| Context lengths beyond training | Does the model keep updating like a Bayes posterior or saturate? | EXPLORATORY in 1A (gaps are small at long n in AR(1)) |
 
-## 6. Power, seeds and number of models
+## 6. Statistical rigour and program discipline
 
-* **Unknown and decisive: the seed-to-seed sd s of a model's regret.** No model exists, so s is UNVERIFIED. SE of an arm mean is
-  about sqrt(s^2 / M + se_item^2) with se_item <= 0.0016.
+* **Unit of inference: the trained model.** Each seed randomises initialisation, data order and data (and library atoms). Seeds come from a
+  seed-role table (single source of truth, as `config/stage06_seed_manifest.yaml`); torch seeds derive from `NamedStreams` names.
+* **Hierarchical resampling:** a Multi-Bootstrap over models (seed pairing across arms kept) and systems (shared across models), studentized
+  max statistic over each family.
+* **Multiplicity across the whole program:** each stage has exactly one primary family (Q1, and Q2 in identifiable cells) at alpha = 0.05 per
+  replicate, plus pre-registered secondary families, each at alpha = 0.05 / (number of secondary families in that stage), Bonferroni. Every
+  confirmatory claim also needs both replicates to agree (false claim <= alpha^2 for a fixed claim). Exploratory analyses carry no
+  confirmatory alpha and are excluded from headline claims.
+* **No selective reporting:** an append-only experiment ledger in `docs/DISCLOSURE_LOG_STAGE1.md` records every training run, evaluation,
+  failure and abort, pre-registered or exploratory. The paper reports every pre-registered outcome.
+* **Stage 0.6 discipline kept:** freeze manifest, read-only snapshot, authorization gate for confirmatory runs (the user issues it), one
+  confirmatory run per decision, no edits to frozen files, the pilot effects file is never opened.
 
-  | s (between-seed sd) | models per arm for SE <= 0.005 |
-  |---|---|
-  | 0.005 | 2 (floor 4) |
-  | 0.01 | 5 |
-  | 0.015 | 10 |
-  | 0.02 | 18 |
-  | 0.03 | 40 (infeasible at the cap) |
+## 7. Power and number of models (GPU budget)
 
-* **Pre-registered two-phase rule (your constraint: no training before the freeze).** The pre-registration fixes, before any training:
-  1. **Pilot** (pilot seeds only): 6 models per arm for CONT, UNIF and LIB-2, size M. It may only set (i) the step budget, the smallest
-     value in {25k, 50k, 100k, 200k} at which every pilot model passes C2 on training-distribution validation data, and (ii) M from the
-     between-seed sd: M = max(4, ceil(s_UCL^2 / (0.005^2 - se_item^2))), with s_UCL the 80% chi-square upper confidence limit of the largest
-     cell sd (df = 5, factor 1.46). Pilot means are never used for any decision (the same rule as the Stage 0.5 pilot); the pilot effect
-     outputs are written to a file that is not opened (as in Stage 0.6).
-  2. **Feasibility:** cap M_max = 16 per arm per replicate. If M > M_max, or no step budget passes C2, the verdict is
-     **STOP (infeasible in this family)**, with no confirmatory run.
-  3. **Confirmatory:** two replicates, each with M fresh training seeds per arm and fresh evaluation seeds.
-* Proposed seed roots (unused; checked against every `config/*.yaml`): pilot train 71001, pilot eval 71101, pilot library 71201, pilot
-  bootstrap 71999; confirmatory train 72001 / 72002, eval 72101 / 72102, library 72201 / 72202, bootstrap 72999. Torch seeds are derived from
-  `NamedStreams` names, so adding models never shifts others (invariant 4). A seed-role table like `config/stage06_seed_manifest.yaml` is the
-  single source of truth.
+* The decisive unknown is the between-seed sd s of a model's regret (UNVERIFIED; no model exists). SE of an arm mean is about
+  sqrt(s^2 / M + se_item^2), se_item <= 0.0016.
 
-## 7. Inference and decision rule (proposal)
-
-* **Hierarchical bootstrap**: resample models within arm (with seed pairing kept across arms), then systems (shared across models);
-  studentized max statistic over the family, as in Stage 0.6. Family per replicate: 6 cells x {R_pop(CONT), G} = 12 contrasts, plus controls.
-* **Per-cell classification of CONT (both replicates must agree):**
-  * POP-LIKE: upper bound of R_pop < Delta/2 and lower bound of G > Delta/2.
-  * STAB-LIKE: lower bound of R_pop > Delta/2 and |G| upper bound < Delta/2 (CONT is indistinguishable from its UNIF twin).
-  * WORSE-THAN-STAB: lower bound of R_pop > Delta(c) + epsilon (the model loses even to the context-only reference).
-  * INCONCLUSIVE: otherwise (including models between the two references whose intervals straddle the midpoint).
-* **Program verdict, in the order BLOCKED, STOP, PROCEED, REVISE:**
-  * **BLOCKED:** a critical check fails (section 8), or a control fails: C1 upper bound >= epsilon, or C2 upper bound >= epsilon in any arm
-    (the models are not good enough to answer, and that is reported as a capability failure, not as a scientific result).
-  * **STOP:** the feasibility rule fails (section 6).
-  * **PROCEED** (to Q2 at scale or another family, on a new decision): CONT is classified, the same way, in >= 4 of 6 cells in both replicates.
-  * **REVISE:** otherwise.
-* The **scientific answer** is the per-cell classification, reported with effect sizes and intervals whatever the verdict.
-* Operating characteristics are computed before the freeze with synthetic "models" (references with injected regret and seed noise),
-  as in the Stage 0.6 dry run: probability of POP-LIKE when the truth is STAB-LIKE and vice versa, and power at s in {0.005, 0.01, 0.02}.
-
-## 8. Validation before the freeze (new tests; nothing frozen is touched)
-
-1. **Reference regression (critical):** pop and stab references on the Stage 0.5 seeds reproduce the stored Stage 0.5 per-item contrasts
-   to <= 1e-9 (frozen Tier-1 tolerance).
-2. **KL quadrature:** Gaussian-Gaussian closed form (<= 1e-10), node doubling (<= 1e-8), Monte Carlo agreement for mixtures (z-test).
-3. **Oracle "models" (positive controls):** the pop reference wrapped as a model gives R_pop = 0 (machine precision) and POP-LIKE; stab
-   wrapped gives STAB-LIKE; a library posterior wrapped gives the library class; a variance-inflated pop gives INTERMEDIATE or worse.
-4. **Estimator agreement:** realized-target and Rao-Blackwellised R_pop agree within their SEs for the oracle models.
-5. **Information access:** the adapter only sees `ContextWindow`; mutation "future target leaked into the input" must be detected
-   (regret drops below the Bayes bound, which is impossible, DERIVED: no predictor beats pop on P in expectation).
-6. **Data generators:** each arm's sampler draws a from the right law (KS test), LIB-K uses exactly K atoms, CRN coupling holds, sequences
-   start at x_0; the numpy/torch sampler agrees in law with `dynaicl.systems.ar1`.
-7. **Training determinism:** same seed gives identical weights on CPU (`torch.use_deterministic_algorithms`); unit tests use at most
-   20 optimizer steps of a 1-layer model and evaluate nothing against references.
-8. **Mutation matrix** for the new code (wrong prior in an arm, wrong reference, unpaired seeds, off-by-one position, leaked target).
-9. **No test waits for typed input.** Tests run with non-interactive stdin.
-
-## 9. Files, dependency and compute
-
-* New, unfrozen locations only: package `dynaicl_neural/` (data, model, train, adapter, evaluate, analysis), `tests_stage1/`,
-  `config/stage1*.yaml`, `scripts/stage1_*.py`, `docs/PREREG_stage1.md`, `docs/DISCLOSURE_LOG_STAGE1.md`, a new Stage 1 freeze manifest.
-  `dynaicl/`, `tests/`, `requirements.txt` and `pyproject.toml` are in the Stage 0.6 v2 manifest and are imported or read only.
-* **New dependency: PyTorch** (autograd, optimisers and attention for training; no alternative in the default stack). Pinned in a new
-  `requirements-stage1.txt` to the exact version installed on the box for Python 3.13.5 (CPU or CUDA build depending on `nvidia-smi`),
-  recorded in a Stage 1 environment manifest. References and scoring stay numpy/scipy float64.
-* **Compute (ASSUMED until the throughput job J0 measures it):**
-
-  | Job | Where | Runtime |
+  | s | M for SE <= delta/4 = 0.005 | M for SE <= delta/8 = 0.0025 |
   |---|---|---|
-  | A1 unit tests + validation | laptop | < 10 min |
-  | A2 head floor, KL spreads, operating-characteristics dry run (references only) | laptop | 5-10 min |
-  | J0 throughput benchmark: 300 steps per size on random sequences, no evaluation | laptop, then box | 2 min each |
-  | Pilot: 18 models (3 arms x 6 seeds, size M) at up to 200k steps + evaluation | box, tmux | about 15 ms/step x 200k = 50 min per model; 16 in parallel on 32 CPUs: about 1-2 h wall |
-  | Confirmatory: up to 6 arms x 2 sizes x 16 seeds x 2 replicates = 384 models + evaluation | box, tmux | about 6-12 h wall on CPU (much less on a GPU) |
+  | 0.005 | 2 (floor 8 applies) | 7 |
+  | 0.01 | 5 | 28 |
+  | 0.02 | 18 | 109 (above cap) |
+  | 0.03 | 41 | 244 (above cap) |
 
-  Results come back as small files (< 2 MB, no weights or checkpoints) on a results branch, as before.
+  (Computed as ceil(s^2 / (target^2 - 0.0016^2)); script output pasted in the session record.)
 
-## 10. Decisions I need from you (recommendation first)
+* **Two-phase rule (pre-registered):** the pilot (pilot seeds; 8 models per arm for CONT, UNIF, LIB-2; size M) sets (i) the budget B (capability rule
+  C2 on training-distribution validation data) and (ii) M = max(8, ceil(s_UCL^2 / (0.005^2 - se_item^2))), with s_UCL the 80% chi-square upper limit
+  of the largest cell sd (df = 7, factor 1.35). Pilot means are never used.
+* **Cap: M_max = 64 models per arm per replicate** (replaces 16). Justification: at s = 0.03 the target needs 41 models; 64 leaves margin, and
+  with small models the GPU cost is modest (section 9). The cap is confirmed once the box's hardware and J0 throughput are known; if J0 shows
+  64 is not affordable for every factor, the cap stays 64 for the primary family and secondary factors are reduced, not the primary.
+* If the required M exceeds 64 for a family, that family's verdict is **NOT RESOLVABLE at delta with this design** (reported; no confirmatory
+  run for it). That replaces the old blanket STOP.
 
-1. **Scope:** Q1 only with arms CONT + UNIF (recommended: smallest design that answers your question; about 1/3 of the compute), or
-   Q1 + Q2 (adds LIB-1/2/4/16).
-2. **Pilot rule:** keep "no training before the freeze" and use the pre-registered two-phase pilot (recommended), or allow an unfrozen
-   UNIF-only engineering pilot before the freeze (UNIF is outside the hypothesis, so it reveals nothing about Q1; it would give real numbers
-   for steps and s).
-3. **J0 throughput benchmark** (300 steps on random data, nothing evaluated): may it run before the freeze? (Recommended yes; it only
-   measures seconds per step.)
-4. **Model sizes:** S and M with M primary (recommended), or M only.
-5. **PyTorch** as the one new dependency, version pinned from the box.
+## 8. Operating characteristics (before the freeze; synthetic "models")
 
-## 12. Consequences of the literature search (workstream B; details in docs/literature/GAP_AND_NOVELTY.md section 6)
+Synthetic models are references with controlled distortion: position pi between stab (0) and pop (1) by mixing predictives, an added
+approximation error e, and seed-to-seed noise s on the predictive mean and log-variance. For pi in {0, 0.25, 0.5, 0.75, 1}, e in {0, 0.005, 0.01},
+s in {0.005, 0.01, 0.02, 0.03, 0.05} and M in {8, 16, 32, 64}: probability of each class over 2000 simulated studies, both replicates, through the
+real analysis code. Targets (hypotheses): P(wrong class) <= alpha^2 = 0.0025 at every setting; P(correct) >= 0.8 at s <= 0.02, M = 64, e <= 0.005.
+The same for Q2 classes and the controls. Results go into the pre-registration.
 
-* Behaviour can drift over training (ridge-like first, then specialising; transient ICL). The classification checkpoint is fixed in the
-  pre-registration (the final step of the pilot-selected budget); intermediate checkpoints are reported descriptively only.
-* The hierarchical bootstrap in section 7 is the "Multi-Bootstrap" structure (models x test items) of the MultiBERTs paper.
-* Each model seed randomises initialisation, data order and data, not only initialisation.
-* The general (i) vs (ii) question is already answered for linear regression and discrete Markov chains. What this design adds is the
-  separate structure-aware context-only reference (UNIF arm / stability reference) and log-score inference powered against a stated effect.
+## 9. Compute (GPU; ASSUMED until hardware facts and J0)
 
-## 11. Pending environment facts
+* Training is many tiny models: run several per GPU (multiple processes or `torch.func` model batching). J0 measures seconds per step for
+  S, M and L on the box, single and batched.
+* Planning guess (ASSUMED): M-size model, 100k steps, about 5 GPU-min single; about 100-200 models per GPU-hour when batched.
+* Stage 1A confirmatory size (upper bound): primary Q1/Q2 arms (CONT, UNIF, about 4 identifiable LIB-K) x M x 64 seeds x 2 replicates = 768
+  models; secondary factors (S, L, depth/width, 4B, architectures) on CONT and UNIF at the pilot-selected M: about 2000 more. At 150 models per
+  GPU-hour: about 20 GPU-hours. Evaluation: references on CPU (32 cores), about 1 h.
+* Local (laptop) jobs only under 10 minutes: unit tests, J0 local, separability-map smoke. Everything else runs on the box in tmux, one wait,
+  results as small files on a results branch.
 
-* This laptop session (VERIFIED): branch `main`, clean tree, Python 3.13.5, no `nvidia-smi` here. The box is not reachable from this
-  session (it is not in the session list), so its GPU, CPU count and disk are UNVERIFIED until you relay the check below.
-* The planning spreads above came from a scratch script (session scratchpad, outside the repo) that reads `item_contrasts.npy` read-only;
-  it will be added as `scripts/stage1_planning_spreads.py` if you approve.
-* Name collision (VERIFIED by the literature search, workstream B): "DynaICL" is already the name of a method in
-  Zhou, Jiang, Cotterell, Sachan, "Efficient Prompting via Dynamic In-Context Learning", arXiv:2305.11170 (2023), unrelated to dynamical
-  systems. A paper should use a different name; your decision.
+## 10. Files, dependency, environment
+
+* New, unfrozen locations only: `dynaicl_neural/` (data, models, training, adapter, evaluation, analysis), `dynaicl_families/` (F1, F2 references),
+  `tests_stage1/`, `config/stage1*.yaml`, `scripts/stage1_*.py`, `docs/PREREG_stage1*.md`, `docs/MATH_F1.md`, `docs/MATH_F2.md`, Stage 1 freeze manifests.
+  The whole `dynaicl/` package, `tests/`, `requirements.txt` and `pyproject.toml` are frozen (Stage 0.6 v2 manifest) and are only imported or read.
+* PyTorch pinned in `requirements-stage1.txt` to the exact version on the box (CUDA build if a GPU exists), recorded in
+  `docs/STAGE1_ENVIRONMENT_MANIFEST.json` (torch, CUDA, cuDNN, driver, GPU model). Deterministic settings: `torch.use_deterministic_algorithms(True)`,
+  CUBLAS workspace config; GPU bitwise reproducibility across runs on the same hardware is tested, not assumed. References and scoring stay numpy/scipy float64.
+
+## 11. Order of work and checkpoints
+
+1. **This plan, hardware facts, name options** (checkpoint 1).
+2. `docs/PREREG_stage1.md` (1A) with the separability map, operating characteristics, compute plan (checkpoint 2). The map and the operating-characteristics
+   simulations are CPU, reference-only, and run before this checkpoint (laptop if under 10 min, else box).
+3. Implementation, tests, mutation matrix; J0 benchmark; the UNIF-only engineering smoke test (checkpoint 3).
+4. Pilot on pilot seeds only; pilot effects written to an unopened file (checkpoint 4).
+5. Freeze: manifest, snapshot, seed-role table, authorization gate (checkpoint 5).
+6. Confirmatory runs (checkpoint 6).
+7. Analysis, then the paper under `paper/` with a claims-to-evidence table (checkpoint 7).
+* **In parallel on CPU (steps 2-4):** F1 (then F2) math, reference implementation, validation, separability map, and its own pre-registration.
+  No network is trained on F1 or F2 before its own freeze.
+
+## 12. What a main-track paper would need that this plan does not yet guarantee
+
+See docs/literature/GAP_AND_NOVELTY.md section 7 for venue tiers. In short: (1) a family where Q1 and Q2 are both identifiable by wide margins (F1, F2);
+(2) a clear neural finding, powered by seeds, that is not already known from linear regression or discrete Markov chains (for example how the diversity
+threshold K* scales with parameter dimension in continuous-state dynamics, or whether models acquire generic stability knowledge before population
+knowledge during training); (3) a predictive account: the separability theory of section 3.1 predicting K* and the n-window, tested against the neural
+results; (4) breadth (architectures, sizes) and possibly an evaluation of public time-series foundation models against the references with CRPS
+(UNVERIFIED feasibility: it needs models whose predictive can be scored). None of these is guaranteed; (2) depends on results we cannot know in advance.
+
+## 13. Hardware check and names (pending your input)
+
+* Hardware: VERIFIED for the laptop only (Python 3.13.5, no `nvidia-smi`). The box is UNVERIFIED until you paste the output of the read-only block given in
+  the session message.
+* Name options are in the session message; you choose before any paper drafting.
