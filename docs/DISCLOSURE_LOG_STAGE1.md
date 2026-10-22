@@ -1,0 +1,12 @@
+# Disclosure log: Stage 1 (neural in-context learning study)
+
+Append-only. Each entry records what was seen, run or changed, and how it was handled. Entries are never edited; corrections are new
+entries that reference the original.
+
+## Design phase (before any pre-registration)
+
+| # | Date | What happened | Handling |
+|---|---|---|---|
+| S1 | 2026-10-22 | Plan drafted (`docs/STAGE1_PLAN.md`). Inputs read: CLAUDE.md, STAGE05_RESULTS.md, STAGE06_RESULTS.md, PREREG_stage06.md, DISCLOSURE_LOG_STAGE06.md (F20-F29). Planning spreads recomputed read-only from the published Stage 0.5 file `runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/item_contrasts.npy` (h = 1 contrasts: means and per-item sd). | These are published Stage 0.5 results, used for planning only (the same use Stage 0.6 made of them). No Stage 1 seed has been used, no model exists, nothing was trained. `phase_d_pilot/PILOT_ONLY_do_not_open_effects.json` was not opened. |
+| S2 | 2026-10-22 | Literature search (workstream B) started with three background agents using web search; one finished. It found a name collision: "DynaICL" is an existing method (arXiv:2305.11170, prompting of language models). | Recorded in the plan section 11; renaming is the user's decision. |
+| S3 | 2026-10-22 | All three literature agents finished (89 sources fetched and kept; excluded items listed). I re-fetched Gibson et al. (2604.12151) and the Simulacrum (2606.27711, full HTML) myself; the latter was read only at abstract level by the agent. Deliverables: `docs/literature/BIBLIOGRAPHY.md`, `docs/literature/GAP_AND_NOVELTY.md`, raw agent reports in `docs/literature/raw/`. Plan section 12 added from the literature. | Quotes passed through a fetch summariser and must be re-checked against PDFs before printing in a paper. No novelty or publishability claim is made. S3 was first inserted above S2 by mistake and moved below it before this file was ever committed. |
