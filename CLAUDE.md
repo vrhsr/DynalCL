@@ -1,7 +1,7 @@
 # CLAUDE.md: DynaICL orientation (read this first)
 
 This file gives a new session full context in one read. Details are in the files it points to.
-Last updated: 2026-10-11 (Stage 0.6 v2 freeze done; read sections 2c-2e first for the current state).
+Last updated: 2026-10-22 (Stage 0.6 confirmatory run DONE, verdict STOP: read section 2g first; sections 2c-2e describe the state BEFORE the run and are historical where they say "not authorised / not started").
 
 ## 1. What this project is
 
@@ -148,6 +148,14 @@ issues the authorization with their own key, the run, then analysis); (c) Stage 
 * **Phase D v2 on the Linux box: 25/25 tasks passed (attempt 3)**; report `phase_d_pilot/PHASE_D_V2_REPORT_linux.md`: GO, scoped to the pilot config on that platform. Attempts 1-2 (15/25, 21/25) failed only in non-frozen tooling (disclosure F22-F24).
   Still NOT done and NOT authorised: Colab qualification, qualification of the confirmatory config, the confirmatory run, the authorization artifact, Stage 1. The harness rewrites `PILOT_ONLY_do_not_open_effects.json` and the pilot YAMLs on each run; restore them with `git checkout` and never open the effects file.
 * Full Phase D queue runtime on the box is about 13 min (the queue's own per-task estimates, about 85 min, were far too high).
+
+## 2g. Stage 0.6 CONFIRMATORY RESULT (2026-10-22): pre-registered verdict STOP. Read `docs/STAGE06_RESULTS.md`.
+
+* The user authorized Phase E; it ran once on the Linux box (run id `phaseE-20261022`, 50/50 units, 3.1 min). All six critical checks PASS. **Verdict STOP:** all 18 long-context gains have an adjusted upper bound below delta = 0.02 in both replicates (largest +0.0077);
+  the increment over zero noise is at most +0.0012 and negative for the larger noise levels. Files: `results_stage06_confirmatory/phaseE-20261022/` (checksums verified), disclosure log F26-F29.
+* **Do not re-run the confirmatory config, issue another authorization, or re-analyse** (the runner refuses a second run for that run id; any new run would need a new, user-initiated decision and would not be pre-registered).
+* The authorization key for this run was generated on the box by the user's instruction and shredded (F26); the artifact stays off-repo. Never ask for, store or print any key.
+* Stage 1 (neural) is NOT started or authorised. What it should do given STOP (population advantage only at short contexts in these AR(1) families, even with observation noise) is the user's decision.
 
 ## 3. Working rules the user set (keep following them)
 
