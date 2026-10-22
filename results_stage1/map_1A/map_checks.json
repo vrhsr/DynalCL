@@ -1,0 +1,9 @@
+{
+ "n_agreement_checks": 4344,
+ "z_critical": 5.17313174477092,
+ "max_abs_z": 3.8220786428682065,
+ "agreement_pass": true,
+ "note": "KL window mass and disjointness are enforced at run time (the run aborts on failure).",
+ "expected_false_identifiable_cells_upper_bound": 0.09719265827736671,
+ "map_valid": true
+}

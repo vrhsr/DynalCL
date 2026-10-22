@@ -1,0 +1,27 @@
+{
+ "MAP_DONE.json": {
+  "sha256": "3a1f1cb260928c8175874102101b70bfee00b5df19b3f11692d411ca118f7415",
+  "bytes": 55
+ },
+ "MAP_REPORT.md": {
+  "sha256": "d1f3fce47465680af09db20cceea8a97698d41bc6cedf5db00fa7c9e1943ab50",
+  "bytes": 104680
+ },
+ "map_checks.json": {
+  "sha256": "ae7b5b65a59d51fd2cfdf3c3dcd3faede0f1c2969db3b2f039ccc54695f2c509",
+  "bytes": 312
+ },
+ "map_decisions.csv": {
+  "sha256": "cedb9b62df2c7273432b8ef6d05a59471fcc26de909a9b33b1bc3011ef8f3129",
+  "bytes": 136597
+ },
+ "map_rows.csv": {
+  "sha256": "91e59828afc9701520f74733c10bd3414f7994dbd33c75dc820c7b5d56fac79b",
+  "bytes": 5907588
+ },
+ "provenance.json": {
+  "sha256": "a8d2f24064cc47007d17fab844261e1e87ba56c96bdd5e4ca1732926b122c1e8",
+  "bytes": 1920
+ },
+ "summarize_exit_code": 0
+}

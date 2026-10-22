@@ -1,0 +1,2 @@
+temperature.gpu, utilization.gpu [%], memory.used [MiB]
+91, 53 %, 754 MiB
