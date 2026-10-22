@@ -139,6 +139,16 @@ issues the authorization with their own key, the run, then analysis); (c) Stage 
   `docs/DISCLOSURE_LOG_STAGE06.md`, `docs/STAGE06_VALIDATION_REPORT_v2.md`, `docs/STAGE06_CHANGE_REPORT_v1_to_v2.md` and `phase_d_pilot/PHASE_D_REPORT.md`.
 * The user's authorization key is never stored anywhere. Running jobs and waiters do not survive a move.
 
+## 2f. Git, the Linux box and the Phase D result (2026-10-22; read with the disclosure log F20-F25)
+
+* The workspace IS now a git repo (user-approved `git init`), pushed to the PUBLIC repo `https://github.com/vrhsr/DynalCL` (`main`, commit `4305222`; `runs/` and `dist/` force-added; `_claude_session_backup/` and `phase_d_pilot/work*` excluded via `.git/info/exclude`, `core.autocrlf` off).
+  Branches: `phase-d-linux-tooling` (non-frozen Phase D tooling fixes, `29912c9`, `0448e13`), `results-phase-d-v2-linux-20261022` (small result files from the box). Never push or edit anything that changes a frozen file.
+* **Compute rule (user): anything over ~10-15 min runs on the remote box only.** The box is a Linux x86_64 machine with its own Claude Code session; this session cannot message it (not listed as a peer), so the user relays prompts. Python 3.13.5 venv via user-space `uv`; deploy key (write, one repo) added by the user; push over ssh port 443.
+* On Linux the runner REFUSES until `qualify` passes (`--qualification`). The PILOT-config qualification passed on the box (V4, V6, V11, V13). The harness queue reads `PHASE_D_QUALIFICATION` for the report path.
+* **Phase D v2 on the Linux box: 25/25 tasks passed (attempt 3)**; report `phase_d_pilot/PHASE_D_V2_REPORT_linux.md`: GO, scoped to the pilot config on that platform. Attempts 1-2 (15/25, 21/25) failed only in non-frozen tooling (disclosure F22-F24).
+  Still NOT done and NOT authorised: Colab qualification, qualification of the confirmatory config, the confirmatory run, the authorization artifact, Stage 1. The harness rewrites `PILOT_ONLY_do_not_open_effects.json` and the pilot YAMLs on each run; restore them with `git checkout` and never open the effects file.
+* Full Phase D queue runtime on the box is about 13 min (the queue's own per-task estimates, about 85 min, were far too high).
+
 ## 3. Working rules the user set (keep following them)
 
 1. **Correctness first. Report only what was run.** Paste real output. Never weaken, skip or delete a test to make
