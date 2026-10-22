@@ -1,0 +1,10 @@
+{
+  "config.yaml": "c78cba3b54a461a785d01b2f66bd6fffe5668353f5639b8f4713f1c1e3087640",
+  "config_hash.txt": "2e6714b37477f40d0dd963555c72e81a8e2eec66e6e0098d490736a17ba500b0",
+  "results/n_curves.csv": "4175f8e89a8c9dcd346e6d57c97fd233303cda45b96eba5eb0142096e50e8b23",
+  "results/naive_secondary.csv": "e567d0355e5e38a1e92e776e9eeb3b6bbbad5d189ad8c9fe8326b6d65beae86c",
+  "results/pooled_descriptive.csv": "686dd2e102f82f019e6a1a7587e1f3c81f5a35a4c09118c1f192f3514d1e413f",
+  "results/report.md": "108f056f281a238d3c9a12a3cea3c8e82f769983347708748ef353f154f5510a",
+  "results/summary.json": "742b4b6108ba5d2f462b6c36a9c4976cb39fffb05241662bdcc0248ec16c6c89",
+  "results/tier2.csv": "5f2968a25b0b8f274f88936ce239122424d4dfa20c1cb88f76b99e5c0ca5b066"
+}
