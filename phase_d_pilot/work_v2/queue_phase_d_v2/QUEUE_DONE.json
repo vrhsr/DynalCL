@@ -1,0 +1,158 @@
+{
+ "updated_utc": "2026-10-22T15:13:36Z",
+ "tasks": [
+  {
+   "name": "integrity bookend 0 (start)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "frozen qualify (pilot config, local)",
+   "status": "done",
+   "seconds": 22.0,
+   "rc": 0
+  },
+  {
+   "name": "reference run, 4 workers",
+   "status": "done",
+   "seconds": 16.0,
+   "rc": 0
+  },
+  {
+   "name": "reference run, 1 worker (order/worker independence)",
+   "status": "done",
+   "seconds": 50.1,
+   "rc": 0
+  },
+  {
+   "name": "compare the two reference runs bitwise",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "completeness of the reference run",
+   "status": "done",
+   "seconds": 14.0,
+   "rc": 0
+  },
+  {
+   "name": "integrity bookend 1 (after reference runs)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "interruption / resume scenarios (8)",
+   "status": "done",
+   "seconds": 352.3,
+   "rc": 0
+  },
+  {
+   "name": "integrity bookend 2 (after interrupt tests)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "corruption / truncation tests (10 cases)",
+   "status": "done",
+   "seconds": 25.0,
+   "rc": 0
+  },
+  {
+   "name": "runtime-restart emulation",
+   "status": "done",
+   "seconds": 22.0,
+   "rc": 0
+  },
+  {
+   "name": "integrity bookend 3 (after resume tests)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "determinism: thread counts + analysis",
+   "status": "done",
+   "seconds": 30.0,
+   "rc": 0
+  },
+  {
+   "name": "per-unit profile (50 units, serial)",
+   "status": "done",
+   "seconds": 70.1,
+   "rc": 0
+  },
+  {
+   "name": "scaling at N = 50/100/200/400",
+   "status": "done",
+   "seconds": 42.1,
+   "rc": 0
+  },
+  {
+   "name": "second pilot size: all 50 units at N = 50",
+   "status": "done",
+   "seconds": 9.0,
+   "rc": 0
+  },
+  {
+   "name": "anchors at N = 4000",
+   "status": "done",
+   "seconds": 70.0,
+   "rc": 0
+  },
+  {
+   "name": "analysis cost at confirmatory scale (synthetic)",
+   "status": "done",
+   "seconds": 3.0,
+   "rc": 0
+  },
+  {
+   "name": "storage probe (local disk)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "qualification gate (throwaway copy)",
+   "status": "done",
+   "seconds": 25.1,
+   "rc": 0
+  },
+  {
+   "name": "integrity bookend 4 (after timing tasks)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "launch protection incl. the v2 gate (stubbed copies)",
+   "status": "done",
+   "seconds": 4.0,
+   "rc": 0
+  },
+  {
+   "name": "structural analysis on pilot output",
+   "status": "done",
+   "seconds": 14.0,
+   "rc": 0
+  },
+  {
+   "name": "seed search (pilot outputs)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  },
+  {
+   "name": "integrity bookend 5 (end)",
+   "status": "done",
+   "seconds": 1.0,
+   "rc": 0
+  }
+ ],
+ "current": null,
+ "finished": true,
+ "total_seconds": 777.9
+}

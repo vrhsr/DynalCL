@@ -1,0 +1,21 @@
+{
+ "comparison_with_uninterrupted_reference": {
+  "arrays_differ": [],
+  "identical_to_reference": true,
+  "json_files": 50,
+  "leftover_tmp_files": [],
+  "max_abs_diff": 0.0,
+  "meta_differs": [],
+  "missing": [],
+  "npz_file_bytes_differ": [],
+  "npz_files": 50,
+  "unexpected_files": [],
+  "units_expected": 50
+ },
+ "emulation_only": true,
+ "fresh_root": "/home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/restart/fresh_root",
+ "resume_rc": 0,
+ "resume_tail": "[ 49/50 units,    0.2 min] naive_1_3_1 (0s) | [ 50/50 units,    0.2 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/restart/runs_b/20261022T150903751619Z_stage06_noisy_probe_pilot_08d069ae1c",
+ "run_kind": "PILOT",
+ "units_done_before_kill": 20
+}

@@ -1,0 +1,81 @@
+{
+ "note": "guards tested on throwaway copies with stubbed evaluation; this does not test the full computation path",
+ "results": {
+  "A2_test_only_artifact_issued_in_throwaway_copy": {
+   "message": "  (the key was not stored anywhere)",
+   "outcome": "ok",
+   "rc": 0
+  },
+  "A2_test_only_artifact_with_its_matching_test_key": {
+   "message": "REFUSED: environment differs from the frozen environment manifest {'system': ['Windows', 'Linux'], 'machine': ['AMD64', 'x86_64']}; run `qualify` in this environment and pass --qualification",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "A3_test_only_artifact_with_another_key": {
+   "message": "REFUSED: environment differs from the frozen environment manifest {'system': ['Windows', 'Linux'], 'machine': ['AMD64', 'x86_64']}; run `qualify` in this environment and pass --qualification",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "A_confirmatory_run_no_authorization_artifact": {
+   "message": "REFUSED: environment differs from the frozen environment manifest {'system': ['Windows', 'Linux'], 'machine': ['AMD64', 'x86_64']}; run `qualify` in this environment and pass --qualification",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "B2_confirmatory_analyze_pilot_checkpoint_parent": {
+   "message": "REFUSED: environment differs from the frozen environment manifest {'system': ['Windows', 'Linux'], 'machine': ['AMD64', 'x86_64']}; run `qualify` in this environment and pass --qualification",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "B_confirmatory_analyze_given_pilot_checkpoints": {
+   "message": "REFUSED: environment differs from the frozen environment manifest {'system': ['Windows', 'Linux'], 'machine': ['AMD64', 'x86_64']}; run `qualify` in this environment and pass --qualification",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "C_pilot_mode_with_confirmatory_seeds": {
+   "message": "REFUSED: seeds [<confirmatory-seed>, <confirmatory-seed>] / <confirmatory-seed> are not the seed-role table's allocation for mode pilot (evaluation role pilot_evaluation, bootstrap role pilot_bootstrap); roles of the given seeds: {<confirmatory-seed>: 'confirmatory_evaluation",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "D_confirmatory_mode_with_pilot_seeds": {
+   "message": "REFUSED: seeds [62001, 62101] / 62999 are not the seed-role table's allocation for mode confirmatory (evaluation role confirmatory_evaluation, bootstrap role confirmatory_bootstrap); roles of the given seeds: {62001: 'pi",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "E_confirmatory_run_without_manifest_arguments": {
+   "message": "REFUSED: mode confirmatory requires --manifest and --expected-manifest-sha256",
+   "outcome": "REFUSED",
+   "rc": 3
+  },
+  "F_entry_point_audit": {
+   "argparse_flags": [
+    "--authorization",
+    "--checkpoint-dir",
+    "--config",
+    "--expected-manifest-sha256",
+    "--manifest",
+    "--max-new-units",
+    "--out",
+    "--qualification",
+    "--runs-dir",
+    "--snapshot",
+    "--workers"
+   ],
+   "checkpoints_bound_to": [
+    "config_hash (differs between pilot and confirmatory: mode is part of the config)",
+    "manifest_sha256",
+    "unit identity",
+    "schema version",
+    "array shapes/dtypes",
+    "npz SHA-256"
+   ],
+   "mentions_authorization": true,
+   "os_environ_reads": [
+    "os.environ.setdefault(var, \"1\")                                       # oversubscription in workers"
+   ],
+   "run_kind_field_in_checkpoints": false
+  },
+  "no_unit_checkpoints_written_by_any_case": true,
+  "pilot_checkpoint_files_copied_as_input_to_case_B": 50
+ },
+ "run_kind": "PILOT"
+}

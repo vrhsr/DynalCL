@@ -1,0 +1,41 @@
+{
+ "array_elements_checked": 1689600,
+ "complete": true,
+ "context_lengths": [
+  2,
+  40,
+  39
+ ],
+ "duplicate_unit_names": 0,
+ "expected": {
+  "naive_items_per_array": 4000,
+  "naive_units": 24,
+  "primary_items_per_array": 15600,
+  "primary_units": 24,
+  "units": 50
+ },
+ "found": {
+  "unit_json": 50,
+  "unit_npz": 50
+ },
+ "horizons": [
+  1,
+  5
+ ],
+ "initial_state_ratios": [
+  0.25,
+  1.0,
+  4.0
+ ],
+ "noise_ratios": [
+  0.0,
+  0.755,
+  2.56,
+  6.5
+ ],
+ "non_finite_elements": 0,
+ "pit_outside_0_1": 0,
+ "primary_cells_present": true,
+ "run_kind": "PILOT",
+ "units_failed_frozen_load_verify": []
+}

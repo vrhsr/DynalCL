@@ -1,0 +1,14 @@
+{
+ "dirs": [
+  "/home/rama_11187/projects/dynacl/phase_d_pilot/work_v2",
+  "/home/rama_11187/projects/dynacl/phase_d_pilot/config"
+ ],
+ "files_scanned": 2723,
+ "files_with_a_whole_token_match": [],
+ "run_kind": "PILOT",
+ "seeds_searched": [
+  "64101",
+  "64102",
+  "64999"
+ ]
+}

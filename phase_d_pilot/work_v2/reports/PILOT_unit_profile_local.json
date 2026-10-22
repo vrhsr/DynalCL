@@ -1,0 +1,1735 @@
+{
+ "config": "config/stage06_pilot.yaml",
+ "rows": [
+  {
+   "array_dtypes": {},
+   "array_sha256": {},
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.3099292960000001,
+   "import_s": 0.21229545399546623,
+   "meta_json_sha256": "14194eaa510ea73535f6bd6db218830fbfa146fc27db4608af902a40d0409029",
+   "n_forecasts": null,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 114.91328,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "integrity"
+   ],
+   "unit_seconds_reported": 0.31,
+   "wall_s": 0.30994516471400857,
+   "wall_s_per_forecast": null
+  },
+  {
+   "array_dtypes": {},
+   "array_sha256": {},
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 2.509702875,
+   "import_s": 0.21192698879167438,
+   "meta_json_sha256": "11fcc590650a7ed6fdc44972124b2ffc20f356f8baf686935c27d14c09eb10fc",
+   "n_forecasts": null,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 151.216128,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "tier1"
+   ],
+   "unit_seconds_reported": 2.51,
+   "wall_s": 2.50979907810688,
+   "wall_s_per_forecast": null
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "9e7d9df566653a21860ac52ab7be3c10c0d829f235498ca32aef656e909b9bd2",
+    "pop_pit": "6ac236d31305821adbcbf3222ad3ce28b536cf4e07dd32c6c723eace8bb5d721",
+    "stab_logscore": "da3942883fe0c96184a8e57116456e677f2f37e7a4669fa6167df7aa1200016d",
+    "stab_pit": "ed87cac240c397763016bfb69f1781dbf192402aa26c8569e2c344d43f03079c"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8113097480000002,
+   "import_s": 0.21683293022215366,
+   "meta_json_sha256": "680efb7017f8f9183d001f5ed4526b5539196125d5b2a3180bf01888035abf7c",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.326976,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    0,
+    0
+   ],
+   "unit_seconds_reported": 1.81,
+   "wall_s": 1.81156149180606,
+   "wall_s_per_forecast": 5.806286832711731e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "727bea2ff304bea16911e669cdf81a680ecc41eaddfa9612792a01702aa49628",
+    "pop_pit": "bd64aace5fc0ea2a5a6510c4d9e3dab527fa0d67d1ad2d9043c81b45c08bcb7f",
+    "stab_logscore": "962be8f56473282d3e8924663d876aa40b6e65c1172e933470a48ef7f1ab11d6",
+    "stab_pit": "5739034c458c055b1c8a8ce3a283250bfe37978f57d9821123f3ec92b655183b"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.7764501460000002,
+   "import_s": 0.2073349761776626,
+   "meta_json_sha256": "7c33d37de57090c17ff214dbd40f9f0cbc9260dfcf2d62852c63ed00ef313ff1",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.42528,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    0,
+    1
+   ],
+   "unit_seconds_reported": 1.78,
+   "wall_s": 1.7765876483172178,
+   "wall_s_per_forecast": 5.6941911805039034e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "a6f865136e9c3e2707ffad6340e758ec495867558c4d65909fe975a2a1bd2ed9",
+    "pop_pit": "d59ccb553a91855e4210d5062559e6147f2d6d7ad108d287a63f42006ab94b2c",
+    "stab_logscore": "20805618dc1654ca5d42d66f8fad09ccb94d53232a17ac68635cd0a904457d41",
+    "stab_pit": "f0e21012946ddbe0c3fbbcc4ceea26c5c1a5f14f79a5d05832734a4683abeac5"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.800317411,
+   "import_s": 0.20753672299906611,
+   "meta_json_sha256": "6a107b2185a6f4c32833ded28b65b8ae7e20dc1c8d5232c099b6cbbb24dbcd26",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.146752,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    0,
+    2
+   ],
+   "unit_seconds_reported": 1.8,
+   "wall_s": 1.800569883082062,
+   "wall_s_per_forecast": 5.7710573175707114e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "56dd30f8c15a22b2afbab9fff1f5d7bccfcda4a15fc04ea2bdd26d3a2244fc94",
+    "pop_pit": "8c09113ae02e447a70c9a66e3cac95283e6726b7bb4660805d33a8194d1d33aa",
+    "stab_logscore": "b4b352f0bb44f61c1ac97e0af09b86494501e3314041f18e10601c571571e014",
+    "stab_pit": "3e1945d315f04826148b156bfc0ef43929cf3f8bc446eb28cbe422087da720d0"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8132083810000001,
+   "import_s": 0.21005038172006607,
+   "meta_json_sha256": "1507c520fccaf35dd68673416f47293504f2272841e8854841a06b93a5361cb4",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.417088,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    1,
+    0
+   ],
+   "unit_seconds_reported": 1.81,
+   "wall_s": 1.8132882788777351,
+   "wall_s_per_forecast": 5.8118214066594076e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "c4d8515dbb010b231946437e3519e630583584258bdd3e706be8883094a257d0",
+    "pop_pit": "1653ef793cd117e43678f58ce71ab6a0c1180dfd417c0d74a69f5a6996c43da2",
+    "stab_logscore": "630e049376e3d716398ad69343e4f05424f850be683fdd809de8ec4777663d79",
+    "stab_pit": "9230b6dd43e7fd9d6bb1153cad96796e5fe108b3fc1f4dc6456341ebb6243799"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.826787296,
+   "import_s": 0.20770590705797076,
+   "meta_json_sha256": "069a188e913976ddc4c01d67568cda6479f08ac9fa83cb2ebda44926ecd810da",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 308.432896,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    1,
+    1
+   ],
+   "unit_seconds_reported": 1.83,
+   "wall_s": 1.8270064778625965,
+   "wall_s_per_forecast": 5.855789993149348e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "0a1fd7285b6c70803d081d94f878e6a93533c8a38a4153a2581ca25ae72a6d1a",
+    "pop_pit": "0102fc86cf55de931e6b0db9c3316374683ff9391f69f400eda9a0a5cfddcc21",
+    "stab_logscore": "df29f974f4c2f9a8906f45d5452b8578ee51e06b3e4468830fa66dd6a44fa7f7",
+    "stab_pit": "1df8f5e55bbda8e0832bc165abdcca0f95defba223a71432a0e01788c3d0d459"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.845280477,
+   "import_s": 0.21203148597851396,
+   "meta_json_sha256": "6a012556979dbd4c6a9f04bf5e3b3557d5b25e5c01794b765e1945d5e3a96222",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.961856,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    1,
+    2
+   ],
+   "unit_seconds_reported": 1.84,
+   "wall_s": 1.8454088340513408,
+   "wall_s_per_forecast": 5.914771904010708e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "4ad26365ccd2ad534b8a6ce6c462aed686f01c652ff79587687eeea7e687d095",
+    "pop_pit": "ad5257d6737095278dc99e181e156d1da76b29f91979865b9b6fa1c11c681435",
+    "stab_logscore": "33ba601f91807c32ed0ef2c62af69e0a6138710d8c6137edeb38a47318aaa283",
+    "stab_pit": "abe6175f669967a23f6f23a7fc6dd3c3b3029b8b80110ed9e201daeca32de607"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.813032501,
+   "import_s": 0.21101042022928596,
+   "meta_json_sha256": "996f83fd2c7562a5fcb15d691654c9d78c08f8053dfd6db59f031e69827a3948",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.17952,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    2,
+    0
+   ],
+   "unit_seconds_reported": 1.81,
+   "wall_s": 1.8131333477795124,
+   "wall_s_per_forecast": 5.811324832626642e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "d14552496c3aff442015818a121bada09605ed3f6bcafba9d240daa3fd8e8660",
+    "pop_pit": "59d87368f8cccab791d38007c740784d63e018d78ca713311306245e6ce0ab8c",
+    "stab_logscore": "aa2bb1bdc48c602a2e14095aca71f1a55277c3a228f5e39c73a6e62df4080fc3",
+    "stab_pit": "84859efe81d90bc0f77b094116ca7baa7f9d52042857fc16a82257397e627829"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.829541418,
+   "import_s": 0.2077298299409449,
+   "meta_json_sha256": "733003200e151aa4c3497310403e0ad384dd72f49333d20cf4f2c2e0c5af7118",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.556352,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    2,
+    1
+   ],
+   "unit_seconds_reported": 1.83,
+   "wall_s": 1.8296674909070134,
+   "wall_s_per_forecast": 5.864318881112223e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "8bbcb583a1e07e8d73e2b442fe3460d3c2fe47533b34241ac6c11112c02c3e3a",
+    "pop_pit": "787c7e36e7c8004f5f2823e9205f18ef4ebc0c94bd4b912e8a792778092f7530",
+    "stab_logscore": "930c8f249b29225b6ddf9ab30a6c0afa3d57c753a09fe954ecf74cdd7274358f",
+    "stab_pit": "08c48dae8c2389e8d08ca7380c41036e7ee06ca20dc18cac5fb48d92a4a7a3ea"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8309895189999998,
+   "import_s": 0.21595415007323027,
+   "meta_json_sha256": "30f89f1f46029a24eeb67684281bfdd1f3c65f89394cb5b94c76fe63478fdab2",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.408896,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    2,
+    2
+   ],
+   "unit_seconds_reported": 1.83,
+   "wall_s": 1.8311844430863857,
+   "wall_s_per_forecast": 5.8691809073281595e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "2fceae11eee3950d2220caa1a08174529811926e3c9951080db1cc9f5d5625d8",
+    "pop_pit": "57da34c6fdc61af3f3ec0908a3048caaf60886047a84692d5743c49543d321ba",
+    "stab_logscore": "874834460e9fad9fc88a9bed7cadc2a8d88c9168f96dbb6e993ee3ecf443b3f2",
+    "stab_pit": "a78dbebed5da2aa56b4fb948a151595c49d94d75f40fd75bdae628fcf0b0f7b1"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8225858480000001,
+   "import_s": 0.21775522315874696,
+   "meta_json_sha256": "a1f1def077026fd3705df90d75490a069bb3921ef2f4b9a5afd305b3dc75aac7",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.28192,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    3,
+    0
+   ],
+   "unit_seconds_reported": 1.82,
+   "wall_s": 1.822663619183004,
+   "wall_s_per_forecast": 5.8418705743045e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "e3bc8474ab21bce3549a9e17788ecfcf345b87b4bebe7bbac914e8e7787b1bd8",
+    "pop_pit": "5190e81a605c9a38569ff9eb8dea838c1900da36d386dea848cb163179190bb8",
+    "stab_logscore": "6b282656708ad51631179156a2d37933160714a40529fc7b3e5c5c4eefdb32d8",
+    "stab_pit": "f30357d4aa13c077989d0fda127d00023fe022c9b501a5cce620bbe87cb31d26"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8068299450000003,
+   "import_s": 0.20720761641860008,
+   "meta_json_sha256": "5378e1808e0470cba54ece4c8fc187298d4b820b2fe16d357cbcee2096b4e6cc",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.662848,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    3,
+    1
+   ],
+   "unit_seconds_reported": 1.81,
+   "wall_s": 1.806970867794007,
+   "wall_s_per_forecast": 5.7915732942115614e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "ecd05fd586419dfa7648b88eafa3af3ff79e48150bdfd6be27850fda1bec06bd",
+    "pop_pit": "c4a540542c7b210e1139a2b2b219dab058d4063d08698031e50893d1eb3c0d86",
+    "stab_logscore": "88d9ae4c4774eaf425eb4715cffd5b54dbfe152869d33ed23720ab85f46ebfbb",
+    "stab_pit": "955a3233bd1df337855676d1255589ca5fcc56ef747991cd089ce2913bf67cea"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.748367252,
+   "import_s": 0.20789063908159733,
+   "meta_json_sha256": "0b443c14b894fa0714238fb9e2fd1175e12987681edd4b50e8951911f329f604",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 310.984704,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    3,
+    2
+   ],
+   "unit_seconds_reported": 1.75,
+   "wall_s": 1.7484334940090775,
+   "wall_s_per_forecast": 5.603953506439351e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "3cc517c265ff269848356ff7583ff3476057f2e8e736cff55c6e7f809d08181a",
+    "pop_pit": "acd540aed3a37e120556ce7b5413994950be0191501a8934cec550165c07a218",
+    "stab_logscore": "58a1a064f1cf3dd9f49c5822d6042a8099e2d7ab225c9aba099ff9bd038ebc49",
+    "stab_pit": "3c3b59fff46fcacbc8293a7b592554cfc9a42f2ddd16e78ae7552c5e2fa726ae"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.7565134709999999,
+   "import_s": 0.20855317823588848,
+   "meta_json_sha256": "eb3e98281f40e2ffc1350b01693b4be704f78e6fc9da6c81af451d15b7837c1e",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.863552,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    0,
+    0
+   ],
+   "unit_seconds_reported": 1.76,
+   "wall_s": 1.7566435802727938,
+   "wall_s_per_forecast": 5.6302678854897233e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "a005ec5343caee0e850a1d41a3c6448fb29b0a53d9872c7db66286ebbfe68886",
+    "pop_pit": "03406ece271e44c6c3fbcc908c65f9dbd7349945f51e2b17715ccd20c0c6a7b3",
+    "stab_logscore": "d384e273082011a1f5d7752a8ea5f36889d5203af42e990b6bac748d397cfade",
+    "stab_pit": "154381978114e2422f17c5fee25f2c09443d46b01efa9b8b934d6771faead884"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.786070528,
+   "import_s": 0.21003100601956248,
+   "meta_json_sha256": "071ab2253b6ef5ede5f35a28d7c8805bccad791b38ef83265f871e081d98ae73",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.453952,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    0,
+    1
+   ],
+   "unit_seconds_reported": 1.79,
+   "wall_s": 1.7862463309429586,
+   "wall_s_per_forecast": 5.725148496612047e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "aa119db4fcff5da43f8da4b483d4196d45ae9b379c6b9bc3892db9e93d58d9b7",
+    "pop_pit": "f0a06984afb824153006858fad27bd77655d3ad2daba1a13bb5c836d0f8fbdc2",
+    "stab_logscore": "d1f34af74f42527f1d4e95102e550eb2dc7898f4b6a514152e4f02619d17b275",
+    "stab_pit": "394a6b481e20bf2534990de9cdce1c306abeb150eeb51696e0465a53641d3007"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.7874586950000002,
+   "import_s": 0.20855600386857986,
+   "meta_json_sha256": "00c8f360e9692346e3e739cb4b7367e56ed50a04d62781e271493beb64a9a24d",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.511296,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    0,
+    2
+   ],
+   "unit_seconds_reported": 1.79,
+   "wall_s": 1.7875546650029719,
+   "wall_s_per_forecast": 5.729341875009525e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "fba20ce1e242505afbae4693725add1cded22bdbe304ab981c5972894f228ca6",
+    "pop_pit": "81c93183d3c4314c9ec7c034f8ff1fa89b41e3b950936368dc2cfd4f67c99588",
+    "stab_logscore": "98b7c3c1a6db02106b4e362f7f28d2c17b89e9de32c9c72250abc2fb1e2e2960",
+    "stab_pit": "5c1002321ea3e0a18f766a61f65f41996591afd0907e79d095713cd658b89231"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.818532851,
+   "import_s": 0.20691009797155857,
+   "meta_json_sha256": "307539655fcc8bb02340df73d9c0bf361ff8ed42631f40e7c5e1ba9d302baa2a",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 308.129792,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    1,
+    0
+   ],
+   "unit_seconds_reported": 1.82,
+   "wall_s": 1.8185740122571588,
+   "wall_s_per_forecast": 5.828762859798586e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "07f00b2ff5794b813a1c6ae9a7af668991d829aed4357b08973f4e53ff871825",
+    "pop_pit": "69a63ce0d33c301945749f6fb27c8fb781cecac93dd6f2a338bda84c058b48e5",
+    "stab_logscore": "4496d84180cf02c642ab10e748bbaf4c4936ca77bbbedfef8402f6e0745bfe1d",
+    "stab_pit": "b0789e68f01bef892b690591913d6c3811aaf414fb40e7ea4529fbdd32741ab2"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8221734900000002,
+   "import_s": 0.20931189833208919,
+   "meta_json_sha256": "f3e31519b38087ccfb8faa54c2d685e84ab623ee0e3660c73a9fa47f1a7cf917",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.15904,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    1,
+    1
+   ],
+   "unit_seconds_reported": 1.82,
+   "wall_s": 1.8222175734117627,
+   "wall_s_per_forecast": 5.840440940422316e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "837f93d6f7769c337d0e3fd34375bcf1defb6385755c0b2241679c9da3ffc270",
+    "pop_pit": "f35c50ac4f980f02f4654daa91d38c0b5aac84c2264f8428a780789c118c9bd2",
+    "stab_logscore": "745e5d09a87015acb63efe92ddaf9e301c7bc49910f5daa656346f87ebf2ec56",
+    "stab_pit": "6ec1607da5ea749b8a14c615fe703884b352086240954b711e45ef1df860b989"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8293086589999998,
+   "import_s": 0.20774029940366745,
+   "meta_json_sha256": "6e0c1b207e904462b215dc774d3a794e0c06f2a99e40c33ecc150826e04af4bf",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.67104,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    1,
+    2
+   ],
+   "unit_seconds_reported": 1.83,
+   "wall_s": 1.829361252952367,
+   "wall_s_per_forecast": 5.863337349206305e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "5ed13239fcc2afa4ac3e165a0106c020b9190e5a593426060d0d8e9b2a87f332",
+    "pop_pit": "4cf1bb8a28523986209bb7bc5384824c9c26ac0e5af81f312398a52cc6f80f0f",
+    "stab_logscore": "64f579a5689dcf9725631aa8ea4c320eabb989264a0dda30a0a361aea0792bb0",
+    "stab_pit": "7ab7472ab622b640d844bb268a7333cc6a50cb8795e85c444bfc155ed76a56cd"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8150307650000002,
+   "import_s": 0.2075481521897018,
+   "meta_json_sha256": "18370d2cc88449b510d173866fc543cc31de37c3245ec9d5bb21e9e13d01cec2",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 308.1216,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    2,
+    0
+   ],
+   "unit_seconds_reported": 1.81,
+   "wall_s": 1.8150469432584941,
+   "wall_s_per_forecast": 5.817458151469533e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "59fefba1bd1f76fef236a78db335f3d8e72d407c3fb7bf334d435d8b1636eb32",
+    "pop_pit": "7402022900063422e421206674802e58d239487c5d21512d9e7489c2c6fa912a",
+    "stab_logscore": "1763c040d9551fcada85e0e2d2dc1ce496450f7aee25b8b35791592eeef35904",
+    "stab_pit": "833b7f76218a737cdb71597e3e25193210c4cbbc8096493b0ffcf650c567ec78"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8200908089999999,
+   "import_s": 0.20730243297293782,
+   "meta_json_sha256": "b5892aa087ef56987730353ba78ad954ada2089483610d3c0fae4529e8d210d5",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.613696,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    2,
+    1
+   ],
+   "unit_seconds_reported": 1.82,
+   "wall_s": 1.8203019839711487,
+   "wall_s_per_forecast": 5.8343012306767584e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "32bbc9093d658eb426ded86e3b3cd2af817cb6e7405bd552fc340e9ccbd546c8",
+    "pop_pit": "00f533dff600d77d6cf085a3bfb56afaf430a1dee2ce99628adcb494c641af08",
+    "stab_logscore": "7c992e46f32208728643c4fde32f91639ec4fe7ec6fd38b32137ab9f264e0559",
+    "stab_pit": "9644c2705ffa3c3e363970145c7954480cadb44a127f50ee07db88e84cea6747"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8160143809999998,
+   "import_s": 0.20935397502034903,
+   "meta_json_sha256": "b77f6ccec134eefaba4a3b05574d42f4441662e831939e5f2fcfd2d9d4d8e16b",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.03616,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    2,
+    2
+   ],
+   "unit_seconds_reported": 1.82,
+   "wall_s": 1.8160477369092405,
+   "wall_s_per_forecast": 5.820665823427053e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "2386ab85b81af85cb030e69c793fd05397301f8cf55e4b170e5b8e8604bf0b97",
+    "pop_pit": "f1ed9ae963b9533e57c1c0441dd9cb53bb6027557da1e6d728284b27a02845d2",
+    "stab_logscore": "0f4d4d48b8820baf539f4442abc70b8686f44e611da1f99f89f1c41f2ba974af",
+    "stab_pit": "ef92ab74e417a8a79feb2db8a38898d11b626fc940a874e79e02e702b7f1c10c"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.812110693,
+   "import_s": 0.20661281514912844,
+   "meta_json_sha256": "231a7fbb2e9ad72bcba0e1403646e641bfa0649a53e8b72181807c18f4bc6113",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.851264,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    3,
+    0
+   ],
+   "unit_seconds_reported": 1.81,
+   "wall_s": 1.8121291901916265,
+   "wall_s_per_forecast": 5.808106378819316e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "d5759bd4ae9cf901e6a43c748c8fc6317e6dfaa12313d8ff1f48cff12665917c",
+    "pop_pit": "b3e5ebdc3e60b365b070dd7f215a717f0ad1b2fd468b03fa39c34b0cc60e48b6",
+    "stab_logscore": "c14b3f207b55fd332283699ae97a3a28549c1e8cab4ea14b43f0a769a922a28a",
+    "stab_pit": "8699ee22eb0ee1dcc394300196cbf28cc54b21a0da633358630ec2f46dcf8cbc"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.803967535,
+   "import_s": 0.20805964013561606,
+   "meta_json_sha256": "0373b78b836d73a0bd0cfcbd472ac77d6f7e305d0a41ec09beb1f4a3add1c67c",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 307.695616,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    3,
+    1
+   ],
+   "unit_seconds_reported": 1.8,
+   "wall_s": 1.8040081840008497,
+   "wall_s_per_forecast": 5.7820775128232364e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "1360290b3e14822ad67894979be8c5bf5f2afbeae7b717833e6336592bd747af",
+    "pop_pit": "91ffb534d03becfd6c58cd66d94e93fea61afb436ad4d85a9541d90feeb888d5",
+    "stab_logscore": "29b1666393d71225842f570834f22d6aa8e3fe9021a661ab8ddcf24ddc3db643",
+    "stab_pit": "20cb69cbef9f218dbfc270c3cdc524298de9880b0f934380a75a5db06b893822"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 1.8123021019999999,
+   "import_s": 0.20721538085490465,
+   "meta_json_sha256": "6f8f749018a0faa403aa5adfc343998e403344a495f61ad2ad6f0852ea262c66",
+   "n_forecasts": 31200,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 308.14208,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    1,
+    3,
+    2
+   ],
+   "unit_seconds_reported": 1.81,
+   "wall_s": 1.8123324918560684,
+   "wall_s_per_forecast": 5.808757986718168e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "31adaf382212be833f201262d957f4e4e85fad5e38983052f603665191d89a30",
+    "naive_pit": "4e8e25fcd8b68ac4e792ad25b326b272972edd5819a60c8bc3b92606a8719690"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.3788565300000001,
+   "import_s": 0.21256744302809238,
+   "meta_json_sha256": "60f41e7658871b891cd000efae78ac51131fc67301136632282f9f764193a0ff",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    0,
+    0
+   ],
+   "unit_seconds_reported": 0.38,
+   "wall_s": 0.37888683285564184,
+   "wall_s_per_forecast": 9.472170821391047e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "9c9daa72342e76721464642746de59520631c366b10549b91303fa240103717f",
+    "naive_pit": "edf1b70f386e28f0b1086af9a53669eaddcd4349929ceccb9f0369fb4fe6e92d"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.362862484,
+   "import_s": 0.2095300587825477,
+   "meta_json_sha256": "7b4adbf700362dc6398803e467925405631add13d2b0e6e115de3d281c73a77d",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    0,
+    1
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.3628605562262237,
+   "wall_s_per_forecast": 9.071513905655593e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "553408676b588c02a83c8c31f600c168b0875f4ac5d014af57947d9918104814",
+    "naive_pit": "614337452e8bfae1f1519c329e8d4ddf3d190e7d70191a837b0f6e28f49974b7"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.361086906,
+   "import_s": 0.2087029181420803,
+   "meta_json_sha256": "93401582db7dcd76ae74f679512a9e1cde1fa20aebccef9d83c8afa027462db3",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    0,
+    2
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.3610900929197669,
+   "wall_s_per_forecast": 9.027252322994172e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "2080b7a5e52329dcbdbee529986b3a3750e9264c17316cb40e41e1fdfd8e2226",
+    "naive_pit": "3c97ffa9070f0dd120ef4e3378d81c001aed61e04b7d0f97e2a4d1343852f4b8"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.371434418,
+   "import_s": 0.20751092117279768,
+   "meta_json_sha256": "77a4fd829d7b821d5f9d8afada7cd643d726db619922ef2f04889dd2816cec5b",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    1,
+    0
+   ],
+   "unit_seconds_reported": 0.37,
+   "wall_s": 0.3714434648863971,
+   "wall_s_per_forecast": 9.286086622159928e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "4a9a1694c6820c68e29fc602a3e4d6057c68cea5eceb9ec10fff4b41660b5a89",
+    "naive_pit": "ed1f737516756bbb6fc0f4ee00d4f67cccce75d915f9167f219893e74c2cdb55"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.35978945900000003,
+   "import_s": 0.20827419310808182,
+   "meta_json_sha256": "7d9994bb5b2bdeb8784902a97c0875faf0506225c6fcfd274c7e74b09df50ad8",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    1,
+    1
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.35979531705379486,
+   "wall_s_per_forecast": 8.994882926344872e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "b5f99422a3cef8609dabb0eac4bc27ced064be1facf8cc38bc8a5f90fe78bc74",
+    "naive_pit": "614676d5f7e7b868369a5191e90cdae35c2a077b109a7e3f19692b94e969466a"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.35655213599999996,
+   "import_s": 0.20714495331048965,
+   "meta_json_sha256": "e3a4ee7feb4d4bad34f9587f2cd0971e093a6f6216aa795a9cc9168e73e7e835",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    1,
+    2
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.35656644497066736,
+   "wall_s_per_forecast": 8.914161124266684e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "4f32c3509cb73c80691d64aa2171a17a4e8b50ec8eb39505d898c49430823e6c",
+    "naive_pit": "f560670add66a900502dc9c1742b4deb035822f4ad46fe802ea0e9eb7fd84d58"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.365535752,
+   "import_s": 0.20708757685497403,
+   "meta_json_sha256": "ef93e66d26a9b12c3d0ffc4de5546655ac329844c5c85fbf3fc7a79690e4827d",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    2,
+    0
+   ],
+   "unit_seconds_reported": 0.37,
+   "wall_s": 0.3655479489825666,
+   "wall_s_per_forecast": 9.138698724564165e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "3471254c5d0eb1860983f29ed6c1196f85a330ba5c5b69f0b1dbbb3711328ac7",
+    "naive_pit": "fc510f5af9ac0afa0fb2ba0904f78fdce9670aaad55d0671745dd471f9a949e7"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.361996699,
+   "import_s": 0.20761474454775453,
+   "meta_json_sha256": "3d9ebfeea534d973fffb798260468867442a3d256b7e3d0e06797f11492603b8",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    2,
+    1
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.36199864000082016,
+   "wall_s_per_forecast": 9.049966000020504e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "25c4bc4b81e068454d12147565bc64c1a35d33e49c740d0f2181e4f9e931981a",
+    "naive_pit": "95ee1273be5e70ccc39f7abc08e7d05e4dd6356342e6a072cb8d5e27cb0fc178"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.35991031000000007,
+   "import_s": 0.20978969428688288,
+   "meta_json_sha256": "bf5531f7433e3e1f8e1878e5602156cbb82b81d3c1f40cbcecce3f4b0c6041b0",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    2,
+    2
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.35990911023691297,
+   "wall_s_per_forecast": 8.997727755922824e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "3ac16f909b932ff5bf8d856c5bd221fe5f2297ddd9ef910e95dbbe825e60fac8",
+    "naive_pit": "18996f5d251be1a27dbeb2b4b5d3e8f1eeaed1f1d7d026c43db0d9d8ac202aee"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.363623158,
+   "import_s": 0.20814622333273292,
+   "meta_json_sha256": "e09c698690b2da846995278991875a506ba4c50171433b6036f3d5d73d909c67",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.8032,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    3,
+    0
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.3636313616298139,
+   "wall_s_per_forecast": 9.090784040745348e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "1bfe6c213df16c1383e5838e03629f2522538e445b695a6ea2ae2d1014877b29",
+    "naive_pit": "e72f093b90fd04320b1cc2dd045ab2b2e4fd0566c1468a8ce5468de37f912e4a"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.375798469,
+   "import_s": 0.2131309718824923,
+   "meta_json_sha256": "7dcd15e2a6e0c531cc341570bbe104b38d72bcac32da2695e2970c037c0a3a31",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    3,
+    1
+   ],
+   "unit_seconds_reported": 0.38,
+   "wall_s": 0.3757994160987437,
+   "wall_s_per_forecast": 9.394985402468592e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "c08880a3d762f2b827dc24f4daa67f309b9151ac959dcb7ca9c8ba4c393b1b1c",
+    "naive_pit": "3acc70064fd413d0a2294d6868c38156231428617f90c6336c2d867ec152f67e"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.36982190400000003,
+   "import_s": 0.20859406515955925,
+   "meta_json_sha256": "54da5c7838f2e2d2953928da8ab13ef92b581f1a817063633c78ab31aa33aba8",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    3,
+    2
+   ],
+   "unit_seconds_reported": 0.37,
+   "wall_s": 0.3698347262106836,
+   "wall_s_per_forecast": 9.24586815526709e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "6e0189e052819ca55ffacbfc1ed8cc9062b0d449b1c2350e7b2e2d675a144e4e",
+    "naive_pit": "1874194eb30d92ffb88a0e9676878bfd795db7b402b431897d486ae509db2396"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.374566717,
+   "import_s": 0.20784556912258267,
+   "meta_json_sha256": "2dcc93ada8ce9b9a30b5d90a00de4b632a4df1aa5b45177c2e30210c689d6429",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    0,
+    0
+   ],
+   "unit_seconds_reported": 0.37,
+   "wall_s": 0.37457998376339674,
+   "wall_s_per_forecast": 9.364499594084919e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "a6583f3e79b3131adaf304dc2bc521f85213dacc8d065e97da0b1ac2650c9e2e",
+    "naive_pit": "d21e4471ce3f578432e47fe3906b802ca3160ddcf9c5e0579346e5137952b523"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.36726892600000005,
+   "import_s": 0.20855559036135674,
+   "meta_json_sha256": "7fe4905aa71c43b9d8a1ee54a8aa5bb2c073db38af08be0c6c532a9a4093b576",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    0,
+    1
+   ],
+   "unit_seconds_reported": 0.37,
+   "wall_s": 0.3672783272340894,
+   "wall_s_per_forecast": 9.181958180852235e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "ff3af92701859f2d5adff4736d9579dcba9055653e9199a56091234f1cf7db4f",
+    "naive_pit": "2f35c3eb948983cb274eecd5acd0f7fc8051fd5bfe3f9cd6a6fa95ac95c809e2"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.35451825699999995,
+   "import_s": 0.20846400875598192,
+   "meta_json_sha256": "0d13f09709d382b583cc4077228b07e08f00a211e22d7ddacd7daf3c6a69d490",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    0,
+    2
+   ],
+   "unit_seconds_reported": 0.35,
+   "wall_s": 0.35452610393986106,
+   "wall_s_per_forecast": 8.863152598496527e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "142610d5b17b99776f2777144eee0fd3f5be02df5e88ef43c4ec6922003a8fb3",
+    "naive_pit": "ba9b7ea29ffa5a61104b8d054ee1e7f738f01ac9571549c0fb2d18af573f673a"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.36644013499999994,
+   "import_s": 0.20651984587311745,
+   "meta_json_sha256": "e67a543bb81f9b37a6637dcd8fe5c6210f4ca89ffaaac2c532c7dd827ebdcabe",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    1,
+    0
+   ],
+   "unit_seconds_reported": 0.37,
+   "wall_s": 0.36643868312239647,
+   "wall_s_per_forecast": 9.160967078059911e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "118d53d39509aa020d43922d5da5d3f0d57fcbb93b5d751b822d0ddd9aee664b",
+    "naive_pit": "8718c326d8d96ffb409ad57ee189ecbe2733f50de4718bbc5c719ec472fb3de2"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.35905457400000007,
+   "import_s": 0.2078577969223261,
+   "meta_json_sha256": "b5e6a3eb88520ad5dbc0f52a30209bb1da94be90aa125717898e7a1be38d5e4c",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    1,
+    1
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.3590557468123734,
+   "wall_s_per_forecast": 8.976393670309335e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "1df284ae6626eb94435a44933842f23f456a31bc69648c451d387d97e6b63cb6",
+    "naive_pit": "8d69d4fc3aef0919a06801b43fedac5b76b15cf4f4fa39b83e471c50e7b04ca5"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.35937805899999997,
+   "import_s": 0.20687787234783173,
+   "meta_json_sha256": "0cff2905c1fba8a17f917950198c55ef8a5c79987ccace05b9be6b7de44a2a4e",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    1,
+    2
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.35938719706609845,
+   "wall_s_per_forecast": 8.984679926652461e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "59fc597bae818b50531412dfd386d9442368a41c400bd1a9b32c2d0b1a57f608",
+    "naive_pit": "120f2eac1562b17b14b95c794217ea7377415b887cea38e0428f0c15312d3213"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.360698002,
+   "import_s": 0.2078162208199501,
+   "meta_json_sha256": "460c57856157de94fac15f410c3f0491caa96535e4410417d864d0149676b68f",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    2,
+    0
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.3607070939615369,
+   "wall_s_per_forecast": 9.017677349038422e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "e4263de92b969b3986e8ed0a7d4bc8d4472889a8bfa74b08a904f66ad4a6edb1",
+    "naive_pit": "1884efa6d2696c53266db8a21c8605941ea1e527f7042552a495cacd53b8a9ac"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.3631097769999999,
+   "import_s": 0.20673386007547379,
+   "meta_json_sha256": "43d0e1c0bdfd77282a3baf07b957adde15daa8efb6367637aedd6e3f2d5f0893",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    2,
+    1
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.3631420861929655,
+   "wall_s_per_forecast": 9.078552154824138e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "1f5c4083b292bb7524b8d29b273d9eadee1177aea9972ead68726ab3c6ab9ea2",
+    "naive_pit": "85aa1a15237b4407a0b629609e5179be21a867739867453359003073800f4314"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.36640477399999993,
+   "import_s": 0.2071746657602489,
+   "meta_json_sha256": "40b1a587c65eebec669caec58f9f1398553de617d3244377da0fa2aa6ed3b02f",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    2,
+    2
+   ],
+   "unit_seconds_reported": 0.37,
+   "wall_s": 0.36642401618883014,
+   "wall_s_per_forecast": 9.160600404720753e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "51442b8e504472974355de02aee50980d47668441ef7cd642cee3359b20923be",
+    "naive_pit": "d0fc81dad8cfab0cd75765ee1fd7cd636427de41921f9ec1d21ffa8e29375306"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.35953458400000005,
+   "import_s": 0.2070126309990883,
+   "meta_json_sha256": "366716607a14c1e0dbf3e32498489597d5dea63dbd270b943f90f93dec1d66d1",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    3,
+    0
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.35953312180936337,
+   "wall_s_per_forecast": 8.988328045234084e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "d247e44c70bdb977d7918d5d1d09eb29e00eae0a4e466ec1294c8fd832e2f8b7",
+    "naive_pit": "f8499ca75e0a310879ed62ac38aef908bccdeb596504559a10c0bc2f285ce71d"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.360732257,
+   "import_s": 0.20659127505496144,
+   "meta_json_sha256": "5ea09bfacf592d89a7aac2dfd30433bd4580bde7470be975d589df77707c8f6d",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    3,
+    1
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.36074356082826853,
+   "wall_s_per_forecast": 9.018589020706714e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "252423b92503c28d8806f1c365449f2d366570953b596c779e2b787033ea8d91",
+    "naive_pit": "72e20d1082b335e2a78af86c036ef30125f36a1ddec5de1a10ae68897716de4c"
+   },
+   "config": "/home/rama_11187/projects/dynacl/config/stage06_pilot.yaml",
+   "cpu_s": 0.360063767,
+   "import_s": 0.20790235698223114,
+   "meta_json_sha256": "31481da7e43a95c3353f20ff539994a9fdbde1be158f733cb3ebfb8c2fce3c08",
+   "n_forecasts": 4000,
+   "n_systems": 200,
+   "naive_n_systems": 50,
+   "peak_rss_mb": 106.55744,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    1,
+    3,
+    2
+   ],
+   "unit_seconds_reported": 0.36,
+   "wall_s": 0.36006704811006784,
+   "wall_s_per_forecast": 9.001676202751696e-05
+  }
+ ],
+ "run_kind": "PILOT",
+ "threads": 1
+}

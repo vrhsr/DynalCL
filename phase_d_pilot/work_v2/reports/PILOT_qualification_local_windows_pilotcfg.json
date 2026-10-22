@@ -1,0 +1,262 @@
+{
+ "checks": {
+  "V11": {
+   "details": {
+    "n_comparisons": 936
+   },
+   "name": "V11_parity_null",
+   "passed": true,
+   "seconds": 1.0
+  },
+  "V13": {
+   "details": {
+    "max_abs_diff": 7.993605777301127e-15
+   },
+   "name": "V13_batch_equals_per_context",
+   "passed": true,
+   "seconds": 2.6
+  },
+  "V4": {
+   "details": {
+    "items_compared": 243216,
+    "max_abs_diff": 9.325873406851315e-15,
+    "tolerance": 1e-09
+   },
+   "name": "V4_tier1_regression_stage05",
+   "passed": true,
+   "seconds": 17.0
+  },
+  "V6": {
+   "details": {
+    "budget": 0.0002,
+    "table": [
+     {
+      "case": "broad: q=6.5 n=2 r=0.25",
+      "gain_err_2N": 1.7763568394002505e-15,
+      "gain_err_N": 1.7763568394002505e-15,
+      "h": 1,
+      "logpdf_err_2N": 8.881784197001252e-16,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "broad: q=6.5 n=2 r=0.25",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 5,
+      "logpdf_err_2N": 8.881784197001252e-16,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "broad: q=6.5 n=40 r=1",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 1,
+      "logpdf_err_2N": 8.881784197001252e-16,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "broad: q=6.5 n=40 r=1",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 5,
+      "logpdf_err_2N": 8.881784197001252e-16,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "concentrated: q=0 n=40 r=4 a=0.5",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 1,
+      "logpdf_err_2N": 8.881784197001252e-16,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "concentrated: q=0 n=40 r=4 a=0.5",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 1.7763568394002505e-15,
+      "h": 5,
+      "logpdf_err_2N": 8.881784197001252e-16,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "concentrated: q=0.755 n=40 r=4",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 1,
+      "logpdf_err_2N": 1.7763568394002505e-15,
+      "logpdf_err_N": 1.7763568394002505e-15,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "concentrated: q=0.755 n=40 r=4",
+      "gain_err_2N": 0.0,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 5,
+      "logpdf_err_2N": 1.7763568394002505e-15,
+      "logpdf_err_N": 1.7763568394002505e-15,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "boundary: q=0 n=40 r=4 a=0.949",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 4.440892098500626e-16,
+      "h": 1,
+      "logpdf_err_2N": 1.7763568394002505e-15,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "boundary: q=0 n=40 r=4 a=0.949",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 5,
+      "logpdf_err_2N": 1.7763568394002505e-15,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "boundary: q=0 n=40 r=4 a=0.998",
+      "gain_err_2N": 4.440892098500626e-15,
+      "gain_err_N": 1.7763568394002505e-15,
+      "h": 1,
+      "logpdf_err_2N": 2.6645352591003757e-15,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "boundary: q=0 n=40 r=4 a=0.998",
+      "gain_err_2N": 6.217248937900877e-15,
+      "gain_err_N": 4.440892098500626e-15,
+      "h": 5,
+      "logpdf_err_2N": 3.552713678800501e-15,
+      "logpdf_err_N": 2.6645352591003757e-15,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "boundary: q=0.755 n=40 r=1 a=-0.949",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 1,
+      "logpdf_err_2N": 8.881784197001252e-16,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "boundary: q=0.755 n=40 r=1 a=-0.949",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 3.552713678800501e-15,
+      "h": 5,
+      "logpdf_err_2N": 2.6645352591003757e-15,
+      "logpdf_err_N": 4.440892098500626e-15,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "large state h=5: q=0.755 n=10 r=4",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 1,
+      "logpdf_err_2N": 1.7763568394002505e-15,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     },
+     {
+      "case": "large state h=5: q=0.755 n=10 r=4",
+      "gain_err_2N": 8.881784197001252e-16,
+      "gain_err_N": 8.881784197001252e-16,
+      "h": 5,
+      "logpdf_err_2N": 1.7763568394002505e-15,
+      "logpdf_err_N": 8.881784197001252e-16,
+      "nodes": [
+       1040,
+       2064,
+       4104
+      ]
+     }
+    ],
+    "worst_case": "boundary: q=0 n=40 r=4 a=0.998",
+    "worst_gain_err": 4.440892098500626e-15
+   },
+   "name": "V6_quadrature_convergence",
+   "passed": true,
+   "seconds": 0.1
+  }
+ },
+ "config_hash": "08d069ae1c5bc40c1c71a6ff4aaca6c88b87c8f34e55d430afd512cd4e4a843a",
+ "environment": {
+  "implementation": "CPython",
+  "machine": "x86_64",
+  "numpy": "2.2.2",
+  "python": "3.13.5",
+  "pyyaml": "6.0.2",
+  "scipy": "1.15.1",
+  "system": "Linux"
+ },
+ "manifest_sha256": "fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05",
+ "passed": true
+}

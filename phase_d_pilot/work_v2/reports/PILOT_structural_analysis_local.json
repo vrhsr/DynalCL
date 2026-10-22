@@ -1,0 +1,16 @@
+{
+ "bootstrap_seed_used": 62999,
+ "contrast_rows": 72,
+ "contrast_rows_all_finite": 72,
+ "effects_written_to": "PILOT_ONLY_do_not_open_effects.json",
+ "exception_type": null,
+ "execution": "success",
+ "has_decision_block": true,
+ "has_tier2_block": true,
+ "n_curve_rows": 1872,
+ "naive_secondary_rows": 1920,
+ "replicates": 2,
+ "replicates_with_ok_flag": 2,
+ "run_kind": "PILOT",
+ "seconds": 0.08
+}

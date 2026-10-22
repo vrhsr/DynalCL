@@ -1,0 +1,20 @@
+{
+ "analyze_cpu_s": 1.205059111,
+ "analyze_wall_s": 1.205183357000351,
+ "bootstrap_draws_used": [
+  20000,
+  20000
+ ],
+ "checkpoint_bytes_total": 271955106,
+ "checkpoint_load_verify_total_s": 0.36325343511998653,
+ "checkpoint_write_total_s": 0.35665903240442276,
+ "data": "SYNTHETIC (no pilot or confirmatory data)",
+ "peak_rss_mb": 591.323136,
+ "replicates_ok": [
+  true,
+  true
+ ],
+ "run_kind": "PILOT",
+ "synthetic_generation_s": 0.09953973861411214,
+ "units": 50
+}

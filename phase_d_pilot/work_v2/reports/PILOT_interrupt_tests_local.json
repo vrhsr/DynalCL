@@ -1,0 +1,306 @@
+{
+ "results": {
+  "clean_keyboardinterrupt_mid_unit": {
+   "after": 9,
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [],
+   "kind": "crash",
+   "npz_without_json": [],
+   "phase1": {
+    "rc": -2,
+    "wall_s": 13.09
+   },
+   "phase1_tail": "  File \"/home/rama_11187/projects/dynacl/phase_d_pilot/pilot_child.py\", line 57, in run_unit |     raise KeyboardInterrupt | KeyboardInterrupt",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 41.05,
+    "workers": 1
+   },
+   "phase2_tail": "[ 49/50 units,    0.7 min] naive_1_3_1 (0s) | [ 50/50 units,    0.7 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/clean_keyboardinterrupt_mid_unit/runs/20261022T150411931899Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "point": "interrupt_mid_unit",
+   "result_dirs_written": 1,
+   "units_done_after_phase1": 8,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 1
+  },
+  "clean_max_new_units": {
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [],
+   "first_extra": [
+    "--max-new-units",
+    "12"
+   ],
+   "kind": "cli",
+   "npz_without_json": [],
+   "phase1": {
+    "rc": 0,
+    "wall_s": 19.36
+   },
+   "phase1_tail": "[ 11/50 units,    0.3 min] primary_0_2_2 (2s) | [ 12/50 units,    0.3 min] primary_0_3_0 (2s) | stopped after --max-new-units: 12/50 units done; rerun to resume",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 34.18,
+    "workers": 1
+   },
+   "phase2_tail": "[ 49/50 units,    0.6 min] naive_1_3_1 (0s) | [ 50/50 units,    0.6 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/clean_max_new_units/runs/20261022T150317511840Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "result_dirs_written": 1,
+   "units_done_after_phase1": 12,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 1
+  },
+  "hard_kill_external_late": {
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [],
+   "kind": "kill",
+   "min_done": 40,
+   "npz_without_json": [],
+   "phase1": {
+    "rc": "killed",
+    "wall_s": 14.73,
+    "was_alive_at_kill": true
+   },
+   "phase1_tail": "[ 39/50 units,    0.2 min] naive_1_0_0 (0s) | [ 40/50 units,    0.2 min] naive_1_0_1 (0s) | [ 41/50 units,    0.2 min] naive_1_0_2 (0s)",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 2.52,
+    "workers": 2
+   },
+   "phase2_tail": "[ 49/50 units,    0.0 min] naive_1_3_1 (0s) | [ 50/50 units,    0.0 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/hard_kill_external_late/runs/20261022T150526836376Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "result_dirs_written": 1,
+   "resume_workers": 2,
+   "units_done_after_phase1": 41,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 4
+  },
+  "hard_kill_external_w1": {
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [],
+   "kind": "kill",
+   "min_done": 6,
+   "npz_without_json": [],
+   "phase1": {
+    "rc": "killed",
+    "wall_s": 10.49,
+    "was_alive_at_kill": true
+   },
+   "phase1_tail": "[  4/50 units,    0.1 min] primary_0_0_1 (2s) | [  5/50 units,    0.1 min] primary_0_0_2 (2s) | [  6/50 units,    0.2 min] primary_0_1_0 (2s)",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 13.03,
+    "workers": 4
+   },
+   "phase2_tail": "[ 49/50 units,    0.2 min] naive_1_3_1 (0s) | [ 50/50 units,    0.2 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/hard_kill_external_w1/runs/20261022T150435507247Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "result_dirs_written": 1,
+   "resume_workers": 4,
+   "units_done_after_phase1": 6,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 1
+  },
+  "hard_kill_external_w4": {
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [],
+   "kind": "kill",
+   "min_done": 16,
+   "npz_without_json": [],
+   "phase1": {
+    "rc": "killed",
+    "wall_s": 10.27,
+    "was_alive_at_kill": true
+   },
+   "phase1_tail": "[ 16/50 units,    0.1 min] primary_1_0_0 (2s) | [ 17/50 units,    0.1 min] primary_1_0_2 (2s) | [ 18/50 units,    0.2 min] primary_1_1_1 (2s)",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 23.75,
+    "workers": 1
+   },
+   "phase2_tail": "[ 49/50 units,    0.4 min] naive_1_3_1 (0s) | [ 50/50 units,    0.4 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/hard_kill_external_w4/runs/20261022T150509546973Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "result_dirs_written": 1,
+   "resume_workers": 1,
+   "units_done_after_phase1": 18,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 4
+  },
+  "selfkill_before_json_replace": {
+   "after": 9,
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [
+    "primary_0_2_0.json.tmp"
+   ],
+   "kind": "crash",
+   "npz_without_json": [
+    "primary_0_2_0"
+   ],
+   "phase1": {
+    "rc": 137,
+    "wall_s": 14.28
+   },
+   "phase1_tail": "[  6/50 units,    0.2 min] primary_0_1_0 (2s) | [  7/50 units,    0.2 min] primary_0_1_1 (2s) | [  8/50 units,    0.2 min] primary_0_1_2 (2s)",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 41.52,
+    "workers": 1
+   },
+   "phase2_tail": "[ 49/50 units,    0.7 min] naive_1_3_1 (0s) | [ 50/50 units,    0.7 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/selfkill_before_json_replace/runs/20261022T150815192355Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "point": "before_json_replace",
+   "result_dirs_written": 1,
+   "units_done_after_phase1": 8,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 1
+  },
+  "selfkill_before_npz_replace": {
+   "after": 8,
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [
+    "primary_0_1_2.npz.tmp"
+   ],
+   "kind": "crash",
+   "npz_without_json": [],
+   "phase1": {
+    "rc": 137,
+    "wall_s": 12.89
+   },
+   "phase1_tail": "[  5/50 units,    0.1 min] primary_0_0_2 (2s) | [  6/50 units,    0.2 min] primary_0_1_0 (2s) | [  7/50 units,    0.2 min] primary_0_1_1 (2s)",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 43.27,
+    "workers": 1
+   },
+   "phase2_tail": "[ 49/50 units,    0.7 min] naive_1_3_1 (0s) | [ 50/50 units,    0.7 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/selfkill_before_npz_replace/runs/20261022T150719367822Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "point": "before_npz_replace",
+   "result_dirs_written": 1,
+   "units_done_after_phase1": 7,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 1
+  },
+  "selfkill_savez_partial": {
+   "after": 7,
+   "comparison_with_uninterrupted_reference": {
+    "arrays_differ": [],
+    "identical_to_reference": true,
+    "json_files": 50,
+    "leftover_tmp_files": [],
+    "max_abs_diff": 0.0,
+    "meta_differs": [],
+    "missing": [],
+    "npz_file_bytes_differ": [],
+    "npz_files": 50,
+    "unexpected_files": [],
+    "units_expected": 50
+   },
+   "files_after_phase1": [
+    "primary_0_1_1.npz.tmp"
+   ],
+   "kind": "crash",
+   "npz_without_json": [],
+   "phase1": {
+    "rc": 137,
+    "wall_s": 11.33
+   },
+   "phase1_tail": "[  4/50 units,    0.1 min] primary_0_0_1 (2s) | [  5/50 units,    0.1 min] primary_0_0_2 (2s) | [  6/50 units,    0.2 min] primary_0_1_0 (2s)",
+   "phase2": {
+    "rc": 0,
+    "wall_s": 44.93,
+    "workers": 1
+   },
+   "phase2_tail": "[ 49/50 units,    0.7 min] naive_1_3_1 (0s) | [ 50/50 units,    0.7 min] naive_1_3_2 (0s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/interrupt/selfkill_savez_partial/runs/20261022T150623162555Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "point": "savez_partial",
+   "result_dirs_written": 1,
+   "units_done_after_phase1": 6,
+   "units_missing_at_end": [],
+   "units_printed_more_than_once": [],
+   "workers": 1
+  }
+ },
+ "run_kind": "PILOT"
+}

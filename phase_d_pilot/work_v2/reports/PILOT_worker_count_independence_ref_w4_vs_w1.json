@@ -1,0 +1,16 @@
+{
+ "reference_vs_other": {
+  "arrays_differ": [],
+  "identical_to_reference": true,
+  "json_files": 50,
+  "leftover_tmp_files": [],
+  "max_abs_diff": 0.0,
+  "meta_differs": [],
+  "missing": [],
+  "npz_file_bytes_differ": [],
+  "npz_files": 50,
+  "unexpected_files": [],
+  "units_expected": 50
+ },
+ "run_kind": "PILOT"
+}

@@ -1,0 +1,129 @@
+{
+ "results": {
+  "json_missing_npz_present": {
+   "finished_without_error": true,
+   "first_resume_rc": 0,
+   "first_resume_tail": "[ 50/50 units,    0.0 min] primary_0_1_1 (2s) | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/json_missing_npz_present/runs/20261022T150827118994Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "identical_after_first_resume": true,
+   "refused_cleanly": false,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_1_1"
+  },
+  "json_wrong_config_hash": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/json_wrong_config_hash/ckpt/08d069ae1c5bc40c/primary_0_3_1.json: checksum mismatch of the unit metadata (the file was altered",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_3_1"
+  },
+  "leftover_tmp_files_only": {
+   "finished_without_error": true,
+   "first_resume_rc": 0,
+   "first_resume_tail": "checkpoint /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/leftover_tmp_files_only/ckpt/08d069ae1c5bc40c: 50/50 units already done | /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/leftover_tmp_files_only/runs/20261022T150836801430Z_stage06_noisy_probe_pilot_08d069ae1c",
+   "identical_after_first_resume": true,
+   "refused_cleanly": false,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_3_0"
+  },
+  "npz_missing_json_present": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/npz_missing_json_present/ckpt/08d069ae1c5bc40c/primary_0_1_2.npz: the arrays file named by the metadata is missing",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_1_2"
+  },
+  "npz_swapped_between_units": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/npz_swapped_between_units/ckpt/08d069ae1c5bc40c/primary_0_2_0.npz: checksum mismatch of the stored arrays",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_2_0"
+  },
+  "single_bit_flip_npz": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/single_bit_flip_npz/ckpt/08d069ae1c5bc40c/primary_0_0_2.npz: checksum mismatch of the stored arrays",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_0_2"
+  },
+  "truncated_json": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/truncated_json/ckpt/08d069ae1c5bc40c/primary_0_1_0.json: unit metadata is not valid JSON (JSONDecodeError: truncated or damag",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_1_0"
+  },
+  "truncated_npz": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/truncated_npz/ckpt/08d069ae1c5bc40c/primary_0_0_1.npz: checksum mismatch of the stored arrays",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_0_1"
+  },
+  "valid_checksum_wrong_array_shape": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/valid_checksum_wrong_array_shape/ckpt/08d069ae1c5bc40c/primary_0_3_2.json: checksum mismatch of the unit metadata (the file w",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_3_2"
+  },
+  "zero_length_npz": {
+   "finished_without_error": false,
+   "first_resume_rc": 4,
+   "first_resume_tail": "pre-flight OK: manifest fdb46788cd0fddba59cbc995adf7a3f6f410184e299b4dfc5cbecfa8f3f3fa05, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'} | CORRUPT: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/corruption/zero_length_npz/ckpt/08d069ae1c5bc40c/primary_0_2_2.npz: checksum mismatch of the stored arrays",
+   "identical_after_first_resume": false,
+   "identical_after_remediation": true,
+   "refused_cleanly": true,
+   "remediation": "operator deleted the affected unit file(s); resumed",
+   "second_resume_rc": 0,
+   "silently_skipped": false,
+   "uncaught_exception": false,
+   "unit_corrupted": "primary_0_2_2"
+  }
+ },
+ "run_kind": "PILOT"
+}

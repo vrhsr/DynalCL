@@ -1,0 +1,19 @@
+{
+ "analyze_pilot_mode_keys": [
+  "check_details",
+  "critical_checks",
+  "mode",
+  "note"
+ ],
+ "critical_check_flags": {
+  "calibration": true,
+  "integrity": true,
+  "numerics": true,
+  "reproducibility": true,
+  "tier1": true
+ },
+ "n_units_done": 50,
+ "n_units_expected": 50,
+ "run_kind": "PILOT",
+ "wall_s": 8.1
+}

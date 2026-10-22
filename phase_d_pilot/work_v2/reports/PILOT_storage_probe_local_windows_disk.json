@@ -1,0 +1,21 @@
+{
+ "concurrent_reader": {
+  "file_missing_during_replace": 0,
+  "reads": 135,
+  "replace_denied_attempts_while_reader_open": 0,
+  "replacements": 100,
+  "torn_reads": 0
+ },
+ "dir": "/home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/PILOT_storage_probe_1792681969",
+ "directory_fsync": "ok",
+ "run_kind": "PILOT",
+ "throughput": {
+  "fsync_s_median": 0.0030822143889963627,
+  "payload_mb": 7.49,
+  "read_mb_per_s": 2184.7340935113557,
+  "read_verify_s_median": 0.0034283348359167576,
+  "replace_s_median": 0.00040943664498627186,
+  "write_mb_per_s": 1370.590966559755,
+  "write_total_s_median": 0.0054647959768772125
+ }
+}

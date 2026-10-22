@@ -1,0 +1,41 @@
+{
+ "no_report": {
+  "message": "REFUSED: environment differs from the frozen environment manifest {'system': ['Windows', 'Linux'], 'machine': ['AMD64', 'x86_64']}; run `qualify` in this environment and pass --qualification",
+  "outcome": "REFUSED",
+  "rc": 3
+ },
+ "note": "copy-only: simulated environment difference; the real checks inside `qualify` are executed",
+ "qualify_seconds": 21.0,
+ "report_bound_to_other_environment": {
+  "message": "REFUSED: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/qualification_gate/other_env.json: qualification report was produced in a different environment (stale)",
+  "outcome": "REFUSED",
+  "rc": 3
+ },
+ "report_bound_to_other_manifest": {
+  "message": "REFUSED: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/qualification_gate/stale_manifest.json: qualification report is for a different manifest or config (stale)",
+  "outcome": "REFUSED",
+  "rc": 3
+ },
+ "report_failed": {
+  "message": "REFUSED: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/qualification_gate/failed.json: qualification report did not pass",
+  "outcome": "REFUSED",
+  "rc": 3
+ },
+ "report_for_other_config_stale": {
+  "message": "REFUSED: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/qualification_gate/qual_pilot.json: qualification report is for a different manifest or config (stale)",
+  "outcome": "REFUSED",
+  "rc": 3
+ },
+ "report_missing_path": {
+  "message": "REFUSED: /home/rama_11187/projects/dynacl/phase_d_pilot/work_v2/qualification_gate/does_not_exist.json: qualification report not found",
+  "outcome": "REFUSED",
+  "rc": 3
+ },
+ "report_passed": true,
+ "run_kind": "PILOT",
+ "valid_report": {
+  "message": "pre-flight OK: manifest d13afbfc425dd63fc417f679fa3a2fa9bdd9a211bd735bbf0396c1ff02f9bfea, environment qualified, seeds {'evaluation': [62001, 62101], 'bootstrap': 62999, 'role': 'pilot_evaluation'}",
+  "outcome": "accepted",
+  "rc": 0
+ }
+}

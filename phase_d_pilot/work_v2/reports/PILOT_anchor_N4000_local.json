@@ -1,0 +1,190 @@
+{
+ "rows": [
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "5cebb0a0ef1704725c22d2919e00b55d1da94d8ede825828a387d8bbbcbbbce6",
+    "pop_pit": "c62c6076fd6fa02dbbdc68e956854a6bc9d94771b7ef0352b70540c88905ba5f",
+    "stab_logscore": "874bcc588c4774061016fd208df77a6b58312fcffea3facfd833f70024664bb3",
+    "stab_pit": "dd266578216780d520462b46c75dd736c84d78aa01f59d20e707aa380ab0534b"
+   },
+   "ckpt_bytes": {
+    "json": 1381,
+    "npz": 7489030
+   },
+   "ckpt_load_verify_s": 0.008879943750798702,
+   "ckpt_write_s": 0.010297430213540792,
+   "config": "/home/rama_11187/projects/dynacl/phase_d_pilot/config/PILOT_N4000.yaml",
+   "cpu_s": 17.916588314,
+   "import_s": 0.20856371289119124,
+   "meta_json_sha256": "b9c0d8de6daf041cbaa5f8ac7944b99b2f6269d93a48bc85c5b0c40c24af61f5",
+   "n_forecasts": 624000,
+   "n_systems": 4000,
+   "naive_n_systems": 4000,
+   "peak_rss_mb": 336.064512,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    0,
+    2
+   ],
+   "unit_seconds_reported": 17.92,
+   "wall_s": 17.917117095086724,
+   "wall_s_per_forecast": 2.8713328678023594e-05
+  },
+  {
+   "array_dtypes": {
+    "pop_logscore": "float64",
+    "pop_pit": "float32",
+    "stab_logscore": "float64",
+    "stab_pit": "float32"
+   },
+   "array_sha256": {
+    "pop_logscore": "b392b5a219c13a38cfc74124be72e14c5ddf9dc4409c1d61f6394cf4aa76c7ed",
+    "pop_pit": "d88259100ec40e7118897412163db659924fee28fdacbd0fab9d739334511ab4",
+    "stab_logscore": "28c478044112e39a87ae543353110333d02afd7d05012792518b30e1c9ee66d2",
+    "stab_pit": "fffab5cc449281b9adddb7af78abda29b4d1e8ac610d0a78e34048940358967b"
+   },
+   "ckpt_bytes": {
+    "json": 1381,
+    "npz": 7489030
+   },
+   "ckpt_load_verify_s": 0.008779468946158886,
+   "ckpt_write_s": 0.010380014777183533,
+   "config": "/home/rama_11187/projects/dynacl/phase_d_pilot/config/PILOT_N4000.yaml",
+   "cpu_s": 18.296735178,
+   "import_s": 0.2079471880570054,
+   "meta_json_sha256": "2d0df78dc18f97d3c38e89b0f7a402ec100f4198b44578168e35884b9465b6c2",
+   "n_forecasts": 624000,
+   "n_systems": 4000,
+   "naive_n_systems": 4000,
+   "peak_rss_mb": 334.221312,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "primary",
+    0,
+    3,
+    0
+   ],
+   "unit_seconds_reported": 18.3,
+   "wall_s": 18.297334425151348,
+   "wall_s_per_forecast": 2.932265132235793e-05
+  },
+  {
+   "array_dtypes": {
+    "naive_logscore": "float64",
+    "naive_pit": "float32"
+   },
+   "array_sha256": {
+    "naive_logscore": "484935b28d7f157e6de7b0a71cf00fb143f585b3457f77c691cf07e88dd11330",
+    "naive_pit": "100799c7879dff65de057491d4c7015ec06ad93024db17bd4a70f3b49c151bae"
+   },
+   "ckpt_bytes": {
+    "json": 882,
+    "npz": 3840532
+   },
+   "ckpt_load_verify_s": 0.004655370954424143,
+   "ckpt_write_s": 0.005317493807524443,
+   "config": "/home/rama_11187/projects/dynacl/phase_d_pilot/config/PILOT_N4000.yaml",
+   "cpu_s": 28.243978478,
+   "import_s": 0.2067352058365941,
+   "meta_json_sha256": "c2aaed8ef4d63cc10a8c35de7b64862331720fec5143f613d3cd74e2e9096b81",
+   "n_forecasts": 320000,
+   "n_systems": 4000,
+   "naive_n_systems": 4000,
+   "peak_rss_mb": 121.20064,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "naive",
+    0,
+    0,
+    2
+   ],
+   "unit_seconds_reported": 28.25,
+   "wall_s": 28.24554230691865,
+   "wall_s_per_forecast": 8.826731970912078e-05
+  },
+  {
+   "array_dtypes": {},
+   "array_sha256": {},
+   "ckpt_bytes": {
+    "json": 744,
+    "npz": 22
+   },
+   "ckpt_load_verify_s": 0.00016671139746904373,
+   "ckpt_write_s": 0.00035472121089696884,
+   "config": "/home/rama_11187/projects/dynacl/phase_d_pilot/config/PILOT_N4000.yaml",
+   "cpu_s": 0.8599135790000001,
+   "import_s": 0.20883158314973116,
+   "meta_json_sha256": "14194eaa510ea73535f6bd6db218830fbfa146fc27db4608af902a40d0409029",
+   "n_forecasts": null,
+   "n_systems": 4000,
+   "naive_n_systems": 4000,
+   "peak_rss_mb": 138.440704,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "integrity"
+   ],
+   "unit_seconds_reported": 0.86,
+   "wall_s": 0.859935715328902,
+   "wall_s_per_forecast": null
+  },
+  {
+   "array_dtypes": {},
+   "array_sha256": {},
+   "ckpt_bytes": {
+    "json": 550,
+    "npz": 22
+   },
+   "ckpt_load_verify_s": 0.00016243290156126022,
+   "ckpt_write_s": 0.0003304933197796345,
+   "config": "/home/rama_11187/projects/dynacl/phase_d_pilot/config/PILOT_N4000.yaml",
+   "cpu_s": 2.547554409,
+   "import_s": 0.2086286609992385,
+   "meta_json_sha256": "11fcc590650a7ed6fdc44972124b2ffc20f356f8baf686935c27d14c09eb10fc",
+   "n_forecasts": null,
+   "n_systems": 4000,
+   "naive_n_systems": 4000,
+   "peak_rss_mb": 151.441408,
+   "run_kind": "PILOT",
+   "threads_env": {
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1"
+   },
+   "unit": [
+    "tier1"
+   ],
+   "unit_seconds_reported": 2.55,
+   "wall_s": 2.547729507088661,
+   "wall_s_per_forecast": null
+  }
+ ],
+ "run_kind": "PILOT"
+}
