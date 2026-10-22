@@ -1,0 +1,20 @@
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "ref-run:ref_w4:start", "threads": 1, "utc": "2026-10-22T15:01:01Z", "workers": 4}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "ref-run:ref_w4:end", "rc": 0, "utc": "2026-10-22T15:01:17Z", "wall_s": 15.49}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "ref-run:ref_w1:start", "threads": 1, "utc": "2026-10-22T15:01:17Z", "workers": 1}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "ref-run:ref_w1:end", "rc": 0, "utc": "2026-10-22T15:02:07Z", "wall_s": 49.4}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:clean_max_new_units:phase1", "utc": "2026-10-22T15:02:24Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:clean_max_new_units:phase2", "utc": "2026-10-22T15:02:43Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:clean_keyboardinterrupt_mid_unit:phase1", "utc": "2026-10-22T15:03:17Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:clean_keyboardinterrupt_mid_unit:phase2", "utc": "2026-10-22T15:03:30Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:hard_kill_external_w1:phase1", "utc": "2026-10-22T15:04:12Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:hard_kill_external_w1:phase2", "utc": "2026-10-22T15:04:22Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:hard_kill_external_w4:phase1", "utc": "2026-10-22T15:04:35Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:hard_kill_external_w4:phase2", "utc": "2026-10-22T15:04:45Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:hard_kill_external_late:phase1", "utc": "2026-10-22T15:05:09Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:hard_kill_external_late:phase2", "utc": "2026-10-22T15:05:24Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:selfkill_savez_partial:phase1", "utc": "2026-10-22T15:05:26Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:selfkill_savez_partial:phase2", "utc": "2026-10-22T15:05:38Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:selfkill_before_npz_replace:phase1", "utc": "2026-10-22T15:06:23Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:selfkill_before_npz_replace:phase2", "utc": "2026-10-22T15:06:36Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:selfkill_before_json_replace:phase1", "utc": "2026-10-22T15:07:19Z"}
+{"cpu_model": "Intel(R) Core(TM) i9-14900K", "host": "sjt418scope042", "phase": "interrupt:selfkill_before_json_replace:phase2", "utc": "2026-10-22T15:07:33Z"}
