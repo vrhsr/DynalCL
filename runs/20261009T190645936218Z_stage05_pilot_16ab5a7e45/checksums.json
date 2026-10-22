@@ -1,0 +1,15 @@
+{
+  "config.yaml": "05de8ebe031ab1f92777a976050abda98afbd33bbe604c515b6c3bdb69f6d2f2",
+  "config_hash.txt": "41326c5dc41adf5757f30058cf77bd1b02e56f1b580c028b2ee8771ee6786e01",
+  "results/bootstrap.csv": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "results/contrasts.csv": "f232ba9d77fcb07a48101865383ea8e2be21fa5972bbfdcdec864adabaeae115",
+  "results/frontier_selection.json": "0edf256cabdfaae9a190cf17ba64114bd67afb30b9db91fbb5b9d9d078c723bc",
+  "results/item_contrasts.npy": "647c12e7b05e6d60b42d7f7912a9ba0419951f46c6da8a85b3268a7520466aae",
+  "results/item_contrasts_index.csv": "023cddbb02283e8d282505b1214e8fd355e95b540895e9742632b45cd8d4e40b",
+  "results/predictors.csv": "e13d03d710efa50d0f8e0079f5f5cacfb8346a1d220b412e1057a6da49c38a5e",
+  "results/quadrature.csv": "62d09aca3d027df02ea0cfc9387c4464179dcc65cb445d034e7bf134ad48a8de",
+  "results/report.md": "095b4177b0bb87c3ba729e834d8180f447c75e9d724c1dc81af9748b0b454608",
+  "results/summary.json": "01a696f90594565ce2120ede0951b79dab63e9991e673920c88948a059c47c8a",
+  "results/t1_optimality.csv": "afe01f22e60bd31612ecb34813502ffbb64f4957eccdb90bc5b465f5615968d1",
+  "results/t2_calibration.csv": "f99e335afd5eacc61ea766dc1c5b0d73b898b3d37aa979853c8706310caa7b3b"
+}

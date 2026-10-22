@@ -1,0 +1,57 @@
+# Stage 0.6 runner test configuration (pytest only; validation seeds; tiny N; results are never interpreted).
+schema_version: 1
+experiment:
+  name: stage06_noisy_probe_test
+  mode: test
+  description: 'Runner plumbing test: refusals, checkpoints, resume and the analysis path on a tiny grid.'
+seeds:
+  evaluation: [61024, 61025]
+  bootstrap: 61026
+prior:
+  family: P-STABLE
+  shape: truncated_normal
+  rho: 0.95
+  mu0: 0.4
+  tau0: 0.3
+model:
+  sigma_w: 1.0
+  noise_ratios: [0.0, 0.755, 2.56, 6.5]
+  initial_state_ratios: [0.25, 1.0, 4.0]
+comparator:
+  name: noise_aware_stability_only
+  stability_bound: 0.999
+grid:
+  context_lengths: [2, 3, 5, 10, 12, 20]
+  long_context: [10, 12, 20]
+  horizons: [1, 5]
+  trajectory_length: 25
+  n_systems: 12
+quadrature:
+  outer_bound: 0.999
+  breakpoints: [-0.95, 0.95]
+  panels_per_unit: 64
+  nodes_per_panel: 8
+secondary:
+  naive_context_lengths: [2, 10]
+  naive_n_systems: 2
+analysis:
+  delta: 0.02
+  alpha: 0.05
+  bootstrap_draws: [10000, 20000]
+  bootstrap_chunk: 500
+  critical_value_rel_mc_error: 0.5
+  min_scales: 2
+tier2:
+  stage05_run: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a
+  context_lengths: [2, 3, 5, 10, 20]
+  alpha: 0.01
+  power: 0.8
+checks:
+  tier1_items: 10
+  tier1_tolerance: 1.0e-09
+  numerical_items: 3
+  error_budget: 2.0e-04
+  reproducibility_items: 2
+  reproducibility_tolerance: 1.0e-10
+  calibration_context_lengths: [10, 20]
+  calibration_family_alpha: 1.0e-03

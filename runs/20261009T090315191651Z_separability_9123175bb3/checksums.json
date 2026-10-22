@@ -1,0 +1,16 @@
+{
+  "config.yaml": "247880aef5f55c01cb2ca6775ab1c2f923475ce17f8243c14f2e5837ef39f8c4",
+  "config_hash.txt": "93614fd7f91176d8b767cb3d11b42e1d2e17f459f55c9e93b41a184ec653f4d2",
+  "results/frontier_selection.json": "205db550fcb7710cd101617cfbbb0023c19d99b43a26e2f207d485d14846a302",
+  "results/g_metric.csv": "50c45db759a0987f490f4b13537a77aef88c16c0b33e6893d55524a5ea3b795d",
+  "results/item_log_scores.npy": "569fb0a9f559308f33f214e6fefccb1b0051c087241c409b2faeacc36a279cda",
+  "results/item_log_scores_index.csv": "e2bd62ab74f3577f456c134d9c6e33e61115f937552eeb43465563bdb04dd126",
+  "results/paired_differences.csv": "48a5f8de89aa5240a3c876c09504601b443a75d09baabb08c718d244c9899465",
+  "results/predictors.csv": "7e0b035078335748d8e828e776ab6cac8cb8fa8678f023669cb57714c5739047",
+  "results/report.md": "715ab89763d60e19d080cc444f2dd19dcbf4586b90cc4bcefdaa02972686cba1",
+  "results/summary.json": "f27b9e55d1d66186f04f4ca5927b788544e309437e79a72669773dc130b20500",
+  "results/t1_optimality.csv": "5fb458bb42394320da1d042ba1c770830cbe92065f16f46dcd8d7dac0dbf61f1",
+  "results/t2_calibration.csv": "00756e5126f4868587954b8cc9fa4315343252069a160216f113ad0be6af1932",
+  "results/t3_identities.csv": "e58fe7fb6d0f3c4828ede1a1a156581c99de9e62aa9b5d0b0505e0906498ee05",
+  "results/units.csv": "82e7437aa6abb8a9a99e7bfdaf5b69eaa3d7609b1f431ba3960c2de55541301f"
+}

@@ -1,0 +1,52 @@
+# Reference separability map (Section 7). Pre-registered in docs/PREREG_separability.md.
+# Every experimental setting lives here; the code hard-codes none. Validated by dynaicl/config/schema.py.
+schema_version: 1
+experiment:
+  name: separability
+  root_seed: 20261009
+  description: >
+    P-STABLE truncated-normal prior; E-CONT and E-LIB; matched reference vs continuous-prior Bayes vs
+    finite library vs context-only family and frontier.
+prior:
+  family: P-STABLE
+  shape: truncated_normal   # chosen before any result was seen (PLAN.md section 2.6)
+  rho: 0.95
+  mu0: 0.4
+  tau0: 0.3
+initial_state:              # x_0 ~ N(mean, sd^2), independent of a
+  mean: 0.0
+  sd: 1.0
+grid:
+  conditions: [E-CONT, E-LIB]
+  library_sizes: [4, 16, 64, 256]
+  context_lengths: [5, 20, 80]
+  horizons: [1, 5]
+  noise_scales: [0.25, 1.0]
+replication:
+  n_eval_items: 2337        # from the pilot by the pre-registered rule (docs/PREREG_separability.md section 5)
+  n_selection_items: 1000
+  justification: "pilot sd_q90 = 0.2417 over 204 key comparisons; N = ceil((4 * 0.2417 / 0.02)^2) = 2337 (PREREG section 5)"
+numerics:
+  quadrature: {panels: 16, nodes_per_panel: 8, log_drop: 40.0, panels_per_cell: 2.0, max_panels: 8192}
+  quadrature_error_check_items: 10
+baselines:
+  ols_min_transitions: 3
+  kernel:
+    bandwidth_multipliers: [0.05, 0.1, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4]
+    min_train_pairs: 3
+    n_blocks: 4
+    gap: 1                  # effective gap = max(h, gap)
+    min_pairs: 3
+    min_validation_points: 2
+  fallback:
+    coefficient_mean: 0.0
+    coefficient_variance: 1.0
+    predictive_variance: 1.0
+    variance_relative_floor: 1.0e-12
+metrics:
+  coverage_levels: [0.5, 0.8, 0.95]
+  compute_crps: false       # numerical CRPS for mixtures is costly; log score is primary
+  practical_gap_nats: 0.02  # delta: smallest gap of interest (hypothesis; PREREG section 4)
+  separation_z: 3.0
+  equivalence_z: 1.645      # TOST at 5% per side
+  family_alpha: 0.001

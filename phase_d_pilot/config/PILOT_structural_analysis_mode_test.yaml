@@ -1,0 +1,155 @@
+schema_version: 1
+experiment:
+  name: stage06_phase_d_structural_analysis
+  mode: test
+  description: 'Stage 0.6 Phase D pilot on the pilot seeds: runtime, numerics and
+    the in-run checks only. The runner computes no effect estimate in pilot mode.'
+seeds:
+  evaluation:
+  - 62001
+  - 62101
+  bootstrap: 62999
+prior:
+  family: P-STABLE
+  shape: truncated_normal
+  rho: 0.95
+  mu0: 0.4
+  tau0: 0.3
+model:
+  sigma_w: 1.0
+  noise_ratios:
+  - 0.0
+  - 0.755
+  - 2.56
+  - 6.5
+  initial_state_ratios:
+  - 0.25
+  - 1.0
+  - 4.0
+comparator:
+  name: noise_aware_stability_only
+  stability_bound: 0.999
+grid:
+  context_lengths:
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  - 32
+  - 33
+  - 34
+  - 35
+  - 36
+  - 37
+  - 38
+  - 39
+  - 40
+  long_context:
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  - 32
+  - 33
+  - 34
+  - 35
+  - 36
+  - 37
+  - 38
+  - 39
+  - 40
+  horizons:
+  - 1
+  - 5
+  trajectory_length: 45
+  n_systems: 200
+quadrature:
+  outer_bound: 0.999
+  breakpoints:
+  - -0.95
+  - 0.95
+  panels_per_unit: 64
+  nodes_per_panel: 8
+secondary:
+  naive_context_lengths:
+  - 2
+  - 5
+  - 10
+  - 20
+  - 40
+  naive_n_systems: 50
+analysis:
+  delta: 0.02
+  alpha: 0.05
+  bootstrap_draws:
+  - 20000
+  - 40000
+  - 80000
+  bootstrap_chunk: 500
+  critical_value_rel_mc_error: 0.01
+  min_scales: 2
+tier2:
+  stage05_run: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a
+  context_lengths:
+  - 2
+  - 3
+  - 5
+  - 10
+  - 20
+  alpha: 0.01
+  power: 0.8
+checks:
+  tier1_items: 500
+  tier1_tolerance: 1.0e-09
+  numerical_items: 100
+  error_budget: 0.0002
+  reproducibility_items: 20
+  reproducibility_tolerance: 1.0e-10
+  calibration_context_lengths:
+  - 10
+  - 40
+  calibration_family_alpha: 0.001

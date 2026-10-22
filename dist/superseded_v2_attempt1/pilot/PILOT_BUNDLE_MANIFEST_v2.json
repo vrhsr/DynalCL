@@ -1,0 +1,21 @@
+{
+ "freeze_manifest_sha256": "31a177841943ed1293a5b050d0037011e61dd34a45384ae86ad4cdb6b98c07ac",
+ "freeze_snapshot_sha256": "da53b423586fd58fdcd0d37f5ffaebd2a810088b3e13ad15b321b7b948765c23",
+ "freeze_version": "v2",
+ "hash_order": "freeze (manifest, snapshot) -> bundle zip -> notebook (embeds the three hashes) -> this manifest (hashed by nothing)",
+ "notebook": {
+  "path": "colab/pilot/DynaICL_Stage06_PhaseD_PILOT_v2.ipynb",
+  "sha256": "523fd52c686afdd3a46fcc0fa2f9632e79a171320306186657adafb41db833e8"
+ },
+ "pilot_bundle_zip": {
+  "path": "dist/phase_d_pilot_bundle_v2.zip",
+  "sha256": "c13dbd06313ee015c9cc8c464511cc1818f78ccac1d5f714614b0f5041b1d3a9"
+ },
+ "schema": "stage06-pilot-bundle-manifest/v1",
+ "tooling_files": {
+  "phase_d_pilot/README_PHASE_D.md": "3c529d811aba10324cd3a2b3368383191df555982ec28521d7f6201b70ea1f8a",
+  "phase_d_pilot/pilot_child.py": "ddd72a4b7937bd7e3b168f4014dad740f931f7937c008bf7a61da25b6d19efa4",
+  "phase_d_pilot/pilot_common.py": "0cd326e18e90562532aea8410f53988b7d340b92130b81e2203d7b0296f2956e",
+  "phase_d_pilot/pilot_harness.py": "fc7d6f6ad26ffb20a25a548444aa41f3bb88088a3354bfce194d690235d4e3b0"
+ }
+}

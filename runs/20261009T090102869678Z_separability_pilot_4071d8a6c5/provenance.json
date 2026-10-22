@@ -1,0 +1,152 @@
+{
+  "command": [
+    "C:\\Users\\Ramana\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "-m",
+    "dynaicl.experiments.separability",
+    "--config",
+    "config/separability_pilot.yaml",
+    "--workers",
+    "6"
+  ],
+  "config_hash": "4071d8a6c57fecdfccc2d4f541dde9c483537eeddcc822e4c3cd6f95a65fe569",
+  "git": {
+    "available": false,
+    "reason": "fatal: not a git repository (or any of the parent directories): .git"
+  },
+  "output_checksums_file": "checksums.json",
+  "packages": {
+    "numpy": "2.2.2",
+    "pytest": "9.0.2",
+    "pyyaml": "6.0.2",
+    "scipy": "1.15.1"
+  },
+  "platform": {
+    "implementation": "CPython",
+    "machine": "AMD64",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "processor": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "run_id": "20261009T090102869678Z_separability_pilot_4071d8a6c5",
+  "runtime": {
+    "n_units": 60,
+    "seconds": 73.1,
+    "unit_seconds": {
+      "0|E-CONT|0|20|1": 4.56,
+      "0|E-CONT|0|20|5": 5.41,
+      "0|E-CONT|0|5|1": 4.44,
+      "0|E-CONT|0|5|5": 3.92,
+      "0|E-CONT|0|80|1": 10.73,
+      "0|E-CONT|0|80|5": 8.66,
+      "0|E-LIB|16|20|1": 4.43,
+      "0|E-LIB|16|20|5": 5.66,
+      "0|E-LIB|16|5|1": 3.57,
+      "0|E-LIB|16|5|5": 2.97,
+      "0|E-LIB|16|80|1": 9.83,
+      "0|E-LIB|16|80|5": 9.22,
+      "0|E-LIB|256|20|1": 4.54,
+      "0|E-LIB|256|20|5": 5.77,
+      "0|E-LIB|256|5|1": 4.1,
+      "0|E-LIB|256|5|5": 3.54,
+      "0|E-LIB|256|80|1": 10.69,
+      "0|E-LIB|256|80|5": 9.15,
+      "0|E-LIB|4|20|1": 3.76,
+      "0|E-LIB|4|20|5": 4.73,
+      "0|E-LIB|4|5|1": 3.49,
+      "0|E-LIB|4|5|5": 2.94,
+      "0|E-LIB|4|80|1": 10.65,
+      "0|E-LIB|4|80|5": 10.55,
+      "0|E-LIB|64|20|1": 4.56,
+      "0|E-LIB|64|20|5": 5.44,
+      "0|E-LIB|64|5|1": 4.79,
+      "0|E-LIB|64|5|5": 3.61,
+      "0|E-LIB|64|80|1": 11.04,
+      "0|E-LIB|64|80|5": 9.35,
+      "1|E-CONT|0|20|1": 5.61,
+      "1|E-CONT|0|20|5": 6.71,
+      "1|E-CONT|0|5|1": 5.55,
+      "1|E-CONT|0|5|5": 4.92,
+      "1|E-CONT|0|80|1": 12.55,
+      "1|E-CONT|0|80|5": 12.53,
+      "1|E-LIB|16|20|1": 4.55,
+      "1|E-LIB|16|20|5": 5.45,
+      "1|E-LIB|16|5|1": 4.78,
+      "1|E-LIB|16|5|5": 3.93,
+      "1|E-LIB|16|80|1": 11.32,
+      "1|E-LIB|16|80|5": 11.55,
+      "1|E-LIB|256|20|1": 5.4,
+      "1|E-LIB|256|20|5": 5.83,
+      "1|E-LIB|256|5|1": 4.45,
+      "1|E-LIB|256|5|5": 3.88,
+      "1|E-LIB|256|80|1": 9.49,
+      "1|E-LIB|256|80|5": 8.75,
+      "1|E-LIB|4|20|1": 4.64,
+      "1|E-LIB|4|20|5": 5.6,
+      "1|E-LIB|4|5|1": 3.82,
+      "1|E-LIB|4|5|5": 3.42,
+      "1|E-LIB|4|80|1": 8.73,
+      "1|E-LIB|4|80|5": 10.67,
+      "1|E-LIB|64|20|1": 4.9,
+      "1|E-LIB|64|20|5": 5.87,
+      "1|E-LIB|64|5|1": 4.12,
+      "1|E-LIB|64|5|5": 3.72,
+      "1|E-LIB|64|80|1": 11.4,
+      "1|E-LIB|64|80|5": 11.56
+    },
+    "workers": 6
+  },
+  "seeds": {
+    "bit_generator": "PCG64",
+    "derivation": "SeedSequence(entropy=entropy_for(name), spawn_key=(sha256(name)[:4] as uint32 LE, *path))",
+    "root_seed": 7110,
+    "streams": {
+      "eval_noise": {
+        "entropy": 7110,
+        "spawn_key_prefix": [
+          1307997307
+        ]
+      },
+      "eval_systems": {
+        "entropy": 7110,
+        "spawn_key_prefix": [
+          3058332557
+        ]
+      },
+      "library_noise": {
+        "entropy": 7110,
+        "spawn_key_prefix": [
+          724467201
+        ]
+      },
+      "library_systems": {
+        "entropy": 7110,
+        "spawn_key_prefix": [
+          1729835345
+        ]
+      },
+      "monte_carlo": {
+        "entropy": 7110,
+        "spawn_key_prefix": [
+          2813790143
+        ]
+      },
+      "selection_noise": {
+        "entropy": 7110,
+        "spawn_key_prefix": [
+          1347800803
+        ]
+      },
+      "selection_systems": {
+        "entropy": 7110,
+        "spawn_key_prefix": [
+          4273282707
+        ]
+      }
+    }
+  },
+  "t1_z_crit": 4.617924668488831,
+  "timestamps": {
+    "finished_utc": "2026-10-09T09:02:17.658460Z",
+    "started_utc": "2026-10-09T09:01:02.869651Z"
+  }
+}

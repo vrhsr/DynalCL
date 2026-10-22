@@ -1,0 +1,79 @@
+# Pilot (Section 7): estimates paired-difference variance to set replication counts.
+schema_version: 1
+experiment:
+  name: separability_pilot
+  root_seed: 7110
+  description: Pilot for replication counts (variance of paired differences). Not
+    used for conclusions.
+prior:
+  family: P-STABLE
+  shape: truncated_normal
+  rho: 0.95
+  mu0: 0.4
+  tau0: 0.3
+initial_state:
+  mean: 0.0
+  sd: 1.0
+grid:
+  conditions:
+  - E-CONT
+  - E-LIB
+  library_sizes:
+  - 4
+  - 16
+  - 64
+  - 256
+  context_lengths:
+  - 5
+  - 20
+  - 80
+  horizons:
+  - 1
+  - 5
+  noise_scales:
+  - 0.25
+  - 1.0
+replication:
+  n_eval_items: 300
+  n_selection_items: 300
+  justification: 'pilot: variance estimate only'
+numerics:
+  quadrature:
+    panels: 16
+    nodes_per_panel: 8
+    log_drop: 40.0
+    panels_per_cell: 2.0
+    max_panels: 8192
+  quadrature_error_check_items: 10
+baselines:
+  ols_min_transitions: 3
+  kernel:
+    bandwidth_multipliers:
+    - 0.05
+    - 0.1
+    - 0.2
+    - 0.4
+    - 0.8
+    - 1.6
+    - 3.2
+    - 6.4
+    min_train_pairs: 3
+    n_blocks: 4
+    gap: 1
+    min_pairs: 3
+    min_validation_points: 2
+  fallback:
+    coefficient_mean: 0.0
+    coefficient_variance: 1.0
+    predictive_variance: 1.0
+    variance_relative_floor: 1.0e-12
+metrics:
+  coverage_levels:
+  - 0.5
+  - 0.8
+  - 0.95
+  compute_crps: false
+  practical_gap_nats: 0.02
+  separation_z: 3.0
+  equivalence_z: 1.645
+  family_alpha: 0.001

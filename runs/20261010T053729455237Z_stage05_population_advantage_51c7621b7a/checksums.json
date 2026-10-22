@@ -1,0 +1,15 @@
+{
+  "config.yaml": "f2c2bc16400fa1df049febf330ef1a2a074a3a0c2e90192519b90bd8856c4c5a",
+  "config_hash.txt": "37fa5c5f1f52f3e5191a7c784368edbe04503f873c9304a4d2c6800e53493441",
+  "results/bootstrap.csv": "be074857c40ea906c0bc3be101e54b7fef9fe890722ec79f8eb53358dffb1189",
+  "results/contrasts.csv": "01a556c2a547ebd8e3cfd84a96cf9134540ed03e6ef57c33853f1f547c1eaad6",
+  "results/frontier_selection.json": "7222a762d815e5ce9eabca099545d24a30954e00b326392f25ed406dc9e27774",
+  "results/item_contrasts.npy": "1dfdb0ef57f22d06eff63e0a4b928970e98cee5ea9acc6d7937b36b2e964a791",
+  "results/item_contrasts_index.csv": "77570be67d108608d9e61c0f31a750bb9d8c7e1284925d39b9270b860d08b2ce",
+  "results/predictors.csv": "4b6a871e4331ce4df4a0550b3668f2bc66f359eae37c8dbb93680ce08d1fa445",
+  "results/quadrature.csv": "1f06f3b4b46dad46bb167f22c063946b8139682ad3b7b8d023f93b1daaf786e6",
+  "results/report.md": "c0ccad068cd430720934761a820bd0329462eb1bf68a291eb034735232675f0b",
+  "results/summary.json": "f07a9f4e19e0c11222c798b0a7a968b56bca0355ee14b3f5a6a22ff8f709fbfd",
+  "results/t1_optimality.csv": "a8e7489ff4ad9e3600dd25e1c5945b4f9e15b4c17f4945814ccef96e3552d255",
+  "results/t2_calibration.csv": "48f32d15a7e9c5ce18200c6b6e67b6a0b9337baefe16c8cee592759f6c7248a2"
+}

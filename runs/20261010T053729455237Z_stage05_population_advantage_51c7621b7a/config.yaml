@@ -1,0 +1,109 @@
+schema_version: 1
+experiment:
+  name: stage05_population_advantage
+  description: 'Stage 0.5 confirmatory run: matched population-aware Bayes vs the
+    strongest context-only frontier (primary); finite library vs continuous prior
+    (secondary). Pre-registered in docs/PREREG_stage05.md.'
+seeds:
+  library: 52001
+  selection: 52002
+  evaluation:
+  - 52101
+  - 52102
+  bootstrap: 52999
+prior:
+  family: P-STABLE
+  shape: truncated_normal
+  rho: 0.95
+  mu0: 0.4
+  tau0: 0.3
+noise_scale: 1.0
+initial_state:
+  mean: 0.0
+  sds:
+  - 0.25
+  - 1.0
+  - 4.0
+grid:
+  conditions:
+  - E-CONT
+  - E-LIB
+  library_sizes:
+  - 2
+  - 4
+  - 8
+  context_lengths:
+  - 1
+  - 2
+  - 3
+  - 5
+  - 10
+  - 20
+  horizons:
+  - 1
+  - 5
+replication:
+  n_eval_items: 3378
+  n_selection_items: 1000
+  justification: pilot sd_q90 = 0.2906 over 360 contrasts; N = ceil((4 * 0.2906 /
+    0.02)^2) = 3378 (PREREG_stage05 section 5)
+numerics:
+  quadrature:
+    panels: 16
+    nodes_per_panel: 8
+    log_drop: 40.0
+    panels_per_cell: 2.0
+    max_panels: 8192
+  quadrature_error_check_items: 10
+baselines:
+  ols_min_transitions: 3
+  stability_bound: 0.999
+  kernel:
+    bandwidth_multipliers:
+    - 0.05
+    - 0.1
+    - 0.2
+    - 0.4
+    - 0.8
+    - 1.6
+    - 3.2
+    - 6.4
+    min_train_pairs: 3
+    n_blocks: 4
+    gap: 1
+    min_pairs: 3
+    min_validation_points: 2
+  fallback:
+    coefficient_mean: 0.0
+    coefficient_variance: 1.0
+    predictive_variance: 1.0
+    variance_relative_floor: 1.0e-12
+metrics:
+  coverage_levels:
+  - 0.5
+  - 0.8
+  - 0.95
+  practical_effect_nats: 0.02
+  decision_z: 2.24
+  ci_z: 1.96
+  sensitivity_effects:
+  - 0.01
+  - 0.04
+  bootstrap_resamples: 2000
+  family_alpha: 0.001
+decision:
+  relevant_condition: E-CONT
+  relevant_initial_state_sd: 1.0
+  relevant_context_lengths:
+  - 2
+  - 3
+  - 5
+  - 10
+  required_horizons:
+  - 1
+  - 5
+  min_consecutive_context_lengths: 2
+  robustness_initial_state_sds:
+  - 0.25
+  - 4.0
+  max_quadrature_error: 1.0e-06

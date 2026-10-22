@@ -1,0 +1,1262 @@
+{
+  "B_dry": 2000,
+  "N": 4000,
+  "halfwidths": {
+    "kappa=1.0|rho_q=0.5": {
+      "bootstrap_seconds": 2.59,
+      "critical_value": {
+        "c": 3.0227663397143196,
+        "c_mc_interval": [
+          3.0041295495581526,
+          3.0442744963851998
+        ],
+        "draws": 20000,
+        "rank": 19000,
+        "rel_mc_error": 0.006640431696556679
+      },
+      "rows": [
+        {
+          "gain_halfwidth": 0.004941059328614494,
+          "h": 1,
+          "increment_halfwidth": 0.004941059328614494,
+          "r": 0.25
+        },
+        {
+          "gain_halfwidth": 0.004741330570178954,
+          "h": 1,
+          "increment_halfwidth": 0.004741330570178954,
+          "r": 1.0
+        },
+        {
+          "gain_halfwidth": 0.0035736042086224563,
+          "h": 1,
+          "increment_halfwidth": 0.0035736042086224563,
+          "r": 4.0
+        },
+        {
+          "gain_halfwidth": 0.0035426287771639997,
+          "h": 5,
+          "increment_halfwidth": 0.0035426287771639997,
+          "r": 0.25
+        },
+        {
+          "gain_halfwidth": 0.003386532191506355,
+          "h": 5,
+          "increment_halfwidth": 0.003386532191506355,
+          "r": 1.0
+        },
+        {
+          "gain_halfwidth": 0.002636931070744758,
+          "h": 5,
+          "increment_halfwidth": 0.002636931070744758,
+          "r": 4.0
+        }
+      ]
+    },
+    "kappa=2.0|rho_q=0.2": {
+      "bootstrap_seconds": 2.32,
+      "critical_value": {
+        "c": 2.9717729785611233,
+        "c_mc_interval": [
+          2.9492967918010615,
+          2.994433314638254
+        ],
+        "draws": 20000,
+        "rank": 19000,
+        "rel_mc_error": 0.0075942077612952035
+      },
+      "rows": [
+        {
+          "gain_halfwidth": 0.009715409626819962,
+          "h": 1,
+          "increment_halfwidth": 0.009955332411715406,
+          "r": 0.25
+        },
+        {
+          "gain_halfwidth": 0.009322690864828984,
+          "h": 1,
+          "increment_halfwidth": 0.009552915429816391,
+          "r": 1.0
+        },
+        {
+          "gain_halfwidth": 0.007026636682913578,
+          "h": 1,
+          "increment_halfwidth": 0.007200160014010112,
+          "r": 4.0
+        },
+        {
+          "gain_halfwidth": 0.006965730916564326,
+          "h": 5,
+          "increment_halfwidth": 0.007137750175095727,
+          "r": 0.25
+        },
+        {
+          "gain_halfwidth": 0.006658804371029957,
+          "h": 5,
+          "increment_halfwidth": 0.006823244055010053,
+          "r": 1.0
+        },
+        {
+          "gain_halfwidth": 0.005184893320671377,
+          "h": 5,
+          "increment_halfwidth": 0.005312934658367238,
+          "r": 4.0
+        }
+      ]
+    },
+    "kappa=2.0|rho_q=0.5": {
+      "bootstrap_seconds": 2.25,
+      "critical_value": {
+        "c": 2.9516552642894793,
+        "c_mc_interval": [
+          2.932914767860064,
+          2.9754732280768788
+        ],
+        "draws": 20000,
+        "rank": 19000,
+        "rel_mc_error": 0.007209253182732228
+      },
+      "rows": [
+        {
+          "gain_halfwidth": 0.009649640190084933,
+          "h": 1,
+          "increment_halfwidth": 0.008356833541992853,
+          "r": 0.25
+        },
+        {
+          "gain_halfwidth": 0.009259579977014027,
+          "h": 1,
+          "increment_halfwidth": 0.008019031488467875,
+          "r": 1.0
+        },
+        {
+          "gain_halfwidth": 0.006979069163423597,
+          "h": 1,
+          "increment_halfwidth": 0.006044051190293446,
+          "r": 4.0
+        },
+        {
+          "gain_halfwidth": 0.0069185757047485,
+          "h": 5,
+          "increment_halfwidth": 0.005991662318318026,
+          "r": 0.25
+        },
+        {
+          "gain_halfwidth": 0.006613726929148103,
+          "h": 5,
+          "increment_halfwidth": 0.0057276555343355,
+          "r": 1.0
+        },
+        {
+          "gain_halfwidth": 0.005149793666994358,
+          "h": 5,
+          "increment_halfwidth": 0.004459852139865333,
+          "r": 4.0
+        }
+      ]
+    }
+  },
+  "scenarios": [
+    {
+      "counts": {
+        "BLOCKED": 4,
+        "GO": 0,
+        "REVISE": 0,
+        "STOP": 96
+      },
+      "example_reasons": [
+        "all 18 gains have adjusted upper bound < delta in both replicates"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.011004493986188198,
+          0.09925715671265996
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.90074284328734,
+          0.9889955060138118
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "null_zero",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 100,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9637833073548235,
+          1.0
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "null_boundary_gain",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 100,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9637833073548235,
+          1.0
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "null_boundary_increment",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 1,
+        "STOP": 99
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.00025314603297742064,
+          0.054459385392080624
+        ],
+        "STOP": [
+          0.9455406146079194,
+          0.9997468539670226
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "sub_threshold",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 89,
+        "REVISE": 11,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [5]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.8116988678035574,
+          0.9437929797145125
+        ],
+        "REVISE": [
+          0.05620702028548746,
+          0.18830113219644257
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 12.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "effect_0.025",
+      "strict_variant": 89,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 100,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [1, 5]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.9637833073548235,
+          1.0
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 18.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "effect_0.03",
+      "strict_variant": 100,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 100,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [1, 5]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.9637833073548235,
+          1.0
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 18.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "effect_0.04",
+      "strict_variant": 100,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 5,
+        "GO": 95,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [1]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.016431879182052155,
+          0.11283491110546275
+        ],
+        "GO": [
+          0.8871650888945373,
+          0.9835681208179479
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 4.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "narrow_effect",
+      "strict_variant": 95,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 4,
+        "GO": 0,
+        "REVISE": 96,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.011004493986188198,
+          0.09925715671265996
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.90074284328734,
+          0.9889955060138118
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 1.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "single_cell",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 5,
+        "GO": 0,
+        "REVISE": 1,
+        "STOP": 94
+      },
+      "example_reasons": [
+        "all 18 gains have adjusted upper bound < delta in both replicates"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.016431879182052155,
+          0.11283491110546275
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.00025314603297742064,
+          0.054459385392080624
+        ],
+        "STOP": [
+          0.873970065419177,
+          0.9776651139286836
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "null_zero",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 100,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9637833073548235,
+          1.0
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "null_boundary_gain",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 100,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9637833073548235,
+          1.0
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "null_boundary_increment",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 97,
+        "STOP": 3
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.91482394702572,
+          0.9937700284616936
+        ],
+        "STOP": [
+          0.006229971538306395,
+          0.08517605297427999
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "sub_threshold",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 100,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9637833073548235,
+          1.0
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 1.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "effect_0.025",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 88,
+        "REVISE": 12,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [1, 5]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.7997643163800312,
+          0.9364310974388407
+        ],
+        "REVISE": [
+          0.06356890256115931,
+          0.20023568361996877
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 12.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "effect_0.03",
+      "strict_variant": 88,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 100,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [1, 5]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.9637833073548235,
+          1.0
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 18.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "effect_0.04",
+      "strict_variant": 100,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 2,
+        "GO": 98,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [1]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0024313368239425423,
+          0.07038393247107012
+        ],
+        "GO": [
+          0.9296160675289299,
+          0.9975686631760574
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 4.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "narrow_effect",
+      "strict_variant": 98,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 7,
+        "GO": 0,
+        "REVISE": 93,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.028605288907438704,
+          0.13891972845585732
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.8610802715441427,
+          0.9713947110925613
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 1.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "single_cell",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 100,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9637833073548235,
+          1.0
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.5,
+      "scenario": "null_boundary_gain",
+      "strict_variant": 0,
+      "tails": "t5"
+    },
+    {
+      "counts": {
+        "BLOCKED": 2,
+        "GO": 0,
+        "REVISE": 0,
+        "STOP": 98
+      },
+      "example_reasons": [
+        "all 18 gains have adjusted upper bound < delta in both replicates"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0024313368239425423,
+          0.07038393247107012
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.9296160675289299,
+          0.9975686631760574
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.2,
+      "scenario": "null_zero",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 100,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9637833073548235,
+          1.0
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.2,
+      "scenario": "null_boundary_increment",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 0,
+        "REVISE": 98,
+        "STOP": 2
+      },
+      "example_reasons": [
+        "valid, but neither the GO nor the STOP condition holds"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.0,
+          0.03621669264517641
+        ],
+        "REVISE": [
+          0.9296160675289299,
+          0.9975686631760574
+        ],
+        "STOP": [
+          0.0024313368239425423,
+          0.07038393247107012
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 100,
+      "rho_q": 0.2,
+      "scenario": "sub_threshold",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 0,
+        "GO": 100,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "Q(h, r) holds for >= 2 scales at h in [1, 5]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.0,
+          0.03621669264517641
+        ],
+        "GO": [
+          0.9637833073548235,
+          1.0
+        ],
+        "REVISE": [
+          0.0,
+          0.03621669264517641
+        ],
+        "STOP": [
+          0.0,
+          0.03621669264517641
+        ]
+      },
+      "kappa": 2.0,
+      "median_cells_supported_both": 18.0,
+      "pairs": 100,
+      "rho_q": 0.2,
+      "scenario": "effect_0.04",
+      "strict_variant": 100,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 20,
+        "GO": 0,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "R1: significantly negative gain in [(6.5, 5, 4.0)]",
+        "R2: significantly negative gain in [(6.5, 5, 4.0)]"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.8315665290169146,
+          1.0
+        ],
+        "GO": [
+          0.0,
+          0.1684334709830853
+        ],
+        "REVISE": [
+          0.0,
+          0.1684334709830853
+        ],
+        "STOP": [
+          0.0,
+          0.1684334709830853
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 20,
+      "rho_q": 0.5,
+      "scenario": "negative_cell",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 20,
+        "GO": 0,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "R2: 1 missing primary cells, e.g. (0.755, 1, 0.25)"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.8315665290169146,
+          1.0
+        ],
+        "GO": [
+          0.0,
+          0.1684334709830853
+        ],
+        "REVISE": [
+          0.0,
+          0.1684334709830853
+        ],
+        "STOP": [
+          0.0,
+          0.1684334709830853
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 17.0,
+      "pairs": 20,
+      "rho_q": 0.5,
+      "scenario": "missing_cell",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 20,
+        "GO": 0,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "R1: analysis invalid (FloatingPointError: non-finite per-item gain in the long-context region)",
+        "R1: 18 missing primary cells, e.g. (0.755, 1, 0.25)"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.8315665290169146,
+          1.0
+        ],
+        "GO": [
+          0.0,
+          0.1684334709830853
+        ],
+        "REVISE": [
+          0.0,
+          0.1684334709830853
+        ],
+        "STOP": [
+          0.0,
+          0.1684334709830853
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 20,
+      "rho_q": 0.5,
+      "scenario": "nonfinite_item",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 20,
+        "GO": 0,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "R1: analysis invalid (BootstrapFailure: a contrast is constant across systems (zero standard error))",
+        "R1: 18 missing primary cells, e.g. (0.755, 1, 0.25)"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.8315665290169146,
+          1.0
+        ],
+        "GO": [
+          0.0,
+          0.1684334709830853
+        ],
+        "REVISE": [
+          0.0,
+          0.1684334709830853
+        ],
+        "STOP": [
+          0.0,
+          0.1684334709830853
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 0.0,
+      "pairs": 20,
+      "rho_q": 0.5,
+      "scenario": "zero_variance_contrast",
+      "strict_variant": 0,
+      "tails": "normal"
+    },
+    {
+      "counts": {
+        "BLOCKED": 20,
+        "GO": 0,
+        "REVISE": 0,
+        "STOP": 0
+      },
+      "example_reasons": [
+        "critical checks failed: tier2"
+      ],
+      "intervals": {
+        "BLOCKED": [
+          0.8315665290169146,
+          1.0
+        ],
+        "GO": [
+          0.0,
+          0.1684334709830853
+        ],
+        "REVISE": [
+          0.0,
+          0.1684334709830853
+        ],
+        "STOP": [
+          0.0,
+          0.1684334709830853
+        ]
+      },
+      "kappa": 1.0,
+      "median_cells_supported_both": 18.0,
+      "pairs": 20,
+      "rho_q": 0.5,
+      "scenario": "critical_check_failure",
+      "strict_variant": 0,
+      "tails": "normal"
+    }
+  ],
+  "seconds": 667.6,
+  "seed": 61903,
+  "spreads": {
+    "L_proxy_corr": [
+      [
+        1.0,
+        0.9790377715023226,
+        0.8347475887618117,
+        0.07182289202884734,
+        0.07058404366455648,
+        0.0593421025941666
+      ],
+      [
+        0.9790377715023226,
+        1.0,
+        0.8875946283269277,
+        0.07636164300194051,
+        0.07978528491106807,
+        0.06948258752074186
+      ],
+      [
+        0.8347475887618117,
+        0.8875946283269278,
+        0.9999999999999999,
+        0.07327197585494524,
+        0.08035385814452614,
+        0.0980695025664112
+      ],
+      [
+        0.07182289202884734,
+        0.07636164300194051,
+        0.07327197585494524,
+        1.0,
+        0.9842029840696904,
+        0.8385319620032352
+      ],
+      [
+        0.07058404366455648,
+        0.07978528491106808,
+        0.08035385814452614,
+        0.9842029840696904,
+        0.9999999999999999,
+        0.8841586463906356
+      ],
+      [
+        0.05934210259416659,
+        0.06948258752074185,
+        0.0980695025664112,
+        0.8385319620032352,
+        0.8841586463906355,
+        1.0
+      ]
+    ],
+    "L_proxy_sd": {
+      "h=1|r=0.25": 0.10338213263232843,
+      "h=1|r=1.0": 0.09920319374052133,
+      "h=1|r=4.0": 0.0747707727635906,
+      "h=5|r=0.25": 0.07412267162769921,
+      "h=5|r=1.0": 0.07085665176259523,
+      "h=5|r=4.0": 0.05517269467284144
+    },
+    "tier2": {
+      "criterion": {
+        "max_combined_se": 0.004781142954612671,
+        "n_tests": 12,
+        "z_crit": 3.341478956038596,
+        "z_power": 0.8416212335729143
+      },
+      "expected_combined_se": {
+        "h=1|r=0.25": 0.0017826209404359311,
+        "h=1|r=1.0": 0.0017120555831291867,
+        "h=1|r=4.0": 0.0013114919365611465,
+        "h=5|r=0.25": 0.0013413675967107197,
+        "h=5|r=1.0": 0.0013215687708379212,
+        "h=5|r=4.0": 0.0011351203070593789
+      },
+      "informative_expected": true,
+      "stage05_systems_pooled": 6756,
+      "stage06_systems": 4000
+    },
+    "tier2_sd": {
+      "h=1|r=0.25": 0.08935285285627198,
+      "h=1|r=1.0": 0.0858158047687308,
+      "h=1|r=4.0": 0.06573778158416459,
+      "h=5|r=0.25": 0.06723528192468903,
+      "h=5|r=1.0": 0.06624287712633269,
+      "h=5|r=4.0": 0.05689725475009829
+    }
+  },
+  "tau": 0.02
+}

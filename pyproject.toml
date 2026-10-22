@@ -1,0 +1,17 @@
+[project]
+name = "dynaicl"
+version = "0.0.1"
+description = "Stage 0: validated Bayesian reference predictors for scalar AR(1) in-context forecasting"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.0", "scipy>=1.13", "pyyaml>=6.0"]
+
+[project.optional-dependencies]
+test = ["pytest>=8.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = [
+    "slow: statistical tests with large Monte Carlo budgets (still CPU-minutes, not hours)",
+]
+filterwarnings = ["error::RuntimeWarning"]

@@ -1,0 +1,441 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "dynaicl.experiments.population_advantage",
+    "--config",
+    "config/stage05.yaml",
+    "--workers",
+    "2",
+    "--checkpoint-dir",
+    "/content/drive/MyDrive/dynaicl_stage05/checkpoints",
+    "--runs-dir",
+    "/content/drive/MyDrive/dynaicl_stage05/runs"
+  ],
+  "config_hash": "51c7621b7a8ff46cb81e70be7a1fa3b9213846858742f6b3b19ad4f6b9792ef3",
+  "git": {
+    "available": false,
+    "reason": "fatal: not a git repository (or any of the parent directories): .git"
+  },
+  "output_checksums_file": "checksums.json",
+  "packages": {
+    "numpy": "2.2.2",
+    "pytest": "9.0.2",
+    "pyyaml": "6.0.2",
+    "scipy": "1.15.1"
+  },
+  "platform": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]"
+  },
+  "preregistration": {
+    "path": "docs/PREREG_stage05.md",
+    "sha256": "fcf7f3a55c5a58de6ba3c4ea75c30f5ed971fccaee4fa6b2b8db852d30751cbf"
+  },
+  "run_id": "20261010T053729455237Z_stage05_population_advantage_51c7621b7a",
+  "runtime": {
+    "n_units": 144,
+    "seconds": 5064.4,
+    "unit_seconds": {
+      "0|E-CONT|0|10|1": 81.58,
+      "0|E-CONT|0|10|5": 91.71,
+      "0|E-CONT|0|1|1": 57.92,
+      "0|E-CONT|0|1|5": 114.99,
+      "0|E-CONT|0|20|1": 84.44,
+      "0|E-CONT|0|20|5": 99.55,
+      "0|E-CONT|0|2|1": 57.13,
+      "0|E-CONT|0|2|5": 81.17,
+      "0|E-CONT|0|3|1": 69.17,
+      "0|E-CONT|0|3|5": 80.21,
+      "0|E-CONT|0|5|1": 79.01,
+      "0|E-CONT|0|5|5": 79.29,
+      "0|E-LIB|2|10|1": 70.44,
+      "0|E-LIB|2|10|5": 76.57,
+      "0|E-LIB|2|1|1": 44.45,
+      "0|E-LIB|2|1|5": 98.04,
+      "0|E-LIB|2|20|1": 73.95,
+      "0|E-LIB|2|20|5": 86.95,
+      "0|E-LIB|2|2|1": 42.92,
+      "0|E-LIB|2|2|5": 70.72,
+      "0|E-LIB|2|3|1": 55.97,
+      "0|E-LIB|2|3|5": 68.46,
+      "0|E-LIB|2|5|1": 67.57,
+      "0|E-LIB|2|5|5": 67.31,
+      "0|E-LIB|4|10|1": 69.35,
+      "0|E-LIB|4|10|5": 77.48,
+      "0|E-LIB|4|1|1": 45.29,
+      "0|E-LIB|4|1|5": 100.32,
+      "0|E-LIB|4|20|1": 75.83,
+      "0|E-LIB|4|20|5": 84.92,
+      "0|E-LIB|4|2|1": 44.64,
+      "0|E-LIB|4|2|5": 69.78,
+      "0|E-LIB|4|3|1": 60.96,
+      "0|E-LIB|4|3|5": 68.92,
+      "0|E-LIB|4|5|1": 68.02,
+      "0|E-LIB|4|5|5": 67.36,
+      "0|E-LIB|8|10|1": 75.21,
+      "0|E-LIB|8|10|5": 81.12,
+      "0|E-LIB|8|1|1": 43.91,
+      "0|E-LIB|8|1|5": 98.21,
+      "0|E-LIB|8|20|1": 77.16,
+      "0|E-LIB|8|20|5": 86.31,
+      "0|E-LIB|8|2|1": 43.57,
+      "0|E-LIB|8|2|5": 68.73,
+      "0|E-LIB|8|3|1": 57.48,
+      "0|E-LIB|8|3|5": 68.5,
+      "0|E-LIB|8|5|1": 67.82,
+      "0|E-LIB|8|5|5": 70.99,
+      "1|E-CONT|0|10|1": 81.65,
+      "1|E-CONT|0|10|5": 90.19,
+      "1|E-CONT|0|1|1": 55.78,
+      "1|E-CONT|0|1|5": 90.85,
+      "1|E-CONT|0|20|1": 85.51,
+      "1|E-CONT|0|20|5": 98.3,
+      "1|E-CONT|0|2|1": 56.02,
+      "1|E-CONT|0|2|5": 78.57,
+      "1|E-CONT|0|3|1": 70.98,
+      "1|E-CONT|0|3|5": 79.2,
+      "1|E-CONT|0|5|1": 80.41,
+      "1|E-CONT|0|5|5": 77.07,
+      "1|E-LIB|2|10|1": 69.87,
+      "1|E-LIB|2|10|5": 77.51,
+      "1|E-LIB|2|1|1": 43.37,
+      "1|E-LIB|2|1|5": 76.95,
+      "1|E-LIB|2|20|1": 73.09,
+      "1|E-LIB|2|20|5": 85.28,
+      "1|E-LIB|2|2|1": 42.39,
+      "1|E-LIB|2|2|5": 67.33,
+      "1|E-LIB|2|3|1": 58.85,
+      "1|E-LIB|2|3|5": 66.54,
+      "1|E-LIB|2|5|1": 67.84,
+      "1|E-LIB|2|5|5": 64.38,
+      "1|E-LIB|4|10|1": 69.12,
+      "1|E-LIB|4|10|5": 75.85,
+      "1|E-LIB|4|1|1": 44.35,
+      "1|E-LIB|4|1|5": 73.77,
+      "1|E-LIB|4|20|1": 76.5,
+      "1|E-LIB|4|20|5": 88.02,
+      "1|E-LIB|4|2|1": 44.07,
+      "1|E-LIB|4|2|5": 68.98,
+      "1|E-LIB|4|3|1": 57.6,
+      "1|E-LIB|4|3|5": 68.14,
+      "1|E-LIB|4|5|1": 68.92,
+      "1|E-LIB|4|5|5": 65.81,
+      "1|E-LIB|8|10|1": 69.96,
+      "1|E-LIB|8|10|5": 76.58,
+      "1|E-LIB|8|1|1": 43.94,
+      "1|E-LIB|8|1|5": 74.7,
+      "1|E-LIB|8|20|1": 71.6,
+      "1|E-LIB|8|20|5": 83.97,
+      "1|E-LIB|8|2|1": 42.09,
+      "1|E-LIB|8|2|5": 66.43,
+      "1|E-LIB|8|3|1": 58.41,
+      "1|E-LIB|8|3|5": 65.04,
+      "1|E-LIB|8|5|1": 67.4,
+      "1|E-LIB|8|5|5": 64.82,
+      "2|E-CONT|0|10|1": 83.51,
+      "2|E-CONT|0|10|5": 92.4,
+      "2|E-CONT|0|1|1": 57.89,
+      "2|E-CONT|0|1|5": 79.11,
+      "2|E-CONT|0|20|1": 87.05,
+      "2|E-CONT|0|20|5": 99.72,
+      "2|E-CONT|0|2|1": 54.41,
+      "2|E-CONT|0|2|5": 77.82,
+      "2|E-CONT|0|3|1": 72.68,
+      "2|E-CONT|0|3|5": 84.58,
+      "2|E-CONT|0|5|1": 89.94,
+      "2|E-CONT|0|5|5": 77.31,
+      "2|E-LIB|2|10|1": 68.06,
+      "2|E-LIB|2|10|5": 75.24,
+      "2|E-LIB|2|1|1": 44.88,
+      "2|E-LIB|2|1|5": 66.65,
+      "2|E-LIB|2|20|1": 73.34,
+      "2|E-LIB|2|20|5": 87.72,
+      "2|E-LIB|2|2|1": 44.69,
+      "2|E-LIB|2|2|5": 64.2,
+      "2|E-LIB|2|3|1": 56.99,
+      "2|E-LIB|2|3|5": 65.92,
+      "2|E-LIB|2|5|1": 67.11,
+      "2|E-LIB|2|5|5": 65.03,
+      "2|E-LIB|4|10|1": 68.14,
+      "2|E-LIB|4|10|5": 75.41,
+      "2|E-LIB|4|1|1": 43.55,
+      "2|E-LIB|4|1|5": 66.71,
+      "2|E-LIB|4|20|1": 73.67,
+      "2|E-LIB|4|20|5": 93.29,
+      "2|E-LIB|4|2|1": 45.19,
+      "2|E-LIB|4|2|5": 63.81,
+      "2|E-LIB|4|3|1": 58.56,
+      "2|E-LIB|4|3|5": 67.28,
+      "2|E-LIB|4|5|1": 67.3,
+      "2|E-LIB|4|5|5": 65.24,
+      "2|E-LIB|8|10|1": 71.24,
+      "2|E-LIB|8|10|5": 76.05,
+      "2|E-LIB|8|1|1": 48.52,
+      "2|E-LIB|8|1|5": 68.35,
+      "2|E-LIB|8|20|1": 72.44,
+      "2|E-LIB|8|20|5": 56.86,
+      "2|E-LIB|8|2|1": 46.06,
+      "2|E-LIB|8|2|5": 64.07,
+      "2|E-LIB|8|3|1": 60.7,
+      "2|E-LIB|8|3|5": 65.66,
+      "2|E-LIB|8|5|1": 68.15,
+      "2|E-LIB|8|5|5": 64.17
+    },
+    "workers": 2
+  },
+  "seeds": {
+    "bootstrap": {
+      "bit_generator": "PCG64",
+      "derivation": "SeedSequence(entropy=entropy_for(name), spawn_key=(sha256(name)[:4] as uint32 LE, *path))",
+      "root_seed": 52999,
+      "streams": {
+        "eval_noise": {
+          "entropy": 52999,
+          "spawn_key_prefix": [
+            1307997307
+          ]
+        },
+        "eval_systems": {
+          "entropy": 52999,
+          "spawn_key_prefix": [
+            3058332557
+          ]
+        },
+        "library_noise": {
+          "entropy": 52999,
+          "spawn_key_prefix": [
+            724467201
+          ]
+        },
+        "library_systems": {
+          "entropy": 52999,
+          "spawn_key_prefix": [
+            1729835345
+          ]
+        },
+        "monte_carlo": {
+          "entropy": 52999,
+          "spawn_key_prefix": [
+            2813790143
+          ]
+        },
+        "selection_noise": {
+          "entropy": 52999,
+          "spawn_key_prefix": [
+            1347800803
+          ]
+        },
+        "selection_systems": {
+          "entropy": 52999,
+          "spawn_key_prefix": [
+            4273282707
+          ]
+        }
+      }
+    },
+    "evaluation_R1": {
+      "bit_generator": "PCG64",
+      "derivation": "SeedSequence(entropy=entropy_for(name), spawn_key=(sha256(name)[:4] as uint32 LE, *path))",
+      "root_seed": 52101,
+      "streams": {
+        "eval_noise": {
+          "entropy": 52101,
+          "spawn_key_prefix": [
+            1307997307
+          ]
+        },
+        "eval_systems": {
+          "entropy": 52101,
+          "spawn_key_prefix": [
+            3058332557
+          ]
+        },
+        "library_noise": {
+          "entropy": 52101,
+          "spawn_key_prefix": [
+            724467201
+          ]
+        },
+        "library_systems": {
+          "entropy": 52101,
+          "spawn_key_prefix": [
+            1729835345
+          ]
+        },
+        "monte_carlo": {
+          "entropy": 52101,
+          "spawn_key_prefix": [
+            2813790143
+          ]
+        },
+        "selection_noise": {
+          "entropy": 52101,
+          "spawn_key_prefix": [
+            1347800803
+          ]
+        },
+        "selection_systems": {
+          "entropy": 52101,
+          "spawn_key_prefix": [
+            4273282707
+          ]
+        }
+      }
+    },
+    "evaluation_R2": {
+      "bit_generator": "PCG64",
+      "derivation": "SeedSequence(entropy=entropy_for(name), spawn_key=(sha256(name)[:4] as uint32 LE, *path))",
+      "root_seed": 52102,
+      "streams": {
+        "eval_noise": {
+          "entropy": 52102,
+          "spawn_key_prefix": [
+            1307997307
+          ]
+        },
+        "eval_systems": {
+          "entropy": 52102,
+          "spawn_key_prefix": [
+            3058332557
+          ]
+        },
+        "library_noise": {
+          "entropy": 52102,
+          "spawn_key_prefix": [
+            724467201
+          ]
+        },
+        "library_systems": {
+          "entropy": 52102,
+          "spawn_key_prefix": [
+            1729835345
+          ]
+        },
+        "monte_carlo": {
+          "entropy": 52102,
+          "spawn_key_prefix": [
+            2813790143
+          ]
+        },
+        "selection_noise": {
+          "entropy": 52102,
+          "spawn_key_prefix": [
+            1347800803
+          ]
+        },
+        "selection_systems": {
+          "entropy": 52102,
+          "spawn_key_prefix": [
+            4273282707
+          ]
+        }
+      }
+    },
+    "library": {
+      "bit_generator": "PCG64",
+      "derivation": "SeedSequence(entropy=entropy_for(name), spawn_key=(sha256(name)[:4] as uint32 LE, *path))",
+      "root_seed": 52001,
+      "streams": {
+        "eval_noise": {
+          "entropy": 52001,
+          "spawn_key_prefix": [
+            1307997307
+          ]
+        },
+        "eval_systems": {
+          "entropy": 52001,
+          "spawn_key_prefix": [
+            3058332557
+          ]
+        },
+        "library_noise": {
+          "entropy": 52001,
+          "spawn_key_prefix": [
+            724467201
+          ]
+        },
+        "library_systems": {
+          "entropy": 52001,
+          "spawn_key_prefix": [
+            1729835345
+          ]
+        },
+        "monte_carlo": {
+          "entropy": 52001,
+          "spawn_key_prefix": [
+            2813790143
+          ]
+        },
+        "selection_noise": {
+          "entropy": 52001,
+          "spawn_key_prefix": [
+            1347800803
+          ]
+        },
+        "selection_systems": {
+          "entropy": 52001,
+          "spawn_key_prefix": [
+            4273282707
+          ]
+        }
+      }
+    },
+    "selection": {
+      "bit_generator": "PCG64",
+      "derivation": "SeedSequence(entropy=entropy_for(name), spawn_key=(sha256(name)[:4] as uint32 LE, *path))",
+      "root_seed": 52002,
+      "streams": {
+        "eval_noise": {
+          "entropy": 52002,
+          "spawn_key_prefix": [
+            1307997307
+          ]
+        },
+        "eval_systems": {
+          "entropy": 52002,
+          "spawn_key_prefix": [
+            3058332557
+          ]
+        },
+        "library_noise": {
+          "entropy": 52002,
+          "spawn_key_prefix": [
+            724467201
+          ]
+        },
+        "library_systems": {
+          "entropy": 52002,
+          "spawn_key_prefix": [
+            1729835345
+          ]
+        },
+        "monte_carlo": {
+          "entropy": 52002,
+          "spawn_key_prefix": [
+            2813790143
+          ]
+        },
+        "selection_noise": {
+          "entropy": 52002,
+          "spawn_key_prefix": [
+            1347800803
+          ]
+        },
+        "selection_systems": {
+          "entropy": 52002,
+          "spawn_key_prefix": [
+            4273282707
+          ]
+        }
+      }
+    }
+  },
+  "timestamps": {
+    "finished_utc": "2026-10-10T07:01:54.685206Z",
+    "started_utc": "2026-10-10T05:37:29.455187Z"
+  }
+}

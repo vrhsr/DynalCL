@@ -1,0 +1,1082 @@
+[
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.10132192678213868,
+      "kernel_blocked": -0.9179703967544376,
+      "kernel_leave_one_out": -0.8249551015197228,
+      "kernel_rolling_origin": -7.555701894683405,
+      "ols_gaussian": -0.6764806352254816,
+      "ols_student_t": -0.23604119014242742,
+      "persistence": -0.45299739292589863
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.25527103965394776,
+      "kernel_blocked": -293.0033615481403,
+      "kernel_leave_one_out": -293.0033615481403,
+      "kernel_rolling_origin": -293.0033615481403,
+      "ols_gaussian": -0.5760197863505526,
+      "ols_student_t": -0.3614574452168601,
+      "persistence": -293.0033615481403
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.05431098675654274,
+      "kernel_blocked": -0.2023128053877633,
+      "kernel_leave_one_out": -0.1675147486689898,
+      "kernel_rolling_origin": -0.17329637272256843,
+      "ols_gaussian": -0.08868999666635458,
+      "ols_student_t": -0.08139536917943382,
+      "persistence": -0.2776729550821566
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.19038427338609995,
+      "kernel_blocked": -0.6596381865025044,
+      "kernel_leave_one_out": -0.5520691443151806,
+      "kernel_rolling_origin": -0.5192700821007229,
+      "ols_gaussian": -0.21162631880998276,
+      "ols_student_t": -0.2036458908750323,
+      "persistence": -0.5990417417978737
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_gaussian",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.014611231650500515,
+      "kernel_blocked": -0.04023215449077121,
+      "kernel_leave_one_out": -0.03765351796773372,
+      "kernel_rolling_origin": -0.028856253569098853,
+      "ols_gaussian": -0.016292848280519693,
+      "ols_student_t": -0.01664992956943331,
+      "persistence": -0.2424198115598214
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.1733126579517802,
+      "kernel_blocked": -0.2055393878735406,
+      "kernel_leave_one_out": -0.22094788749966948,
+      "kernel_rolling_origin": -0.2110315218119785,
+      "ols_gaussian": -0.17934239966716084,
+      "ols_student_t": -0.17872878038098794,
+      "persistence": -0.5017668508350375
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.09897037875257925,
+      "kernel_blocked": -0.8796627968427627,
+      "kernel_leave_one_out": -0.8705339837086443,
+      "kernel_rolling_origin": -9.010076384232917,
+      "ols_gaussian": -0.5314669629173601,
+      "ols_student_t": -0.22000514215118724,
+      "persistence": -0.448616048808213
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.20865164430541971,
+      "kernel_blocked": -525.80911758967,
+      "kernel_leave_one_out": -525.80911758967,
+      "kernel_rolling_origin": -525.80911758967,
+      "ols_gaussian": -0.7928852411991103,
+      "ols_student_t": -0.33421958285008313,
+      "persistence": -525.80911758967
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.03138996900685146,
+      "kernel_blocked": -0.1518280052275509,
+      "kernel_leave_one_out": -0.14316449025929817,
+      "kernel_rolling_origin": -0.14809795930952657,
+      "ols_gaussian": -0.06383539726692951,
+      "ols_student_t": -0.05803377665113567,
+      "persistence": -0.22277720266345796
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.09702111662109619,
+      "kernel_blocked": -0.4065509052342703,
+      "kernel_leave_one_out": -0.32946711856825706,
+      "kernel_rolling_origin": -0.37012233984172965,
+      "ols_gaussian": -0.13216098056297837,
+      "ols_student_t": -0.12719065082816408,
+      "persistence": -0.49703333414048495
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.05295881712630769,
+      "kernel_blocked": -0.09356336151397539,
+      "kernel_leave_one_out": -0.09762046108000674,
+      "kernel_rolling_origin": -0.09347050340370944,
+      "ols_gaussian": -0.05621568481702978,
+      "ols_student_t": -0.05560792326876563,
+      "persistence": -0.2508604282605641
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.119235910840929,
+      "kernel_blocked": -0.14427128387712235,
+      "kernel_leave_one_out": -0.152113616701817,
+      "kernel_rolling_origin": -0.1462155780741217,
+      "ols_gaussian": -0.12767631438231017,
+      "ols_student_t": -0.12657276725912608,
+      "persistence": -0.4594899127114875
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.11210919232014126,
+      "kernel_blocked": -0.9703253592130112,
+      "kernel_leave_one_out": -0.9871601504807364,
+      "kernel_rolling_origin": -41.85477852443492,
+      "ols_gaussian": -0.6256152595762461,
+      "ols_student_t": -0.23110922759294303,
+      "persistence": -0.4411282065186819
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.291234613352756,
+      "kernel_blocked": -608.5847332269423,
+      "kernel_leave_one_out": -608.5847332269423,
+      "kernel_rolling_origin": -608.5847332269423,
+      "ols_gaussian": -0.8832505897327747,
+      "ols_student_t": -0.4258962653486104,
+      "persistence": -608.5847332269423
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.02632917852900948,
+      "kernel_blocked": -0.17575768819691637,
+      "kernel_leave_one_out": -0.13718794210111115,
+      "kernel_rolling_origin": -0.15121529176785323,
+      "ols_gaussian": -0.059141435542536126,
+      "ols_student_t": -0.05300938622633658,
+      "persistence": -0.2021477464855447
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.1535175342847612,
+      "kernel_blocked": -0.5589566411749426,
+      "kernel_leave_one_out": -0.4735774439619135,
+      "kernel_rolling_origin": -0.47178379574470447,
+      "ols_gaussian": -0.19376171524594005,
+      "ols_student_t": -0.18769162157567446,
+      "persistence": -0.5289217445513478
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.05236709569967553,
+      "kernel_blocked": -0.09343762767826728,
+      "kernel_leave_one_out": -0.10233730870279925,
+      "kernel_rolling_origin": -0.09208720640498214,
+      "ols_gaussian": -0.056056065877499,
+      "ols_student_t": -0.05518791124506734,
+      "persistence": -0.24491788883730595
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.1945100313324503,
+      "kernel_blocked": -0.23011899405017208,
+      "kernel_leave_one_out": -0.2512039573674172,
+      "kernel_rolling_origin": -0.2334565259967108,
+      "ols_gaussian": -0.20354108646875604,
+      "ols_student_t": -0.20248928958459833,
+      "persistence": -0.517278041087783
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.10645528786699486,
+      "kernel_blocked": -0.8147685522563021,
+      "kernel_leave_one_out": -0.7786364813490337,
+      "kernel_rolling_origin": -10.606902560990227,
+      "ols_gaussian": -0.5169689884156167,
+      "ols_student_t": -0.2293834237846193,
+      "persistence": -0.44417024364804447
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.2930052349533656,
+      "kernel_blocked": -1632.0575692366376,
+      "kernel_leave_one_out": -1632.0575692366376,
+      "kernel_rolling_origin": -1632.0575692366376,
+      "ols_gaussian": -0.9037309974961013,
+      "ols_student_t": -0.42061316021398804,
+      "persistence": -1632.0575692366376
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.030143502381884638,
+      "kernel_blocked": -0.17826437047726607,
+      "kernel_leave_one_out": -0.15371122332092427,
+      "kernel_rolling_origin": -0.16266974324943978,
+      "ols_gaussian": -0.061967201208904886,
+      "ols_student_t": -0.05583888394949404,
+      "persistence": -0.2138158799270701
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.16239552577575825,
+      "kernel_blocked": -0.6013054021743389,
+      "kernel_leave_one_out": -0.4533415485807267,
+      "kernel_rolling_origin": -0.49136489901482794,
+      "ols_gaussian": -0.1980137271530246,
+      "ols_student_t": -0.19046408702451884,
+      "persistence": -0.5322467857318438
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.052788331930606336,
+      "kernel_blocked": -0.0986209899987148,
+      "kernel_leave_one_out": -0.09910566895831363,
+      "kernel_rolling_origin": -0.09509456141670958,
+      "ols_gaussian": -0.05643829033589463,
+      "ols_student_t": -0.05556884451578924,
+      "persistence": -0.23662610937031917
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.18127481900104367,
+      "kernel_blocked": -0.22668931369259396,
+      "kernel_leave_one_out": -0.24099061235640615,
+      "kernel_rolling_origin": -0.2234132661980994,
+      "ols_gaussian": -0.19084669777754393,
+      "ols_student_t": -0.18993874265424054,
+      "persistence": -0.499400930286036
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.10724329509914493,
+      "kernel_blocked": -2.817524598769045,
+      "kernel_leave_one_out": -0.936825761190038,
+      "kernel_rolling_origin": -13.721918625458748,
+      "ols_gaussian": -0.6115358673899598,
+      "ols_student_t": -0.23073856982974475,
+      "persistence": -0.45053502205256185
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.3129143510640181,
+      "kernel_blocked": -43.480811685352556,
+      "kernel_leave_one_out": -43.480811685352556,
+      "kernel_rolling_origin": -43.480811685352556,
+      "ols_gaussian": -0.9593324775233768,
+      "ols_student_t": -0.45056145389826086,
+      "persistence": -43.480811685352556
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.0320381753968387,
+      "kernel_blocked": -0.178780009320468,
+      "kernel_leave_one_out": -0.16642508489878838,
+      "kernel_rolling_origin": -0.1810779032481284,
+      "ols_gaussian": -0.0664254808591023,
+      "ols_student_t": -0.059795470001900254,
+      "persistence": -0.2070261675983076
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.18394168022224547,
+      "kernel_blocked": -0.5795261535142049,
+      "kernel_leave_one_out": -0.5376755162899151,
+      "kernel_rolling_origin": -0.5227998770900151,
+      "ols_gaussian": -0.22041418795204545,
+      "ols_student_t": -0.21561355786690597,
+      "persistence": -0.5446593247334447
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.051108520474486864,
+      "kernel_blocked": -0.10277020157781812,
+      "kernel_leave_one_out": -0.09927932730961485,
+      "kernel_rolling_origin": -0.09927245455357568,
+      "ols_gaussian": -0.054276270118921666,
+      "ols_student_t": -0.05366450466889783,
+      "persistence": -0.21990090336040896
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -0.21854764088562723,
+      "kernel_blocked": -0.2570998346521452,
+      "kernel_leave_one_out": -0.2639751348606769,
+      "kernel_rolling_origin": -0.25164242818345206,
+      "ols_gaussian": -0.225443484893305,
+      "ols_student_t": -0.22418104619343088,
+      "persistence": -0.5242000483602026
+    },
+    "sigma": 0.25
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.537449060572068,
+      "kernel_blocked": -2.3086395226747354,
+      "kernel_leave_one_out": -2.2933070127378072,
+      "kernel_rolling_origin": -12.116018201488135,
+      "ols_gaussian": -2.2285753140422324,
+      "ols_student_t": -1.6699520153854346,
+      "persistence": -1.9348448389413702
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.7432540850918121,
+      "kernel_blocked": -42411.86260897105,
+      "kernel_leave_one_out": -42411.86260897105,
+      "kernel_rolling_origin": -42411.86260897105,
+      "ols_gaussian": -2.2038504969511807,
+      "ols_student_t": -1.8152486969277655,
+      "persistence": -42411.86260897105
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4460756812272302,
+      "kernel_blocked": -1.5768191327008554,
+      "kernel_leave_one_out": -1.5757852989640104,
+      "kernel_rolling_origin": -1.5684504263809749,
+      "ols_gaussian": -1.4798070654714492,
+      "ols_student_t": -1.4730470787462346,
+      "persistence": -1.6509326745489443
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5855353929697762,
+      "kernel_blocked": -1.9289298534027133,
+      "kernel_leave_one_out": -1.923532441622058,
+      "kernel_rolling_origin": -1.8763639942623256,
+      "ols_gaussian": -1.6050136453469537,
+      "ols_student_t": -1.597305459723736,
+      "persistence": -1.9938330528568535
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_gaussian",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4014441952476164,
+      "kernel_blocked": -1.4268207481473718,
+      "kernel_leave_one_out": -1.4303998942233502,
+      "kernel_rolling_origin": -1.4208214474976535,
+      "ols_gaussian": -1.4033658970025809,
+      "ols_student_t": -1.403716207841876,
+      "persistence": -1.62688540505711
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 0,
+    "condition": "E-CONT",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5607679753218373,
+      "kernel_blocked": -1.5920445909405407,
+      "kernel_leave_one_out": -1.6100402465598056,
+      "kernel_rolling_origin": -1.6003221259357678,
+      "ols_gaussian": -1.5672837600521106,
+      "ols_student_t": -1.5663580327620688,
+      "persistence": -1.884506723471873
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5363973606724304,
+      "kernel_blocked": -2.4882055583302525,
+      "kernel_leave_one_out": -2.347029686213652,
+      "kernel_rolling_origin": -17.461613412796595,
+      "ols_gaussian": -1.9275940414086312,
+      "ols_student_t": -1.6484058501683203,
+      "persistence": -1.8733294758790344
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.6810203981426242,
+      "kernel_blocked": -680099.1524851278,
+      "kernel_leave_one_out": -680099.1524851278,
+      "kernel_rolling_origin": -680099.1524851278,
+      "ols_gaussian": -2.075789227023548,
+      "ols_student_t": -1.7536376507120517,
+      "persistence": -680099.1524851278
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4236816852812864,
+      "kernel_blocked": -1.535581039147069,
+      "kernel_leave_one_out": -1.5327328121780825,
+      "kernel_rolling_origin": -1.5261734931795476,
+      "ols_gaussian": -1.4587462516983973,
+      "ols_student_t": -1.4515307179713728,
+      "persistence": -1.5973809948250248
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4876105514112947,
+      "kernel_blocked": -1.821702534754271,
+      "kernel_leave_one_out": -1.7012273183922761,
+      "kernel_rolling_origin": -1.7299124563170658,
+      "ols_gaussian": -1.5166037333139726,
+      "ols_student_t": -1.512926072819856,
+      "persistence": -1.867017712504123
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4403756353968502,
+      "kernel_blocked": -1.480037185759786,
+      "kernel_leave_one_out": -1.4848708410595035,
+      "kernel_rolling_origin": -1.47487810426373,
+      "ols_gaussian": -1.4432424522420753,
+      "ols_student_t": -1.4426533000756516,
+      "persistence": -1.6397624254724288
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 4,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5058383310843186,
+      "kernel_blocked": -1.5339475539723726,
+      "kernel_leave_one_out": -1.5340090705755847,
+      "kernel_rolling_origin": -1.530923182864197,
+      "ols_gaussian": -1.5137766695961794,
+      "ols_student_t": -1.5126551238498773,
+      "persistence": -1.8410812325660348
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.551185236385136,
+      "kernel_blocked": -2.45780325362663,
+      "kernel_leave_one_out": -2.385495515454382,
+      "kernel_rolling_origin": -9.771914437677966,
+      "ols_gaussian": -1.9792715095836146,
+      "ols_student_t": -1.6608062192373345,
+      "persistence": -1.8655762635523325
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.7633987591629756,
+      "kernel_blocked": -10237.135964057241,
+      "kernel_leave_one_out": -10237.135964057241,
+      "kernel_rolling_origin": -10237.135964057241,
+      "ols_gaussian": -2.3505768828457265,
+      "ols_student_t": -1.8556788916765563,
+      "persistence": -10237.135964057241
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4178658650574318,
+      "kernel_blocked": -1.5755807320447448,
+      "kernel_leave_one_out": -1.5481398370709831,
+      "kernel_rolling_origin": -1.5464455893488585,
+      "ols_gaussian": -1.4537183237091311,
+      "ols_student_t": -1.4457418376389206,
+      "persistence": -1.5784817948809806
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.54590576378996,
+      "kernel_blocked": -1.9115570752719722,
+      "kernel_leave_one_out": -1.8147407240670816,
+      "kernel_rolling_origin": -1.823285178088418,
+      "ols_gaussian": -1.5788630257594205,
+      "ols_student_t": -1.5739966853767247,
+      "persistence": -1.9064566455285699
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4396818282520631,
+      "kernel_blocked": -1.4844052907368164,
+      "kernel_leave_one_out": -1.4847595577432064,
+      "kernel_rolling_origin": -1.4742967397654019,
+      "ols_gaussian": -1.4430506506979894,
+      "ols_student_t": -1.4421836260153682,
+      "persistence": -1.6330769886693193
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 16,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5817943159890668,
+      "kernel_blocked": -1.6209309647401182,
+      "kernel_leave_one_out": -1.632415981861253,
+      "kernel_rolling_origin": -1.6176309655494756,
+      "ols_gaussian": -1.5903666688006342,
+      "ols_student_t": -1.5893914578103174,
+      "persistence": -1.8985451588820825
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5480914623945796,
+      "kernel_blocked": -2.466850517284433,
+      "kernel_leave_one_out": -2.417359572448183,
+      "kernel_rolling_origin": -6.698936705884054,
+      "ols_gaussian": -1.9817502452678766,
+      "ols_student_t": -1.659756946203085,
+      "persistence": -1.875522205166048
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.7616966574252755,
+      "kernel_blocked": -557.6516140520938,
+      "kernel_leave_one_out": -557.6516140520938,
+      "kernel_rolling_origin": -557.6516140520938,
+      "ols_gaussian": -2.3444382160748343,
+      "ols_student_t": -1.85215940755521,
+      "persistence": -557.6516140520938
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4201824353952792,
+      "kernel_blocked": -1.5624167362658532,
+      "kernel_leave_one_out": -1.5413653948185715,
+      "kernel_rolling_origin": -1.5447219922791582,
+      "ols_gaussian": -1.4554368234628323,
+      "ols_student_t": -1.447669749500961,
+      "persistence": -1.586856782807649
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.555127588022995,
+      "kernel_blocked": -1.9439185093874152,
+      "kernel_leave_one_out": -1.8302292049692432,
+      "kernel_rolling_origin": -1.8679258197298485,
+      "ols_gaussian": -1.5838602357804317,
+      "ols_student_t": -1.577999780767812,
+      "persistence": -1.902286062927995
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4397391608983232,
+      "kernel_blocked": -1.4889161285531687,
+      "kernel_leave_one_out": -1.4848265268115866,
+      "kernel_rolling_origin": -1.4817104390743059,
+      "ols_gaussian": -1.442875066395735,
+      "ols_student_t": -1.442070348543342,
+      "persistence": -1.6248205626255054
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 64,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.56829888547004,
+      "kernel_blocked": -1.6075262137347923,
+      "kernel_leave_one_out": -1.6307083483994083,
+      "kernel_rolling_origin": -1.6089877838249365,
+      "ols_gaussian": -1.5773555603874956,
+      "ols_student_t": -1.576439204438996,
+      "persistence": -1.881260429959607
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5494674499509116,
+      "kernel_blocked": -2.8277804537554667,
+      "kernel_leave_one_out": -2.3705638388538923,
+      "kernel_rolling_origin": -8.473077897063046,
+      "ols_gaussian": -1.996785912602592,
+      "ols_student_t": -1.6605075303936394,
+      "persistence": -1.837732644592855
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 5,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.7884861175587266,
+      "kernel_blocked": -2050.6771746126346,
+      "kernel_leave_one_out": -2050.6771746126346,
+      "kernel_rolling_origin": -2050.6771746126346,
+      "ols_gaussian": -2.3467834150498983,
+      "ols_student_t": -1.8896902492800327,
+      "persistence": -2050.6771746126346
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.4255451857131087,
+      "kernel_blocked": -1.5573532009633966,
+      "kernel_leave_one_out": -1.5522237143465172,
+      "kernel_rolling_origin": -1.563001409674598,
+      "ols_gaussian": -1.4599776462741574,
+      "ols_student_t": -1.4523423095242742,
+      "persistence": -1.585874076765867
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 20,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.5770383713778537,
+      "kernel_blocked": -1.951084022167769,
+      "kernel_leave_one_out": -1.9156401619463885,
+      "kernel_rolling_origin": -1.9246616784379054,
+      "ols_gaussian": -1.6093385167232837,
+      "ols_student_t": -1.60527906233415,
+      "persistence": -1.9212092568543475
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 1,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.437761996749824,
+      "kernel_blocked": -1.4934452009190635,
+      "kernel_leave_one_out": -1.4876718416112211,
+      "kernel_rolling_origin": -1.4848585316691127,
+      "ols_gaussian": -1.440552008593047,
+      "ols_student_t": -1.4400316492442398,
+      "persistence": -1.608073366996749
+    },
+    "sigma": 1.0
+  },
+  {
+    "K": 256,
+    "condition": "E-LIB",
+    "frontier_all": "flat_prior_bayes",
+    "frontier_strict": "ols_student_t",
+    "h": 5,
+    "n": 80,
+    "selection_mean_log_scores": {
+      "flat_prior_bayes": -1.6057413630869293,
+      "kernel_blocked": -1.6434770273391208,
+      "kernel_leave_one_out": -1.6453547247970879,
+      "kernel_rolling_origin": -1.6390529224562151,
+      "ols_gaussian": -1.612337881531496,
+      "ols_student_t": -1.6111606193347037,
+      "persistence": -1.9061151083344123
+    },
+    "sigma": 1.0
+  }
+]

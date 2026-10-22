@@ -1,0 +1,41 @@
+# Stage 0.6 seed-role table: THE single source of truth for every seed role (v2 freeze). Every seed is a NamedStreams root
+# (role streams are derived by name inside each root). Disjoint from every other seed literal in the repository (TESTED:
+# checks_stage06.check_seed_isolation_noisy). docs/STAGE06_SEED_ROLES.md is GENERATED from this file and checked against it
+# (TESTED: V28). Seed VALUES are unchanged from the v1 freeze; v2 only splits the v1 role `pilot` into `pilot_evaluation` and
+# `pilot_bootstrap` and states, for each role, what the seeds may and may not be used for.
+roles:
+  validation:
+    purpose: validation checks V1-V29 (one root per check), the fresh calibration-diagnostic rerun (61020), analysis checks V20-V23 (61021-61023), the runner's test-mode configuration (evaluation 61024, 61025; bootstrap 61026)
+    seeds: [61001, 61002, 61003, 61005, 61006, 61007, 61008, 61009, 61010, 61011, 61012, 61013, 61014, 61015, 61016, 61017, 61018, 61019, 61020, 61021, 61022, 61023, 61024, 61025, 61026]
+    allowed_uses: [validation checks and pytest only, runner test-mode configuration]
+    forbidden_uses: [any pilot or confirmatory run, any decision]
+  design_calculation:
+    purpose: prior-based noise-level verification (Fisher-information Monte Carlo, expected posterior variance) and the synthetic decision-rule dry run (61903; synthetic data only, planning variances from Stage 0.5 artifacts)
+    seeds: [61901, 61902, 61903]
+    allowed_uses: [design calculations on prior-predictive or synthetic data]
+    forbidden_uses: [any run on model data used for a decision]
+  pilot_evaluation:
+    purpose: Phase D operational pilot data generation, replicate 1 = 62001 and replicate 2 = 62101 (runtime, memory, checkpoints, resume and structural completeness; never selection, thresholds or hypothesis tests)
+    seeds: [62001, 62101]
+    allowed_uses: [generating pilot systems and observations through the frozen runner in pilot mode, pilot-size variants through direct calls of frozen functions, timing and memory measurement]
+    forbidden_uses: [bootstrap stream, any confirmatory evaluation, choosing hypotheses, thresholds, sample sizes, noise levels or baselines]
+  pilot_bootstrap:
+    purpose: bootstrap root of PILOT pipeline-execution tests only. The pilot-mode runner draws no bootstrap and never uses it. The Phase D structural analysis (frozen analyze() on pilot per-item outputs, config variant of mode test) drew from it, which the v1 note 'never drawn from' did not allow for (disclosure erratum E1)
+    seeds: [62999]
+    allowed_uses: [bootstrap stream of structural or pipeline-execution analyses of PILOT per-item outputs, written only to pilot-labelled files]
+    forbidden_uses: [data generation, any confirmatory analysis, any use whose result informs a design choice]
+  selection:
+    purpose: selection-data audit of noise-aware context-only alternatives (context-only predictors only) and the runner's integrity-unit disjointness check (no scores)
+    seeds: [63001]
+    allowed_uses: [the Phase B selection audit, disjointness checks]
+    forbidden_uses: [population-aware scores, confirmatory evaluation]
+  confirmatory_evaluation:
+    purpose: confirmatory replicates R1 = 64101 and R2 = 64102 (allocated, NOT used before authorization)
+    seeds: [64101, 64102]
+    allowed_uses: [the authorized confirmatory run only]
+    forbidden_uses: [everything else, including tests, pilots, qualification and dry runs]
+  confirmatory_bootstrap:
+    purpose: cluster bootstrap for the confirmatory run (allocated, not used)
+    seeds: [64999]
+    allowed_uses: [the authorized confirmatory analysis only]
+    forbidden_uses: [everything else]

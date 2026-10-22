@@ -1,0 +1,156 @@
+{
+  "command": [
+    "C:\\Users\\Ramana\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "-m",
+    "dynaicl.experiments.separability",
+    "--config",
+    "config/separability.yaml",
+    "--workers",
+    "6"
+  ],
+  "config_hash": "9123175bb3c61df9185e3cc909ff7750e58d45494d443b2ea7a03a0b329a8575",
+  "git": {
+    "available": false,
+    "reason": "fatal: not a git repository (or any of the parent directories): .git"
+  },
+  "output_checksums_file": "checksums.json",
+  "packages": {
+    "numpy": "2.2.2",
+    "pytest": "9.0.2",
+    "pyyaml": "6.0.2",
+    "scipy": "1.15.1"
+  },
+  "platform": {
+    "implementation": "CPython",
+    "machine": "AMD64",
+    "platform": "Windows-11-10.0.26100-SP0",
+    "processor": "Intel64 Family 6 Model 142 Stepping 12, GenuineIntel",
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]"
+  },
+  "preregistration": {
+    "path": "docs/PREREG_separability.md",
+    "sha256": "f3401ff03bbbcdf132ce0f1a4854f922890551a66c8d97d3ef995d45dc918cca"
+  },
+  "run_id": "20261009T094047949167Z_separability_9123175bb3",
+  "runtime": {
+    "n_units": 60,
+    "seconds": 523.0,
+    "unit_seconds": {
+      "0|E-CONT|0|20|1": 37.02,
+      "0|E-CONT|0|20|5": 48.08,
+      "0|E-CONT|0|5|1": 33.79,
+      "0|E-CONT|0|5|5": 32.78,
+      "0|E-CONT|0|80|1": 73.93,
+      "0|E-CONT|0|80|5": 75.21,
+      "0|E-LIB|16|20|1": 49.62,
+      "0|E-LIB|16|20|5": 50.41,
+      "0|E-LIB|16|5|1": 33.61,
+      "0|E-LIB|16|5|5": 34.75,
+      "0|E-LIB|16|80|1": 63.84,
+      "0|E-LIB|16|80|5": 80.21,
+      "0|E-LIB|256|20|1": 39.21,
+      "0|E-LIB|256|20|5": 49.45,
+      "0|E-LIB|256|5|1": 30.85,
+      "0|E-LIB|256|5|5": 33.44,
+      "0|E-LIB|256|80|1": 67.17,
+      "0|E-LIB|256|80|5": 76.61,
+      "0|E-LIB|4|20|1": 36.16,
+      "0|E-LIB|4|20|5": 42.65,
+      "0|E-LIB|4|5|1": 29.99,
+      "0|E-LIB|4|5|5": 27.98,
+      "0|E-LIB|4|80|1": 68.59,
+      "0|E-LIB|4|80|5": 88.28,
+      "0|E-LIB|64|20|1": 37.39,
+      "0|E-LIB|64|20|5": 40.46,
+      "0|E-LIB|64|5|1": 34.26,
+      "0|E-LIB|64|5|5": 35.54,
+      "0|E-LIB|64|80|1": 71.31,
+      "0|E-LIB|64|80|5": 66.03,
+      "1|E-CONT|0|20|1": 49.46,
+      "1|E-CONT|0|20|5": 48.6,
+      "1|E-CONT|0|5|1": 43.88,
+      "1|E-CONT|0|5|5": 43.46,
+      "1|E-CONT|0|80|1": 84.59,
+      "1|E-CONT|0|80|5": 89.48,
+      "1|E-LIB|16|20|1": 36.02,
+      "1|E-LIB|16|20|5": 45.12,
+      "1|E-LIB|16|5|1": 33.6,
+      "1|E-LIB|16|5|5": 29.42,
+      "1|E-LIB|16|80|1": 62.02,
+      "1|E-LIB|16|80|5": 65.51,
+      "1|E-LIB|256|20|1": 35.06,
+      "1|E-LIB|256|20|5": 45.99,
+      "1|E-LIB|256|5|1": 31.71,
+      "1|E-LIB|256|5|5": 29.94,
+      "1|E-LIB|256|80|1": 56.21,
+      "1|E-LIB|256|80|5": 60.44,
+      "1|E-LIB|4|20|1": 35.77,
+      "1|E-LIB|4|20|5": 48.38,
+      "1|E-LIB|4|5|1": 29.81,
+      "1|E-LIB|4|5|5": 33.21,
+      "1|E-LIB|4|80|1": 78.91,
+      "1|E-LIB|4|80|5": 70.58,
+      "1|E-LIB|64|20|1": 36.76,
+      "1|E-LIB|64|20|5": 41.81,
+      "1|E-LIB|64|5|1": 31.99,
+      "1|E-LIB|64|5|5": 29.64,
+      "1|E-LIB|64|80|1": 60.45,
+      "1|E-LIB|64|80|5": 67.39
+    },
+    "workers": 6
+  },
+  "seeds": {
+    "bit_generator": "PCG64",
+    "derivation": "SeedSequence(entropy=entropy_for(name), spawn_key=(sha256(name)[:4] as uint32 LE, *path))",
+    "root_seed": 20261009,
+    "streams": {
+      "eval_noise": {
+        "entropy": 20261009,
+        "spawn_key_prefix": [
+          1307997307
+        ]
+      },
+      "eval_systems": {
+        "entropy": 20261009,
+        "spawn_key_prefix": [
+          3058332557
+        ]
+      },
+      "library_noise": {
+        "entropy": 20261009,
+        "spawn_key_prefix": [
+          724467201
+        ]
+      },
+      "library_systems": {
+        "entropy": 20261009,
+        "spawn_key_prefix": [
+          1729835345
+        ]
+      },
+      "monte_carlo": {
+        "entropy": 20261009,
+        "spawn_key_prefix": [
+          2813790143
+        ]
+      },
+      "selection_noise": {
+        "entropy": 20261009,
+        "spawn_key_prefix": [
+          1347800803
+        ]
+      },
+      "selection_systems": {
+        "entropy": 20261009,
+        "spawn_key_prefix": [
+          4273282707
+        ]
+      }
+    }
+  },
+  "t1_z_crit": 4.617924668488831,
+  "timestamps": {
+    "finished_utc": "2026-10-09T09:49:33.534765Z",
+    "started_utc": "2026-10-09T09:40:47.949114Z"
+  }
+}
