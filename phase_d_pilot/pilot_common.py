@@ -321,11 +321,16 @@ def spawn(cmd, root: Path, log: Path, threads: int | None = None, env_extra: dic
 
 
 def hard_kill(proc: subprocess.Popen) -> None:
-    """SIGKILL analogue for the whole process tree (Linux: SIGKILL to the process group; Windows: taskkill /F /T)."""
+    """SIGKILL analogue for the whole process tree (Linux: SIGKILL to the process group; Windows: taskkill /F /T).
+    A process that already exited (and was reaped by an earlier poll) is not an error: taskkill ignores it on Windows, and so do we.
+    Callers that care record ``alive`` from ``proc.poll()`` BEFORE the kill (``was_alive_at_kill``)."""
     if os.name == "nt":
         subprocess.run(["taskkill", "/F", "/T", "/PID", str(proc.pid)], capture_output=True)
     else:
-        os.killpg(proc.pid, signal.SIGKILL)
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
     proc.wait()
 
 

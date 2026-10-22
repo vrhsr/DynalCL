@@ -634,10 +634,22 @@ def extract_copy(ctx: Ctx, name: str) -> Path:
 def rebuild_manifest(copy: Path) -> str:
     """Throwaway copies only: re-hash the copy's manifest so a deliberate edit passes the manifest gate and reaches the gate
     under test. NEVER used on the workspace."""
+    workspace = PC._ROOT[0] or PC.HERE.parent
+    if Path(copy).resolve() == Path(workspace).resolve():
+        raise RuntimeError("rebuild_manifest refuses to touch the frozen workspace")
+    # v2: build_manifest takes the freeze Version, the copy already holds the v2 manifest (write_manifest never overwrites, so the
+    # COPY's file is removed first), and v2 hashes the v1 manifest and v1 snapshot ("supersedes"), which a snapshot extraction
+    # does not contain: they are copied from the workspace into the copy's dist/ and docs/ (read-only use).
+    for rel in ("dist/stage06_frozen_snapshot.zip", "docs/FREEZE_MANIFEST_STAGE06.json"):
+        src, dst = Path(workspace) / rel, Path(copy) / rel
+        if src.is_file() and not dst.exists():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(src, dst)
     code = ("import sys; sys.path.insert(0, sys.argv[1]); from pathlib import Path; "
             "from dynaicl.experiments import stage06_freeze as F; from dynaicl.config.stage06_schema import load_stage06_config; "
-            "r=Path(sys.argv[1]); m=F.build_manifest(r, load_stage06_config(r/'config/stage06.yaml').tier2.stage05_run); "
-            "print(F.write_manifest(r, m, 'docs/FREEZE_MANIFEST_STAGE06.json')[1])")
+            "r=Path(sys.argv[1]); v=F.VERSIONS['v2']; "
+            "m=F.build_manifest(r, load_stage06_config(r/'config/stage06.yaml').tier2.stage05_run, v); "
+            "(r/v.manifest).unlink(missing_ok=True); print(F.write_manifest(r, m, v.manifest)[1])")
     out = subprocess.run([sys.executable, "-c", code, str(copy)], cwd=copy, capture_output=True, text=True,
                          env=PC.child_env(copy))
     if out.returncode:
