@@ -1,0 +1,108 @@
+{
+ "gpu_start": {
+  "temperature_c": 92.0,
+  "utilization_pct": 98.0,
+  "memory_mib": 3977.0,
+  "time": 1792770788.158101
+ },
+ "steps": 5000,
+ "models": [
+  {
+   "seed_index": 0,
+   "train_seconds": 91.27525973320007,
+   "final_loss": 1.477564926147461,
+   "eval": {
+    "r1.0_n1": {
+     "regret_vs_stab_RB": 0.0007647873571119028,
+     "se_RB": 4.2793915472876564e-05,
+     "regret_vs_stab_realized": 0.0017852098454593699,
+     "se_realized": 0.0007776580551737425
+    },
+    "r1.0_n2": {
+     "regret_vs_stab_RB": 0.0007571483587356788,
+     "se_RB": 4.517802610591969e-05,
+     "regret_vs_stab_realized": 0.001329979447186561,
+     "se_realized": 0.0008090541851367538
+    },
+    "r1.0_n3": {
+     "regret_vs_stab_RB": 0.0008710995664365943,
+     "se_RB": 6.086804240431522e-05,
+     "regret_vs_stab_realized": 0.0008205471669440333,
+     "se_realized": 0.0010233771938657835
+    },
+    "r1.0_n20": {
+     "regret_vs_stab_RB": 0.002868694392068233,
+     "se_RB": 0.0005122968715774768,
+     "regret_vs_stab_realized": 0.001280855822626492,
+     "se_realized": 0.001690123134643752
+    },
+    "r4.0_n1": {
+     "regret_vs_stab_RB": 0.003708063688302485,
+     "se_RB": 0.0008392207255409637,
+     "regret_vs_stab_realized": 0.00559039281355336,
+     "se_realized": 0.0017449154259827503
+    },
+    "r0.25_n3": {
+     "regret_vs_stab_RB": 0.0008961502411139939,
+     "se_RB": 6.427202102356026e-05,
+     "regret_vs_stab_realized": 0.00045593360995278473,
+     "se_realized": 0.001014863717224565
+    }
+   },
+   "eval_seconds": 1.4461257457733154,
+   "causality_max_abs_diff": 1.0728836059570312e-06
+  },
+  {
+   "seed_index": 1,
+   "train_seconds": 91.6341323852539,
+   "final_loss": 1.4761494648456575,
+   "eval": {
+    "r1.0_n1": {
+     "regret_vs_stab_RB": 0.0006041030167748882,
+     "se_RB": 3.640135773392239e-05,
+     "regret_vs_stab_realized": 0.0014232778330960168,
+     "se_realized": 0.0007477986604965783
+    },
+    "r1.0_n2": {
+     "regret_vs_stab_RB": 0.0007259448735559405,
+     "se_RB": 4.337288780987872e-05,
+     "regret_vs_stab_realized": 0.0014698993647328665,
+     "se_realized": 0.0007978814536726199
+    },
+    "r1.0_n3": {
+     "regret_vs_stab_RB": 0.0008769259205619498,
+     "se_RB": 6.662421192859069e-05,
+     "regret_vs_stab_realized": 0.0006157774755783076,
+     "se_realized": 0.0010391034499912266
+    },
+    "r1.0_n20": {
+     "regret_vs_stab_RB": 0.0027643360892538825,
+     "se_RB": 0.0004421727458601834,
+     "regret_vs_stab_realized": 0.0020476875041590677,
+     "se_realized": 0.0016426130926154802
+    },
+    "r4.0_n1": {
+     "regret_vs_stab_RB": 0.0038042955136989537,
+     "se_RB": 0.0009015038567217326,
+     "regret_vs_stab_realized": 0.005578094680476091,
+     "se_realized": 0.0017660631364870318
+    },
+    "r0.25_n3": {
+     "regret_vs_stab_RB": 0.0008627377130367712,
+     "se_RB": 6.837021861834142e-05,
+     "regret_vs_stab_realized": -5.469224768886116e-05,
+     "se_realized": 0.0009742898783022257
+    }
+   },
+   "eval_seconds": 1.1322214603424072,
+   "causality_max_abs_diff": 1.1920928955078125e-06
+  }
+ ],
+ "repro_max_abs_diff_nats": 0.0,
+ "gpu_end": {
+  "temperature_c": 92.0,
+  "utilization_pct": 98.0,
+  "memory_mib": 4546.0,
+  "time": 1792771066.2097712
+ }
+}

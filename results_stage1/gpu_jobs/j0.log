@@ -1,0 +1,11 @@
+single S: 9.3 ms/step, 25734 params
+single M: 19.0 ms/step, 200582 params
+single L: 61.7 ms/step, 1587462 params
+single DW-shallow: 14.1 ms/step, 224646 params
+single DW-deep: 31.7 ms/step, 226662 params
+single GRU: 9.4 ms/step, 199174 params
+single SSM: 14.6 ms/step, 166918 params
+concurrency 1 (size M): 36.1 aggregate steps/s, wall 8s
+concurrency 4 (size M): 69.0 aggregate steps/s, wall 17s
+concurrency 8 (size M): 80.6 aggregate steps/s, wall 30s
+concurrency 16 (size M): 87.6 aggregate steps/s, wall 55s
