@@ -57,6 +57,15 @@ def reference_window(ref, st: ContextStats) -> tuple[np.ndarray, np.ndarray]:
         hi_a = np.where(pin_hi, ref.rho, hi_a)
         hi_a = np.where(pin_lo, np.minimum(ref.rho, -ref.rho + PINNED_SD * s), hi_a)
         lo_a = np.where(pin_lo, -ref.rho, lo_a)
+        # Audit finding A5: a kernel mode just outside the support (but within 10 sd) is neither interior nor pinned.
+        # Widen with a Gaussian tail bound: for mode m > rho the mass below rho - t, relative to the mass in
+        # [rho - s, rho], is at most about exp(-(x_t^2 - x_1^2)/2) with x = (m - rho + t)/s; t solves x_t^2 = x_1^2 + 92
+        # (ratio about e^-46, below 1e-20). Mirror for m < -rho. The window only grows.
+        x1 = (np.abs(m) - ref.rho + s) / s
+        t_edge = s * np.sqrt(x1 * x1 + 92.0) - (np.abs(m) - ref.rho)
+        outside_hi, outside_lo = m > ref.rho, m < -ref.rho
+        lo_a = np.where(outside_hi, np.minimum(lo_a, np.maximum(-ref.rho, ref.rho - t_edge)), lo_a)
+        hi_a = np.where(outside_lo, np.maximum(hi_a, np.minimum(ref.rho, -ref.rho + t_edge)), hi_a)
         e1, e2 = lo_a * c, hi_a * c
         sig = ref.sigma
     elif isinstance(ref, FiniteLibrary):

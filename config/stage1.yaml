@@ -1,0 +1,27 @@
+# Stage 1A confirmatory run (PREREG_stage1). Models per arm and the step budget B come from the frozen pilot rule
+# (pilot_decision.json, bound by the authorization artifact); the cap on models per arm comes from the frozen J0 rule.
+schema: stage1-config/v1
+phase: confirmatory
+seed_roles: {train: confirmatory_train, eval: confirmatory_eval, library: confirmatory_library,
+             bootstrap: confirmatory_bootstrap}
+replicates: 2
+primary_arms: [CONT, UNIF, LIB-1, LIB-2, LIB-4, LIB-8, LIB-16, LIB-32, LIB-64, LIB-256]
+model: M
+models_per_arm: null
+steps: null
+checkpoints: null
+batch: 256
+eval: {held_n: 40000, probe_n: 10000, oos_n: 10000, control_n: 4000}
+alpha_q1: 0.025
+alpha_q2: 0.025
+alpha_secondary_total: 0.05
+bootstrap_draws: 4000
+target_se_q1: 0.002
+target_se_q2: 0.008
+min_models: 16
+ucl_factor: 1.35
+cap_rule: {max_models: 128, gpu_hours_limit: 48.0, safety: 1.25, step: 8}
+# secondary families (PREREG_stage1 section 9); Q1-behavioural reuses the primary models (no extra training)
+secondary: [Q1-behavioural, training-length-4B, size-L, size-S, Q2-size-L, depth-width, architecture]
+# if the projected GPU time exceeds the limit, families are dropped in this order (first listed is dropped first)
+drop_order: [architecture, depth-width, Q2-size-L, size-S, size-L, training-length-4B]

@@ -23,6 +23,7 @@ UNIFORM_PANELS = 64
 CORE_PANELS = 64
 CORE_HALF_WIDTH = 40.0
 NODES_PER_PANEL = 8
+GEOMETRIC_FLOOR = 1e-12        # smallest collapsed-core panel, relative to the support width (audit A4)
 
 
 @dataclass(frozen=True)
@@ -172,6 +173,14 @@ class UnknownScaleReference:
         lo = np.clip(st.a_hat - half, -rho, rho)
         hi = np.clip(st.a_hat + half, -rho, rho)
         core = lo[:, None] + (hi - lo)[:, None] * (np.arange(cp + 1) / cp)[None, :]
+        # Audit finding A4: if the core window lies entirely beyond a support edge it collapses onto that edge, and the
+        # posterior piles up there with an unknown decay length. Use geometrically spaced edges toward the edge instead,
+        # from 2 rho down to 1e-12 * 2 rho, which resolves every decay length in that range.
+        geo = 2.0 * rho * GEOMETRIC_FLOOR ** (np.arange(cp + 1) / cp)
+        up = st.a_hat - half >= rho
+        down = st.a_hat + half <= -rho
+        core = np.where(up[:, None], rho - geo[None, :], core)
+        core = np.where(down[:, None], -rho + geo[None, :], core)
         edges = np.sort(np.concatenate([uni, core], axis=1), axis=1)
         x, w = np.polynomial.legendre.leggauss(NODES_PER_PANEL)
         a0, a1 = edges[:, :-1], edges[:, 1:]

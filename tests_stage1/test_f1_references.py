@@ -210,3 +210,21 @@ def test_log_gammaincc_asymptotic_branch_matches_direct():
     # far tail is finite and decreasing (direct value underflows there)
     far = m.log_gammaincc(3.0, np.array([800.0, 1e4, 1e8]))
     assert np.all(np.isfinite(far)) and far[0] > far[1] > far[2]
+
+
+@pytest.mark.parametrize("which", ["pop", "ctx"])
+def test_node_doubling_on_explosive_and_out_of_support_contexts_audit_a4(which):
+    """Audit finding A4: with the core window beyond the support edge, the posterior piles up at the edge. Node doubling
+    must stay <= 1e-6 nats for explosive data (a = 1.10, n = 60, sigma = 0.6) and out-of-support data (a = 0.99, n = 40)."""
+    ref = population_f1() if which == "pop" else context_only_f1()
+    fine = UnknownScaleReference(ref.coef, ref.scale, refine=2)
+    rng = np.random.default_rng(808)
+    for a, n, sig in ((1.10, 60, 0.6), (0.99, 40, 1.0), (-1.10, 60, 0.6)):
+        ctx = np.empty((6, n + 1))
+        ctx[:, 0] = rng.normal(size=6)
+        for t in range(1, n + 1):
+            ctx[:, t] = a * ctx[:, t - 1] + sig * rng.normal(size=6)
+        st = F1Stats.from_contexts(ctx)
+        y = a * ctx[:, -1] + sig * rng.normal(size=6)
+        err = float(np.max(np.abs(ref.logpdf(st, y) - fine.logpdf(st, y))))
+        assert err <= 1e-6, (a, n, err)

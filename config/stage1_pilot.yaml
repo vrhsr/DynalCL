@@ -1,0 +1,13 @@
+# Stage 1A pilot (PREREG_stage1 section 7). Pilot seeds only. The pilot sets the step budget B and the numbers of models
+# by the frozen rule; pilot means and classes are never written to any file that is read.
+schema: stage1-config/v1
+phase: pilot
+seed_roles: {train: pilot_train, eval: pilot_eval, library: pilot_library, bootstrap: pilot_bootstrap}
+replicates: 1
+primary_arms: [CONT, UNIF, LIB-2, LIB-16]
+model: M
+models_per_arm: 8
+steps: 200000
+checkpoints: [25000, 50000, 100000, 200000]
+batch: 256
+eval: {held_n: 10000, probe_n: 5000, oos_n: 5000, control_n: 4000}

@@ -101,3 +101,15 @@ def test_rao_blackwell_equals_realized_score_gap_in_expectation():
         diff = d - kl                       # paired: removes most context-level variance
         z = diff.mean() / (diff.std(ddof=1) / np.sqrt(diff.size))
         assert abs(z) <= 4.0, (n, r, z, kl.mean(), d.mean())
+
+
+def test_window_mode_just_outside_support_audit_a5():
+    """Audit finding A5: stab with context (0.1, 10.0899) has its kernel mode 9.99 sd above 0.999 (neither interior nor
+    pinned); the window previously held 0.838 of the mass. It must now hold all of it (the run-time check enforces 1e-8)."""
+    st = ContextStats.from_contexts(np.array([[0.1, 10.0899]]))
+    stab = stability_prior()
+    m, s = stab.posterior(st)
+    assert 9.9 < float((m[0] - stab.rho) / s[0]) < 10.0
+    lo, hi = reference_window(stab, st)
+    _, mass = kl_quadrature(_logfn(stab, st), _logfn(population_prior(), st), lo, hi, panel_width=0.25)
+    assert abs(float(mass[0]) - 1.0) <= 1e-9

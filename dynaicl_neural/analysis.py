@@ -121,6 +121,32 @@ def critical_value_gaussian(cov: np.ndarray, alpha: float, rng: np.random.Genera
     return float(np.quantile(tmax, 1.0 - alpha, method="higher"))
 
 
+def satterthwaite_df(stat: Statistic) -> float:
+    """Effective degrees of freedom of the two-level SE: (A + B)^2 / (A^2/(M-1) + B^2/(N-1)) with A = var(rows)/M and
+    B = var(cols)/N (Welch-Satterthwaite). When seed variation dominates it tends to M - 1."""
+    x = stat.values
+    m, n = x.shape
+    a = x.mean(axis=1).var(ddof=1) / m
+    b = x.mean(axis=0).var(ddof=1) / n
+    return float((a + b) ** 2 / (a * a / (m - 1) + b * b / (n - 1)))
+
+
+def critical_value_mvt(stats: list[Statistic], alpha: float, rng: np.random.Generator, draws: int = 20000) -> float:
+    """(1 - alpha) quantile of max_k |T_k| for a multivariate t with the estimated correlation of the estimates and
+    df = the smallest Satterthwaite df over the family (conservative). Added after the independent audit (finding A1):
+    the Gaussian quantile ignores that the SE has only about M - 1 df when seed variation dominates."""
+    cov = covariance_of_estimates(stats)
+    df = min(satterthwaite_df(s) for s in stats)
+    sd = np.sqrt(np.diag(cov))
+    corr = cov / np.outer(sd, sd)
+    evals, evecs = np.linalg.eigh(corr)
+    root = evecs * np.sqrt(np.clip(evals, 0.0, None))
+    z = rng.standard_normal((draws, corr.shape[0])) @ root.T
+    w = np.sqrt(rng.chisquare(df, size=draws) / df)
+    tmax = np.abs(z).max(axis=1) / w
+    return float(np.quantile(tmax, 1.0 - alpha, method="higher"))
+
+
 # ------------------------------------------------------------------------------------------- classification
 
 @dataclass(frozen=True)

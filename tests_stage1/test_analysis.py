@@ -127,3 +127,20 @@ def test_classify_memorisation_two_way():
 def test_band():
     b = band(0.03, 0.002, 2.5)
     assert (b.lo, b.hi) == pytest.approx((0.025, 0.035))
+
+
+def test_bootstrap_coverage_in_the_seed_dominated_small_m_regime_audit_a1():
+    """Audit finding A1: with seed variation dominating, the SE has about M - 1 df. The hierarchical bootstrap (the
+    analysis's procedure) must keep familywise coverage at M = 16 (measured 0.95-0.98 in 200-study runs); the Gaussian
+    value undercovers there (measured 0.85-0.91). 80 studies, B = 300; acceptance >= 0.88 for the bootstrap
+    (binomial: P(X <= 70 | 80, 0.95) is about 0.004)."""
+    rng = np.random.default_rng(11)
+    m, n, cover = 16, 40, 0
+    for _ in range(80):
+        stats = []
+        for k in range(10):
+            stats.append(Statistic(f"s{k}", rng.normal(0, 0.01, (m, 1)) + rng.normal(0, 0.002, (m, n)), "HELD"))
+        est = estimates(stats)
+        c, _ = critical_value_bootstrap(stats, 0.05, 300, rng)
+        cover += all(abs(est[s.name][0]) <= c * est[s.name][1] for s in stats)
+    assert cover / 80 >= 0.88, cover / 80
