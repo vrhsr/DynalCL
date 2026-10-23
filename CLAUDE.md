@@ -157,6 +157,19 @@ issues the authorization with their own key, the run, then analysis); (c) Stage 
 * The authorization key for this run was generated on the box by the user's instruction and shredded (F26); the artifact stays off-repo. Never ask for, store or print any key.
 * Stage 1 (neural) is NOT started or authorised. What it should do given STOP (population advantage only at short contexts in these AR(1) families, even with observation noise) is the user's decision.
 
+## 2h. Stage 1 (neural; working name IdentICL), branch `stage1-planning` (2026-10-23): at checkpoint 3, NOT frozen
+
+* Read `docs/STAGE1_PLAN.md` (v2, approved), `docs/PREREG_stage1.md` (draft v2, proposed for freezing), `docs/DISCLOSURE_LOG_STAGE1.md`
+  (S1-S17, append-only), `docs/STAGE1_INDEPENDENT_AUDIT.md`, `docs/literature/` (bibliography, gap/novelty: AR(1)-only is not main-track).
+* Done: Stage 1A separability map (box, `results-stage1-map-1A`), F1 (unknown sigma) references + map (`results-stage1-step3`),
+  operating characteristics v2 (bootstrap-calibrated; v1 power claims WITHDRAWN after the audit), power lookup, neural code
+  (`dynaicl_neural/`), runner `scripts/stage1_run.py`, freeze tool `scripts/stage1_freeze.py`; tests_stage1 82 passed; mutation matrix 7/7.
+* Box: repo `/home/rama_11187/projects/dynacl`; `.venv` (frozen Stage 0.6 stack, untouched) and `.venv-stage1` (torch 2.14.1+cu126).
+  The GPU (RTX A4000) is shared; GPU jobs only after the user says it is free. Compute > 10-15 min runs on the box.
+* Next (user decides): J0 + engineering smoke on the GPU (`scripts/stage1_box_j0_smoke.sh`), then the freeze BEFORE the pilot, then
+  the pilot (pilot seeds only), then the confirmatory run under the authorization gate. F2 is NOT started (needs F1 approval).
+* Main risk: Q1 is resolvable only if the between-seed sd of a model's regret is <= about 0.015 nats (lookup).
+
 ## 3. Working rules the user set (keep following them)
 
 1. **Correctness first. Report only what was run.** Paste real output. Never weaken, skip or delete a test to make
