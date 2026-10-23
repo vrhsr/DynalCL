@@ -1,0 +1,22 @@
+{
+ "F1_MAP_REPORT.md": {
+  "sha256": "41ea93bf9cd2063a3c4abdec204c469ea2b8bf0a99695861a329d98a9d62b947",
+  "bytes": 132527
+ },
+ "f1_map_checks.json": {
+  "sha256": "f8e6c7d7c1c50f2a94cc4bb6a3c6b95d1aa1cb64c7891211f83183dff09a4d94",
+  "bytes": 83
+ },
+ "f1_map_decisions.csv": {
+  "sha256": "bb14def3ba466fcacfc096cbc52f92f6406c819e8167305e138055326c83b04b",
+  "bytes": 159727
+ },
+ "f1_map_rows.csv": {
+  "sha256": "3697044d87a48429ec06f39eb2380843ac7bccb3e8c98c468cdc079ae2cb3f03",
+  "bytes": 4329809
+ },
+ "provenance.json": {
+  "sha256": "6bd9e109f9a22ace1757fe3209acf0e919bbff2313f0949d2c4a50c231337eb9",
+  "bytes": 1501
+ }
+}

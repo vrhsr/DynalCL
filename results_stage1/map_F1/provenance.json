@@ -1,0 +1,70 @@
+{
+ "config": {
+  "root_seed": 70301,
+  "r_list": [
+   0.25,
+   1.0,
+   4.0
+  ],
+  "n_list": [
+   2,
+   3,
+   5,
+   10,
+   20,
+   40
+  ],
+  "k_list": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   256
+  ],
+  "draws_small_k": 32,
+  "draws_large_k": 16,
+  "n_items": 20000,
+  "n_q2_items": 5000,
+  "n_inlib": 10000,
+  "a_grid": [
+   -0.9,
+   -0.75,
+   -0.6,
+   -0.45,
+   -0.3,
+   -0.15,
+   -0.0,
+   0.15,
+   0.3,
+   0.45,
+   0.6,
+   0.75,
+   0.9
+  ],
+  "s_grid": [
+   0.3,
+   0.5,
+   1.0,
+   2.0,
+   3.0
+  ]
+ },
+ "smoke": false,
+ "git_commit": "eb1fc593947228294e87ffd4b398ae36dbaedd59",
+ "git_status_porcelain": "?? results_stage1/map_1A/\n?? results_stage1/step3/",
+ "python": "3.13.5 (main, Jul 23 2025, 00:37:22) [Clang 20.1.4 ]",
+ "numpy": "2.2.2",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "source_sha256": {
+  "dynaicl_families/ar1_unknown_sigma.py": "77aada85acfb2f8bfbb5e521cea34db8474fd9464de4e25a6ed5f2cc029e6023",
+  "dynaicl_families/f1_separability.py": "90b211e25d672534003167857f63796b36cf11290af3e7664aa6b5a7598b12af",
+  "dynaicl_families/sampling.py": "f3a3bc006d0ae7d43ea81c2f38318638a17f60ccf4a1fbf63ade5426ccafdbaf",
+  "scripts/stage1_f1_map.py": "f52ee47e0c33986138b44763d008ec8d36bea0db84ce1a031d12395e0fa21f3f",
+  "docs/STAGE1_F1_SEPARABILITY_MAP_SPEC.md": "2bcd1c8d2fad25cc867d2c27ca1dccf0fb208e80659725900d955bc21e8d8ec1",
+  "docs/MATH_F1.md": "b2a0d088cadbaee4c7389d4dc0072facf798675bd10d0717bad38a0b37da5daf"
+ },
+ "started_utc": "2026-10-23T09:59:35Z"
+}
