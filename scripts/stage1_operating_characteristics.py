@@ -82,8 +82,8 @@ def classify_replicate(stats, c):
     return out
 
 
-def run_setting(rng, m, pi, e, s, kappa, sims):
-    c = critical_value_gaussian(covariance_of_estimates(one_replicate(rng, m, pi, e, s, kappa)), ALPHA, rng, 20000)
+def run_setting(rng, m, pi, e, s, kappa, sims, alpha=ALPHA):
+    c = critical_value_gaussian(covariance_of_estimates(one_replicate(rng, m, pi, e, s, kappa)), alpha, rng, 20000)
     counts = {}
     proceed = 0
     for _ in range(sims):
@@ -138,12 +138,13 @@ def q2_classify(stats, c, cell, classify):
     return classify_memorisation(dist, con, sep), classify(dist, con, sep)
 
 
-def run_q2(rng, out: Path, sims: int) -> None:
+def run_q2(rng, out: Path, sims: int, c_override: float | None = None, tag: str = "") -> None:
     rows = []
     for cell, pi, e, s, m in itertools.product(Q2_CELLS, [0.0, 0.5, 1.0], [0.0, 0.01], [0.01, 0.02, 0.05],
                                                [8, 16, 32, 64]):
         stats, classify = q2_replicate(rng, m, pi, e, s, cell)
-        c = critical_value_gaussian(covariance_of_estimates(stats), ALPHA, rng, 20000)
+        c = (critical_value_gaussian(covariance_of_estimates(stats), ALPHA, rng, 20000) if c_override is None
+             else c_override)
         counts, counts3 = {}, {}
         for _ in range(sims):
             a, a3 = q2_classify(q2_replicate(rng, m, pi, e, s, cell)[0], c, cell, classify)
@@ -158,7 +159,7 @@ def run_q2(rng, out: Path, sims: int) -> None:
                                                                     "INCONCLUSIVE")},
                      **{f"P3_{k}": counts3.get(k, 0) / sims for k in ("LIB-LIKE", "POP-LIKE", "STAB-LIKE", "NEITHER",
                                                                      "INCONCLUSIVE")}})
-    with open(out / "oc_q2.csv", "w", newline="", encoding="utf-8") as fh:
+    with open(out / f"oc_q2{tag}.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
@@ -169,11 +170,14 @@ def main(argv=None) -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--quick", action="store_true")
     ap.add_argument("--q2-only", action="store_true")
+    ap.add_argument("--alpha", type=float, default=ALPHA, help="Q1 family level per replicate")
+    ap.add_argument("--q2-c", type=float, default=None, help="fixed Q2 critical value (emulates the family size)")
+    ap.add_argument("--tag", default="")
     args = ap.parse_args(argv)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     if args.q2_only:
-        run_q2(np.random.default_rng(OC_SEED + 1), out, 20 if args.quick else 300)
+        run_q2(np.random.default_rng(OC_SEED + 1), out, 20 if args.quick else 300, args.q2_c, args.tag)
         return 0
     rng = np.random.default_rng(OC_SEED)
     if args.quick:
@@ -186,7 +190,7 @@ def main(argv=None) -> int:
     rows = []
     t0 = time.time()
     for i, (pi, e, s, m, kappa) in enumerate(grid):
-        c, probs, p_proceed = run_setting(rng, m, pi, e, s, kappa, sims)
+        c, probs, p_proceed = run_setting(rng, m, pi, e, s, kappa, sims, args.alpha)
         truths = {truth_class(pi, e, gap) for _, _, gap, _ in CELLS}
         truth = truths.pop() if len(truths) == 1 else "MIXED"
         wrong = (probs.get("STAB-LIKE", 0.0) if truth == "POP-LIKE" else
@@ -197,12 +201,12 @@ def main(argv=None) -> int:
                      "P_wrong_class": wrong, "P_PROCEED": p_proceed})
         if (i + 1) % 20 == 0 or i + 1 == len(grid):
             print(f"[{i + 1}/{len(grid)}] {time.time() - t0:.0f}s", flush=True)
-    with open(out / "oc_q1.csv", "w", newline="", encoding="utf-8") as fh:
+    with open(out / f"oc_q1{args.tag}.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
-    (out / "oc_q1_meta.json").write_text(json.dumps({"seed": OC_SEED, "n_sim": N_SIM, "n_real": N_REAL,
-                                                      "cells": CELLS, "alpha": ALPHA, "epsilon": EPSILON,
+    (out / f"oc_q1{args.tag}_meta.json").write_text(json.dumps({"seed": OC_SEED, "n_sim": N_SIM, "n_real": N_REAL,
+                                                      "cells": CELLS, "alpha": args.alpha, "epsilon": EPSILON,
                                                       "proceed_min_cells": PROCEED_MIN_CELLS, "sims": sims,
                                                       "seconds": time.time() - t0}, indent=1), encoding="utf-8")
     return 0

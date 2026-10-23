@@ -62,6 +62,34 @@ class OutOfSupportCondition:
         return float(sign * mag), float(self.sigma), "oos"
 
 
+@dataclass(frozen=True)
+class F1PopulationCondition:
+    """F1 population P_F1 (docs/MATH_F1.md section 1): a ~ TN(mu0, tau0^2; +/-rho), sigma^2 ~ IG(alpha0, beta0),
+    independent; x_0 ~ N(0, r^2) independent of both."""
+
+    rho: float = 0.95
+    mu0: float = 0.4
+    tau0: float = 0.3
+    alpha0: float = 3.0
+    beta0: float = 2.0
+    initial_state: InitialStateSpec = InitialStateSpec()
+    name: str = "F1-POP"
+    stream_code: int = 4
+
+    def system_distribution_fingerprint(self) -> str:
+        return canonical_fingerprint({"family": "F1-POP", "rho": self.rho, "mu0": self.mu0, "tau0": self.tau0,
+                                      "alpha0": self.alpha0, "beta0": self.beta0, "likelihood": LIKELIHOOD_ID})
+
+    def draw_system(self, rng: np.random.Generator) -> tuple[float, float, str]:
+        from scipy import special
+        lo, hi = (-self.rho - self.mu0) / self.tau0, (self.rho - self.mu0) / self.tau0
+        plo, phi = special.ndtr(lo), special.ndtr(hi)
+        a = self.mu0 + self.tau0 * special.ndtri(plo + rng.uniform() * (phi - plo))
+        a = float(np.clip(a, np.nextafter(-self.rho, 0.0), np.nextafter(self.rho, 0.0)))
+        sigma2 = self.beta0 / rng.gamma(shape=self.alpha0, scale=1.0)
+        return a, float(np.sqrt(sigma2)), "f1"
+
+
 def simulate(condition, streams: NamedStreams, n_items: int, length: int) -> DataSplit:
     """Trajectories x_0..x_length via the frozen ``generate_split`` (selection-role streams of ``streams``)."""
     return generate_split(condition, SplitRole.SELECTION, streams, n_items, length)
