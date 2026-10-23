@@ -1,0 +1,90 @@
+{
+ "pass": true,
+ "rows": [
+  {
+   "mutation": "baseline",
+   "exit_code": 0,
+   "failed_tests": [],
+   "summary": "16 passed in 9.98s",
+   "seconds": 13.5,
+   "assertion_failures": 0
+  },
+  {
+   "mutation": "wrong_prior_cont",
+   "exit_code": 1,
+   "failed_tests": [
+    "tests_stage1/test_neural.py::test_cont_arm_draws_the_population_prior"
+   ],
+   "summary": "1 failed, 15 passed in 7.68s",
+   "seconds": 10.5,
+   "assertion_failures": 2
+  },
+  {
+   "mutation": "unpaired_seeds",
+   "exit_code": 1,
+   "failed_tests": [
+    "tests_stage1/test_neural.py::test_common_random_numbers_across_arms"
+   ],
+   "summary": "1 failed, 15 passed in 7.99s",
+   "seconds": 10.8,
+   "assertion_failures": 1
+  },
+  {
+   "mutation": "library_not_nested",
+   "exit_code": 1,
+   "failed_tests": [
+    "tests_stage1/test_neural.py::test_library_atoms_nested_and_used"
+   ],
+   "summary": "1 failed, 15 passed in 7.38s",
+   "seconds": 10.2,
+   "assertion_failures": 1
+  },
+  {
+   "mutation": "missing_causal_mask",
+   "exit_code": 1,
+   "failed_tests": [
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[S]",
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[DW-deep]"
+   ],
+   "summary": "2 failed, 14 passed in 11.49s",
+   "seconds": 14.5,
+   "assertion_failures": 4
+  },
+  {
+   "mutation": "target_in_input",
+   "exit_code": 1,
+   "failed_tests": [
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[S]",
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[GRU]",
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[SSM]",
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[DW-deep]"
+   ],
+   "summary": "4 failed, 12 passed in 8.54s",
+   "seconds": 11.9,
+   "assertion_failures": 8
+  },
+  {
+   "mutation": "off_by_one_position",
+   "exit_code": 1,
+   "failed_tests": [
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[S]",
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[GRU]",
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[SSM]",
+    "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[DW-deep]"
+   ],
+   "summary": "4 failed, 12 passed in 7.72s",
+   "seconds": 10.6,
+   "assertion_failures": 8
+  },
+  {
+   "mutation": "wrong_reference",
+   "exit_code": 1,
+   "failed_tests": [
+    "tests_stage1/test_neural.py::test_q1_statistics_use_the_population_reference"
+   ],
+   "summary": "1 failed, 15 passed in 7.69s",
+   "seconds": 10.6,
+   "assertion_failures": 1
+  }
+ ]
+}
