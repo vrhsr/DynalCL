@@ -1,0 +1,8 @@
+# Stage 1 environment (.venv-stage1 on the box). Frozen stack as requirements.txt, plus PyTorch.
+# torch: CUDA 12.6 build from https://download.pytorch.org/whl/cu126 ; version as installed on the box
+# (REPORTED 2026-10-23, results-stage1-step3 commit 66c5846, STAGE1_ENVIRONMENT_MANIFEST.json).
+numpy==2.2.2
+scipy==1.15.1
+pyyaml==6.0.2
+pytest==9.0.2
+torch==2.14.1

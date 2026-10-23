@@ -117,7 +117,7 @@ def run_q1(out: Path, quick: bool) -> None:
         truth = truths.pop() if len(truths) == 1 else "MIXED"
         wrong = {"POP-LIKE": probs.get("STAB-LIKE", 0.0) + probs.get("WORSE-THAN-STAB", 0.0),
                  "STAB-LIKE": probs.get("POP-LIKE", 0.0)}.get(truth, float("nan"))
-        correct = probs.get(truth, float("nan")) if truth in ("POP-LIKE", "STAB-LIKE") else float("nan")
+        correct = probs.get(truth, 0.0) if truth in ("POP-LIKE", "STAB-LIKE") else float("nan")  # 0 if never seen
         rows.append({"pi": pi, "e": e, "s": s, "M": m, "rho_cell": rho, "truth": truth, "c_boot_median": c,
                      "c_min": c_range[0], "c_max": c_range[1], "sims": sims, "P_correct": correct, "P_wrong": wrong,
                      "P_POP": probs.get("POP-LIKE", 0.0), "P_STAB": probs.get("STAB-LIKE", 0.0),

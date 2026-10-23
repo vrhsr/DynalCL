@@ -26,7 +26,8 @@ from dynaicl.systems.priors import StableCoefficientPrior
 from dynaicl_families.ar1_known_sigma import ContextStats, FiniteLibrary, population_prior, stability_prior
 from dynaicl_families.sampling import OutOfSupportCondition, ProbeGridCondition, contexts_and_targets, simulate
 from dynaicl_families.separability import POP_FROZEN, kl_per_context
-from dynaicl_neural.analysis import (Band, Statistic, band, classify_memorisation, classify_q1_held, critical_value_bootstrap,
+from dynaicl_neural.analysis import (Band, Statistic, band, classify_behavioural, classify_memorisation, classify_q1_held,
+                                     critical_value_bootstrap,
                                      two_level)
 from dynaicl_neural.config import Stage1Config
 from dynaicl_neural.data import ArmSpec, library_atoms
@@ -56,15 +57,22 @@ class Job:
     steps: int
     checkpoints: tuple[int, ...]
 
-    def model_dir(self, out: Path) -> Path:
-        return out / "models" / f"R{self.replicate + 1}" / self.arm / self.size / f"seed{self.seed_index}"
+    def _tail(self) -> Path:
+        return Path(f"R{self.replicate + 1}") / self.arm / self.size / f"steps{self.steps}" / f"seed{self.seed_index}"
 
-    def eval_file(self, out: Path, step: int) -> Path:
-        return out / "eval" / f"R{self.replicate + 1}" / self.arm / self.size / f"seed{self.seed_index}" / f"step{step}.npz"
+    def model_dir(self, out: Path) -> Path:
+        return out / "models" / self._tail()
+
+    def eval_file(self, out: Path, step: int, controls_only: bool = False) -> Path:
+        name = f"step{step}_controls.npz" if controls_only else f"step{step}.npz"
+        return out / "eval" / self._tail() / name
 
 
 def roots(cfg: Stage1Config, replicate: int) -> dict[str, int]:
-    return {k: role_seed(v, replicate) for k, v in cfg.seed_roles.items()}
+    """Per-replicate roots for train / eval / library; the bootstrap root is one seed shared by all replicates (each
+    replicate uses its own named stream of it). Found by the end-to-end test: indexing the bootstrap role by replicate
+    would fail for R2."""
+    return {k: role_seed(v, 0 if k == "bootstrap" else replicate) for k, v in cfg.seed_roles.items()}
 
 
 # ------------------------------------------------------------------------------------------------ planning
@@ -86,7 +94,72 @@ def plan_jobs(cfg: Stage1Config, decision: dict | None = None) -> list[Job]:
             if m is None:
                 continue                                    # that family is NOT RESOLVABLE: no models
             jobs += [Job(rep, arm, cfg.model, i, b, ck) for i in range(m)]
+    return jobs + secondary_jobs(cfg, decision)
+
+
+#: secondary families (PREREG section 9): (arm, size, budget multiplier) per variant; Q1-behavioural reuses primary models
+SECONDARY = {
+    "training-length-4B": (("CONT", "M", 4), ("UNIF", "M", 4)),
+    "size-S": (("CONT", "S", 1), ("UNIF", "S", 1)),
+    "size-L": (("CONT", "L", 1), ("UNIF", "L", 1)),
+    "depth-width": (("CONT", "DW-shallow", 1), ("UNIF", "DW-shallow", 1), ("CONT", "DW-deep", 1), ("UNIF", "DW-deep", 1)),
+    "architecture": (("CONT", "GRU", 1), ("UNIF", "GRU", 1), ("CONT", "SSM", 1), ("UNIF", "SSM", 1)),
+    "Q2-size-L": (("LIB-4", "L", 1), ("LIB-16", "L", 1), ("LIB-64", "L", 1)),
+    "Q1-behavioural": (),
+}
+M_SECONDARY_MAX = 32
+
+
+def secondary_count(family: str, decision: dict) -> int:
+    base = decision.get("M2") if family == "Q2-size-L" else decision.get("M1")
+    return min(base, M_SECONDARY_MAX) if base else 0
+
+
+def secondary_jobs(cfg: Stage1Config, decision: dict) -> list[Job]:
+    jobs = []
+    b = int(decision["B"])
+    for fam in decision.get("secondary_kept", []):
+        m = secondary_count(fam, decision)
+        for rep in range(cfg.replicates):
+            for arm, size, mult in SECONDARY[fam]:
+                steps = b * mult
+                jobs += [Job(rep, arm, size, i, steps, (steps // 4, steps // 2, steps)) for i in range(m)]
     return jobs
+
+
+def primary_jobs(cfg: Stage1Config, jobs: list[Job], decision: dict) -> list[Job]:
+    return [j for j in jobs if j.size == cfg.model and j.steps == int(decision["B"])]
+
+
+def project_hours(cfg: Stage1Config, decision: dict, j0: dict, eval_sec: float) -> dict:
+    """Projected GPU hours (with the cap rule's safety factor) of the primary experiment and of each secondary family.
+    J0 gives the effective seconds per model-step for size M at the best concurrency; other sizes are scaled by their
+    single-process seconds per step relative to M."""
+    steps_j0 = j0["single"][0]["steps"]
+    eff_m = min(c["wall_seconds"] / (c["processes"] * steps_j0) for c in j0["concurrent"])
+    single = {s["size"]: s["sec_per_step"] for s in j0["single"]}
+    eff = {size: eff_m * single[size] / single["M"] for size in single}
+    b, k = int(decision["B"]), cfg.cap_rule.safety
+
+    def hours(n_models, size, steps):
+        return n_models * (steps * eff[size] + eval_sec) * k / 3600.0
+    n_lib = sum(a.startswith("LIB-") for a in cfg.primary_arms)
+    prim = cfg.replicates * (hours(2 * (decision.get("M1") or 0), cfg.model, b)
+                             + hours(n_lib * (decision.get("M2") or 0), cfg.model, b))
+    sec = {fam: cfg.replicates * sum(hours(secondary_count(fam, decision), size, b * mult)
+                                     for _, size, mult in SECONDARY[fam]) for fam in cfg.secondary}
+    return {"primary_hours": prim, "secondary_hours": sec, "eff_sec_per_model_step": eff}
+
+
+def keep_secondary(cfg: Stage1Config, proj: dict) -> list[str]:
+    """Drop secondary families in cfg.drop_order until primary + kept <= gpu_hours_limit (primary is never reduced)."""
+    kept = list(cfg.secondary)
+    for fam in cfg.drop_order:
+        if proj["primary_hours"] + sum(proj["secondary_hours"][f] for f in kept) <= cfg.cap_rule.gpu_hours_limit:
+            break
+        if fam in kept:
+            kept.remove(fam)
+    return kept
 
 
 def _train_one(job: Job, cfg_batch: int, out: str, device: str, roots_: dict) -> str:
@@ -151,7 +224,7 @@ def evaluate_model(cfg: Stage1Config, job: Job, step: int, sets: dict, out: Path
     import torch
     from dynaicl_neural.adapter import mixture_params
     from dynaicl_neural.models import SIZES, build_model
-    f = job.eval_file(out, step)
+    f = job.eval_file(out, step, controls_only)
     if f.exists():
         return f
     model = build_model(SIZES[job.size])
@@ -256,13 +329,13 @@ def pilot_decision(cfg: Stage1Config, jobs: list[Job], out: Path, cap: int) -> d
     for step in jobs[0].checkpoints:
         ok = True
         for a in arms:
-            vals = [_load(j.eval_file(out, step))["C2"] for j in by_arm[a]]
+            vals = [_load(j.eval_file(out, step, True))["C2"] for j in by_arm[a]]
             passed, upper = control_pass(vals, cfg.epsilon, z)
             flags[f"C2|{a}|{step}"] = {"pass": passed}
             ok &= passed
             if a == "UNIF":
                 for r, n in C1_CELLS:
-                    passed, _ = control_pass([_load(j.eval_file(out, step))[f"C1|{r}|{n}"] for j in by_arm[a]],
+                    passed, _ = control_pass([_load(j.eval_file(out, step, True))[f"C1|{r}|{n}"] for j in by_arm[a]],
                                              cfg.epsilon, z)
                     flags[f"C1|{r}|{n}|{step}"] = {"pass": passed}
                     ok &= passed
@@ -273,6 +346,10 @@ def pilot_decision(cfg: Stage1Config, jobs: list[Job], out: Path, cap: int) -> d
                 "control_flags": flags, "z_controls": z, "cap": cap}
     if budget is None:
         decision.update(M1=None, M2=None, s1=None, s2=None)
+        return decision
+
+    if not all(j.eval_file(out, budget).exists() for j in jobs):
+        decision.update(status="NEEDS FULL EVALUATION AT B", M1=None, M2=None, s1=None, s2=None)
         return decision
 
     def sd_between(arr: np.ndarray) -> float:
@@ -333,13 +410,13 @@ def cap_from_j0(cfg: Stage1Config, sec_per_model_step: float, eval_sec_per_model
 
 # ------------------------------------------------------------------------------------------------ confirmatory analysis
 
-def q1_family(cfg: Stage1Config, jobs: list[Job], out: Path, rep: int, step: int) -> tuple[list[Statistic], dict]:
+def q1_family(cfg: Stage1Config, jobs: list[Job], out: Path, rep: int) -> tuple[list[Statistic], dict]:
     cont = sorted((j for j in jobs if j.replicate == rep and j.arm == "CONT"), key=lambda j: j.seed_index)
     unif = sorted((j for j in jobs if j.replicate == rep and j.arm == "UNIF"), key=lambda j: j.seed_index)
     if [j.seed_index for j in cont] != [j.seed_index for j in unif]:
         raise ValueError("CONT and UNIF seed indices must match (pairing)")
-    dc = [_load(j.eval_file(out, step)) for j in cont]
-    du = [_load(j.eval_file(out, step)) for j in unif]
+    dc = [_load(j.eval_file(out, j.steps)) for j in cont]
+    du = [_load(j.eval_file(out, j.steps)) for j in unif]
     ref = _load(out / "eval" / f"R{rep + 1}" / "reference.npz")
     stats, gaps = [], {}
     for r, n in Q1_CELLS:
@@ -351,12 +428,12 @@ def q1_family(cfg: Stage1Config, jobs: list[Job], out: Path, rep: int, step: int
     return stats, gaps
 
 
-def analyse_q1(cfg: Stage1Config, jobs: list[Job], out: Path, step: int) -> dict:
+def analyse_q1(cfg: Stage1Config, jobs: list[Job], out: Path, alpha: float | None = None, label: str = "q1") -> dict:
     per_rep = []
     for rep in range(cfg.replicates):
-        stats, gaps = q1_family(cfg, jobs, out, rep, step)
-        rng = NamedStreams(roots(cfg, 0)["bootstrap"]).stream("stage1_bootstrap_q1", rep)
-        c, diag = critical_value_bootstrap(stats, cfg.alpha_q1, cfg.bootstrap_draws, rng)
+        stats, gaps = q1_family(cfg, jobs, out, rep)
+        rng = NamedStreams(roots(cfg, 0)["bootstrap"]).stream(f"stage1_bootstrap_{label}", rep)
+        c, diag = critical_value_bootstrap(stats, cfg.alpha_q1 if alpha is None else alpha, cfg.bootstrap_draws, rng)
         est = {s.name: two_level(s.values) for s in stats}
         cells = {}
         for r, n in Q1_CELLS:
@@ -377,3 +454,190 @@ def analyse_q1(cfg: Stage1Config, jobs: list[Job], out: Path, step: int) -> dict
     else:
         answer = "mixed or inconclusive"
     return {"replicates": per_rep, "confirmed": confirmed, "answer": answer, "pop_like": pop_n, "stab_like": stab_n}
+
+
+def _mirror(b: Band) -> Band:
+    return Band(-b.estimate, -b.hi, -b.lo)
+
+
+def q2_family(cfg: Stage1Config, jobs: list[Job], out: Path, rep: int) -> tuple[list[Statistic], dict]:
+    """Q2 statistics for every LIB arm and cell. Arm-level gate (PREREG 6.2 as revised before the freeze): a (K, cell)
+    is analysed if >= 90% of the arm's models have both library separations (lib vs pop, lib vs stab; mean min-KL over
+    the cell's systems) >= delta; otherwise it is GATED OUT and reported. All of the arm's models enter a kept cell."""
+    stats, meta = [], {}
+    for arm in sorted({j.arm for j in jobs if j.arm.startswith("LIB-")}, key=lambda a: int(a.split("-")[1])):
+        js = sorted((j for j in jobs if j.replicate == rep and j.arm == arm), key=lambda j: j.seed_index)
+        if not js:
+            continue
+        ds = [_load(j.eval_file(out, j.steps)) for j in js]
+        for s, r, n in Q2_CELLS:
+            key = f"{s}|{r}|{n}"
+            sep_lp = np.array([d[f"SEP|{key}|lib-pop"].mean() for d in ds])
+            sep_ls = np.array([d[f"SEP|{key}|lib-stab"].mean() for d in ds])
+            frac = float(np.mean((sep_lp >= cfg.delta) & (sep_ls >= cfg.delta)))
+            sep_ps = float(_load(out / "eval" / f"R{rep + 1}" / "reference.npz")[f"SEP|{key}|pop-stab"].mean())
+            meta[(arm, key)] = {"gate_fraction": frac, "kept": frac >= 0.9, "sep_lib_pop": float(sep_lp.mean()),
+                                "sep_lib_stab": float(sep_ls.mean()), "sep_pop_stab": sep_ps}
+            if frac < 0.9:
+                continue
+            d = {name: np.stack([x[f"Q2|{key}|{name}"] for x in ds]) for name in ("lib", "pop", "stab")}
+            for name, arr in (("D_lib", d["lib"]), ("D_pop", d["pop"]), ("D_stab", d["stab"]),
+                              ("C_pop_lib", d["pop"] - d["lib"]), ("C_stab_lib", d["stab"] - d["lib"])):
+                stats.append(Statistic(f"{arm}|{key}|{name}", arr, f"{s}|{r}"))
+    return stats, meta
+
+
+def analyse_q2(cfg: Stage1Config, jobs: list[Job], out: Path, alpha: float | None = None, label: str = "q2") -> dict:
+    per_rep = []
+    for rep in range(cfg.replicates):
+        stats, meta = q2_family(cfg, jobs, out, rep)
+        cells = {}
+        c = None
+        if stats:
+            rng = NamedStreams(roots(cfg, 0)["bootstrap"]).stream(f"stage1_bootstrap_{label}", rep)
+            c, _ = critical_value_bootstrap(stats, cfg.alpha_q2 if alpha is None else alpha, cfg.bootstrap_draws, rng)
+            est = {s.name: two_level(s.values) for s in stats}
+        for (arm, key), mt in meta.items():
+            if not mt["kept"]:
+                cells[f"{arm}|{key}"] = {"class": "GATED OUT", **mt}
+                continue
+            b = {nm: band(*est[f"{arm}|{key}|{nm}"], c) for nm in ("D_lib", "D_pop", "D_stab", "C_pop_lib", "C_stab_lib")}
+            dist = {"lib": b["D_lib"], "pop": b["D_pop"], "stab": b["D_stab"]}
+            con = {("pop", "lib"): b["C_pop_lib"], ("lib", "pop"): _mirror(b["C_pop_lib"]),
+                   ("stab", "lib"): b["C_stab_lib"], ("lib", "stab"): _mirror(b["C_stab_lib"])}
+            sep = {("lib", "pop"): mt["sep_lib_pop"], ("lib", "stab"): mt["sep_lib_stab"], ("pop", "stab"): mt["sep_pop_stab"]}
+            cells[f"{arm}|{key}"] = {"class": classify_memorisation(dist, con, sep), **mt,
+                                     **{nm: asdict(v) for nm, v in b.items()}}
+        per_rep.append({"critical_value": c, "cells": cells})
+    confirmed = {}
+    for key in per_rep[0]["cells"]:
+        cls = {p["cells"][key]["class"] for p in per_rep}
+        confirmed[key] = cls.pop() if len(cls) == 1 else "INCONCLUSIVE (discordant)"
+    per_k = {}
+    for arm in sorted({j.arm for j in jobs if j.arm.startswith("LIB-")}, key=lambda a: int(a.split("-")[1])):
+        vals = [v for k, v in confirmed.items() if k.startswith(arm + "|") and v != "GATED OUT"]
+        if not vals:
+            per_k[arm] = "NO CELLS"
+            continue
+        top = max(set(vals), key=vals.count)
+        per_k[arm] = top if vals.count(top) >= math.ceil(0.7 * len(vals)) else "MIXED"
+    ks = sorted((int(a.split("-")[1]), v) for a, v in per_k.items())
+    k_star = None
+    for i, (k, v) in enumerate(ks):
+        if v == "GENERALISING" and all(w != "LIB-LIKE" for _, w in ks[i + 1:]):
+            k_star = k
+            break
+    if all(v == "LIB-LIKE" for _, v in ks):
+        answer = "no transition up to the largest K"
+    elif k_star is None:
+        answer = "no clean transition"
+    else:
+        answer = f"K* = {k_star}"
+    return {"replicates": per_rep, "confirmed": confirmed, "per_K": per_k, "K_star": k_star, "answer": answer}
+
+
+def controls_and_validity(cfg: Stage1Config, jobs: list[Job], out: Path) -> dict:
+    """C1, C2 (Bonferroni over all control statistics at 0.05) and V-RB (familywise 0.001) for every replicate."""
+    from scipy.stats import norm
+    arms = sorted({j.arm for j in jobs})
+    n_c = cfg.replicates * (len(arms) + len(C1_CELLS))
+    z = float(norm.isf(0.05 / (2 * n_c)))
+    n_rb = cfg.replicates * 2 * len(Q1_CELLS)
+    z_rb = float(norm.isf(0.001 / (2 * n_rb)))
+    res = {"controls": {}, "v_rb": {}, "z_controls": z, "z_rb": z_rb}
+    ok = True
+    for rep in range(cfg.replicates):
+        for a in arms:
+            js = [j for j in jobs if j.replicate == rep and j.arm == a]
+            data = [_load(j.eval_file(out, j.steps)) for j in js]
+            passed, upper = control_pass([d["C2"] for d in data], cfg.epsilon, z)
+            res["controls"][f"R{rep + 1}|C2|{a}"] = {"pass": passed, "upper": upper}
+            ok &= passed
+            if a == "UNIF":
+                for r, n in C1_CELLS:
+                    passed, upper = control_pass([d[f"C1|{r}|{n}"] for d in data], cfg.epsilon, z)
+                    res["controls"][f"R{rep + 1}|C1|{r}|{n}"] = {"pass": passed, "upper": upper}
+                    ok &= passed
+            if a in ("CONT", "UNIF"):
+                for r, n in Q1_CELLS:
+                    diff = np.stack([d[f"Q1R|{r}|{n}"] - d[f"Q1|{r}|{n}"] for d in data])
+                    theta, se = two_level(diff)
+                    zz = theta / se
+                    res["v_rb"][f"R{rep + 1}|{a}|{r}|{n}"] = {"z": zz, "pass": abs(zz) <= z_rb}
+                    ok &= abs(zz) <= z_rb
+    res["all_pass"] = bool(ok)
+    return res
+
+
+def verdict(checks: dict, q1: dict | None, q2: dict | None, decision: dict) -> str:
+    """BLOCKED, NOT RESOLVABLE, PROCEED, REVISE (PREREG section 8)."""
+    if not checks["all_pass"]:
+        return "BLOCKED"
+    if decision.get("status") != "RESOLVED":
+        return "NOT RESOLVABLE"
+    decisive_q1 = q1 is not None and q1["answer"] != "mixed or inconclusive"
+    q2_kstar = q2 is not None and q2["K_star"] is not None
+    return "PROCEED" if (decisive_q1 or q2_kstar) else "REVISE"
+
+
+def analyse_behavioural(cfg: Stage1Config, jobs: list[Job], out: Path, alpha: float) -> dict:
+    """Secondary Q1-behavioural: CONT and UNIF models vs pop and stab on PROBE / OOS cells (classify_behavioural)."""
+    per_rep = []
+    for rep in range(cfg.replicates):
+        ref = _load(out / "eval" / f"R{rep + 1}" / "reference.npz")
+        stats, sep = [], {}
+        for arm in ("CONT", "UNIF"):
+            js = sorted((j for j in jobs if j.replicate == rep and j.arm == arm), key=lambda j: j.seed_index)
+            ds = [_load(j.eval_file(out, j.steps)) for j in js]
+            for s, r, n in BEHAV_CELLS:
+                key = f"{s}|{r}|{n}"
+                dp = np.stack([d[f"B|{key}|pop"] for d in ds])
+                dst = np.stack([d[f"B|{key}|stab"] for d in ds])
+                stats += [Statistic(f"{arm}|{key}|D_pop", dp, f"{s}|{r}"),
+                          Statistic(f"{arm}|{key}|D_stab", dst, f"{s}|{r}"),
+                          Statistic(f"{arm}|{key}|C_stab_pop", dst - dp, f"{s}|{r}")]
+                sep[key] = float(ref[f"SEP|{key}|pop-stab"].mean())
+        rng = NamedStreams(roots(cfg, 0)["bootstrap"]).stream("stage1_bootstrap_behavioural", rep)
+        c, _ = critical_value_bootstrap(stats, alpha, cfg.bootstrap_draws, rng)
+        est = {st.name: two_level(st.values) for st in stats}
+        cells = {}
+        for arm in ("CONT", "UNIF"):
+            for s, r, n in BEHAV_CELLS:
+                key = f"{s}|{r}|{n}"
+                if sep[key] < cfg.delta:
+                    cells[f"{arm}|{key}"] = "UNIDENTIFIABLE (pop-stab separation < delta)"
+                    continue
+                dist = {"pop": band(*est[f"{arm}|{key}|D_pop"], c), "stab": band(*est[f"{arm}|{key}|D_stab"], c)}
+                cs = band(*est[f"{arm}|{key}|C_stab_pop"], c)
+                cells[f"{arm}|{key}"] = classify_behavioural(dist, {("stab", "pop"): cs, ("pop", "stab"): _mirror(cs)},
+                                                             {("pop", "stab"): sep[key]})
+        per_rep.append({"critical_value": c, "cells": cells})
+    confirmed = {k: (per_rep[0]["cells"][k] if all(p["cells"][k] == per_rep[0]["cells"][k] for p in per_rep)
+                     else "INCONCLUSIVE (discordant)") for k in per_rep[0]["cells"]}
+    return {"replicates": per_rep, "confirmed": confirmed}
+
+
+def analyse_secondary(cfg: Stage1Config, jobs: list[Job], out: Path, decision: dict) -> dict:
+    """Every retained secondary family at alpha_secondary_total / len(cfg.secondary) per replicate; variants within a
+    family split that level (Bonferroni)."""
+    alpha = cfg.alpha_secondary_total / len(cfg.secondary)
+    b = int(decision["B"])
+    prim = primary_jobs(cfg, jobs, decision)
+    res = {}
+    for fam in decision.get("secondary_kept", []):
+        if fam == "Q1-behavioural":
+            res[fam] = analyse_behavioural(cfg, [j for j in prim if j.arm in ("CONT", "UNIF")], out, alpha)
+            continue
+        variants = sorted({size for _, size, _ in SECONDARY[fam]})
+        res[fam] = {}
+        for size in variants:
+            spec = {(a, m) for a, s, m in SECONDARY[fam] if s == size}
+            vj = [j for j in jobs if j.size == size and (j.arm, j.steps // b) in spec and j.steps % b == 0]
+            if size == cfg.model:
+                vj = [j for j in vj if j.steps != b]          # the 4B family must not reuse primary models
+            if not vj:
+                continue
+            label = f"{fam}_{size}"
+            res[fam][size] = (analyse_q2(cfg, vj, out, alpha / len(variants), label) if fam == "Q2-size-L"
+                              else analyse_q1(cfg, vj, out, alpha / len(variants), label))
+    return res

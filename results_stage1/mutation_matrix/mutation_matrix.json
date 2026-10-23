@@ -5,8 +5,8 @@
    "mutation": "baseline",
    "exit_code": 0,
    "failed_tests": [],
-   "summary": "16 passed in 9.98s",
-   "seconds": 13.5,
+   "summary": "16 passed in 7.92s",
+   "seconds": 11.1,
    "assertion_failures": 0
   },
   {
@@ -15,8 +15,8 @@
    "failed_tests": [
     "tests_stage1/test_neural.py::test_cont_arm_draws_the_population_prior"
    ],
-   "summary": "1 failed, 15 passed in 7.68s",
-   "seconds": 10.5,
+   "summary": "1 failed, 15 passed in 7.54s",
+   "seconds": 10.6,
    "assertion_failures": 2
   },
   {
@@ -25,8 +25,8 @@
    "failed_tests": [
     "tests_stage1/test_neural.py::test_common_random_numbers_across_arms"
    ],
-   "summary": "1 failed, 15 passed in 7.99s",
-   "seconds": 10.8,
+   "summary": "1 failed, 15 passed in 8.71s",
+   "seconds": 12.1,
    "assertion_failures": 1
   },
   {
@@ -35,8 +35,8 @@
    "failed_tests": [
     "tests_stage1/test_neural.py::test_library_atoms_nested_and_used"
    ],
-   "summary": "1 failed, 15 passed in 7.38s",
-   "seconds": 10.2,
+   "summary": "1 failed, 15 passed in 7.79s",
+   "seconds": 10.9,
    "assertion_failures": 1
   },
   {
@@ -46,8 +46,8 @@
     "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[S]",
     "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[DW-deep]"
    ],
-   "summary": "2 failed, 14 passed in 11.49s",
-   "seconds": 14.5,
+   "summary": "2 failed, 14 passed in 8.04s",
+   "seconds": 11.2,
    "assertion_failures": 4
   },
   {
@@ -59,8 +59,8 @@
     "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[SSM]",
     "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[DW-deep]"
    ],
-   "summary": "4 failed, 12 passed in 8.54s",
-   "seconds": 11.9,
+   "summary": "4 failed, 12 passed in 7.95s",
+   "seconds": 11.0,
    "assertion_failures": 8
   },
   {
@@ -72,8 +72,8 @@
     "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[SSM]",
     "tests_stage1/test_neural.py::test_causality_cut_context_equals_full_sequence[DW-deep]"
    ],
-   "summary": "4 failed, 12 passed in 7.72s",
-   "seconds": 10.6,
+   "summary": "4 failed, 12 passed in 7.88s",
+   "seconds": 11.0,
    "assertion_failures": 8
   },
   {
@@ -82,8 +82,8 @@
    "failed_tests": [
     "tests_stage1/test_neural.py::test_q1_statistics_use_the_population_reference"
    ],
-   "summary": "1 failed, 15 passed in 7.69s",
-   "seconds": 10.6,
+   "summary": "1 failed, 15 passed in 7.86s",
+   "seconds": 10.9,
    "assertion_failures": 1
   }
  ]

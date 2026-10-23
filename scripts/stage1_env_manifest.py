@@ -7,6 +7,7 @@ Reads versions only; changes nothing. Touches the GPU only to query its name and
 from __future__ import annotations
 
 import argparse
+import importlib.metadata
 import json
 import platform
 import shutil
@@ -42,10 +43,11 @@ def main(argv=None) -> int:
         "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
         "nvidia_smi": _run(["nvidia-smi", "--query-gpu=name,driver_version,memory.total", "--format=csv,noheader"])
         if shutil.which("nvidia-smi") else None,
-        "pip_freeze": _run([sys.executable, "-m", "pip", "freeze"]).splitlines(),
+        # uv-created venvs have no pip; list installed distributions directly (fixes an empty list in the first run)
+        "packages": sorted(f"{d.metadata['Name']}=={d.version}" for d in importlib.metadata.distributions()),
     }
     out.write_text(json.dumps(info, indent=1), encoding="utf-8")
-    print(json.dumps({k: v for k, v in info.items() if k != "pip_freeze"}, indent=1))
+    print(json.dumps({k: v for k, v in info.items() if k != "packages"}, indent=1))
     return 0
 
 

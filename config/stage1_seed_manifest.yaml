@@ -18,3 +18,7 @@ roles:
   confirmatory_eval:   {seeds: [72101, 72102], use: "R1, R2 evaluation systems", status: unused}
   confirmatory_library: {seeds: [72201, 72202], use: "R1, R2 library atoms", status: unused}
   confirmatory_bootstrap: {seeds: [72999], use: "confirmatory hierarchical bootstrap", status: unused}
+  test_train:          {seeds: [69101, 69102], use: "pytest end-to-end pipeline test only; never decisions", status: tests}
+  test_eval:           {seeds: [69111, 69112], use: "pytest end-to-end pipeline test only; never decisions", status: tests}
+  test_library:        {seeds: [69121, 69122], use: "pytest end-to-end pipeline test only; never decisions", status: tests}
+  test_bootstrap:      {seeds: [69131], use: "pytest end-to-end pipeline test only; never decisions", status: tests}

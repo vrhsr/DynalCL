@@ -1,213 +1,180 @@
-# Stage 1A pre-registration (DRAFT for review at checkpoint 2; NOT frozen)
+# Stage 1A pre-registration (DRAFT v2, proposed for freezing at checkpoint 3; NOT frozen)
 
-Status: **DRAFT.** Nothing in this document has been frozen, no model exists, no Stage 1 training, pilot or confirmatory
-seed has been used. After your review it is frozen together with the code, configs and seed-role table by a Stage 1
-manifest (section 15). Labels: VERIFIED (read or recomputed from a result file named here), DERIVED (reasoning stated
-here or in a cited doc), ASSUMED (a planning guess), UNVERIFIED. Every threshold is a hypothesis with a stated
-justification. Plan: `docs/STAGE1_PLAN.md` v2 (approved at checkpoint 1). Working project name: IdentICL.
+Status: **DRAFT v2.** Not frozen. No model of the study exists; no pilot or confirmatory seed has been used. v1 (reviewed at
+checkpoint 2) is in git history (`stage1-planning`, commit `21fd209`). After your approval, this document, the code, the
+configs, the seed-role table, the power lookup and the J0 / engineering-smoke result files are frozen by a Stage 1 manifest
+**before the pilot** (section 15); the pilot outcome is then recorded as an appendix and the confirmatory run uses the
+pilot-determined budget and model counts under the frozen rules. Labels: VERIFIED (read or recomputed from a named result
+file), DERIVED (reasoning stated here or in a cited doc), ASSUMED (a planning guess), UNVERIFIED. Every threshold is a
+hypothesis with a stated justification. Working project name: IdentICL.
+
+**Changes since v1 (checkpoint 2), all before any model:** (a) the independent audit (docs/STAGE1_INDEPENDENT_AUDIT.md;
+disclosure S15) found that v1's operating characteristics used a Gaussian critical value while the analysis uses the
+bootstrap, so v1's power statements and target SEs are **withdrawn** (sections 7, 12); (b) the sample-size rule is now an
+OC-calibrated lookup; minimum 16 models per arm; (c) the per-arm cap is set by a frozen rule from J0 (section 7);
+(d) the Q2 per-model gate became an arm-level gate (section 6.2; reason: bootstrap validity); (e) secondary families are
+implemented with a frozen drop rule (section 9); (f) two numerical defects found by the audit were fixed with regression tests.
 
 ## 1. Questions
-
-* **Q1 (primary).** Do transformers pretrained on the population prior P behave like population-aware Bayes (the pop
-  reference) or like the context-only comparator (the stab reference) on held-out systems, in the cells where these two
-  references differ by at least delta?
+* **Q1 (primary).** Do transformers pretrained on the population prior P behave like population-aware Bayes (pop) or like
+  the context-only comparator (stab) on held-out systems, in the cells where these two references differ by at least delta?
 * **Q2 (primary).** Do transformers pretrained on a library of K systems drawn from P behave like the K-atom library
   posterior (memorising) or like a generalising reference (pop or stab), and from which K on (the transition K*)?
-* Everything else in this document is secondary (section 9) or EXPLORATORY (section 10).
+* Everything else is secondary (section 9) or EXPLORATORY (section 10).
 
 ## 2. Family, references and what the map established (VERIFIED)
-
 * Scalar AR(1), x_t = a x_{t-1} + eps_t, eps ~ N(0, 1) (sigma = 1 known), x_0 ~ N(0, r^2) independent of a, h = 1.
-* References (frozen Stage 0 / 0.5 code, batch forms equal within 1e-9 nats, tests_stage1/test_ar1_batch_references.py):
-  pop = truncated normal (0.4, 0.3) on (-0.95, 0.95); stab = U(-0.999, 0.999); lib_K = uniform over the model's own K atoms.
-* Separability map `results_stage1/map_1A/` (branch `results-stage1-map-1A`, commit `a499874`; spec
-  `docs/STAGE1_SEPARABILITY_MAP_SPEC.md`, committed before the run; VALID, 4344 agreement checks, max |z| 3.82 vs 5.17):
-  * Q1 on held-out systems: IDENTIFIABLE at r in {0.25, 1}, n in {1, 2, 3, 5} and at r = 4, n in {1, 2}
-    (Delta = 0.023-0.054 nats); UNIDENTIFIABLE for n >= 10 (and r = 4, n >= 3).
-  * Q2 on held-out and in-library systems: library vs pop identifiable only for K = 1 (held-out, n >= 5); K = 2, 4
-    PARTIAL; K >= 8 UNIDENTIFIABLE at r <= 1. **Memorisation is not visible by score on natural evaluation sets for
-    K >= 4 in this family.**
-  * Q2 on designed sets: library vs pop IDENTIFIABLE or PARTIAL for every K in {1, ..., 256} on the probe grid and on
-    out-of-support systems at n in {5, 10, 20}. Caveat (DERIVED): on out-of-support systems (|a| in (0.95, 0.999)) both the
-    library and pop are misspecified; their separation largely reflects how close the library's extreme atom is to the
-    support edge (coverage), not only memorisation. Results on that set are reported as such.
+* References: pop = truncated normal (0.4, 0.3) on (-0.95, 0.95); stab = U(-0.999, 0.999); lib_K = uniform over the model's own
+  K atoms. Batch forms equal the frozen Stage 0 / 0.5 references within 1e-9 nats, including the stored Stage 0.5 items
+  (tests_stage1/test_ar1_batch_references.py; the audit re-derived them and found TN predictive errors <= 2.8e-13).
+* Separability map `results_stage1/map_1A/` (branch `results-stage1-map-1A`, `a499874`; spec committed before the run; VALID):
+  * Q1 held-out: IDENTIFIABLE at r in {0.25, 1}, n in {1, 2, 3, 5} and at r = 4, n in {1, 2} (Delta = 0.023-0.054 nats);
+    UNIDENTIFIABLE for n >= 10.
+  * Q2 held-out / in-library: library vs pop identifiable only for K = 1 (held-out, n >= 5); K = 2, 4 PARTIAL; K >= 8
+    UNIDENTIFIABLE at r <= 1. **Memorisation is not visible by score on natural evaluation sets for K >= 4 in this family.**
+  * Q2 designed sets: IDENTIFIABLE or PARTIAL for every K up to 256 on the probe grid and out-of-support systems (n in {5, 10, 20}).
+    **Caveat (kept for the paper):** on out-of-support systems (|a| in (0.95, 0.999)) both the library and pop are misspecified;
+    their separation largely reflects how close the library's extreme atom is to the support edge (coverage), not only memorisation.
+  * Common random numbers (audit A6): all cells and r share the same systems; Q2 cells and library draws share their evaluation
+    systems. Per-cell estimates are valid; patterns across cells or draws are not independent and are interpreted as such.
 
-## 3. Arms (pretraining distributions; they differ only in the law of a)
-
+## 3. Arms (they differ only in the law of a)
 | Arm | Law of a during pretraining | Its Bayes predictor | Role |
 |---|---|---|---|
-| CONT | P | pop | Q1 test arm; Q2 generalising control |
+| CONT | P | pop | Q1 test arm |
 | UNIF | U(-0.999, 0.999) | stab | Q1 positive control (context-only); capability control C1 |
 | LIB-K, K in {1, 2, 4, 8, 16, 32, 64, 256} | uniform over K atoms drawn from P (per model seed) | lib_K | Q2 |
-
-* x_0 ~ N(0, r^2) with r uniform on {0.25, 1, 4} per sequence (DERIVED: the Bayes predictor does not depend on the x_0
-  law, because the likelihood is conditional on x_0 and x_0 is independent of a). Sequences x_0..x_20, fresh every step.
-* Common random numbers: model seed index i uses the same initialisation, data order, x_0 and noise in every arm; a is
-  drawn by each arm's inverse CDF from the same uniforms (LIB-K: atom index from the same uniforms). Library atoms of
-  seed i are nested across K (the first K atoms of the 256-atom draw).
+* x_0 ~ N(0, r^2), r uniform on {0.25, 1, 4} per sequence (DERIVED: the Bayes predictor does not depend on the x_0 law).
+* Common random numbers: seed index i has the same initialisation, data order, x_0 and innovations in every arm; a is drawn by each
+  arm's inverse CDF from the same uniforms; library atoms of seed i are nested across K (TESTED: test_neural.py; mutation matrix).
 
 ## 4. Models and training (primary configuration in bold)
+* Causal transformer (explicit masked attention, fixed sinusoidal positions, pre-LayerNorm, GELU MLP 4d, no dropout); output a
+  2-component Gaussian mixture for x_{t+1}.
+* Parameter counts (VERIFIED from the code): S 25 734; **M 200 582**; L 1 587 462; depth/width variants 224 646 (2 layers, d 96)
+  and 226 662 (8 layers, d 48); GRU 199 174; diagonal linear SSM 166 918.
+* Loss: mean NLL over positions t = 0..19; AdamW lr 1e-3, weight decay 0.01, warmup min(1000, steps/10), cosine to 0, batch 256,
+  gradient clip 1.0, float32; deterministic algorithms on (tested bitwise on CPU; GPU tolerance V-REPRO).
+* Step budget B from the pilot (section 7) in {25k, 50k, 100k, 200k}. **Classification checkpoint: the final step of B.**
+* Head size **m = 2**: smallest m with mean KL floor <= 0.001 nats in every cell (results_stage1/head_floor; worst cell mean 4.8e-5,
+  worst single context 7.9e-4; m = 1 fails at 1.9e-3).
 
-* Causal decoder-only transformer: linear embedding of the scalar input, fixed sinusoidal positions, pre-LayerNorm,
-  GELU MLP (4d), no dropout. Output: a Gaussian-mixture density for x_{t+1} with m components (head floor rule below).
-* Sizes: S (2 layers, d 32, 2 heads, about 25k parameters), **M (4 layers, d 64, 4 heads, about 200k)**, L (8 layers,
-  d 128, 8 heads, about 1.6M). Parameter counts DERIVED as 12 d^2 per layer, to be confirmed by the code.
-* Loss: mean negative log likelihood over positions t = 0..19 (predict x_{t+1} from x_0..x_t). AdamW, lr 1e-3, weight
-  decay 0.01, 1000 warmup steps then cosine decay to 0, batch 256 sequences, gradient-norm clip 1.0, float32.
-* Step budget B: chosen in the pilot (section 7) from {25k, 50k, **B**, 4B}; checkpoints at B/4, B/2, B, (4B for the
-  training-length factor). **The classification checkpoint is the final step of B.**
-* Head size m: the smallest m in {1, 2, 4, 8} whose mean KL floor (best m-mixture vs each reference predictive, pop, stab and
-  libraries K in {2, 8, 32, 256}) is <= epsilon/10 = 0.001 nats in every evaluated cell
-  (`scripts/stage1_head_floor.py`, seed 70201, `results_stage1/head_floor/head_floor.csv`; 60 contexts per cell, sets HELD /
-  PROBE / OOS, r in {0.25, 1, 4}, n in {1, 3, 5, 20}; VERIFIED). **m = 2.** m = 1 fails (worst cell mean 1.9e-3 nats, mostly
-  the stab reference, whose truncation at 0.999 skews the predictive); with m = 2 the worst cell mean is 4.8e-5, the worst
-  95th percentile 3.1e-4 and the worst single context 7.9e-4. The fitted floors are upper bounds (EM; local optima).
-* Every model seed randomises initialisation, data order and data (and library atoms for LIB-K).
-
-## 5. Evaluation (contexts only through `dynaicl.evaluation.harness.make_context`)
-
-* Sets: HELD (systems from P), PROBE (a uniform on the 39-point grid -0.95..0.95), OOS (|a| ~ U(0.95, 0.999), random
-  sign). N = 40 000 systems per replicate for HELD; 10 000 each for PROBE and OOS. Systems are shared by all models and
-  cells of a replicate (common random numbers).
-* The model sees `make_context(trajectory, n).values` cast to float32 and returns mixture parameters, cast to float64 and
-  wrapped as the frozen `GaussianMixturePredictive`. A test asserts that the output at the last position of a cut context
-  equals the output at position n of the full sequence (causality check; catches future leakage).
-* **Estimators (Rao-Blackwellised):** for each model and context, KL(X || model) by y-quadrature for each reference X
-  (`dynaicl_families/kl.py`, window mass checked to 1e-8). On HELD, KL(pop || model) is the model's expected regret
-  against pop (DERIVED: pop is Bayes on HELD). The realized-target log-score regret is computed too and must agree
-  (validity check V-RB below).
+## 5. Evaluation (contexts only through `harness.make_context`)
+* Sets per replicate: HELD (P) 40 000 systems; PROBE (39-point grid of a) 10 000; OOS (|a| ~ U(0.95, 0.999)) 10 000; UNIF systems
+  4000 (controls). Systems shared by all models and cells of a replicate.
+* Model input: the cut context cast to float32; output wrapped as float64 `GaussianMixturePredictive`. Causality TESTED (cut
+  context = full sequence at position n; detects a missing mask, target leakage and an off-by-one read).
+* Estimators: per-context KL(X || model) by y-quadrature (window mass checked to 1e-8). On HELD, KL(pop || model) is the
+  expected regret against pop (DERIVED; audit re-derived). Realized-target regret is computed for check V-RB.
 
 ## 6. Estimands, families and classification rules
-
 ### 6.1 Q1 family (per replicate; alpha = 0.025)
-Cells C1: (r, n) in {0.25, 1} x {1, 2, 3, 5} plus (4, 1), (4, 2): 10 cells (the map's IDENTIFIABLE held-out cells).
-Per cell, over the CONT and UNIF models (paired by seed index):
-* R_pop = E[KL(pop || CONT_i)]; G = E[KL(pop || UNIF_i) - KL(pop || CONT_i)] (DERIVED: = E[LS(CONT_i) - LS(UNIF_i)] on HELD);
-  Delta = E[KL(pop || stab)] on the same systems (reference-only; its SE is about 0.0004 and it is treated as known).
-* 20 statistics (10 R_pop + 10 G). Simultaneous band: estimate +/- c x SE (two-level SE; c from the hierarchical bootstrap,
-  4000 draws, studentized max over the 20; `dynaicl_neural/analysis.py`).
-* Rule `classify_q1_held` (epsilon = 0.01): POP-LIKE if hi(R_pop) < Delta/2 and lo(G) > Delta/2; STAB-LIKE if lo(R_pop) > Delta/2
-  and |G| < Delta/2 at both band ends; WORSE-THAN-STAB if lo(R_pop) > Delta + epsilon; INCONCLUSIVE otherwise.
-* A cell's class is confirmed only if both replicates give it (otherwise DISCORDANT, counted as INCONCLUSIVE).
-* **Q1 answer:** "CONT behaves like population Bayes" if POP-LIKE is confirmed in >= 7 of the 10 cells and STAB-LIKE in none;
-  "CONT behaves like the context-only comparator" if STAB-LIKE is confirmed in >= 7 and POP-LIKE in none; otherwise
-  "mixed or inconclusive", reported with every cell's estimates and bands.
-
+10 cells: (r, n) in {0.25, 1} x {1, 2, 3, 5} plus (4, 1), (4, 2). Per cell, CONT and UNIF models paired by seed index:
+R_pop = E[KL(pop || CONT_i)], G = E[KL(pop || UNIF_i) - KL(pop || CONT_i)], Delta = E[KL(pop || stab)] (reference-only, treated
+as known). 20 statistics; band estimate +/- c x SE, two-level SE, **c from the hierarchical bootstrap** (4000 draws; models and
+systems resampled; studentized max). Rule `classify_q1_held` (epsilon 0.01): POP-LIKE, STAB-LIKE, WORSE-THAN-STAB, INCONCLUSIVE.
+Confirmed only if both replicates agree. **Q1 answer:** POP-LIKE in >= 7 of 10 cells and STAB-LIKE in none -> "behaves like
+population Bayes"; the mirror image -> "behaves like the context-only comparator"; otherwise "mixed or inconclusive".
+* Why the bootstrap (VERIFIED, coverage comparison in disclosure S15; 200 studies per row, seed-dominated regime): familywise
+  coverage Gaussian 0.70-0.93, multivariate t 0.86-0.97, bootstrap 0.935-0.995 (0.995 at M = 8, about 0.95 at M >= 16).
 ### 6.2 Q2 family (per replicate; alpha = 0.025)
-Cells C2(K): set in {PROBE, OOS} x r in {0.25, 1} x n in {5, 10, 20}: 12 cells for every K (all IDENTIFIABLE or PARTIAL in the
-map). Per model, cells where the model's own library is not separable from pop or stab at >= delta (gate: the reference
-separation computed on the replicate's systems) are excluded for that model and reported.
-* Statistics per (K, cell): D_lib, D_pop, D_stab (D_X = E[KL(X || model)]) and the contrasts D_pop - D_lib, D_stab - D_lib:
-  5 x 12 x 8 = 480 statistics; one studentized-max band over them.
-* Rule `classify_memorisation`: LIB-LIKE / GENERALISING / NEITHER / INCONCLUSIVE (separations from the replicate's own
-  reference computations). Two replicates must agree.
-* K's class: the class confirmed in >= 70% of its gated cells (8 of 12 when none are gated out); otherwise MIXED.
-* **Q2 answer:** K* = the smallest K classified GENERALISING such that no larger K is LIB-LIKE. If every K is LIB-LIKE:
-  "no transition up to K = 256". If the pattern is non-monotone or mostly MIXED: "no clean transition", reported per K.
-* Secondary (not decision-driving): which generalising reference is nearer (`classify_behavioural`, pop vs stab).
+Cells per K: set in {PROBE, OOS} x r in {0.25, 1} x n in {5, 10, 20} (all IDENTIFIABLE or PARTIAL in the map).
+* **Arm-level gate (changed from v1's per-model exclusion):** a (K, cell) is analysed only if >= 90% of the arm's models have both
+  library separations (min of the two directional KLs, lib vs pop and lib vs stab, on the cell's systems) >= delta; otherwise it is
+  reported GATED OUT. All of the arm's models enter a kept cell. Reason: excluding single models gives statistics with different
+  model sets, and bootstrap draws that put no weight on enough of a statistic's models make its SE undefined, which the frozen
+  rule would treat as an invalid analysis.
+* Statistics per kept (K, cell): D_lib, D_pop, D_stab and the contrasts D_pop - D_lib, D_stab - D_lib (up to 480), one bootstrap
+  band. Rule `classify_memorisation` (two-way): LIB-LIKE / GENERALISING / NEITHER / INCONCLUSIVE. Two replicates must agree.
+* K's class: the class confirmed in >= 70% of its kept cells, else MIXED. **Q2 answer:** K* = the smallest K classified
+  GENERALISING with no larger K LIB-LIKE; all LIB-LIKE -> "no transition up to K = 256"; otherwise "no clean transition".
+### 6.3 Controls and critical checks (any failure -> BLOCKED)
+* C1: UNIF arm's regret against stab on UNIF systems at r in {0.25, 1, 4}, n in {1, 2, 3}: upper band < 0.01.
+* C2: every arm's regret against its own Bayes reference on its own distribution at n = 20 (CONT on HELD, UNIF on UNIF systems,
+  LIB-K on its own atoms): upper band < 0.01. Bands: two-level SE with Bonferroni z over all control statistics at 0.05.
+* V-RB: realized-target minus Rao-Blackwell regret, |z| <= Bonferroni critical value (familywise 0.001) in every Q1 cell and arm.
+* V-REF (box rerun of tests_stage1: 78 passed in the box environment at step 3; repeated at the freeze), V-CAUSAL (tests),
+  V-REPRO (one model per arm retrained from its seed; tolerance set from the engineering smoke before the freeze).
 
-### 6.3 Controls and critical checks (any failure: verdict BLOCKED for the affected family)
-* C1: every UNIF model's regret against stab on its own distribution (U systems) at n in {1, 2, 3}, upper band < epsilon = 0.01.
-* C2: every arm's arm-mean regret against its own Bayes reference on its own distribution at n = 20, upper band < epsilon.
-* V-RB: realized-target vs Rao-Blackwell regret agree on HELD (|z| <= Bonferroni critical value at familywise 0.001).
-* V-REF: the batch references reproduce the frozen references (rerun of tests_stage1 on the box environment) and the KL
-  window mass checks pass.
-* V-CAUSAL: cut-context output equals full-sequence output for 1000 random contexts per model family (<= 1e-6 in float32).
-* V-REPRO: one model per arm is retrained from its seed; its evaluation statistics agree with the original to <= 1e-4 nats
-  (GPU nondeterminism tolerance; ASSUMED; measured in the pilot and fixed before the confirmatory run).
-* Bootstrap validity: no non-finite or zero per-draw SE (as Stage 0.6).
+## 7. Pilot, cap and sample size (pilot seeds only)
+* Pilot arms CONT, UNIF, LIB-2, LIB-16; 8 models each (the pilot only estimates sds and capability; no inference); size M; trained
+  to 200k with checkpoints 25k / 50k / 100k / 200k.
+* **B** = the smallest checkpoint at which every pilot arm passes C2 and UNIF passes C1 (controls-only evaluation at every
+  checkpoint). None -> NOT RESOLVABLE (capability).
+* **Cap (frozen rule, user decision at checkpoint 2):** the largest M (multiple of 8, <= 128) such that the projected primary
+  experiment (2 replicates x 10 arms x M models x (B x J0 effective seconds per model-step + evaluation seconds per model) x 1.25)
+  fits in 48 GPU-hours (`pipeline.cap_from_j0`). J0 effective seconds come from `results_stage1/j0/j0.json` (best concurrency, wall
+  time including start-up), evaluation seconds from the engineering smoke. Both files are produced before the freeze and frozen.
+* **Model counts (frozen lookup, `config/stage1_power_lookup.json`, built by `scripts/stage1_power_lookup.py` from the v2
+  operating characteristics):** s1 = the largest between-seed sd over the 20 Q1 statistics at B; s2 = the largest over the Q2
+  statistics of LIB-2 and LIB-16 (ASSUMED representative of all K). M = the smallest M in {16, 32, 64, 128} (>= 16, <= cap)
+  whose supported sd s*(M) >= 1.35 x s (80% upper confidence factor for an sd from 8 models, computed). None -> that family
+  is NOT RESOLVABLE.
+  | M | Q1 s*(M) | Q2 s*(M) |
+  |---|---|---|
+  | 16 | 0.005 | 0.02 |
+  | 32 | 0.01 | 0.02 |
+  | 64 | 0.01 | 0.05 |
+  | 128 | 0.02 | 0.05 |
+  s*(M) = the largest grid seed sd at which P(correct class per cell) >= 0.8 for both reference positions, e <= 0.005 (Q1) or
+  e in {0, 0.01} (Q2), and every cell correlation of the seed effect (0 and 0.9).
+* **Operating characteristics v2 (VERIFIED, `results-stage1-step3`, `66c5846`, `results_stage1/oc_1A_v2/`):** bootstrap critical
+  value at alpha 0.025 (median c 4.16 / 3.46 / 3.29 / 3.21 at M = 16 / 32 / 64 / 128); P(wrong class) 0 in all 192 non-boundary
+  Q1 settings and all 144 Q2 settings (200 and 300 two-replicate studies); P(PROCEED) 0 at every boundary truth (96 settings).
+  Q1 per-cell power (min over the conditions above): 0.95 at s = 0.005, M = 16; 0.88 at s = 0.01, M = 32; 0.92 at s = 0.02,
+  M = 128; 0.00-0.67 at s = 0.02 with M <= 64. **Honest consequence: Q1 is resolvable only if the between-seed sd of a model's
+  regret is at most about 0.0148 nats (0.02 / 1.35) and the cap reaches 128; this is the main risk of Stage 1A.**
+* The pilot writes only sds, pass flags, counts, the cap, the projection and the retained secondary families
+  (`pilot_decision.json`); no pilot means or classes are computed into any file.
 
-## 7. Pilot and sample size (pilot seeds only; pilot effects are written to a file that is not opened)
+## 8. Program verdict (order: BLOCKED, NOT RESOLVABLE, PROCEED, REVISE)
+BLOCKED if a control or critical check fails; NOT RESOLVABLE if the pilot finds no budget or both families exceed the cap;
+PROCEED (to the F1 neural stage, on a new decision) if the Q1 answer is decisive or Q2 yields K*; REVISE otherwise. The answers
+of section 6 are reported with effect sizes and bands whatever the verdict.
 
-* Pilot arms: CONT, UNIF, LIB-2, LIB-16; 8 models each; size M; trained to 200k steps with checkpoints at 25k, 50k, 100k, 200k.
-* **Budget B** = the smallest checkpoint at which every pilot model passes C1 and C2 on training-distribution validation
-  systems (pilot evaluation seed). None passes: Stage 1A verdict NOT RESOLVABLE (capability), no confirmatory run.
-* **Number of models** per arm and replicate, from the between-seed sd s of the per-model statistics at budget B:
-  * Q1: s1 = the largest between-seed sd over the 20 Q1 statistics (CONT, UNIF pilots); M1 = max(8, ceil((1.35 s1)^2 / 0.002^2)).
-  * Q2: s2 = the largest over the Q2 statistics of LIB-2 and LIB-16 (ASSUMED representative of all K); M2 = max(8, ceil((1.35 s2)^2 / 0.008^2)).
-  * 1.35 = sqrt(7 / chi2_{0.20, 7}), the 80% upper confidence factor for an sd from 8 models (computed).
-  * Cap 64 per arm per replicate. If M1 > 64: Q1 NOT RESOLVABLE at delta (no confirmatory Q1 run); likewise Q2.
-* Justification of the targets (VERIFIED, `results_stage1/oc_1A/oc_q1_a025.csv`, `oc_q2_c405.csv`): at the
-  pre-registered family sizes, for models at either reference (pi in {0, 1}):
-  * Q1 (alpha 0.025): P(correct class per cell) 0.90-0.98 at s = 0.01, M = 32 when the approximation error e <= 0.005
-    (0.58-0.95 at e = 0.01); 0.71-0.82 at s = 0.02, M = 64 (e <= 0.005). The target SE 0.002 (delta/10) is the
-    s/sqrt(M) at which per-cell power is about 0.9 or more for e <= 0.005. With the cap of 64, Q1 is resolvable for
-    s up to about 0.016 (UCL-adjusted).
-  * Q2 (c = 4.05, the Bonferroni value for 480 statistics at 0.025): P(correct) >= 0.88 at s = 0.05, M = 32 (0.30 at M = 16).
-  * P(wrong class) was 0 in every non-boundary setting: 352 Q1 settings and 144 Q2 settings, 300 two-replicate studies each.
-  * Models half-way between references (pi = 0.25, 0.5, 0.75) are mostly INCONCLUSIVE: the design does not resolve
-    intermediate positions, by construction of the margins.
-* Pilot statistics used: only between-seed sds, C1/C2 pass flags and timing. Pilot means and classes are never computed
-  into any file that is opened (`results_stage1/pilot/PILOT_ONLY_do_not_open_effects.json`).
-
-## 8. Program verdict (in the order BLOCKED, NOT RESOLVABLE, PROCEED, REVISE)
-
-* BLOCKED: a critical check or control fails (reported as a capability or validity failure, not a scientific result).
-* NOT RESOLVABLE: the pilot rule says no budget passes C1/C2, or M1 > 64 and M2 > 64.
-* PROCEED (to the F1 neural stage, on a new decision): the Q1 answer is decisive (POP-LIKE or STAB-LIKE) or Q2 yields K*.
-* REVISE: otherwise.
-* The scientific answers (section 6) are reported with effect sizes and bands whatever the verdict.
-
-## 9. Secondary families (each alpha = 0.05 / 6 per replicate; two replicates; CONT and UNIF arms unless stated)
-
-| Family | Purpose | Models |
+## 9. Secondary families (alpha 0.05 / 7 per replicate each; variants split their family's level; two replicates)
+| Family | Variants (arm, size, budget) | Purpose |
 |---|---|---|
-| Q1 behavioural on PROBE and OOS (cells IDENTIFIABLE in the map, n <= 20; rule `classify_behavioural` with pop, stab) | Prior use where held-out gaps are small; OOS is the sharpest test (pop cannot reach abs(a) > 0.95) | the primary CONT/UNIF models |
-| Size S and L | Does capacity change the Q1 class? | M_sec per arm and size |
-| Training length 4B (classification at 4B) | Is the class stable after longer training (transience)? | M_sec |
-| Depth vs width at equal parameters: (2 layers, d 96) vs (8 layers, d 48), both 221 184 parameters by 12 d^2 per layer | Depth for in-context estimation (Cole et al.) vs use of the prior | M_sec each |
-| Architecture: GRU (2 x 128) and a diagonal linear recurrent state-space model (4 layers, d 64), plain PyTorch | Is the behaviour attention-specific? | M_sec each |
-| Q2 with size L | Does capacity move K*? | M_sec for LIB-K at K in {4, 16, 64} |
+| Q1-behavioural | primary CONT and UNIF models on PROBE / OOS cells (`classify_behavioural`, pop vs stab) | prior use where held-out gaps are small; OOS is the sharpest test |
+| training-length-4B | CONT, UNIF, size M, 4B | transience of the class |
+| size-S, size-L | CONT, UNIF | capacity |
+| depth-width | CONT, UNIF at (2 x 96) and (8 x 48) | depth for in-context estimation vs prior use |
+| architecture | CONT, UNIF as GRU and as diagonal linear SSM | attention-specific? |
+| Q2-size-L | LIB-4, LIB-16, LIB-64 at size L | capacity and K* |
+M_sec = min(M1, 32) (Q2-size-L: min(M2, 32)). **Drop rule (frozen):** projected GPU hours (J0-scaled per size) of primary plus
+retained secondary families must fit 48 h; families are dropped in the order architecture, depth-width, Q2-size-L, size-S,
+size-L, training-length-4B; the primary families are never reduced (TESTED: test_pipeline_e2e.py).
 
-M_sec = min(M1, 32). If the J0-projected total exceeds 48 GPU-hours (your instruction: 1-2 days), secondary families are
-dropped in this order until it fits: architectures, depth/width, Q2-size-L, size S, size L, training length. The primary
-families are never reduced.
+## 10. EXPLORATORY (excluded from headline claims)
+Context lengths beyond training; training trajectories at B/4, B/2; mixture-weight fits; per-r breakdowns; anything else.
 
-## 10. EXPLORATORY (no confirmatory alpha; excluded from headline claims)
-Context lengths beyond training (n = 40, 80); the training trajectory of each statistic at B/4 and B/2; mixture-weight fits
-between library and continuous predictors; per-r breakdowns beyond the cells above; anything not listed in sections 6 and 9.
+## 11. Seeds (`config/stage1_seed_manifest.yaml` is the single source of truth)
+Used: map 70001; OC 70101, 70102; head floor 70201; F1 map 70301; smoke and timing 69999, 12345. Unused until their step:
+engineering smoke 70901; J0 70902; pilot 71001 / 71101 / 71201 / 71999; confirmatory 72001-72002 / 72101-72102 / 72201-72202 /
+72999. Test-only roles 691xx (pytest end-to-end test; never decisions). Torch seeds derive from (train root, "stage1_init", seed index).
 
-## 11. Seeds (single source of truth after the freeze: `config/stage1_seed_manifest.yaml`)
-
-| Role | Seed | Status |
-|---|---|---|
-| stage1_map | 70001 | used (map) |
-| stage1_oc | 70101, 70102 | used (operating characteristics) |
-| stage1_head_floor | 70201 | used (head floor) |
-| smoke / timing (never decisions) | 69999, 12345 | used |
-| engineering smoke (UNIF only, before the freeze) | 70901 | unused |
-| pilot train / eval / library / bootstrap | 71001 / 71101 / 71201 / 71999 | unused |
-| confirmatory R1 / R2 train | 72001 / 72002 | unused |
-| confirmatory R1 / R2 eval | 72101 / 72102 | unused |
-| confirmatory R1 / R2 library | 72201 / 72202 | unused |
-| confirmatory bootstrap | 72999 | unused |
-Torch seeds derive from `NamedStreams(root).seed_sequence(name, arm, seed_index)` (stable across arms and model counts).
-
-## 12. Compute plan (ASSUMED until J0; one shared RTX A4000, wall-clock limited)
-
+## 12. Compute plan (pending J0 on the free GPU)
 | Job | Where | Estimate |
 |---|---|---|
-| Unit tests, mutation matrix, J0 benchmark (300 steps per size, random data) | laptop then box | minutes |
-| Engineering smoke (UNIF, 2 models, 5k steps, seed 70901) | box GPU | < 15 min |
-| Pilot: 32 models x 200k steps (size M) + evaluation | box GPU | ASSUMED 5 min per model if batched 8-16 per GPU: about 1-2 h |
-| Confirmatory primary: CONT + UNIF (M1 each) + 8 LIB arms (M2 each), 2 replicates, size M | box GPU | at M1 = M2 = 64: 1280 models; at ASSUMED 150 models per GPU-hour about 9 h |
-| Secondary families | box GPU | up to about 1500 more models; trimmed by the rule in section 9 |
-| Evaluation (KL quadrature for every model and cell) | box CPU + GPU | about 1-2 h |
+| J0 (300 steps per size; concurrency 1/4/8/16) and engineering smoke (UNIF, 2 models, 5k steps) | box GPU, after your go | about 15-30 min |
+| Pilot: 32 models x 200k steps + two evaluation passes | box GPU | from J0 |
+| Confirmatory primary + retained secondary | box GPU | <= 48 GPU-h by the frozen rules |
+| Evaluation and analysis (KL quadrature, bootstrap) | box CPU | about 2-4 h (ASSUMED) |
 
-## 13. Implementation and validation before the freeze (step 3)
-`dynaicl_neural/` data (arm samplers with CRN), models (transformer, GRU, linear SSM), training (deterministic settings,
-checkpointing, GPU temperature and utilisation logged per job), evaluation adapter, analysis (exists). Tests: sampler laws
-(KS), CRN coupling, library atoms, causality (V-CAUSAL), oracle "models" (pop / stab / lib wrapped as models must be
-classified POP-LIKE / STAB-LIKE / LIB-LIKE with zero regret), training determinism on CPU, bootstrap vs Gaussian agreement.
-Mutation matrix: wrong prior in an arm, unpaired seeds, missing causal mask, target leaked into the input, wrong reference
-in the analysis, off-by-one position, library atoms not nested. No test waits for input.
+## 13. Implementation and validation status (VERIFIED at this draft)
+`dynaicl_neural/` (seeds, data, models, train, adapter, evaluate, analysis, config, pipeline, authorization), `scripts/stage1_run.py`,
+`scripts/stage1_freeze.py`. Stage 1 suite: 82 passed (laptop); mutation matrix 7/7 detected with a clean baseline; end-to-end
+pipeline test at toy scale; the end-to-end test found and fixed one real defect (the bootstrap seed was indexed per replicate).
 
-## 14. What was seen before this draft
-Stage 0.5 per-item contrasts (planning spreads); the full separability map (reference-only); operating characteristics
-(synthetic); smoke-seed reference numbers; the head-floor smoke. No model, no neural result, no Stage 1 pilot or
-confirmatory seed.
+## 14. What was seen before freezing
+Stage 0.5 per-item contrasts; the Stage 1A and F1 separability maps (reference-only); operating characteristics v1 (withdrawn)
+and v2 (synthetic); smoke-seed reference numbers; the head floor; the audit. No Stage 1 model has been trained except toy and
+30-step CPU smoke models on test or smoke seeds; no pilot or confirmatory seed has been used.
 
-## 15. Freeze (step 5, after your approval)
-A Stage 1 manifest (`docs/FREEZE_MANIFEST_STAGE1.json`) over this document, the configs, the seed manifest, `dynaicl_families/`,
-`dynaicl_neural/`, the scripts and tests; a read-only snapshot; an authorization gate for the confirmatory run (you issue it with
-your own key, as in Stage 0.6); one confirmatory run per decision; append-only disclosure log `docs/DISCLOSURE_LOG_STAGE1.md`.
+## 15. Freeze (step 5)
+`scripts/stage1_freeze.py build` writes `docs/FREEZE_MANIFEST_STAGE1.json` (SHA-256 of every file in the frozen set: this document,
+the map specs, MATH_F1, the audit, configs, seed table, power lookup, requirements-stage1.txt, dynaicl_families/, dynaicl_neural/,
+tests_stage1/, scripts/stage1_*) and a read-only snapshot; J0 and engineering-smoke result files are added to the frozen set. You
+store the manifest hash outside the workspace. Pilot and confirmatory runs verify it; the confirmatory run additionally needs your
+authorization artifact (HMAC-SHA256 under your key, binding manifest, snapshot, config, this document, the pilot decision and the
+seed set; one run id per output directory). Appendix A (after the pilot) will record the pilot decision.

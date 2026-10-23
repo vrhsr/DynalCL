@@ -32,6 +32,7 @@ class Statistic:
     name: str
     values: np.ndarray        # (M, N)
     item_set: str             # evaluation set id; systems are resampled jointly within a set
+    rows: tuple[int, ...] | None = None   # seed indices of the rows when a gate kept only some models (else 0..M-1)
 
     def __post_init__(self) -> None:
         v = np.asarray(self.values, dtype=FLOAT)
@@ -60,15 +61,23 @@ def estimates(stats: list[Statistic]) -> dict[str, tuple[float, float]]:
     return {s.name: two_level(s.values) for s in stats}
 
 
+def _rows(s: Statistic) -> list[int]:
+    return list(range(s.values.shape[0])) if s.rows is None else list(s.rows)
+
+
 def _check_shapes(stats: list[Statistic]) -> tuple[int, dict[str, int]]:
-    m = {s.values.shape[0] for s in stats}
-    if len(m) != 1:
-        raise ValueError("all statistics must have the same number of model rows (aligned seed indices)")
+    """(number of seed indices M, {item set: N}). Rows are seed indices; a gated statistic uses a subset of them."""
+    for s in stats:
+        if s.rows is not None and len(s.rows) != s.values.shape[0]:
+            raise ValueError(f"statistic {s.name}: rows do not match the number of model rows")
+    m = {max(_rows(s)) + 1 for s in stats}
+    if len(m) != 1 and any(s.rows is None for s in stats):
+        raise ValueError("all ungated statistics must have the same number of model rows (aligned seed indices)")
     sets: dict[str, int] = {}
     for s in stats:
         if sets.setdefault(s.item_set, s.values.shape[1]) != s.values.shape[1]:
             raise ValueError(f"item set {s.item_set} has inconsistent column counts")
-    return m.pop(), sets
+    return max(m), sets
 
 
 def critical_value_bootstrap(stats: list[Statistic], alpha: float, draws: int, rng: np.random.Generator,
@@ -84,7 +93,7 @@ def critical_value_bootstrap(stats: list[Statistic], alpha: float, draws: int, r
         vs = {k: rng.multinomial(n, np.full(n, 1.0 / n)).astype(FLOAT) for k, n in sets.items()}
         t = 0.0
         for s in stats:
-            th, se = two_level(s.values, w, vs[s.item_set])
+            th, se = two_level(s.values, w[_rows(s)], vs[s.item_set])
             if not (math.isfinite(se) and se > 0):
                 raise FloatingPointError(f"bootstrap draw {b}: invalid SE for {s.name}")
             t = max(t, abs(th - base[s.name][0]) / se)

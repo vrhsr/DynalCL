@@ -41,6 +41,7 @@ SIZES = {
     "DW-deep": ModelSpec("transformer", 48, 8, 4),
     "GRU": ModelSpec("gru", 128, 2),
     "SSM": ModelSpec("ssm", 64, 4),
+    "XS": ModelSpec("transformer", 16, 1, 2),          # tests only (end-to-end pipeline test); never in a run config
 }
 
 
