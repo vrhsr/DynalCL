@@ -171,6 +171,21 @@ Stage 0.5 per-item contrasts; the Stage 1A and F1 separability maps (reference-o
 and v2 (synthetic); smoke-seed reference numbers; the head floor; the audit. No Stage 1 model has been trained except toy and
 30-step CPU smoke models on test or smoke seeds; no pilot or confirmatory seed has been used.
 
+## 14b. Status of every audit finding (docs/STAGE1_INDEPENDENT_AUDIT.md)
+| Item | Severity | Status |
+|---|---|---|
+| A1 Gaussian vs bootstrap critical value in the OC | MAJOR | **Fixed**: OC v2 uses the bootstrap critical value (median of 5 x 1000-draw replicates per setting); v1 power withdrawn; min 16 models; lookup. Residual, disclosed: the per-setting c varied across the 5 replicates (median range 0.21, max 2.53), so OC power is evaluated at the median c, while the real analysis computes c once per study with 4000 draws. |
+| A2 model effect shared across cells | MINOR | **Fixed and bounded**: OC v2 simulates one model-level effect with cell correlation rho in {0, 0.9}; the lookup takes the minimum power over both. VERIFIED from oc_q1_v2.csv: per-cell power at rho = 0.9 is >= power at rho = 0 in 96 of 96 setting pairs (smallest difference -0.001, Monte Carlo noise) and the bootstrap c is smaller at rho = 0.9 in 96 of 96 (mean 3.23 vs 3.65). DERIVED: sharing does not change a cell's marginal distribution, only the correlation across cells, which lowers the max-statistic quantile (Slepian-type argument), so per-cell power can only rise with non-negative sharing; the lookup (rho = 0) is therefore conservative for any rho in [0, 1]. |
+| A3 G without system variance in the OC | MINOR | **Fixed**: G's system component is pi d_j (grows with pi). |
+| A4 F1 quadrature at the support edge | MINOR | **Fixed** with regression test (fails on old code, passes now). |
+| A5 window gap near the support edge | NOTE | **Fixed** with regression test. |
+| A6 common random numbers across cells and draws | NOTE | **Disclosed** in section 2; patterns across cells / draws are not treated as independent evidence. |
+| A7 F1 KL window | NOTE | **Not applicable**: the F1 map uses score gaps, not KL (spec section 3). |
+| A8 log-uniform marginal underflow at (n = 81, R = 1e-12) | NOTE | **Deferred, unreachable** (R >= R_min ~ sigma^2 chi^2_79 at n = 80); raises loudly if ever hit. |
+| A9 Q2 OC critical value and independent distances | NOTE | **Fixed**: Bonferroni-t value with M - 1 df over 480 statistics (conservative) and per-system distances correlated 0.5. |
+| A10 WORSE outcomes not counted as wrong | NOTE | **Fixed**: WORSE counts as wrong for a POP truth; for STAB truths P_WORSE was 0 in all 96 settings (VERIFIED). |
+| A11 Q2 OC seed derived arithmetically | NOTE | **Fixed**: OC v2 takes both seeds from the seed-role table (role stage1_oc: 70101, 70102). |
+
 ## 15. Freeze (step 5)
 `scripts/stage1_freeze.py build` writes `docs/FREEZE_MANIFEST_STAGE1.json` (SHA-256 of every file in the frozen set: this document,
 the map specs, MATH_F1, the audit, configs, seed table, power lookup, requirements-stage1.txt, dynaicl_families/, dynaicl_neural/,

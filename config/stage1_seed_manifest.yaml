@@ -9,6 +9,7 @@ roles:
   smoke_and_timing:    {seeds: [69999, 12345], use: "smoke and timing runs; never decisions", status: used}
   engineering_smoke:   {seeds: [70901], use: "UNIF-only engineering smoke before the freeze", status: unused}
   j0_benchmark:        {seeds: [70902], use: "J0 throughput benchmark (random sequences; nothing evaluated)", status: unused}
+  unif_spread:         {seeds: [70903], use: "PROPOSED UNIF-only seed-spread read before the freeze (outside the hypothesis)", status: unused}
   f1_map:              {seeds: [70301], use: "F1 separability map (reference-only)", status: unused}
   pilot_train:         {seeds: [71001], use: "pilot model initialisation and training data", status: unused}
   pilot_eval:          {seeds: [71101], use: "pilot evaluation and validation systems", status: unused}

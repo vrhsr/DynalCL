@@ -11,6 +11,7 @@ Pilot outputs: pilot_decision.json (step budget, between-seed sds, model counts,
 from __future__ import annotations
 
 import json
+import multiprocessing
 import math
 import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -179,7 +180,8 @@ def run_training(cfg: Stage1Config, jobs: list[Job], out: Path, workers: int, de
     rts = {rep: roots(cfg, rep) for rep in {j.replicate for j in jobs}}
     todo = [j for j in jobs if not (j.model_dir(out) / "train_record.json").exists()]
     log(f"training: {len(jobs)} models, {len(jobs) - len(todo)} done, {len(todo)} to run, workers={workers}")
-    with ProcessPoolExecutor(max_workers=workers) as ex:
+    # spawn, not fork: CUDA cannot be used in a child forked from a parent that has touched CUDA
+    with ProcessPoolExecutor(max_workers=workers, mp_context=multiprocessing.get_context("spawn")) as ex:
         futs = [ex.submit(_train_one, j, cfg.batch, str(out), device, rts[j.replicate]) for j in todo]
         for k, f in enumerate(as_completed(futs), 1):
             log(f"[train {k}/{len(todo)}] {f.result()}")
