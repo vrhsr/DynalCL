@@ -31,7 +31,7 @@ N_EVAL = 4000
 CELLS = [(r, n) for r in (0.25, 1.0, 4.0) for n in (1, 2, 3, 5)] + [(1.0, 20)]
 
 
-def _train(i: int, steps: int, device: str, out: str) -> str:
+def _train(i: int, steps: int, device: str, out: str, checkpoints: tuple[int, ...]) -> str:
     from dynaicl_neural.data import ArmSpec
     from dynaicl_neural.models import SIZES
     from dynaicl_neural.seeds import derived_seed, role_seed
@@ -41,7 +41,7 @@ def _train(i: int, steps: int, device: str, out: str) -> str:
     d = Path(out) / f"model{i}"
     if (d / "train_record.json").exists():
         return str(d)
-    cfg = TrainConfig(steps=steps, checkpoints=(steps,), log_every=max(1, steps // 20),
+    cfg = TrainConfig(steps=steps, checkpoints=checkpoints, log_every=max(1, steps // 20),
                       warmup=min(1000, max(1, steps // 10)))
     train_model(SIZES["M"], ArmSpec("UNIF"), i, derived_seed(root, "train"), derived_seed(root, "library"), cfg, d,
                 device)
@@ -63,7 +63,10 @@ def main(argv=None) -> int:
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--steps", type=int, required=True)
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--checkpoints", type=int, nargs="*", default=None,
+                    help="extra checkpoints to evaluate (the final step is always included)")
     args = ap.parse_args(argv)
+    cks = tuple(sorted(set((args.checkpoints or []) + [args.steps])))
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     res = {"gpu_start": gpu_stats(), "steps": args.steps, "n_models": N_MODELS}
@@ -71,7 +74,7 @@ def main(argv=None) -> int:
     # spawn, not fork: CUDA cannot be used in a child forked from a parent that has touched CUDA (and on Windows)
     with ProcessPoolExecutor(max_workers=args.workers, mp_context=multiprocessing.get_context("spawn")) as ex:
         list(ex.map(_train, range(N_MODELS), [args.steps] * N_MODELS, [args.device] * N_MODELS,
-                    [str(out)] * N_MODELS))
+                    [str(out)] * N_MODELS, [cks] * N_MODELS))
     res["train_wall_seconds"] = time.time() - t0
     res["gpu_after_training"] = gpu_stats()
 
@@ -81,26 +84,32 @@ def main(argv=None) -> int:
     from dynaicl_neural.models import SIZES, build_model
     stab = stability_prior()
     eval_root = derived_seed(role_seed("unif_spread"), "eval")
-    per_model = {f"{r}|{n}": [] for r, n in CELLS}
-    for i in range(N_MODELS):
-        model = build_model(SIZES["M"])
-        model.load_state_dict(torch.load(out / f"model{i}" / f"step{args.steps}.pt", map_location=args.device))
-        model.to(args.device)
-        for r, n in CELLS:
-            cond = ContinuousPriorCondition(StableCoefficientPrior(rho=0.999, sigma=1.0, shape="uniform"),
-                                            InitialStateSpec(0.0, r))
-            ctx, _ = contexts_and_targets(simulate(cond, NamedStreams(eval_root), N_EVAL, 22), n)
-            kl = kl_reference_to_model(stab, ContextStats.from_contexts(ctx), mixture_params(model, ctx, args.device))
-            per_model[f"{r}|{n}"].append(float(kl.mean()))
-    res["cells"] = {k: {"arm_mean_regret": float(np.mean(v)), "between_seed_sd": float(np.std(v, ddof=1)),
-                        "ucl_sd_x1.35": float(1.35 * np.std(v, ddof=1)), "per_model_mean": v}
-                    for k, v in per_model.items()}
-    q1_like = [k for k in res["cells"] if not k.endswith("|20")]
-    res["max_between_seed_sd_q1_like_cells"] = max(res["cells"][k]["between_seed_sd"] for k in q1_like)
+    res["by_checkpoint"] = {}
+    for ck in cks:
+        per_model = {f"{r}|{n}": [] for r, n in CELLS}
+        for i in range(N_MODELS):
+            model = build_model(SIZES["M"])
+            model.load_state_dict(torch.load(out / f"model{i}" / f"step{ck}.pt", map_location=args.device))
+            model.to(args.device)
+            for r, n in CELLS:
+                cond = ContinuousPriorCondition(StableCoefficientPrior(rho=0.999, sigma=1.0, shape="uniform"),
+                                                InitialStateSpec(0.0, r))
+                ctx, _ = contexts_and_targets(simulate(cond, NamedStreams(eval_root), N_EVAL, 22), n)
+                kl = kl_reference_to_model(stab, ContextStats.from_contexts(ctx),
+                                           mixture_params(model, ctx, args.device))
+                per_model[f"{r}|{n}"].append(float(kl.mean()))
+        cells = {k: {"arm_mean_regret": float(np.mean(v)), "between_seed_sd": float(np.std(v, ddof=1)),
+                     "ucl_sd_x1.35": float(1.35 * np.std(v, ddof=1)), "per_model_mean": v}
+                 for k, v in per_model.items()}
+        q1_like = [k for k in cells if not k.endswith("|20")]
+        res["by_checkpoint"][str(ck)] = {"cells": cells, "max_between_seed_sd_q1_like_cells":
+                                         max(cells[k]["between_seed_sd"] for k in q1_like)}
     res["gpu_end"] = gpu_stats()
     res["total_wall_seconds"] = time.time() - t0
     (out / "unif_spread.json").write_text(json.dumps(res, indent=1), encoding="utf-8")
-    print(json.dumps({k: res[k] for k in ("max_between_seed_sd_q1_like_cells", "train_wall_seconds")}, indent=1))
+    print(json.dumps({"train_wall_seconds": res["train_wall_seconds"],
+                      "max_sd_by_checkpoint": {k: v["max_between_seed_sd_q1_like_cells"]
+                                               for k, v in res["by_checkpoint"].items()}}, indent=1))
     return 0
 
 
