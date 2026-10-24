@@ -157,6 +157,14 @@ issues the authorization with their own key, the run, then analysis); (c) Stage 
 * The authorization key for this run was generated on the box by the user's instruction and shredded (F26); the artifact stays off-repo. Never ask for, store or print any key.
 * Stage 1 (neural) is NOT started or authorised. What it should do given STOP (population advantage only at short contexts in these AR(1) families, even with observation noise) is the user's decision.
 
+## 2h-ter. Stage 1 freeze v2 (Amendment 1: cap-rule budget 96 GPU-h), 2026-10-24: THE CURRENT FREEZE
+
+* Manifest `docs/FREEZE_MANIFEST_STAGE1_v2.json` (57 files) sha256 `94cf1c51c80763ce3da4bc37134a4aa03e024744c4e231f2898ffd72a6bc5f75`;
+  snapshot `dist/stage1_frozen_snapshot_v2.zip` sha256 `67ed86062f6f9079f719f3896f8ae7fd422dce9878eef9589cbe8a917c56d2a9`;
+  freeze commit `3a29c15`; amendment `docs/PREREG_stage1_AMENDMENT_1.md`. v1 (below) preserved untouched. Caps at 96 h:
+  120 / 48 / 24 at B = 10k / 25k / 50k (B = 50k still NOT RESOLVABLE (compute)). Pilot wrapper: `pilot_tooling/run_stage1_pilot.sh`
+  (not frozen). Pilot NOT started; it needs the user's approval. Disclosure log S1-S25.
+
 ## 2h-bis. Stage 1 FROZEN before the pilot (2026-10-24)
 
 * Manifest `docs/FREEZE_MANIFEST_STAGE1.json` (55 files) sha256 `ef3dd65e749a49ed5600e95fc613d3192d5ac62d9a902485b290fa25f7369da0`;
