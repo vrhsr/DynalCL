@@ -157,6 +157,16 @@ issues the authorization with their own key, the run, then analysis); (c) Stage 
 * The authorization key for this run was generated on the box by the user's instruction and shredded (F26); the artifact stays off-repo. Never ask for, store or print any key.
 * Stage 1 (neural) is NOT started or authorised. What it should do given STOP (population advantage only at short contexts in these AR(1) families, even with observation noise) is the user's decision.
 
+## 2h-bis. Stage 1 FROZEN before the pilot (2026-10-24)
+
+* Manifest `docs/FREEZE_MANIFEST_STAGE1.json` (55 files) sha256 `ef3dd65e749a49ed5600e95fc613d3192d5ac62d9a902485b290fa25f7369da0`;
+  snapshot `dist/stage1_frozen_snapshot.zip` sha256 `7a070c80d2444b6a94e7b7310cf40f78e376ffeb46aeefb01cf0929387139be0`; commit `f8e1dab`.
+  PREREG is v3 (budget grid {10k, 25k, 50k, 100k} with a convergence criterion; min 32 models per arm; contended J0 caps 56/24/8 at
+  10k/25k/50k, so only B = 10k is feasible; NOT RESOLVABLE (compute) otherwise). Never edit a frozen file; verify with
+  `python scripts/stage1_freeze.py verify --manifest docs/FREEZE_MANIFEST_STAGE1.json --expected-sha256 <hash>`.
+* Next, only on the user's approval: the pilot (pilot seeds; `scripts/stage1_run.py` with config/stage1_pilot.yaml), then
+  pilot-decide, then the confirmatory run under the user's authorization artifact. Disclosure log S1-S23.
+
 ## 2h. Stage 1 (neural; working name IdentICL), branch `stage1-planning` (2026-10-23): at checkpoint 3, NOT frozen
 
 * Read `docs/STAGE1_PLAN.md` (v2, approved), `docs/PREREG_stage1.md` (draft v2, proposed for freezing), `docs/DISCLOSURE_LOG_STAGE1.md`
