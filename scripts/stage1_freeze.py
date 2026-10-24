@@ -21,7 +21,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 FROZEN_GLOBS = [
-    "docs/PREREG_stage1.md", "docs/STAGE1_SEPARABILITY_MAP_SPEC.md", "docs/STAGE1_F1_SEPARABILITY_MAP_SPEC.md",
+    "docs/PREREG_stage1.md", "docs/PREREG_stage1_AMENDMENT_1.md", "docs/STAGE1_SEPARABILITY_MAP_SPEC.md",
+    "docs/STAGE1_F1_SEPARABILITY_MAP_SPEC.md",
+    "docs/FREEZE_MANIFEST_STAGE1.json",          # the v1 freeze, recorded in v2 for chain of custody
     "docs/MATH_F1.md", "docs/STAGE1_INDEPENDENT_AUDIT.md",
     "config/stage1.yaml", "config/stage1_pilot.yaml", "config/stage1_seed_manifest.yaml",
     "config/stage1_power_lookup.json",
