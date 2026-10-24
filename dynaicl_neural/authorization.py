@@ -1,8 +1,11 @@
-"""Stage 1 confirmatory authorization gate (same design as the frozen Stage 0.6 gate; docs/STAGE06_AUTHORIZATION_GATE.md).
+"""Stage 1 confirmatory authorization gate (same design as the frozen Stage 0.6 gate;
+docs/STAGE06_AUTHORIZATION_GATE.md).
 
-A confirmatory ``train`` / ``analyze`` needs an artifact whose payload binds the Stage 1 freeze manifest, snapshot, config,
+A confirmatory ``train`` / ``analyze`` needs an artifact whose payload binds the Stage 1 freeze manifest, snapshot,
+config,
 pre-registration, pilot decision file, exact seed set, run id and a validity window (<= 72 h), authenticated with
-HMAC-SHA256 under a key only the user holds (environment variable DYNAICL_STAGE1_AUTH_KEY at launch; never stored, logged or
+HMAC-SHA256 under a key only the user holds (environment variable DYNAICL_STAGE1_AUTH_KEY at launch; never stored,
+logged or
 written to results). Test-only keys (prefix TEST-ONLY-) can never authorize a non-test artifact, and vice versa.
 One run id per output directory (RUN_LOCK.json). Standard library only.
 
@@ -80,7 +83,8 @@ def build_payload(binding: Binding, run_id: str, issued: _dt.datetime, hours: fl
     if not (0 < hours <= MAX_VALIDITY.total_seconds() / 3600):
         raise ValueError("validity must be in (0, 72] hours")
     return {"schema": SCHEMA, "test_only": bool(test_only), "run_id": run_id,
-            "issued_utc": issued.strftime(TIME_FMT), "expires_utc": (issued + _dt.timedelta(hours=hours)).strftime(TIME_FMT),
+            "issued_utc": issued.strftime(TIME_FMT),
+            "expires_utc": (issued + _dt.timedelta(hours=hours)).strftime(TIME_FMT),
             **{f: getattr(binding, f) for f in BOUND_FIELDS}, "seeds": sorted(int(s) for s in binding.seeds)}
 
 

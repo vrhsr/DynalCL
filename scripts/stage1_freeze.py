@@ -1,10 +1,12 @@
 """Stage 1 freeze tooling: build or verify the Stage 1 freeze manifest and its read-only snapshot.
 
-    python scripts/stage1_freeze.py build  --out docs/FREEZE_MANIFEST_STAGE1.json --snapshot dist/stage1_frozen_snapshot.zip
+    python scripts/stage1_freeze.py build  --out docs/FREEZE_MANIFEST_STAGE1.json --snapshot
+    dist/stage1_frozen_snapshot.zip
     python scripts/stage1_freeze.py verify --manifest docs/FREEZE_MANIFEST_STAGE1.json --expected-sha256 <hash>
 
 `build` refuses if the manifest already exists (a freeze happens once; a re-freeze needs a new versioned name and the
-user's approval). The manifest lists every frozen file with its SHA-256; its own SHA-256 is printed and must be stored by
+user's approval). The manifest lists every frozen file with its SHA-256; its own SHA-256 is printed and must be stored
+by
 the user outside the workspace. `verify` exits 3 (REFUSED) on any mismatch or missing file.
 """
 
@@ -21,11 +23,14 @@ ROOT = Path(__file__).resolve().parents[1]
 FROZEN_GLOBS = [
     "docs/PREREG_stage1.md", "docs/STAGE1_SEPARABILITY_MAP_SPEC.md", "docs/STAGE1_F1_SEPARABILITY_MAP_SPEC.md",
     "docs/MATH_F1.md", "docs/STAGE1_INDEPENDENT_AUDIT.md",
-    "config/stage1.yaml", "config/stage1_pilot.yaml", "config/stage1_seed_manifest.yaml", "config/stage1_power_lookup.json",
+    "config/stage1.yaml", "config/stage1_pilot.yaml", "config/stage1_seed_manifest.yaml",
+    "config/stage1_power_lookup.json",
     "requirements-stage1.txt",
     "dynaicl_families/*.py", "dynaicl_neural/*.py", "tests_stage1/*.py",
     "scripts/stage1_*.py", "scripts/stage1_*.sh",
-    "results_stage1/j0/j0.json", "results_stage1/eng_smoke/eng_smoke.json",   # inputs of the frozen cap and V-REPRO rules
+    # inputs of the frozen cap rule and V-REPRO, and the pre-freeze UNIF-only spread read (disclosure S20)
+    "results_stage1/j0/j0.json", "results_stage1/eng_smoke/eng_smoke.json",
+    "results_stage1/unif_spread/unif_spread.json",
 ]
 SCHEMA = "stage1-freeze-manifest/v1"
 

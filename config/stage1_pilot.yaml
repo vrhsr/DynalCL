@@ -7,7 +7,9 @@ replicates: 1
 primary_arms: [CONT, UNIF, LIB-2, LIB-16]
 model: M
 models_per_arm: 8
-steps: 200000
-checkpoints: [25000, 50000, 100000, 200000]
+steps: 100000
+checkpoints: [10000, 25000, 50000, 100000]
+min_models: 32
+budgets: [10000, 25000, 50000, 100000]
 batch: 256
 eval: {held_n: 10000, probe_n: 5000, oos_n: 5000, control_n: 4000}

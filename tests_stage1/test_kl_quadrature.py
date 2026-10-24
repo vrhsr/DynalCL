@@ -105,7 +105,8 @@ def test_rao_blackwell_equals_realized_score_gap_in_expectation():
 
 def test_window_mode_just_outside_support_audit_a5():
     """Audit finding A5: stab with context (0.1, 10.0899) has its kernel mode 9.99 sd above 0.999 (neither interior nor
-    pinned); the window previously held 0.838 of the mass. It must now hold all of it (the run-time check enforces 1e-8)."""
+    pinned); the window previously held 0.838 of the mass. It must now hold all of it (the run-time check enforces
+    1e-8)."""
     st = ContextStats.from_contexts(np.array([[0.1, 10.0899]]))
     stab = stability_prior()
     m, s = stab.posterior(st)

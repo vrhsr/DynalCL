@@ -74,7 +74,8 @@ def main(argv=None) -> int:
         outs = [json.loads(p.communicate()[0].strip().splitlines()[-1]) for p in procs]
         wall = time.time() - t0
         steps_per_s = c * args.steps / wall
-        res["concurrent"].append({"processes": c, "size": "M", "wall_seconds": wall, "aggregate_steps_per_s": steps_per_s,
+        res["concurrent"].append({"processes": c, "size": "M", "wall_seconds": wall,
+                                  "aggregate_steps_per_s": steps_per_s,
                                   "per_process_sec_per_step": [o["sec_per_step"] for o in outs], "gpu_mid": mid})
         print(f"concurrency {c} (size M): {steps_per_s:.1f} aggregate steps/s, wall {wall:.0f}s", flush=True)
     res["gpu_end"] = gpu_stats()

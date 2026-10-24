@@ -30,7 +30,8 @@ def test_seed_manifest_roles_are_disjoint_and_complete():
     roles = load_roles()
     assert role_seed("stage1_map") == 70001
     for r in ("pilot_train", "pilot_eval", "pilot_library", "pilot_bootstrap", "confirmatory_train",
-              "confirmatory_eval", "confirmatory_library", "confirmatory_bootstrap", "engineering_smoke", "j0_benchmark"):
+              "confirmatory_eval", "confirmatory_library", "confirmatory_bootstrap", "engineering_smoke",
+              "j0_benchmark"):
         assert r in roles
     flat = [s for v in roles.values() for s in v]
     assert len(flat) == len(set(flat))

@@ -1,16 +1,15 @@
 {
  "Q1": {
-  "16": 0.005,
   "32": 0.01,
   "64": 0.01,
   "128": 0.02
  },
  "Q2": {
-  "16": 0.02,
   "32": 0.02,
   "64": 0.05,
   "128": 0.05
  },
+ "min_models": 32,
  "power": 0.8,
  "source": "branch results-stage1-step3, commit 66c5846, results_stage1/oc_1A_v2",
  "note": "s*(M): largest grid seed sd with P_correct >= 0.8 in every qualifying setting"

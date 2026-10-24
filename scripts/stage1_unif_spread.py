@@ -1,14 +1,17 @@
 """PROPOSED (not yet approved): early read of seed-to-seed spread from UNIF-only models, before the freeze.
 
 UNIF is outside the hypothesis (Q1 concerns CONT models on population systems), so this reveals nothing about Q1 or Q2.
-8 UNIF models (size M, seed role `unif_spread`), trained to --steps, evaluated ONLY on systems from UNIF's own law against
+8 UNIF models (size M, seed role `unif_spread`), trained to --steps, evaluated ONLY on systems from UNIF's own law
+against
 stab (UNIF's Bayes predictor): per-context regret KL(stab || model) in the Q1-shaped cells (r in {0.25, 1, 4} x n in
 {1, 2, 3, 5}) and at n = 20. Output: per cell, the arm-mean regret (a capability number) and the BETWEEN-SEED sd of the
-per-model mean regret (the quantity that decides Q1 feasibility through the frozen lookup). Training runs --workers models
+per-model mean regret (the quantity that decides Q1 feasibility through the frozen lookup). Training runs --workers
+models
 concurrently on the GPU; GPU temperature and utilisation are logged.
 
 Usage (box, only on the user's approval):
-    .venv-stage1/bin/python scripts/stage1_unif_spread.py --device cuda --steps <B> --workers 8 --out results_stage1/unif_spread
+    .venv-stage1/bin/python scripts/stage1_unif_spread.py --device cuda --steps <B> --workers 8 --out
+    results_stage1/unif_spread
 """
 
 from __future__ import annotations
@@ -48,6 +51,22 @@ def _train(i: int, steps: int, device: str, out: str, checkpoints: tuple[int, ..
     return str(d)
 
 
+def provenance(args) -> dict:
+    """Commit, tree state, environment and arguments (added after the first run, which wrote none; disclosure S20)."""
+    import platform
+    import subprocess
+
+    import numpy
+    import torch
+
+    def git(*a):
+        return subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    return {"git_commit": git("rev-parse", "HEAD"), "git_status_porcelain": git("status", "--porcelain"),
+            "python": sys.version, "numpy": numpy.__version__, "torch": torch.__version__,
+            "platform": platform.platform(), "args": vars(args),
+            "started_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+
+
 def main(argv=None) -> int:
     from dynaicl.rng import NamedStreams
     from dynaicl.systems.conditions import ContinuousPriorCondition, InitialStateSpec
@@ -69,7 +88,7 @@ def main(argv=None) -> int:
     cks = tuple(sorted(set((args.checkpoints or []) + [args.steps])))
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    res = {"gpu_start": gpu_stats(), "steps": args.steps, "n_models": N_MODELS}
+    res = {"gpu_start": gpu_stats(), "steps": args.steps, "n_models": N_MODELS, "provenance": provenance(args)}
     t0 = time.time()
     # spawn, not fork: CUDA cannot be used in a child forked from a parent that has touched CUDA (and on Windows)
     with ProcessPoolExecutor(max_workers=args.workers, mp_context=multiprocessing.get_context("spawn")) as ex:

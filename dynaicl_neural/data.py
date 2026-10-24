@@ -2,7 +2,8 @@
 
 * Arms differ only in the law of a: CONT (population prior P), UNIF (U(-0.999, 0.999)), LIB-K (uniform over K atoms).
 * Common random numbers: for seed index i the uniforms that pick a, the choice of r, x_0's standard normal and the
-  innovations come from one stream keyed by (data root, "stage1_data", i), which does NOT depend on the arm. Each arm maps
+  innovations come from one stream keyed by (data root, "stage1_data", i), which does NOT depend on the arm. Each arm
+  maps
   the same uniform u to its own a by its inverse CDF (LIB-K: atom floor(u K)).
 * Library atoms for seed i are the first K of 256 atoms drawn from P with the frozen prior sampler, one child stream per
   atom, so libraries are nested across K.

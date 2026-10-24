@@ -1,11 +1,13 @@
 """UNIF-only engineering smoke test (allowed before the freeze; reveals nothing about Q1, which concerns CONT models on
 population systems). Two UNIF models (size M, seed role engineering_smoke), trained for --steps steps, evaluated ONLY on
 systems drawn from UNIF's own law against the stab reference (its Bayes predictor): the capability quantities of
-controls C1 / C2. Also measures V-CAUSAL on the device and V-REPRO (model 0 retrained from its seed). GPU temperature and
+controls C1 / C2. Also measures V-CAUSAL on the device and V-REPRO (model 0 retrained from its seed). GPU temperature
+and
 utilisation are logged in the training records and here.
 
 Usage (box, only after the user says the GPU is free):
-    .venv-stage1/bin/python scripts/stage1_engineering_smoke.py --device cuda --steps 5000 --out results_stage1/eng_smoke
+    .venv-stage1/bin/python scripts/stage1_engineering_smoke.py --device cuda --steps 5000 --out
+    results_stage1/eng_smoke
 """
 
 from __future__ import annotations
@@ -88,9 +90,11 @@ def main(argv=None) -> int:
     res = {"gpu_start": gpu_stats(), "steps": args.steps, "models": []}
     for i in (0, 1):
         t0 = time.time()
-        model, rec = train_model(SIZES["M"], ArmSpec("UNIF"), i, train_root, lib_root, cfg, out / f"model{i}", args.device)
+        model, rec = train_model(SIZES["M"], ArmSpec("UNIF"), i, train_root, lib_root, cfg, out / f"model{i}",
+                                 args.device)
         res["models"].append({"seed_index": i, "train_seconds": rec.seconds, "final_loss": rec.losses[-1][1],
-                              "eval": evaluate(model, args.device, eval_root), "eval_seconds": time.time() - t0 - rec.seconds,
+                              "eval": evaluate(model, args.device, eval_root),
+                              "eval_seconds": time.time() - t0 - rec.seconds,
                               "causality_max_abs_diff": causality(model, args.device, eval_root)})
         print(json.dumps(res["models"][-1]["eval"]), flush=True)
     model_r, _ = train_model(SIZES["M"], ArmSpec("UNIF"), 0, train_root, lib_root, cfg, None, args.device)

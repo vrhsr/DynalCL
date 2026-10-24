@@ -4,7 +4,8 @@ Every model maps x_0..x_T (shape (B, T + 1)) to mixture parameters at every posi
 parameters at position t describe the predictive density of x_{t+1} given x_0..x_t. Causality is by construction
 (masked attention; recurrences run forward) and TESTED by comparing cut contexts with full sequences.
 
-Attention is written out explicitly (no fused kernels) so that ``torch.use_deterministic_algorithms(True)`` holds on GPU.
+Attention is written out explicitly (no fused kernels) so that ``torch.use_deterministic_algorithms(True)`` holds on
+GPU.
 """
 
 from __future__ import annotations

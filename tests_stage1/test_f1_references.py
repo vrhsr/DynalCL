@@ -215,7 +215,8 @@ def test_log_gammaincc_asymptotic_branch_matches_direct():
 @pytest.mark.parametrize("which", ["pop", "ctx"])
 def test_node_doubling_on_explosive_and_out_of_support_contexts_audit_a4(which):
     """Audit finding A4: with the core window beyond the support edge, the posterior piles up at the edge. Node doubling
-    must stay <= 1e-6 nats for explosive data (a = 1.10, n = 60, sigma = 0.6) and out-of-support data (a = 0.99, n = 40)."""
+    must stay <= 1e-6 nats for explosive data (a = 1.10, n = 60, sigma = 0.6) and out-of-support data
+    (a = 0.99, n = 40)."""
     ref = population_f1() if which == "pop" else context_only_f1()
     fine = UnknownScaleReference(ref.coef, ref.scale, refine=2)
     rng = np.random.default_rng(808)

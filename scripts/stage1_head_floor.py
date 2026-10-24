@@ -25,8 +25,10 @@ sys.path.insert(0, str(ROOT))
 from dynaicl.rng import NamedStreams  # noqa: E402
 from dynaicl.systems.conditions import ContinuousPriorCondition, InitialStateSpec  # noqa: E402
 from dynaicl.systems.library import build_library_from_prior  # noqa: E402
-from dynaicl_families.ar1_known_sigma import ContextStats, FiniteLibrary, population_prior, stability_prior  # noqa: E402
-from dynaicl_families.sampling import OutOfSupportCondition, ProbeGridCondition, contexts_and_targets, simulate  # noqa: E402
+from dynaicl_families.ar1_known_sigma import (ContextStats, FiniteLibrary, population_prior,  # noqa: E402
+                                              stability_prior)
+from dynaicl_families.sampling import (OutOfSupportCondition, ProbeGridCondition,  # noqa: E402
+                                       contexts_and_targets, simulate)
 from dynaicl_families.separability import POP_FROZEN, reference_window  # noqa: E402
 
 SEED = 70201
@@ -105,7 +107,8 @@ def main(argv=None) -> int:
     out.mkdir(parents=True, exist_ok=True)
     rng = np.random.default_rng(SEED)
     streams = NamedStreams(SEED)
-    lib_atoms = {k: build_library_from_prior(POP_FROZEN, k, streams, stream_name="stage1_head_floor_library").coefficients
+    lib_atoms = {k: build_library_from_prior(POP_FROZEN, k, streams,
+                                             stream_name="stage1_head_floor_library").coefficients
                  for k in (2, 8, 32, 256)}
     refs = {"pop": population_prior(), "stab": stability_prior(), "lib2": FiniteLibrary(lib_atoms[2]),
             "lib8": FiniteLibrary(lib_atoms[8]), "lib32": FiniteLibrary(lib_atoms[32]),
@@ -140,7 +143,8 @@ def main(argv=None) -> int:
                     for m, f in floors.items():
                         f = np.asarray(f)
                         rows.append({"set": set_name, "r": r, "n": n, "ref": ref_name, "m": m, "mean_floor": f.mean(),
-                                     "p95_floor": float(np.quantile(f, 0.95)), "max_floor": f.max(), "contexts": f.size})
+                                     "p95_floor": float(np.quantile(f, 0.95)), "max_floor": f.max(),
+                                     "contexts": f.size})
                 print(f"r={r} {set_name} done", flush=True)
     with open(out / "head_floor.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))

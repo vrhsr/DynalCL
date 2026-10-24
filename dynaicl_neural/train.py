@@ -2,7 +2,8 @@
 
 AdamW (lr 1e-3, weight decay 0.01), linear warmup over 1000 steps then cosine decay to 0 at the final step, batch 256,
 gradient-norm clip 1.0, float32, loss = mean NLL of x_{t+1} given x_0..x_t over t = 0..19. Deterministic settings are
-applied by ``set_determinism`` (call it before CUDA initialises). GPU temperature and utilisation are logged at the start,
+applied by ``set_determinism`` (call it before CUDA initialises). GPU temperature and utilisation are logged at the
+start,
 every ``log_every`` steps and at the end (``gpu_stats``; None on machines without nvidia-smi).
 """
 

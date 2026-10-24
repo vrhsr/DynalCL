@@ -18,7 +18,8 @@ alpha_secondary_total: 0.05
 bootstrap_draws: 4000
 target_se_q1: 0.002
 target_se_q2: 0.008
-min_models: 16
+min_models: 32
+budgets: [10000, 25000, 50000, 100000]
 ucl_factor: 1.35
 cap_rule: {max_models: 128, gpu_hours_limit: 48.0, safety: 1.25, step: 8}
 # secondary families (PREREG_stage1 section 9); Q1-behavioural reuses the primary models (no extra training)

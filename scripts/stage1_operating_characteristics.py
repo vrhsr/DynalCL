@@ -1,7 +1,8 @@
 """Operating characteristics of the Stage 1A decision rules with synthetic "models" (version 2, after the independent
 audit: findings A1, A2, A3, A9, A10; docs/DISCLOSURE_LOG_STAGE1.md S15). Version 1 is in git history.
 
-Q1. Two independent replicates; in each, CONT and UNIF arms of M models are evaluated on the 10 Q1 cells. Truth per cell:
+Q1. Two independent replicates; in each, CONT and UNIF arms of M models are evaluated on the 10 Q1 cells. Truth per
+cell:
 a position pi between the stability reference (0) and the population reference (1), an approximation error e shared by
 both arms, Delta = the map's KL(pop || stab). Per model and system j:
     R_CONT = (1 - pi) Delta + e + (1 - pi) d_j + u^C_mk + eta,     R_UNIF = Delta + e + d_j + u^U_mk + eta',
@@ -9,7 +10,8 @@ both arms, Delta = the map's KL(pop || stab). Per model and system j:
 d_j the per-system fluctuation of KL(pop || stab) (sd = the map's per-context sd; so G's system variance grows with pi,
 audit A3), u_mk the seed effect: one model-level effect shared across cells with correlation rho_cell (audit A2), sd s,
 eta an interaction (sd = half the system sd). The 40 000 evaluation systems are represented by N_SIM systems with the
-system sds scaled by sqrt(N_SIM / 40 000), which leaves the system part of every SE unchanged (DERIVED; audit confirmed).
+system sds scaled by sqrt(N_SIM / 40 000), which leaves the system part of every SE unchanged (DERIVED; audit
+confirmed).
 **Critical value: the analysis's own procedure, the hierarchical bootstrap (`critical_value_bootstrap`)** at alpha =
 0.025, computed per setting as the median over 5 simulated replicates with 1000 draws each (a bootstrap inside every one
 of thousands of studies is unaffordable; the range of c across the 5 replicates is reported). Classification

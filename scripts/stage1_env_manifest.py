@@ -1,6 +1,7 @@
 """Record the Stage 1 execution environment (PREREG_stage1 section 13) as JSON.
 
-Usage (box): .venv-stage1/bin/python scripts/stage1_env_manifest.py --out results_stage1/env/STAGE1_ENVIRONMENT_MANIFEST.json
+Usage (box): .venv-stage1/bin/python scripts/stage1_env_manifest.py --out
+results_stage1/env/STAGE1_ENVIRONMENT_MANIFEST.json
 Reads versions only; changes nothing. Touches the GPU only to query its name and CUDA availability.
 """
 
@@ -36,7 +37,8 @@ def main(argv=None) -> int:
     info = {
         "python": sys.version, "implementation": platform.python_implementation(), "executable": sys.executable,
         "system": platform.system(), "machine": platform.machine(), "platform": platform.platform(),
-        "numpy": numpy.__version__, "scipy": scipy.__version__, "pyyaml": yaml.__version__, "pytest": pytest.__version__,
+        "numpy": numpy.__version__, "scipy": scipy.__version__, "pyyaml": yaml.__version__,
+        "pytest": pytest.__version__,
         "torch": torch.__version__, "torch_cuda": torch.version.cuda,
         "cudnn": torch.backends.cudnn.version() if torch.backends.cudnn.is_available() else None,
         "cuda_available": torch.cuda.is_available(),

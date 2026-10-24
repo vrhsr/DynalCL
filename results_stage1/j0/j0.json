@@ -1,0 +1,201 @@
+{
+ "gpu_start": {
+  "temperature_c": 92.0,
+  "utilization_pct": 96.0,
+  "memory_mib": 3977.0,
+  "time": 1792770622.8198357
+ },
+ "single": [
+  {
+   "size": "S",
+   "steps": 300,
+   "seconds": 2.784083366394043,
+   "sec_per_step": 0.009280277887980143,
+   "params": 25734,
+   "gpu_end": {
+    "temperature_c": 93.0,
+    "utilization_pct": 100.0,
+    "memory_mib": 4336.0,
+    "time": 1792770626.828355
+   },
+   "final_loss": 1.5713374078273774
+  },
+  {
+   "size": "M",
+   "steps": 300,
+   "seconds": 5.712453126907349,
+   "sec_per_step": 0.019041510423024495,
+   "params": 200582,
+   "gpu_end": {
+    "temperature_c": 93.0,
+    "utilization_pct": 100.0,
+    "memory_mib": 4436.0,
+    "time": 1792770633.0882413
+   },
+   "final_loss": 1.500723522901535
+  },
+  {
+   "size": "L",
+   "steps": 300,
+   "seconds": 18.51767635345459,
+   "sec_per_step": 0.061725587844848634,
+   "params": 1587462,
+   "gpu_end": {
+    "temperature_c": 93.0,
+    "utilization_pct": 100.0,
+    "memory_mib": 4740.0,
+    "time": 1792770653.0873315
+   },
+   "final_loss": 1.4895627868175507
+  },
+  {
+   "size": "DW-shallow",
+   "steps": 300,
+   "seconds": 4.233173608779907,
+   "sec_per_step": 0.014110578695933023,
+   "params": 224646,
+   "gpu_end": {
+    "temperature_c": 93.0,
+    "utilization_pct": 100.0,
+    "memory_mib": 4740.0,
+    "time": 1792770657.7186015
+   },
+   "final_loss": 1.5072086799144744
+  },
+  {
+   "size": "DW-deep",
+   "steps": 300,
+   "seconds": 9.501278162002563,
+   "sec_per_step": 0.03167092720667521,
+   "params": 226662,
+   "gpu_end": {
+    "temperature_c": 93.0,
+    "utilization_pct": 100.0,
+    "memory_mib": 4778.0,
+    "time": 1792770668.1029656
+   },
+   "final_loss": 1.4963561522960662
+  },
+  {
+   "size": "GRU",
+   "steps": 300,
+   "seconds": 2.8329975605010986,
+   "sec_per_step": 0.009443325201670329,
+   "params": 199174,
+   "gpu_end": {
+    "temperature_c": 93.0,
+    "utilization_pct": 99.0,
+    "memory_mib": 4872.0,
+    "time": 1792770671.25559
+   },
+   "final_loss": 1.4874912631511688
+  },
+  {
+   "size": "SSM",
+   "steps": 300,
+   "seconds": 4.384068012237549,
+   "sec_per_step": 0.01461356004079183,
+   "params": 166918,
+   "gpu_end": {
+    "temperature_c": 93.0,
+    "utilization_pct": 100.0,
+    "memory_mib": 4872.0,
+    "time": 1792770676.0891173
+   },
+   "final_loss": 1.4922848284244536
+  }
+ ],
+ "concurrent": [
+  {
+   "processes": 1,
+   "size": "M",
+   "wall_seconds": 8.317447423934937,
+   "aggregate_steps_per_s": 36.06875820299105,
+   "per_process_sec_per_step": [
+    0.01901134252548218
+   ],
+   "gpu_mid": {
+    "temperature_c": 93.0,
+    "utilization_pct": 100.0,
+    "memory_mib": 4872.0,
+    "time": 1792770676.1124725
+   }
+  },
+  {
+   "processes": 4,
+   "size": "M",
+   "wall_seconds": 17.392845630645752,
+   "aggregate_steps_per_s": 68.99388550230277,
+   "per_process_sec_per_step": [
+    0.04285687526067098,
+    0.042957897981007895,
+    0.04281884431838989,
+    0.04285943587621053
+   ],
+   "gpu_mid": {
+    "temperature_c": 93.0,
+    "utilization_pct": 99.0,
+    "memory_mib": 4872.0,
+    "time": 1792770684.430273
+   }
+  },
+  {
+   "processes": 8,
+   "size": "M",
+   "wall_seconds": 29.78840446472168,
+   "aggregate_steps_per_s": 80.56826282328457,
+   "per_process_sec_per_step": [
+    0.07501434882481893,
+    0.07500502745310465,
+    0.07509521484375,
+    0.07492311954498292,
+    0.07513978719711303,
+    0.07503307342529297,
+    0.0750247859954834,
+    0.07500085353851318
+   ],
+   "gpu_mid": {
+    "temperature_c": 93.0,
+    "utilization_pct": 98.0,
+    "memory_mib": 4872.0,
+    "time": 1792770701.8226066
+   }
+  },
+  {
+   "processes": 16,
+   "size": "M",
+   "wall_seconds": 54.78217387199402,
+   "aggregate_steps_per_s": 87.6197430794888,
+   "per_process_sec_per_step": [
+    0.13983399311701455,
+    0.13996055841445923,
+    0.1398530904452006,
+    0.13987202008565267,
+    0.13986224015553791,
+    0.1390761661529541,
+    0.13984514872233073,
+    0.13921195189158123,
+    0.13985271692276002,
+    0.13978146235148112,
+    0.14002240498860677,
+    0.13893533627192178,
+    0.1398117478688558,
+    0.13956233501434326,
+    0.1393668007850647,
+    0.13869096199671427
+   ],
+   "gpu_mid": {
+    "temperature_c": 92.0,
+    "utilization_pct": 99.0,
+    "memory_mib": 4872.0,
+    "time": 1792770731.62051
+   }
+  }
+ ],
+ "gpu_end": {
+  "temperature_c": 92.0,
+  "utilization_pct": 95.0,
+  "memory_mib": 4872.0,
+  "time": 1792770786.3969347
+ }
+}

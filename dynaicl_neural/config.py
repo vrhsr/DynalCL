@@ -45,14 +45,14 @@ class Stage1Config:
     bootstrap_draws: int = 4000
     target_se_q1: float = 0.002
     target_se_q2: float = 0.008
-    min_models: int = 16
+    min_models: int = 32
     ucl_factor: float = 1.35
     epsilon: float = 0.01
     delta: float = 0.02
     cap_rule: CapRule = field(default_factory=CapRule)
     secondary: tuple[str, ...] = ()
     drop_order: tuple[str, ...] = ()
-    budgets: tuple[int, ...] = (25000, 50000, 100000, 200000)
+    budgets: tuple[int, ...] = (10000, 25000, 50000, 100000)
 
     def __post_init__(self) -> None:
         if self.phase not in ("pilot", "confirmatory"):

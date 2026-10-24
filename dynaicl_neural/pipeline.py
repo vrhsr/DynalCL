@@ -27,7 +27,8 @@ from dynaicl.systems.priors import StableCoefficientPrior
 from dynaicl_families.ar1_known_sigma import ContextStats, FiniteLibrary, population_prior, stability_prior
 from dynaicl_families.sampling import OutOfSupportCondition, ProbeGridCondition, contexts_and_targets, simulate
 from dynaicl_families.separability import POP_FROZEN, kl_per_context
-from dynaicl_neural.analysis import (Band, Statistic, band, classify_behavioural, classify_memorisation, classify_q1_held,
+from dynaicl_neural.analysis import (Band, Statistic, band, classify_behavioural, classify_memorisation,
+                                     classify_q1_held,
                                      critical_value_bootstrap,
                                      two_level)
 from dynaicl_neural.config import Stage1Config
@@ -40,6 +41,9 @@ Q2_CELLS = tuple((s, r, n) for s in ("PROBE", "OOS") for r in (0.25, 1.0) for n 
 BEHAV_CELLS = tuple((s, r, n) for s in ("PROBE", "OOS") for r in (0.25, 1.0) for n in (1, 2, 3, 5, 10, 20))
 C1_CELLS = tuple((r, n) for r in (0.25, 1.0, 4.0) for n in (1, 2, 3))
 C2_N = 20
+VAL_N = 20000                 # validation sequences per model for the convergence criterion (training distribution)
+VAL_POSITIONS = 3             # positions 0, 1, 2 (predict x_1, x_2, x_3)
+CONVERGENCE_TOL = 0.002       # nats: user decision at checkpoint 3b (disclosure S21)
 LENGTH = 22
 PROBE_GRID = tuple(round(-0.95 + 0.05 * i, 2) for i in range(39))
 UNIF_PRIOR = StableCoefficientPrior(rho=0.999, sigma=1.0, shape="uniform")
@@ -98,12 +102,14 @@ def plan_jobs(cfg: Stage1Config, decision: dict | None = None) -> list[Job]:
     return jobs + secondary_jobs(cfg, decision)
 
 
-#: secondary families (PREREG section 9): (arm, size, budget multiplier) per variant; Q1-behavioural reuses primary models
+# : secondary families (PREREG section 9): (arm, size, budget multiplier) per variant; Q1-behavioural reuses primary
+# models
 SECONDARY = {
     "training-length-4B": (("CONT", "M", 4), ("UNIF", "M", 4)),
     "size-S": (("CONT", "S", 1), ("UNIF", "S", 1)),
     "size-L": (("CONT", "L", 1), ("UNIF", "L", 1)),
-    "depth-width": (("CONT", "DW-shallow", 1), ("UNIF", "DW-shallow", 1), ("CONT", "DW-deep", 1), ("UNIF", "DW-deep", 1)),
+    "depth-width": (("CONT", "DW-shallow", 1), ("UNIF", "DW-shallow", 1),
+                    ("CONT", "DW-deep", 1), ("UNIF", "DW-deep", 1)),
     "architecture": (("CONT", "GRU", 1), ("UNIF", "GRU", 1), ("CONT", "SSM", 1), ("UNIF", "SSM", 1)),
     "Q2-size-L": (("LIB-4", "L", 1), ("LIB-16", "L", 1), ("LIB-64", "L", 1)),
     "Q1-behavioural": (),
@@ -242,6 +248,10 @@ def evaluate_model(cfg: Stage1Config, job: Job, step: int, sets: dict, out: Path
         ctx, _ = sets[key]
         return mixture_params(model, ctx, device)
 
+    # convergence criterion: NLL at positions 0-2 on validation sequences from the model's own training distribution
+    # (same sequences at every checkpoint: paired); no reference and no other arm is involved
+    if controls_only:
+        res["VAL_NLL_0_2"] = validation_nll(model, job, roots(cfg, job.replicate), device)
     # controls: C1 (UNIF on its own systems, short n), C2 (each arm on its own distribution, n = 20)
     if arm.kind == "UNIF":
         for r, n in C1_CELLS:
@@ -285,6 +295,34 @@ def evaluate_model(cfg: Stage1Config, job: Job, step: int, sets: dict, out: Path
     return f
 
 
+def validation_nll(model, job: Job, roots_: dict, device: str) -> np.ndarray:
+    """Per-sequence mean NLL over positions 0..2 on VAL_N sequences drawn from the job's own arm law (data stream
+    derived
+    from the evaluation root, label 'stage1_validation'; library atoms as in training)."""
+    import torch
+    from dynaicl_neural.data import SequenceSampler
+    from dynaicl_neural.models import mixture_log_prob, model_inputs
+    sampler = SequenceSampler(arm_spec(job.arm), derived_seed(roots_["eval"], "stage1_validation"), roots_["library"],
+                              job.seed_index, VAL_N, VAL_POSITIONS)
+    x_np, _ = sampler.next_batch()
+    model.eval()
+    with torch.no_grad():
+        x = torch.from_numpy(x_np.astype(np.float32)).to(device)
+        nll = -mixture_log_prob(model(model_inputs(x[:, :-1])), x[:, 1:]).double().cpu().numpy()
+    return nll.mean(axis=1)
+
+
+def choose_budget(checkpoints: tuple[int, ...], controls_ok: dict[int, bool], max_improvement: dict[int, float],
+                  tol: float = CONVERGENCE_TOL) -> int | None:
+    """B = the smallest checkpoint at which (a) the controls pass and (b) every model's validation NLL (positions 0-2)
+    improves by less than ``tol`` to the NEXT checkpoint. The last checkpoint has no next point and cannot qualify."""
+    cks = sorted(checkpoints)
+    for k, nxt in zip(cks[:-1], cks[1:]):
+        if controls_ok[k] and max_improvement[k] < tol:
+            return k
+    return None
+
+
 def reference_quantities(cfg: Stage1Config, replicate: int, sets: dict, out: Path) -> Path:
     """Delta = KL(pop || stab) per Q1 cell and pop-stab separations on the behavioural cells (reference-only)."""
     f = out / "eval" / f"R{replicate + 1}" / "reference.npz"
@@ -318,7 +356,10 @@ def control_pass(values: list[np.ndarray], epsilon: float, z: float) -> tuple[bo
 def pilot_decision(cfg: Stage1Config, jobs: list[Job], out: Path, cap: int) -> dict:
     """The frozen pilot rule (PREREG section 7). Writes no means or classes; only sds, flags, counts.
 
-    B: smallest checkpoint where every arm passes C2 (and UNIF passes C1), with Bonferroni z over the control statistics.
+    B: smallest checkpoint where every arm passes C2 (and UNIF passes C1), with Bonferroni z over the control
+    statistics,
+    AND every model's training-distribution validation NLL at positions 0-2 improves by < 0.002 nats to the next
+    checkpoint (``choose_budget``). Cap below min_models at B -> NOT RESOLVABLE (compute).
     s1: largest between-seed sd over the Q1 statistics (R_pop of CONT; G formed per seed index); s2: largest over Q2
     statistics of the LIB arms. M = the smallest M in the frozen power lookup (OC-calibrated, >= min_models, <= cap)
     that supports ucl x s; none -> that family is NOT RESOLVABLE."""
@@ -327,12 +368,12 @@ def pilot_decision(cfg: Stage1Config, jobs: list[Job], out: Path, cap: int) -> d
     by_arm = {a: [j for j in jobs if j.arm == a] for a in arms}
     n_controls = len(arms) + len(C1_CELLS)
     z = float(norm.isf(0.05 / (2 * n_controls)))
-    budget, flags = None, {}
+    flags, controls_ok = {}, {}
     for step in jobs[0].checkpoints:
         ok = True
         for a in arms:
             vals = [_load(j.eval_file(out, step, True))["C2"] for j in by_arm[a]]
-            passed, upper = control_pass(vals, cfg.epsilon, z)
+            passed, _ = control_pass(vals, cfg.epsilon, z)
             flags[f"C2|{a}|{step}"] = {"pass": passed}
             ok &= passed
             if a == "UNIF":
@@ -341,11 +382,20 @@ def pilot_decision(cfg: Stage1Config, jobs: list[Job], out: Path, cap: int) -> d
                                              cfg.epsilon, z)
                     flags[f"C1|{r}|{n}|{step}"] = {"pass": passed}
                     ok &= passed
-        if ok:
-            budget = step
-            break
+        controls_ok[step] = bool(ok)
+    cks = sorted(jobs[0].checkpoints)
+    improvement = {}
+    for k, nxt in zip(cks[:-1], cks[1:]):
+        improvement[k] = max(float(_load(j.eval_file(out, k, True))["VAL_NLL_0_2"].mean()
+                                   - _load(j.eval_file(out, nxt, True))["VAL_NLL_0_2"].mean()) for j in jobs)
+    budget = choose_budget(tuple(cks), controls_ok, improvement)
     decision = {"status": "NOT RESOLVABLE (capability)" if budget is None else "RESOLVED", "B": budget,
-                "control_flags": flags, "z_controls": z, "cap": cap}
+                "control_flags": flags, "controls_ok": {str(k): v for k, v in controls_ok.items()},
+                "max_validation_nll_improvement_to_next": {str(k): v for k, v in improvement.items()},
+                "convergence_tol": CONVERGENCE_TOL, "z_controls": z, "cap": cap}
+    if budget is not None and cap < cfg.min_models:
+        decision.update(status="NOT RESOLVABLE (compute)", M1=None, M2=None, s1=None, s2=None)
+        return decision
     if budget is None:
         decision.update(M1=None, M2=None, s1=None, s2=None)
         return decision
@@ -503,11 +553,13 @@ def analyse_q2(cfg: Stage1Config, jobs: list[Job], out: Path, alpha: float | Non
             if not mt["kept"]:
                 cells[f"{arm}|{key}"] = {"class": "GATED OUT", **mt}
                 continue
-            b = {nm: band(*est[f"{arm}|{key}|{nm}"], c) for nm in ("D_lib", "D_pop", "D_stab", "C_pop_lib", "C_stab_lib")}
+            b = {nm: band(*est[f"{arm}|{key}|{nm}"], c)
+                 for nm in ("D_lib", "D_pop", "D_stab", "C_pop_lib", "C_stab_lib")}
             dist = {"lib": b["D_lib"], "pop": b["D_pop"], "stab": b["D_stab"]}
             con = {("pop", "lib"): b["C_pop_lib"], ("lib", "pop"): _mirror(b["C_pop_lib"]),
                    ("stab", "lib"): b["C_stab_lib"], ("lib", "stab"): _mirror(b["C_stab_lib"])}
-            sep = {("lib", "pop"): mt["sep_lib_pop"], ("lib", "stab"): mt["sep_lib_stab"], ("pop", "stab"): mt["sep_pop_stab"]}
+            sep = {("lib", "pop"): mt["sep_lib_pop"], ("lib", "stab"): mt["sep_lib_stab"],
+                   ("pop", "stab"): mt["sep_pop_stab"]}
             cells[f"{arm}|{key}"] = {"class": classify_memorisation(dist, con, sep), **mt,
                                      **{nm: asdict(v) for nm, v in b.items()}}
         per_rep.append({"critical_value": c, "cells": cells})

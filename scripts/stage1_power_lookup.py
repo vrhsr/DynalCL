@@ -20,10 +20,11 @@ from pathlib import Path
 POWER = 0.8
 
 
-def lookup(rows: list[dict], e_allowed: set[float]) -> dict:
+def lookup(rows: list[dict], e_allowed: set[float], min_models: int) -> dict:
     ok = defaultdict(lambda: defaultdict(list))       # M -> s -> [P_correct ...]
     for r in rows:
-        if r["truth"] not in ("POP-LIKE", "STAB-LIKE", "LIB-LIKE", "GENERALISING") or float(r["e"]) not in e_allowed:
+        if (r["truth"] not in ("POP-LIKE", "STAB-LIKE", "LIB-LIKE", "GENERALISING") or float(r["e"]) not in e_allowed
+                or int(r["M"]) < min_models):
             continue
         pc = float(r["P_correct"])
         ok[int(r["M"])][float(r["s"])].append(0.0 if math.isnan(pc) else pc)   # OC v2 wrote NaN for "never correct"
@@ -39,12 +40,15 @@ def main(argv=None) -> int:
     ap.add_argument("--oc", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--source-label", default=None)
+    ap.add_argument("--min-models", type=int, default=32)
     args = ap.parse_args(argv)
     oc = Path(args.oc)
     q1 = list(csv.DictReader(open(oc / "oc_q1_v2.csv", encoding="utf-8")))
     q2 = list(csv.DictReader(open(oc / "oc_q2_v2.csv", encoding="utf-8")))
-    table = {"Q1": lookup(q1, {0.0, 0.005}), "Q2": lookup(q2, {0.0, 0.01}), "power": POWER,
-             "source": args.source_label or str(oc), "note": "s*(M): largest grid seed sd with P_correct >= 0.8 in every qualifying setting"}
+    table = {"Q1": lookup(q1, {0.0, 0.005}, args.min_models), "Q2": lookup(q2, {0.0, 0.01}, args.min_models),
+             "min_models": args.min_models, "power": POWER,
+             "source": args.source_label or str(oc),
+             "note": "s*(M): largest grid seed sd with P_correct >= 0.8 in every qualifying setting"}
     Path(args.out).write_text(json.dumps(table, indent=1), encoding="utf-8")
     print(json.dumps(table, indent=1))
     return 0
