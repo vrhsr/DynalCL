@@ -1,0 +1,14 @@
+# Stage 2 / 3 seed-role table (F1 reference validation extras, F2 VAR(1) references and map, F3 map): the single source of
+# truth for every seed used by dynaicl_families/stage2 and scripts/stage2_*. A seed belongs to exactly one role, and no seed
+# here appears in config/stage1_seed_manifest.yaml, config/stage06_seed_manifest.yaml or the Stage 0 / 0.5 configs
+# (checked by tests_stage2/test_seed_roles.py). Code reads seeds only through dynaicl_families/stage2/seeds.py.
+schema: stage2-seed-roles/v1
+roles:
+  f1_tests:            {seeds: [80301], use: "tests_stage2 unit tests of the F1 checks; never decisions", status: tests}
+  f1_v9_detectors:     {seeds: [80101], use: "F1-V9 mutation matrix, detector checks (clean and mutated rows)", status: unused}
+  f1_a2_validation:    {seeds: [80201], use: "F1 calibration / SBC / coverage / optimality / known-sigma report (task A2)", status: unused}
+  f2_tests:            {seeds: [80401], use: "tests_stage2 unit tests of the F2 references; never decisions", status: tests}
+  f2_validation:       {seeds: [80501], use: "F2 reference validation report (IS convergence, calibration, optimality)", status: unused}
+  f2_v_mutation:       {seeds: [80801], use: "F2 mutation matrix detector checks", status: unused}
+  f2_map:              {seeds: [80601], use: "F2 separability map (reference-only); spec committed before use", status: unused}
+  f3_map:              {seeds: [80701], use: "F3 short-context Kalman map (reference-only); spec committed before use", status: unused}
