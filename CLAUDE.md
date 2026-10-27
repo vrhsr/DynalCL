@@ -1,7 +1,26 @@
 # CLAUDE.md: DynaICL orientation (read this first)
 
 This file gives a new session full context in one read. Details are in the files it points to.
-Last updated: 2026-10-22 (Stage 0.6 confirmatory run DONE, verdict STOP: read section 2g first; sections 2c-2e describe the state BEFORE the run and are historical where they say "not authorised / not started").
+Last updated: 2026-10-27. **Start with section 0 (where things stand now)**, then 2h-quater (Stage 1 pilot result). Sections are in
+chronological order; older ones (1-2g, 7-8) are historical where they say "not started / not authorised / not a git repo".
+
+## 0. Where things stand now (2026-10-27): read this first
+
+* **Active work: Stage 1 (neural, working name IdentICL) on branch `stage1-planning`** (latest pushed commit: see `git log`).
+  Never push `main` without asking; never `--force`.
+* **Current freeze: Stage 1 v2** (Amendment 1, 96 GPU-h), manifest `docs/FREEZE_MANIFEST_STAGE1_v2.json` sha256 `94cf1c51...` (section 2h-ter).
+* **Stage 1A pilot: DONE on the box (2026-10-24 18:28 UTC). Reported outcome: NOT RESOLVABLE (compute)** (B = 50k, cap 24 < 32 models).
+  NOT YET VERIFIED here: the box has not pushed `results-stage1-pilot` yet. Details and the open decision: section 2h-quater.
+* **Waiting on the user** for: (1) relaying the push prompt to the box (small pilot files only), then I verify and append disclosure S26;
+  (2) the decision: accept NOT RESOLVABLE (compute) as the Stage 1A result, or a post-pilot Amendment 2 (128 GPU-h). Nothing is running.
+* Finished stages: 0 (references), 0.5 (REVISE), 0.6 (confirmatory verdict STOP, section 2g). Workstream B (literature) done:
+  `docs/literature/`. Workstream C (paper, `paper/`, claims-to-evidence table) NOT started. F1 neural pre-registration and F2 NOT started.
+* The box: repo `/home/rama_11187/projects/dynacl`, `.venv-stage1` (torch 2.14.1+cu126), shared RTX A4000 (another user's job,
+  `ts2vec_matched`, holds ~8 GB and ~100% utilisation since 2026-10-23: confirm the GPU is free before any Stage 1 GPU work).
+  This session cannot message the box; the user relays prompts. Results come back as small files on a `results-*` branch.
+* Rules that bite most often: never edit a frozen file or manifest; disclosure logs are append-only; never open pilot effect files
+  (`results_stage1/pilot/eval/`, `phase_d_pilot/PILOT_ONLY_do_not_open_effects.json`); never ask for, store or print a key;
+  compute over ~10-15 min runs on the box (detached in tmux, one background waiter, no polling loops); stop at every checkpoint.
 
 ## 1. What this project is
 
@@ -17,7 +36,7 @@ experiment treats as ground truth, for scalar AR(1) x_t = a x_{t-1} + sigma eps_
 A wrong reference silently invalidates the project, so correctness beats speed and features.
 The original Stage 0 spec is in [docs/STAGE0_SPEC.md](docs/STAGE0_SPEC.md).
 
-**Out of scope until asked:** the ~2,000-model sweep, chaotic/particle-filter posteriors, neural or
+**Out of scope until asked (Stage 0 wording; neural Stage 1 is now active, see section 0):** the ~2,000-model sweep, chaotic/particle-filter posteriors, neural or
 transformer pretraining, cross-model validation, any novelty or publishability claim.
 
 ## 2. Status
@@ -27,7 +46,7 @@ transformer pretraining, cross-model validation, any novelty or publishability c
 - Independent audit (a sub-agent re-derived the math and read the code): no critical defects. One major
   quadrature weakness was found and fixed (DECISIONS D-08).
 - **Remote mutation matrix: DONE** (Google Colab, 2026-10-09/10; results pasted by the user; archive not saved because the Colab runtime recycled). Baseline row: 20/20 checks pass. All 5 mutations detected (see 7.1). Pipeline exit codes 0/0.
-- Not a git repository, so provenance records git as unavailable. The user has not asked for `git init`/commits (and Stage 0.6 forbids it without asking again). Integrity evidence is SHA-256 manifests plus read-only snapshot archives.
+- (Historical, Stage 0.) Not a git repository at the time, so Stage 0 provenance records git as unavailable. Since 2026-10-22 the workspace IS a git repo (section 2f). Integrity evidence is SHA-256 manifests plus read-only snapshot archives.
 
 ## 2b. Stage 0.5 (decisive population-advantage experiment): DONE, decision REVISE
 
@@ -157,13 +176,37 @@ issues the authorization with their own key, the run, then analysis); (c) Stage 
 * The authorization key for this run was generated on the box by the user's instruction and shredded (F26); the artifact stays off-repo. Never ask for, store or print any key.
 * Stage 1 (neural) is NOT started or authorised. What it should do given STOP (population advantage only at short contexts in these AR(1) families, even with observation noise) is the user's decision.
 
+## 2h-quater. Stage 1A PILOT RESULT (2026-10-24, relayed 2026-10-27): reported NOT RESOLVABLE (compute); NOT YET VERIFIED
+
+* Ran once on the box via `pilot_tooling/run_stage1_pilot.sh` (pilot seeds, `config/stage1_pilot.yaml`; 32 models = 8 each of CONT, UNIF,
+  LIB-2, LIB-16, size M, 100k steps, checkpoints 10k/25k/50k/100k). Finished 2026-10-24 18:28 UTC; wrapper step `done`.
+* REPORTED by the box (not yet checked here): all 32 models trained; controls evaluated; `pilot-decide` ran ONCE; log line
+  `B=50000 M1=None M2=None cap=24 secondary=None`; status **NOT RESOLVABLE (compute)** (PREREG v3 section 8 and Amendment 1:
+  the cap at 50k under 96 GPU-h is 24 < the 32-model minimum).
+* Meaning (frozen rules): the convergence rule did not qualify 10k or 25k (a control failed or validation NLL at positions 0-2 still
+  improved by >= 0.002 nats to the next grid point; which one is in `pilot_decision.json`) and qualified 50k. Because pass 1 stopped,
+  the full evaluation at B NEVER RAN: no Q1/Q2 effect information exists. `results_stage1/pilot/eval/` holds only controls and
+  validation NLL and must still never be opened or pushed.
+* NOT DONE: the box did not push the results (no `results-stage1-pilot` branch on origin as of 2026-10-27). The push-only relay prompt
+  (no compute) is `pilot_tooling/RELAY_push_pilot_results.md`; it also asks the box to confirm the 50k checkpoints still exist (do not delete
+  weights). After the push: verify the freeze-verify line in `wrapper_log.txt`, `git_head.txt`, the training records, the timings and
+  `pilot_decision.json`; then append disclosure S26 (pilot outcome); then write appendix A.
+* OPEN DECISION (the user's): (1) accept NOT RESOLVABLE (compute) as the Stage 1A result (clean, pre-registered, uninformative);
+  (2) RECOMMENDED if ~5-6 days of shared GPU are acceptable: post-pilot Amendment 2, budget 96 -> 128 GPU-h. Projection at B = 50k:
+  2 replicates x 10 arms x 32 models x (50000 x 0.01141 + 1) s x 1.25 = 127 h -> cap 32 (M = 40 needs about 159 h). Then, on CPU with no
+  retraining, the full evaluation at B on the existing pilot models and `pilot-decide` again (M forced to 32; a family whose lookup
+  needs 64 becomes NOT RESOLVABLE; all secondary families dropped). Must be disclosed as made after seeing the pilot's budget choice
+  (convergence information only, no effects). Requires a v3 freeze alongside v1/v2, suite + mutation matrix, and the user's
+  authorization for the confirmatory run. (3) NOT recommended: recompute the cap from measured pilot timings instead of J0
+  (looks like choosing the input that gives feasibility). Lowering the 32-model minimum is off the table (audit A1 power fix).
+
 ## 2h-ter. Stage 1 freeze v2 (Amendment 1: cap-rule budget 96 GPU-h), 2026-10-24: THE CURRENT FREEZE
 
 * Manifest `docs/FREEZE_MANIFEST_STAGE1_v2.json` (57 files) sha256 `94cf1c51c80763ce3da4bc37134a4aa03e024744c4e231f2898ffd72a6bc5f75`;
   snapshot `dist/stage1_frozen_snapshot_v2.zip` sha256 `67ed86062f6f9079f719f3896f8ae7fd422dce9878eef9589cbe8a917c56d2a9`;
   freeze commit `3a29c15`; amendment `docs/PREREG_stage1_AMENDMENT_1.md`. v1 (below) preserved untouched. Caps at 96 h:
   120 / 48 / 24 at B = 10k / 25k / 50k (B = 50k still NOT RESOLVABLE (compute)). Pilot wrapper: `pilot_tooling/run_stage1_pilot.sh`
-  (not frozen). Pilot NOT started; it needs the user's approval. Disclosure log S1-S25.
+  (not frozen). Pilot DONE (section 2h-quater). Disclosure log S1-S25.
 
 ## 2h-bis. Stage 1 FROZEN before the pilot (2026-10-24)
 
