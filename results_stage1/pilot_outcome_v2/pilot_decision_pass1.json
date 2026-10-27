@@ -1,0 +1,183 @@
+{
+ "status": "NOT RESOLVABLE (compute)",
+ "B": 50000,
+ "control_flags": {
+  "C2|CONT|10000": {
+   "pass": true
+  },
+  "C2|LIB-16|10000": {
+   "pass": true
+  },
+  "C2|LIB-2|10000": {
+   "pass": true
+  },
+  "C2|UNIF|10000": {
+   "pass": true
+  },
+  "C1|0.25|1|10000": {
+   "pass": true
+  },
+  "C1|0.25|2|10000": {
+   "pass": true
+  },
+  "C1|0.25|3|10000": {
+   "pass": true
+  },
+  "C1|1.0|1|10000": {
+   "pass": true
+  },
+  "C1|1.0|2|10000": {
+   "pass": true
+  },
+  "C1|1.0|3|10000": {
+   "pass": true
+  },
+  "C1|4.0|1|10000": {
+   "pass": false
+  },
+  "C1|4.0|2|10000": {
+   "pass": true
+  },
+  "C1|4.0|3|10000": {
+   "pass": true
+  },
+  "C2|CONT|25000": {
+   "pass": true
+  },
+  "C2|LIB-16|25000": {
+   "pass": true
+  },
+  "C2|LIB-2|25000": {
+   "pass": true
+  },
+  "C2|UNIF|25000": {
+   "pass": true
+  },
+  "C1|0.25|1|25000": {
+   "pass": true
+  },
+  "C1|0.25|2|25000": {
+   "pass": true
+  },
+  "C1|0.25|3|25000": {
+   "pass": true
+  },
+  "C1|1.0|1|25000": {
+   "pass": true
+  },
+  "C1|1.0|2|25000": {
+   "pass": true
+  },
+  "C1|1.0|3|25000": {
+   "pass": true
+  },
+  "C1|4.0|1|25000": {
+   "pass": true
+  },
+  "C1|4.0|2|25000": {
+   "pass": true
+  },
+  "C1|4.0|3|25000": {
+   "pass": true
+  },
+  "C2|CONT|50000": {
+   "pass": true
+  },
+  "C2|LIB-16|50000": {
+   "pass": true
+  },
+  "C2|LIB-2|50000": {
+   "pass": true
+  },
+  "C2|UNIF|50000": {
+   "pass": true
+  },
+  "C1|0.25|1|50000": {
+   "pass": true
+  },
+  "C1|0.25|2|50000": {
+   "pass": true
+  },
+  "C1|0.25|3|50000": {
+   "pass": true
+  },
+  "C1|1.0|1|50000": {
+   "pass": true
+  },
+  "C1|1.0|2|50000": {
+   "pass": true
+  },
+  "C1|1.0|3|50000": {
+   "pass": true
+  },
+  "C1|4.0|1|50000": {
+   "pass": true
+  },
+  "C1|4.0|2|50000": {
+   "pass": true
+  },
+  "C1|4.0|3|50000": {
+   "pass": true
+  },
+  "C2|CONT|100000": {
+   "pass": true
+  },
+  "C2|LIB-16|100000": {
+   "pass": true
+  },
+  "C2|LIB-2|100000": {
+   "pass": true
+  },
+  "C2|UNIF|100000": {
+   "pass": true
+  },
+  "C1|0.25|1|100000": {
+   "pass": true
+  },
+  "C1|0.25|2|100000": {
+   "pass": true
+  },
+  "C1|0.25|3|100000": {
+   "pass": true
+  },
+  "C1|1.0|1|100000": {
+   "pass": true
+  },
+  "C1|1.0|2|100000": {
+   "pass": true
+  },
+  "C1|1.0|3|100000": {
+   "pass": true
+  },
+  "C1|4.0|1|100000": {
+   "pass": true
+  },
+  "C1|4.0|2|100000": {
+   "pass": true
+  },
+  "C1|4.0|3|100000": {
+   "pass": true
+  }
+ },
+ "controls_ok": {
+  "10000": false,
+  "25000": true,
+  "50000": true,
+  "100000": true
+ },
+ "max_validation_nll_improvement_to_next": {
+  "10000": 0.005219081464409969,
+  "25000": 0.002145937067270287,
+  "50000": 0.0012606014430522894
+ },
+ "convergence_tol": 0.002,
+ "z_controls": 2.8905115606917384,
+ "cap": 24,
+ "M1": null,
+ "M2": null,
+ "s1": null,
+ "s2": null,
+ "j0_effective_sec_per_step": 0.011412952889998754,
+ "eval_sec_per_model": 1.4461257457733154,
+ "config_sha256": "411c8c2971745dd1a15075711d76c933658d7dcafa0db7ed414857ca60f94197"
+}

@@ -6,8 +6,10 @@
   analyze       --config config/stage1.yaml --out O --decision D
 
 Confirmatory `train`, `evaluate` and `analyze` additionally need the frozen state and the user's authorization:
-  --manifest docs/FREEZE_MANIFEST_STAGE1.json --expected-manifest-sha256 H --snapshot dist/stage1_frozen_snapshot.zip
-  --authorization A.json --run-id R     (key in DYNAICL_STAGE1_AUTH_KEY; never stored)
+  --manifest docs/FREEZE_MANIFEST_STAGE1_v3.json --expected-manifest-sha256 H --snapshot dist/stage1_frozen_snapshot_v3.zip
+  --authorization A.json --run-id R     (key in DYNAICL_STAGE1_AUTH_KEY; never stored; TEST-ONLY keys refused)
+The gate is checked when each subcommand starts (an authorization is valid for at most 72 h); a restart after expiry needs
+a new artifact for the same run id. Artifacts are made by scripts/stage1_issue_authorization.py.
 Exit codes: 0 done, 3 REFUSED. Production runs refuse if a mutation is set (STAGE1_MUTATION).
 """
 
@@ -42,12 +44,25 @@ def log_to(out: Path):
     return log
 
 
+def binding_for(cfg, cfg_sha: str, manifest: str, snapshot: str, decision: str) -> Binding:
+    """What a confirmatory authorization binds; shared by the gate and scripts/stage1_issue_authorization.py."""
+    roles = load_roles()
+    seeds = tuple(s for r in cfg.seed_roles.values() for s in roles[r])
+    return Binding(sha256_file(ROOT / manifest), sha256_file(ROOT / snapshot), cfg_sha,
+                   sha256_file(ROOT / "docs" / "PREREG_stage1.md"), sha256_file(Path(decision)), seeds)
+
+
 def gate(args, cfg, cfg_sha: str, out: Path) -> None:
-    """Confirmatory gate: manifest, frozen files, snapshot, authorization artifact, run lock."""
+    """Confirmatory gate: key kind, manifest, frozen files, snapshot, authorization artifact, run lock."""
     import subprocess
     for need in ("manifest", "expected_manifest_sha256", "snapshot", "authorization", "run_id", "decision"):
         if not getattr(args, need, None):
             raise Refused(f"confirmatory runs need --{need.replace('_', '-')}")
+    key, is_test = obtain_key()
+    if is_test:
+        # Amendment 2 (disclosure S28): a self-made TEST-ONLY key with a matching test artifact used to pass the gate
+        # for the frozen confirmatory config; the gate only ever runs for frozen configs, so test keys are refused here
+        raise Refused("test-only keys can never authorize a confirmatory run")
     rc = subprocess.run([sys.executable, str(ROOT / "scripts" / "stage1_freeze.py"), "verify", "--manifest",
                          args.manifest, "--expected-sha256", args.expected_manifest_sha256], cwd=ROOT).returncode
     if rc != 0:
@@ -55,11 +70,7 @@ def gate(args, cfg, cfg_sha: str, out: Path) -> None:
     frozen = json.loads((ROOT / args.manifest).read_text(encoding="utf-8"))["files"]
     if str(Path(args.config).as_posix()) not in frozen:
         raise Refused("the config is not in the freeze manifest")
-    roles = load_roles()
-    seeds = tuple(s for r in cfg.seed_roles.values() for s in roles[r])
-    binding = Binding(sha256_file(ROOT / args.manifest), sha256_file(ROOT / args.snapshot), cfg_sha,
-                      sha256_file(ROOT / "docs" / "PREREG_stage1.md"), sha256_file(Path(args.decision)), seeds)
-    key, is_test = obtain_key()
+    binding = binding_for(cfg, cfg_sha, args.manifest, args.snapshot, args.decision)
     payload = verify(Path(args.authorization).read_bytes(), key, is_test, binding, dt.datetime.now(dt.timezone.utc))
     if payload["run_id"] != args.run_id:
         raise Refused("run id differs from the authorization")

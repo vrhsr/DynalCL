@@ -21,7 +21,7 @@ target_se_q2: 0.008
 min_models: 32
 budgets: [10000, 25000, 50000, 100000]
 ucl_factor: 1.35
-cap_rule: {max_models: 128, gpu_hours_limit: 96.0, safety: 1.25, step: 8}   # Amendment 1 (was 48.0)
+cap_rule: {max_models: 128, gpu_hours_limit: 128.0, safety: 1.25, step: 8}   # Amendment 2 (post-pilot; was 96.0 in Amendment 1, 48.0 in v3)
 # secondary families (PREREG_stage1 section 9); Q1-behavioural reuses the primary models (no extra training)
 secondary: [Q1-behavioural, training-length-4B, size-L, size-S, Q2-size-L, depth-width, architecture]
 # if the projected GPU time exceeds the limit, families are dropped in this order (first listed is dropped first)
