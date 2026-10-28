@@ -1,0 +1,20 @@
+{
+ "command": "python.exe scripts/stage2_f1_validation.py --out results_stage2/f1_validation --workers 6",
+ "python": "3.13.5",
+ "platform": "Windows-11-10.0.26100-SP0",
+ "cpu_count": 8,
+ "workers": 6,
+ "seconds": 255.0,
+ "sources_sha256": {
+  "dynaicl_families/ar1_unknown_sigma.py": "77aada85acfb2f8bfbb5e521cea34db8474fd9464de4e25a6ed5f2cc029e6023",
+  "dynaicl_families/sampling.py": "f3a3bc006d0ae7d43ea81c2f38318638a17f60ccf4a1fbf63ade5426ccafdbaf",
+  "dynaicl_families/ar1_known_sigma.py": "508369947b64b3229a9fa05a88f7c3a6851ed39d9ad22599af48f4b66ab5de68",
+  "dynaicl_families/stage2/f1_checks.py": "9df78adc3d5ab6059231e4a525975d1d1dae9777bb2c59479e3f19b834abd3e1",
+  "config/stage2_seed_manifest.yaml": "57d8e31688dd73da388ef5452cc80fa14ac6cae6846c1f73b790306859314a18",
+  "scripts/stage2_f1_validation.py": "c433020944272b64f3689a56057a3c73048805c4ec9e9851d1e23f75b338e6f6"
+ },
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "git_head": "9b0fcd56c325a10462167576a3bcfab4cc27e2ce",
+ "git_dirty_tracked": false
+}
