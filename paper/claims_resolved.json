@@ -1,0 +1,597 @@
+[
+ {
+  "id": "S0-T1",
+  "label": "VERIFIED",
+  "text": "Stage 0 optimality check: 0 violations in 516 paired comparisons (min z = -0.48).",
+  "ref": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "path": "runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json",
+  "commit": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "sha256": "9b47e95709ac8b4a63a6afb4b1ad3fd45c1897d2d1696c531eaead8c1f581bb6",
+  "checks": [
+   {
+    "spec": {
+     "json": "theorem_checks.T1_n_comparisons"
+    },
+    "expect": 516,
+    "got": 516,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "theorem_checks.T1_violations"
+    },
+    "expect": [],
+    "got": [],
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "theorem_checks.T1_min_z"
+    },
+    "expect": -0.48,
+    "got": -0.4813773824347071,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S0-T2",
+  "label": "VERIFIED",
+  "text": "Stage 0 calibration of the matched reference: 0 failing cells of 60 (min p = 0.0051).",
+  "ref": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "path": "runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json",
+  "commit": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "sha256": "9b47e95709ac8b4a63a6afb4b1ad3fd45c1897d2d1696c531eaead8c1f581bb6",
+  "checks": [
+   {
+    "spec": {
+     "json": "theorem_checks.T2_n_cells"
+    },
+    "expect": 60,
+    "got": 60,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "theorem_checks.T2_failures"
+    },
+    "expect": [],
+    "got": [],
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "theorem_checks.T2_min_p"
+    },
+    "expect": 0.0051,
+    "got": 0.005073488910534395,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S0-SEP",
+  "label": "VERIFIED",
+  "text": "Stage 0 map: 2 of 60 regimes separable for all three strategy pairs.",
+  "ref": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "path": "runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json",
+  "commit": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "sha256": "9b47e95709ac8b4a63a6afb4b1ad3fd45c1897d2d1696c531eaead8c1f581bb6",
+  "checks": [
+   {
+    "spec": {
+     "json": "n_cells"
+    },
+    "expect": 60,
+    "got": 60,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json_len": "all_pairs_separable_regimes"
+    },
+    "expect": 2,
+    "got": 2,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S0-ELIB",
+  "label": "VERIFIED",
+  "text": "Stage 0 map, in-library systems: library vs continuous-prior Bayes equivalent in all 48 cells.",
+  "ref": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "path": "runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json",
+  "commit": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "sha256": "9b47e95709ac8b4a63a6afb4b1ad3fd45c1897d2d1696c531eaead8c1f581bb6",
+  "checks": [
+   {
+    "spec": {
+     "json": "separability_counts.E-LIB:matched_reference vs continuous_prior_bayes.equivalent"
+    },
+    "expect": 48,
+    "got": 48,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S05-DECISION",
+  "label": "VERIFIED",
+  "text": "Stage 0.5 pre-registered decision REVISE: reference reliability passed, stability across n (P2) and robustness across r (P3) failed.",
+  "ref": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "path": "runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json",
+  "commit": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "sha256": "f07a9f4e19e0c11222c798b0a7a968b56bca0355ee14b3f5a6a22ff8f709fbfd",
+  "checks": [
+   {
+    "spec": {
+     "json": "decision.P1_reference_reliability"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "decision.P2"
+    },
+    "expect": false,
+    "got": false,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "decision.P3"
+    },
+    "expect": false,
+    "got": false,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S05-RELIABILITY",
+  "label": "VERIFIED",
+  "text": "Stage 0.5 reliability: 0 of 2736 optimality comparisons violated; 0 of 288 calibration cells failed.",
+  "ref": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "path": "runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json",
+  "commit": "3632e9edf7699d44613c6df53ebc97ec305b0f4e",
+  "sha256": "f07a9f4e19e0c11222c798b0a7a968b56bca0355ee14b3f5a6a22ff8f709fbfd",
+  "checks": [
+   {
+    "spec": {
+     "json": "reliability.T1_comparisons"
+    },
+    "expect": 2736,
+    "got": 2736,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "reliability.T1_violations"
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "reliability.T2_cells"
+    },
+    "expect": 288,
+    "got": 288,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "reliability.T2_failures"
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S06-VERDICT",
+  "label": "VERIFIED",
+  "text": "Stage 0.6 confirmatory verdict STOP: all 18 long-context gains have an adjusted upper bound below delta in both replicates; all six critical checks passed.",
+  "ref": "18d34b099b6c836f1d0795afe0ce132cc5b428c7",
+  "path": "results_stage06_confirmatory/phaseE-20261022/results/summary.json",
+  "commit": "18d34b099b6c836f1d0795afe0ce132cc5b428c7",
+  "sha256": "742b4b6108ba5d2f462b6c36a9c4976cb39fffb05241662bdcc0248ec16c6c89",
+  "checks": [
+   {
+    "spec": {
+     "json": "decision.verdict"
+    },
+    "expect": "STOP",
+    "got": "STOP",
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "decision.reasons"
+    },
+    "expect": [
+     "all 18 gains have adjusted upper bound < delta in both replicates"
+    ],
+    "got": [
+     "all 18 gains have adjusted upper bound < delta in both replicates"
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "critical_checks"
+    },
+    "expect": {
+     "calibration": true,
+     "integrity": true,
+     "numerics": true,
+     "reproducibility": true,
+     "tier1": true,
+     "tier2": true
+    },
+    "got": {
+     "calibration": true,
+     "integrity": true,
+     "numerics": true,
+     "reproducibility": true,
+     "tier1": true,
+     "tier2": true
+    },
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S1A-MAP-Q1",
+  "label": "VERIFIED",
+  "text": "Stage 1A map, held-out pop vs stab (delta 0.02): IDENTIFIABLE only for n <= 5 at r <= 1 and n <= 2 at r = 4, gaps 0.023-0.054 nats; UNIDENTIFIABLE for n >= 10 at r <= 1 and n >= 3 at r = 4.",
+  "ref": "a499874cad30de8d9a20759b3ce73c62436c8408",
+  "path": "results_stage1/map_1A/map_decisions.csv",
+  "commit": "a499874cad30de8d9a20759b3ce73c62436c8408",
+  "sha256": "cedb9b62df2c7273432b8ef6d05a59471fcc26de909a9b33b1bc3011ef8f3129",
+  "checks": [
+   {
+    "spec": {
+     "csv_minmax": "estimate",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|stab",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": [
+     0.0226,
+     0.0544
+    ],
+    "got": [
+     0.022608894763515446,
+     0.05440829149721672
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|stab",
+      "r": "0.25",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|stab",
+      "r": "1.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|stab",
+      "r": "4.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 2,
+    "got": 2,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_min_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|stab",
+      "r": "0.25",
+      "decision": "UNIDENTIFIABLE"
+     }
+    },
+    "expect": 10,
+    "got": 10,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_min_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|stab",
+      "r": "1.0",
+      "decision": "UNIDENTIFIABLE"
+     }
+    },
+    "expect": 10,
+    "got": 10,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_min_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|stab",
+      "r": "4.0",
+      "decision": "UNIDENTIFIABLE"
+     }
+    },
+    "expect": 3,
+    "got": 3,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F1-MAP-Q1",
+  "label": "VERIFIED",
+  "text": "F1 map, held-out pop vs context-only: IDENTIFIABLE for n <= 10 at every r, gaps 0.032-0.316 nats; UNIDENTIFIABLE for n >= 20.",
+  "ref": "66c58460078b6a291242debfd5a783a9f54e47a4",
+  "path": "results_stage1/map_F1/f1_map_decisions.csv",
+  "commit": "66c58460078b6a291242debfd5a783a9f54e47a4",
+  "sha256": "bb14def3ba466fcacfc096cbc52f92f6406c819e8167305e138055326c83b04b",
+  "checks": [
+   {
+    "spec": {
+     "csv_minmax": "estimate",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|ctx",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": [
+     0.0324,
+     0.3165
+    ],
+    "got": [
+     0.03237892336524569,
+     0.31647020037451035
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|ctx",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 10,
+    "got": 10,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_min_int": "n",
+     "where": {
+      "set": "HELD",
+      "pair": "pop|ctx",
+      "decision": "UNIDENTIFIABLE"
+     }
+    },
+    "expect": 20,
+    "got": 20,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S1A-PILOT",
+  "label": "VERIFIED",
+  "text": "Stage 1A pilot, pre-registered outcome NOT RESOLVABLE (compute): budget B = 50 000 steps chosen by the convergence rule; cap 24 models per arm < the 32-model minimum.",
+  "ref": "e260526d9f62c1ab9863e7293c68fcfb41d85af6",
+  "path": "results_stage1/pilot/pilot_decision.json",
+  "commit": "e260526d9f62c1ab9863e7293c68fcfb41d85af6",
+  "sha256": "6518a9f895b66c3f48ffd7f51219c124be9c9bc3309f0ff8e243dd7c2f39fb2c",
+  "checks": [
+   {
+    "spec": {
+     "json": "status"
+    },
+    "expect": "NOT RESOLVABLE (compute)",
+    "got": "NOT RESOLVABLE (compute)",
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "B"
+    },
+    "expect": 50000,
+    "got": 50000,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "cap"
+    },
+    "expect": 24,
+    "got": 24,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S1A-PILOT-B",
+  "label": "VERIFIED",
+  "text": "Why B = 50k: at 25k all controls passed but the largest validation-NLL improvement to 50k was 0.00215 (> 0.002); at 50k it was 0.00126.",
+  "ref": "e260526d9f62c1ab9863e7293c68fcfb41d85af6",
+  "path": "results_stage1/pilot/pilot_decision.json",
+  "commit": "e260526d9f62c1ab9863e7293c68fcfb41d85af6",
+  "sha256": "6518a9f895b66c3f48ffd7f51219c124be9c9bc3309f0ff8e243dd7c2f39fb2c",
+  "checks": [
+   {
+    "spec": {
+     "json": "max_validation_nll_improvement_to_next.25000"
+    },
+    "expect": 0.002146,
+    "got": 0.002145937067270287,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "max_validation_nll_improvement_to_next.50000"
+    },
+    "expect": 0.001261,
+    "got": 0.0012606014430522894,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "controls_ok.25000"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "controls_ok.10000"
+    },
+    "expect": false,
+    "got": false,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "S1A-MIN32",
+  "label": "DESIGN",
+  "text": "The 32-model minimum and the bootstrap-calibrated power lookup were fixed before the pilot (frozen pre-registration v3).",
+  "ref": "3a29c1584bc8a322469842db13385a4b5dfa51f4",
+  "path": "config/stage1.yaml",
+  "commit": "3a29c1584bc8a322469842db13385a4b5dfa51f4",
+  "sha256": "e5ed6fa53a08ac53955ff68f3f8b0536221fa881e9f7752e41925ec1a16db2d8",
+  "checks": [
+   {
+    "spec": {
+     "yaml": "min_models"
+    },
+    "expect": 32,
+    "got": 32,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F1-VALIDATION",
+  "label": "VERIFIED",
+  "text": "F1 references pass calibration (PIT KS, 50/80/95% coverage), continuous SBC of a and sigma^2, optimality against the context-only reference and libraries of 2/16/256 atoms, the known-sigma limit, leakage and the matched guard: 18 cells, 180 statistical tests at family level 0.01, all pass.",
+  "ref": "ac8aecb13448efaff908df010ce1dc606e631ff2",
+  "path": "results_stage2/f1_validation/f1_validation.json",
+  "commit": "ac8aecb13448efaff908df010ce1dc606e631ff2",
+  "sha256": "8a5faacd2bd46d80e88bce119651705409f00c1c938490337fa76ce8b67ea295",
+  "checks": [
+   {
+    "spec": {
+     "json": "pass"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "n_tests"
+    },
+    "expect": 180,
+    "got": 180,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "family_alpha"
+    },
+    "expect": 0.01,
+    "got": 0.01,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F1-V9",
+  "label": "PENDING",
+  "text": "F1-V9 mutation matrix: every mutation detected, clean baseline passes.",
+  "ref": "origin/results-stage2-cpu-batch1",
+  "path": "results_stage2/f1_mutation_matrix/f1_mutation_matrix.json",
+  "commit": null,
+  "sha256": null,
+  "checks": [],
+  "status": "PENDING"
+ },
+ {
+  "id": "F3-MAP",
+  "label": "PENDING",
+  "text": "F3 short-context map (noisy observations): where pop vs stab and library vs continuous are identifiable for n = 2..9.",
+  "ref": "origin/results-stage2-cpu-batch1",
+  "path": "results_stage2/f3_map/map_decisions.csv",
+  "commit": null,
+  "sha256": null,
+  "checks": [],
+  "status": "PENDING"
+ },
+ {
+  "id": "F2-MAP",
+  "label": "PENDING",
+  "text": "F2 (bivariate VAR(1)) separability map.",
+  "ref": "none",
+  "path": "none",
+  "commit": null,
+  "sha256": null,
+  "checks": [],
+  "status": "PENDING"
+ }
+]
