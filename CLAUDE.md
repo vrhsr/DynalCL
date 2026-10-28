@@ -18,6 +18,21 @@ chronological order; older ones (1-2g, 7-8) are historical where they say "not s
 * The box: repo `/home/rama_11187/projects/dynacl`, `.venv-stage1` (torch 2.14.1+cu126), shared RTX A4000 (another user's job,
   `ts2vec_matched`, holds ~8 GB and ~100% utilisation since 2026-10-23: confirm the GPU is free before any Stage 1 GPU work).
   This session cannot message the box; the user relays prompts. Results come back as small files on a `results-*` branch.
+* **UPDATE 2026-10-29 (standing instruction of 2026-10-27: all CPU-side work, no GPU, no CUDA).** Pilot VERIFIED from the pushed
+  files (S26). The user chose Amendment 2 with conditions (S27), then paused it: the candidate (128 GPU-h; the gate now refuses
+  TEST-ONLY keys, a real defect found in the v2 gate, S28; issuer; continuation and confirmatory wrappers; key plan) is on the
+  LOCAL, UNPUSHED branch `amendment2-candidate` (`eaf4d3a`). HARD NO until the user says so: pilot full evaluation at B,
+  Amendment 2 / v3 freeze, any confirmatory run or authorization, any torch/GPU job, any F1/F2 neural training.
+  CPU workstreams (code outside the Stage 1 freeze globs: `dynaicl_families/stage2/`, `tests_stage2/`, `scripts/stage2_*`,
+  seeds in `config/stage2_seed_manifest.yaml`; disclosures S28-S31 in docs/DISCLOSURE_LOG_STAGE1.md):
+  A (F1): A2 validation PASS (`results_stage2/f1_validation/`); A1 mutation matrix and the F1 operating characteristics wait for
+  the box (relay `pilot_tooling/RELAY_stage2_cpu_jobs.md`, CPU batch 1; attempt 1 locally failed through MemoryError, S29);
+  A3 DRAFT `docs/PREREG_stage2_F1.md`. B (F2): `docs/MATH_F2.md`, `dynaicl_families/stage2/f2_var.py`, tests; the per-item
+  Monte Carlo target 2e-4 is infeasible for the context-only reference at n <= 5 (S30; user decision pending); map spec NOT written.
+  C (F3): spec `docs/STAGE2_F3_MAP_SPEC.md` committed before the run; smoke VALID; full map in CPU batch 1 (box).
+  D: literature D1/D2/D4 done (`docs/literature/SEARCH_LOG.md`, `VENUES.md`); GAP_AND_NOVELTY.md update waits for the maps.
+  E: branch `paper-draft`: `paper/claims.yaml` + `paper/tools/build_claims.py` (re-extracts every number from pinned commits;
+  PASS 13 verified) and `paper/OUTLINE_track1.md` (CP4, waiting for the user before any full text).
 * Rules that bite most often: never edit a frozen file or manifest; disclosure logs are append-only; never open pilot effect files
   (`results_stage1/pilot/eval/`, `phase_d_pilot/PILOT_ONLY_do_not_open_effects.json`); never ask for, store or print a key;
   compute over ~10-15 min runs on the box (detached in tmux, one background waiter, no polling loops); stop at every checkpoint.
