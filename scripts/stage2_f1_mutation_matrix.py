@@ -7,7 +7,7 @@ Pass condition: the clean row passes everything; every mutation is detected by a
 failed test or a failed detector without an exception); detections only through crashes are reported separately.
 Writes <out>/f1_mutation_matrix.json and .md, and <out>/provenance.json (source hashes, versions, command).
 
-Usage: python scripts/stage2_f1_mutation_matrix.py --out results_stage2/f1_mutation_matrix --jobs 7
+Usage: python scripts/stage2_f1_mutation_matrix.py --out results_stage2/f1_mutation_matrix --jobs 2
 """
 
 from __future__ import annotations
@@ -51,7 +51,11 @@ def run_row(mutation: str | None) -> dict:
     p = subprocess.run([sys.executable, "-m", "pytest", FROZEN_TESTS, "-q", "-rf", "-p", "no:cacheprovider",
                         "-p", "dynaicl_families.stage2.f1_plugin"], cwd=ROOT, env=_env(mutation),
                        capture_output=True, text=True, stdin=subprocess.DEVNULL, timeout=3600)
-    failed = re.findall(r"^FAILED (\S+)", p.stdout, flags=re.M)
+    # "-rf" short summary lines read "FAILED <id> - <ExceptionType>: <message>"; only AssertionError counts as a
+    # detection (a MemoryError from running rows in parallel once made the clean row fail: disclosure S29)
+    fails = re.findall(r"^FAILED (\S+)(?: - (\w+))?", p.stdout, flags=re.M)
+    failed = [f for f, kind in fails if kind in ("AssertionError", "assert", "")]
+    failed_other = [f"{f.split('::')[-1]} ({kind})" for f, kind in fails if kind not in ("AssertionError", "assert", "")]
     errors = re.findall(r"^ERROR (\S+)", p.stdout, flags=re.M)
     summary = (p.stdout.strip().splitlines() or [""])[-1]
     d = subprocess.run([sys.executable, "-m", "dynaicl_families.stage2.f1_detect"], cwd=ROOT, env=_env(mutation),
@@ -63,7 +67,8 @@ def run_row(mutation: str | None) -> dict:
     det_fail = sorted(k for k, v in det["checks"].items() if not v["pass"] and "exception" not in v)
     det_crash = sorted(k for k, v in det["checks"].items() if not v["pass"] and "exception" in v)
     return {"mutation": mutation or "baseline", "pytest_exit": p.returncode, "pytest_summary": summary,
-            "failed_tests": [f.split("::")[-1] for f in failed], "errored_tests": [e.split("::")[-1] for e in errors],
+            "failed_tests": [f.split("::")[-1] for f in failed], "failed_other_exception": failed_other,
+            "errored_tests": [e.split("::")[-1] for e in errors],
             "assertion_failures_in_pytest": p.stdout.count("AssertionError"),
             "detector_failures": det_fail, "detector_crashes": det_crash, "detectors": det,
             "seconds": round(time.time() - t0, 1)}
@@ -72,7 +77,7 @@ def run_row(mutation: str | None) -> dict:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
-    ap.add_argument("--jobs", type=int, default=7)
+    ap.add_argument("--jobs", type=int, default=2)    # memory: the frozen F1-V3 grid oracle needs about 1-2 GB a process
     args = ap.parse_args(argv)
     out = ROOT / args.out
     out.mkdir(parents=True, exist_ok=True)
@@ -80,7 +85,8 @@ def main(argv=None) -> int:
     with ThreadPoolExecutor(max_workers=args.jobs) as ex:
         rows = list(ex.map(run_row, [None, *KNOWN]))
     base = rows[0]
-    base_ok = base["pytest_exit"] == 0 and not base["detector_failures"] and not base["detector_crashes"]
+    base_ok = (base["pytest_exit"] == 0 and not base["detector_failures"] and not base["detector_crashes"]
+               and not base["failed_other_exception"])
     for r in rows[1:]:
         r["detected_by_assertion"] = bool(r["failed_tests"] and r["assertion_failures_in_pytest"]) or bool(
             r["detector_failures"])
@@ -91,7 +97,7 @@ def main(argv=None) -> int:
              "", "| mutation | frozen F1 tests failing | extra detectors failing | crashes | pytest summary |",
              "|---|---|---|---|---|"]
     for r in rows:
-        crashes = ", ".join(r["detector_crashes"] + r["errored_tests"]) or "-"
+        crashes = ", ".join(r["detector_crashes"] + r["errored_tests"] + r["failed_other_exception"]) or "-"
         lines.append(f"| {r['mutation']} | {', '.join(r['failed_tests']) or '-'} | "
                      f"{', '.join(r['detector_failures']) or '-'} | {crashes} | {r['pytest_summary']} |")
     (out / "f1_mutation_matrix.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

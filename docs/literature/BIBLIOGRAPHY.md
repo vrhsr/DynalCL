@@ -30,6 +30,82 @@ heads" was searched; its other quoted claims were not PDF-checked).
 * Entry 73 (Simulacrum): "The reference AR models are correctly specified according to the simulation mechanism" and the comparator list
   (AR-BURG, AR-YW, AR-OLS, AR-MLE) are in the PDF.
 * Not re-checked against PDFs (not relied on by the gap analysis): the remaining entries keep the abstract-level verification described above.
+  **Superseded by section 0b** for every entry that has a quote.
+
+## 0b. Quote check against the PDFs (2026-10-27)
+
+**Method.** Every entry with a quoted claim that was not PDF-checked in section 0 was re-checked on 2026-10-27/28. Each PDF was downloaded with curl
+into its own new directory in the session scratchpad (arXiv `https://arxiv.org/pdf/<id>`, current version; journal or proceedings items from the
+publisher or the authors' own copy only when it is the same paper), converted with `pdftotext -enc UTF-8`, and searched for the exact phrase after
+normalising whitespace, ligatures, curly quotes and line-break hyphenation (script kept outside the repo, run with `python -I`; nothing from a
+download was executed). Where the extractor dropped a line-break hyphen, the hyphen was confirmed with a second extractor (PyMuPDF). A quote that
+is not found is reported with the closest PDF wording. Entry 51's two unchecked claims and the "135 systems" figure that GAP_AND_NOVELTY.md
+attributes to entry 57 were checked too.
+
+**Counts (66 entries with a quote or a quoted figure not fully checked in section 0, including 51 and 57):** FOUND verbatim 59; FOUND with a
+stated difference 4 (entries 15, 17, 59, 66); NOT FOUND 1 (entry 53); PDF not accessible 2 (entries 41, 79). Entries 74, 75, 76, 80 carry no
+quote (metadata only) and were not checked. Entry 46 (already checked in section 0) is listed only for its venue update.
+
+| # | ID / PDF used | Result | Detail |
+|---|---|---|---|
+| 4 | 2509.26551 | FOUND verbatim | |
+| 5 | 2501.17745 | FOUND verbatim | |
+| 6 | 2412.00104 | FOUND verbatim | "sub-circuits" is split across a line break ("sub-\ncircuits"); the same abstract spells it "sub-circuits" elsewhere. |
+| 10 | 2506.05574 | FOUND verbatim | |
+| 12 | 2212.04458 | FOUND verbatim | |
+| 13 | 2205.05055 | FOUND verbatim | |
+| 14 | 2311.08360 | FOUND verbatim | |
+| 15 | 2312.03002 | FOUND with difference | PDF: "In-context learning (ICL) is driven by the abrupt emergence of an induction head". Entry corrected. |
+| 17 | 2402.18819 | FOUND with difference | PDF: "we derive a closed-form expression for the task posterior". Entry corrected. |
+| 18 | 2111.02080 | FOUND verbatim | |
+| 20 | 2207.01848 | FOUND verbatim | |
+| 21 | Nature PDF, s41586-024-08328-6 | FOUND verbatim | Open-access PDF from nature.com. |
+| 22 | 2501.16825 | FOUND verbatim | |
+| 23 | 2606.20538 | FOUND verbatim | |
+| 24 | 2605.26713 | FOUND verbatim | Venue now VERIFIED: ICML 2026 poster (icml.cc/virtual/2026/poster/62122). Entry updated. |
+| 25 | 2602.04596 | FOUND verbatim | |
+| 26 | 2406.00793 | FOUND verbatim | |
+| 27 | 2408.03307 | FOUND verbatim | |
+| 28 | 2410.16531 | FOUND verbatim | |
+| 29-38 | 2208.01066, 2211.15661, 2212.07677, 2306.04637, 2311.08362, 2306.00297, 2301.07067, 2402.05787, 2405.16845, 2309.05858 | FOUND verbatim (all 10) | |
+| 41 | NeurIPS 2026 poster 153067 | PDF not accessible | No arXiv or proceedings PDF found in two searches; abstract-level only, as before. |
+| 42 | 2409.13421 | FOUND verbatim | |
+| 43 | ICLR 2026 proceedings PDF (hash 0edcce16...) | FOUND verbatim | |
+| 44 | 2312.06937 | FOUND verbatim | |
+| 46 | 2410.16546 (v3) | (checked 2026-10-22) | Venue now VERIFIED from the PDF header: "Published in Transactions on Machine Learning Research (03/2026)". Entry updated. |
+| 47 | 2602.17744 | FOUND verbatim | |
+| 48 | 2308.13380 | FOUND verbatim | |
+| 49 | 2312.04083 | FOUND verbatim | |
+| 50 | 2304.07993 | FOUND verbatim | |
+| 51 | 2402.11004 | FOUND verbatim | "rapid phase transition to the correct in-context bigram solution" and "converge near the Bayesian optimal solution" now PDF-checked. |
+| 52 | 2402.14735 | FOUND verbatim | |
+| 53 | NeurIPS 2024 proceedings PDF (hash f8a20700...) and arXiv 2407.17686v1 | **NOT FOUND** | Neither PDF contains "a transformer with a constant number of layers can represent". Both abstracts say: "our main result is that a transformer with a single head and three layers can represent the in-context conditional empirical distribution for kth-order Markov sources". The body says the model "can represent conditional k-grams using just a constant number of layers". Entry corrected; arXiv id 2407.17686 added (same title and authors in the PDF). |
+| 54 | 2410.05493 | FOUND verbatim | |
+| 55 | 2402.04161 | FOUND verbatim | |
+| 56 | 2409.15771 | FOUND verbatim | |
+| 57 | 2505.11349 | FOUND verbatim | "135" confirmed: "The dysts dataset provides a standardized benchmark of 135 low-dimensional chaotic systems"; results aggregate "over all 135 chaotic systems". GAP_AND_NOVELTY.md item 1.6 is consistent with the PDF. |
+| 58 | 2505.13755 | FOUND verbatim | |
+| 59 | 2602.18679 (v2, 12 Apr 2026) | FOUND with difference | PDF: "We discover that attention models apply a transfer-operator forecasting strategy in-context." (not "attention-based models"). Entry corrected. |
+| 60 | 2402.00795 | FOUND verbatim | |
+| 61 | 2110.05266 | FOUND verbatim | |
+| 62 | 2505.13192 | FOUND verbatim | |
+| 63 | 2502.19049 | FOUND verbatim | |
+| 64 | 2310.07820 | FOUND verbatim | "zero-shot" is split across a line break ("zero-\nshot"). |
+| 66 | 2310.10688 | FOUND with difference | PDF: "We create generators for ARMA [McK84] processes" (citation inside the phrase). Entry corrected. |
+| 67 | 2310.08278 | FOUND verbatim | |
+| 68 | 2402.02592 | FOUND verbatim | |
+| 69 | 2310.03589 | FOUND verbatim | |
+| 71 | 2410.09385 | FOUND verbatim | |
+| 72 | 2501.02945 | FOUND verbatim | |
+| 77 | Author copy, sites.stat.washington.edu/people/raftery/Research/PDF/Gneiting2007jrssb.pdf | FOUND verbatim | Author-hosted copy of the JRSS B paper. |
+| 78 | 1804.06788 | FOUND verbatim | |
+| 79 | Sims & Uhlig 1991 | PDF not accessible | No open copy retrieved (a guessed author URL did not connect). The quote stays RePEc-abstract level. |
+| 81 | 2103.03098 | FOUND verbatim | |
+| 82 | 2002.06305 | FOUND verbatim | |
+| 83 | 2109.08203 | FOUND verbatim | |
+| 85 | 2406.10229 | FOUND verbatim | British spelling "initialisations" is what the PDF uses. |
+| 87 | 1709.06560 | FOUND verbatim | |
+| 88 | 1806.08295 | FOUND verbatim | |
 
 ## 1. Memorisation vs generalisation, task diversity, finite vs continuous pretraining priors
 
@@ -49,9 +125,9 @@ heads" was searched; its other quoted claims were not PDF-checked).
 | 12 | Kirsch, Harrison, Sohl-Dickstein, Metz (2022). General-Purpose In-Context Learning by Meta-Learning Transformers. NeurIPS 2022 Workshop on Meta-Learning (final venue unverified). | 2212.04458 | "transitions between algorithms that generalize, algorithms that memorize, and algorithms that fail to meta-train". | Early statement of the transition vs number of tasks. |
 | 13 | Chan, Santoro, Lampinen, Wang, Singh, Richemond, McClelland, Hill (2022). Data Distributional Properties Drive Emergent In-Context Learning in Transformers. NeurIPS 2022. | 2205.05055 | "In-context learning emerges when the training data exhibits particular distributional properties such as burstiness". | Background (in-weights vs in-context). |
 | 14 | Singh, Chan, Moskovitz, Grant, Saxe, Hill (2023). The Transient Nature of Emergent In-Context Learning in Transformers. NeurIPS 2023. | 2311.08360 | "ICL first emerges, then disappears and gives way to IWL". | Transience: report the training trajectory, decide at a fixed checkpoint. |
-| 15 | Reddy (2024). The mechanistic basis of data dependence and abrupt learning in an in-context classification task. ICLR 2024. | 2312.03002 | "ICL is driven by the abrupt emergence of an induction head". | Mechanism background. |
+| 15 | Reddy (2024). The mechanistic basis of data dependence and abrupt learning in an in-context classification task. ICLR 2024. | 2312.03002 | "In-context learning (ICL) is driven by the abrupt emergence of an induction head" (corrected 2026-10-27, see 0b). | Mechanism background. |
 | 16 | Aswadi, Ma, Wei (2026). What does a Bayes-filtered transformer believe? A predictive Monte Carlo approach. arXiv preprint. | 2607.17060 | "prediction-space comparison is fragile: different posteriors can share the same posterior-mean predictions." | Supports scoring full predictives (log score), not MSE. Possible implicit-prior readout. |
-| 17 | Lin, Lee (2024). Dual Operating Modes of In-Context Learning. arXiv preprint. | 2402.18819 | Task retrieval vs task learning; "we derive the closed-form expression of the task posterior distribution". | Retrieval as (ii). |
+| 17 | Lin, Lee (2024). Dual Operating Modes of In-Context Learning. arXiv preprint. | 2402.18819 | Task retrieval vs task learning; "we derive a closed-form expression for the task posterior" (corrected 2026-10-27, see 0b). | Retrieval as (ii). |
 
 ## 2. Transformers as Bayesian predictors; prior-fitted networks
 
@@ -63,7 +139,7 @@ heads" was searched; its other quoted claims were not PDF-checked).
 | 21 | Hollmann, Müller, Purucker, et al. (2025). Accurate predictions on small data with a tabular foundation model. Nature 637:319-326. | DOI 10.1038/s41586-024-08328-6 (fetched via PMC11711098) | "a learning algorithm that is itself learned across millions of synthetic datasets". | Background. |
 | 22 | Reuter, Rudner, Fortuin, Rügamer (2025). Can Transformers Learn Full Bayesian Inference in Context? ICML 2025. | 2501.16825 | Posterior samples "similar in quality to state-of-the-art MCMC or variational inference methods". | Posterior (not only predictive) matching. |
 | 23 | Zhu, Oermann, Cho (2026). Multi-Task Bayesian In-Context Learning. ICML 2026. | 2606.20538 | "matches oracle Bayesian predictors"; prior given as an in-context prefix. | Matched-prior design. |
-| 24 | Kang, Lee, Cheng (2026). Transformers Can Learn Posterior Predictive Distributions In-Context. arXiv preprint. | 2605.26713 | Transformers can implement GD "targeting the posterior predictive mean and variance". | Theory of full-PPD learning. |
+| 24 | Kang, Lee, Cheng (2026). Transformers Can Learn Posterior Predictive Distributions In-Context. ICML 2026 (poster page fetched 2026-10-27; was "arXiv preprint"). | 2605.26713 | Transformers can implement GD "targeting the posterior predictive mean and variance". | Theory of full-PPD learning. |
 | 25 | Fortini, Ng, Petrone, Rousseau, Wei (2026). Uncertainty Decomposition for Bayes-Filtered Transformers via Bayesian Predictive Inference. arXiv preprint. | 2602.04596 | "epistemic uncertainty shrinks with context length". | Predictive-inference view. |
 | 26 | Falck, Wang, Holmes (2024). Is In-Context Learning in Large Language Models Bayesian? A Martingale Perspective. ICML 2024. | 2406.00793 | Martingale property is "a fundamental requirement of a Bayesian learning system for exchangeable data". | Bayesian-coherence diagnostic; assumes exchangeability, so not directly for AR. |
 | 27 | Ye, Namkoong (2024). Exchangeable Sequence Models Quantify Uncertainty Over Latent Concepts. arXiv preprint. | 2408.03307 | "epistemic uncertainty over latent environments is captured by variation in predicted future observations." | Background. |
@@ -95,7 +171,7 @@ heads" was searched; its other quoted claims were not PDF-checked).
 | 43 | Vlǎdǎrean, Zhang, Sra (2026). On learning linear dynamical systems in context with attention layers. ICLR 2026 (fetched proceedings page). | proceedings.iclr.cc 2026, hash 0edcce16... | "the optimal weight construction for a single linear-attention layer". | Theory, noisy observations. |
 | 44 | Goel, Bartlett (2024). Can a Transformer Represent a Kalman Filter? L4DC 2024, PMLR 242:1502-1512. | 2312.06937 | A causally-masked Transformer "which implements the Kalman Filter". | Representability only (known system). |
 | 45 | Du, Balim, Oymak, Ozay (2023; arXiv order Balim first). Can Transformers Learn Optimal Filtering for Unknown Systems? IEEE Control Systems Letters 7:3525-3530. | 2308.08536; DOI 10.1109/LCSYS.2023.3335318 | "matches the optimal performance given by the Kalman filter for linear systems". | Oracle KF (known matrices) and RLS; L2; no seeds. |
-| 46 | Akram, Vikalo (2024-2026). Transformers as Implicit State Estimators: In-Context Learning in Dynamical Systems. arXiv preprint (TMLR venue unverified). | 2410.16546 | "In linear-Gaussian regimes, its predictions closely match those of the Kalman filter." | Oracle KF, OLS, ridge; MSE. |
+| 46 | Akram, Vikalo (2024-2026). Transformers as Implicit State Estimators: In-Context Learning in Dynamical Systems. TMLR (03/2026), verified from the v3 PDF header on 2026-10-27. | 2410.16546 | "In linear-Gaussian regimes, its predictions closely match those of the Kalman filter." | Oracle KF, OLS, ridge; MSE. |
 | 47 | Zhang, Xing (2026). Bayesian Optimality of In-Context Learning with Selective State Spaces. arXiv preprint. | 2602.17744 | Meta-trained selective SSM "asymptotically implements the Bayes-optimal predictor" for LG state-space tasks. | Asymptotic theory; silent on short context. |
 | 48 | Forgione, Pura, Piga (2023). From system models to class models: An in-context learning paradigm. arXiv (related DOI 10.1109/LCSYS.2023.3335036; venue unverified). | 2308.13380 | "learn a meta model that represents a class of dynamical systems". | In-context system identification; RMSE. |
 | 49 | Piga, Pura, Forgione (2023). On the adaptation of in-context learners for system identification. arXiv preprint. | 2312.04083 | "meta-model adaptation can enhance predictive performance". | Background. |
@@ -107,7 +183,7 @@ heads" was searched; its other quoted claims were not PDF-checked).
 |---|---|---|---|---|
 | 51 | Edelman, Tsilivis, Edelman, Malach, Goel (2024). The Evolution of Statistical Induction Heads: In-Context Learning Markov Chains. NeurIPS 2024. | 2402.11004 | "rapid phase transition to the correct in-context bigram solution"; models "converge near the Bayesian optimal solution". | (i) Dirichlet posterior mean; KL. |
 | 52 | Nichani, Damian, Lee (2024). How Transformers Learn Causal Structure with Gradient Descent. ICML 2024. | 2402.14735 | "we prove that transformers learn an induction head". | Mechanism. |
-| 53 | Rajaraman, Bondaschi, Ramchandran, Gastpar, Makkuva (2024). Transformers on Markov data: Constant depth suffices. NeurIPS 2024 (proceedings page; arXiv id not confirmed). | NeurIPS 2024 hash f8a20700... | "a transformer with a constant number of layers can represent" the in-context conditional empirical distribution. | (iii) k-gram estimator. |
+| 53 | Rajaraman, Bondaschi, Ramchandran, Gastpar, Makkuva (2024). Transformers on Markov data: Constant depth suffices. NeurIPS 2024 (proceedings page). | NeurIPS 2024 hash f8a20700...; arXiv 2407.17686 (PDF-confirmed 2026-10-27) | **Corrected 2026-10-27 (see 0b):** the earlier quote was NOT FOUND in either PDF. PDF abstract: "a transformer with a single head and three layers can represent the in-context conditional empirical distribution for kth-order Markov sources". | (iii) k-gram estimator. |
 | 54 | Zhou, Tian, Diggavi (2026). An Information-Theoretic Approach to Understanding Transformers' In-Context Learning of Variable-Order Markov Chains. AISTATS 2026. | 2410.05493 | CTW "provides an optimal solution" in a Bayesian formulation. | (i) with log-loss. |
 | 55 | Makkuva, Bondaschi, Girish, et al. (2025). Attention with Markov. ICLR 2025. | 2402.04161 | "global minima (bigram) and bad local minima (unigram)". | Low relevance. |
 
@@ -118,14 +194,14 @@ heads" was searched; its other quoted claims were not PDF-checked).
 | 56 | Zhang, Gilpin (2025). Zero-shot forecasting of chaotic systems. ICLR 2025. | 2409.15771 | Identifies "context parroting as a simple mechanism". | Context-only behaviour of foundation models. |
 | 57 | Zhang, Gilpin (2026). Context parroting: A simple but tough-to-beat baseline for foundation models in scientific machine learning. ICLR 2026. | 2505.11349 | The parroting baseline "scores higher than leading time-series foundation models". | **Context-only estimator explains pretrained models**, mirroring hypothesis (c). |
 | 58 | Lai, Bao, Gilpin (2026). Panda: A pretrained forecast model for chaotic dynamics. ICLR 2026. | 2505.13755 | "clear scaling of zero-shot performance on unseen systems" with the number of unique systems. | Only dynamics paper varying the training-system count; point metrics. |
-| 59 | Bao, Lai, Gilpin (2026). Transformers for dynamical systems learn transfer operators in-context. arXiv preprint. | 2602.18679 | "attention-based models apply a transfer-operator forecasting strategy in-context". | Bayes predictor derived but not tested. |
+| 59 | Bao, Lai, Gilpin (2026). Transformers for dynamical systems learn transfer operators in-context. arXiv preprint. | 2602.18679 | "attention models apply a transfer-operator forecasting strategy in-context" (v2 PDF; corrected 2026-10-27, see 0b). | Bayes predictor derived but not tested. |
 | 60 | Liu, Boullé, Sarfati, Earls (2024). LLMs learn governing principles of dynamical systems, revealing an in-context neural scaling law. EMNLP 2024. | 2402.00795; DOI 10.18653/v1/2024.emnlp-main.842 | Accuracy "increases with the length of the input context window". | Distributional (Bhattacharyya) evaluation vs ground truth. |
 | 61 | Gilpin (2021). Chaos as an interpretable benchmark for forecasting and data-driven modelling. NeurIPS 2021 Datasets and Benchmarks. | 2110.05266 | "131 known chaotic dynamical systems". | Benchmark background. |
 | 62 | Hemmer, Durstewitz (2025). True Zero-Shot Inference of Dynamical Systems Preserving Long-Term Statistics (DynaMix). NeurIPS 2025. | 2505.13192 | "the first DSR model able to generalize zero-shot to out-of-domain DS". | Background. |
 | 63 | Seifner, Cvejoski, Berghaus, Ojeda, Sanchez (2025). In-Context Learning of Stochastic Differential Equations with Foundation Inference Models. NeurIPS 2025. | 2502.19049 | "robust in-context function estimation". | Amortised ICL of stochastic dynamics. |
 | 64 | Gruver, Finzi, Qiu, Wilson (2023). Large Language Models Are Zero-Shot Time Series Forecasters. NeurIPS 2023. | 2310.07820 | LLMs "can surprisingly zero-shot extrapolate time series". | Background. |
 | 65 | Ansari, Stella, Turkmen, et al. (2024). Chronos: Learning the Language of Time Series. TMLR (via mlanthology). | 2403.07815 | For AR(4) Chronos "performs on par with the fitted AR model with correct order"; synthetic GP data (KernelSynth). | AR test against fitted AR, not a Bayes posterior. |
-| 66 | Das, Kong, Sen, Zhou (2024). A decoder-only foundation model for time-series forecasting (TimesFM). ICML 2024, PMLR 235:10148-10167. | 2310.10688 | "generators for ARMA processes"; 20% synthetic training data. | Synthetic ARMA in pretraining. |
+| 66 | Das, Kong, Sen, Zhou (2024). A decoder-only foundation model for time-series forecasting (TimesFM). ICML 2024, PMLR 235:10148-10167. | 2310.10688 | "We create generators for ARMA [McK84] processes" (PDF wording; corrected 2026-10-27, see 0b); 20% synthetic training data. | Synthetic ARMA in pretraining. |
 | 67 | Rasul, Ashok, Williams, et al. (2023). Lag-Llama. arXiv preprint. | 2310.08278 | "univariate probabilistic time series forecasting". | Background. |
 | 68 | Woo, Liu, Kumar, Xiong, Savarese, Sahoo (2024). Unified Training of Universal Time Series Forecasting Transformers (Moirai). ICML 2024, PMLR 235:53140-53164. | 2402.02592 | Trained on LOTSA. | Background. |
 | 69 | Garza, Challu, Mergenthaler-Canseco (2023). TimeGPT-1. arXiv preprint. | 2310.03589 | "the first foundation model for time series" (authors' claim). | Background. |
@@ -165,14 +241,74 @@ heads" was searched; its other quoted claims were not PDF-checked).
 |---|---|---|---|---|
 | 89 | Zhou, Jiang, Cotterell, Sachan (2023). Efficient Prompting via Dynamic In-Context Learning. arXiv preprint. | 2305.11170 | "we propose DynaICL". | **The project name is taken** by an unrelated prompting method. |
 
+## 10. Added 2026-10-27
+
+Retrieved in the 2026-10-27 search (queries in [SEARCH_LOG.md](SEARCH_LOG.md)). Every item's PDF was downloaded and its text searched; the quoted
+claim is **PDF-verified** (exact phrase found after whitespace, ligature and hyphenation normalisation) unless marked otherwise. Authors, dates and
+arXiv comments / journal-refs come from the arXiv API record. Venue is VERIFIED only from a journal-ref, an arXiv comment, the PDF itself or an
+official venue page, as stated.
+
+**Overlap flag.** No item found does what this project does (validated Bayes references for AR or state-space families, with population vs
+finite-library vs context-only comparisons, pre-registered). **Entry 90 overlaps partially** and must be cited and discussed: it trains a network
+on a Bayesian AR(1) prior, checks it against MCMC, and finds it beats a per-series AR(1) fit because the Bayes model knows the parameter distribution.
+
+### 10a. In-context learning of AR / state-space / dynamical systems, and Bayes references
+
+| # | Reference | ID | Claim (checked) | Use |
+|---|---|---|---|---|
+| 90 | Koshelev, Ponomarenko, Seleznev (2023). Amortized neural networks for agent-based model forecasting. arXiv preprint (econ.EM); venue unverified. | 2308.05753 | PDF-verified: toy Bayesian AR(1) (Appendix B.1: sigma^2 ~ IG(3, 1), rho ~ N(0, sigma) on [0, 1), stationary y_0); the network "statistically significantly outperforms the AR(1) model on all forecast horizons" in MSFE and LPS, "since the Bayesian model knows a little more information". Checked against MCMC. | **Partial overlap: closest precedent** for a network matched to a Bayesian AR(1) prior and for "population knowledge beats a context-only fit". No library, no separability map, no seeds, no pre-registration. |
+| 91 | Cao, Trinh, Quan, Truong (2026). Transformers Learn Robust In-Context Regression under Distributional Uncertainty. arXiv preprint; venue unverified. | 2603.18564 | PDF-verified: "the Transformer consistently outperforms OLS, Ridge, and ℓ1-based solvers for small to moderate context lengths"; read as "a form of implicit prior inference". | Same pattern as our short-context population advantage, but against context-only baselines only, MSE, regression. |
+| 92 | Wakayama, Suzuki (2025-2026). In-Context Learning Is Provably Bayesian Inference: A Generalization Theory for Meta-Learning. ICML 2026, PMLR 306:124318-124351 (arXiv journal-ref). | 2510.10981 | PDF-verified: "We use two Bayes reference predictors computed in closed form (conjugate Gaussian updates)"; abstract: "the uncertainty arising from the task mixture vanishes exponentially fast with only a few in-context examples". | Bayes Gap / Posterior Variance decomposition; theory consistent with our finding that prior knowledge matters only at short context. Regression mixture, not AR. |
+| 93 | Letey, Lu, Pehlevan, Zavatone-Veth (2026). Sequential Correlations Change In-Context Learning: Effective Context Length and Architectural Mismatch. ICML 2026 (icml.cc virtual page 72425, listed under spotlight posters). | 2607.03660 | PDF-verified: "within-context correlations induce an effective context length: correlated prompts behave like shorter i.i.d. prompts". Uses a Gaussian model equivalent to an AR(1) process for prompt correlations. | Theory for why dependent (AR) contexts carry less information than n i.i.d. points; relevant to how context length n should be read. |
+| 94 | Tang, Ildiz, Kurt, Oymak, Ozay (2026). On the Generalization Properties of Selective State-Space Models for Filtering Tasks for Unknown Systems. CDC 2026 (arXiv comment). | 2604.23818 | PDF-verified: "we train the SSM on trajectory samples from a set of systems"; in experiments "the Kalman filter achieves the lowest prediction error" (oracle KF with full model knowledge), RMS error. | Finite training set of M systems, but the reference is an oracle KF, not a population or library posterior. |
+| 95 | Rufolo, Piga, Pura, Forgione (2026). In-Context Learning for System Identification: Probabilistic Formulation, Long-Sequence Handling, and Benchmark Validation. arXiv preprint (9 Oct 2026); venue unverified. | 2610.13411 | PDF-verified: a probabilistic meta-identification architecture "enabling calibrated predictions over long horizons". | Probabilistic in-context system identification; nonlinear benchmarks, no Bayes reference. |
+| 96 | Rufolo, Piga, Maroni, Forgione (2024). Enhanced Transformer architecture for in-context learning of dynamical systems. arXiv preprint; venue unverified. | 2410.03291 | PDF-verified: "by formulating the learning task within a probabilistic framework". | Predecessor of 95 (was in the 2026-10-22 "seen only" list; now read). |
+| 97 | Dai, Gao, Sattar, Dean, Sun (2025). Pre-trained Large Language Models Learn Hidden Markov Models In-context. NeurIPS 2025 (arXiv comment). | 2506.07298 | PDF-verified: "LLMs achieve predictive accuracy approaching the theoretical optimum". | Pretrained LLMs vs the HMM optimum on synthetic HMMs: a latent-state analogue, discrete observations. |
+| 98 | Müller, Hollmann, Hutter (2024). Bayes' Power for Explaining In-Context Learning Generalizations. arXiv preprint; venue unverified. | 2410.01565 | PDF-verified: argues networks are better read as "an approximation of the true posterior, as defined by the data-generating process". | Supports the matched-posterior reading (i). |
+| 99 | Müller, Reuter, Hollmann, Rügamer, Hutter (2025). Position: The Future of Bayesian Prediction Is Prior-Fitted. ICML 2025 position paper (arXiv comment). | 2505.23947 | PDF-verified: "Training neural networks on randomly generated artificial datasets yields Bayesian models that capture the prior defined by the dataset-generating distribution". | Position statement of the PFN view that our Stage 1 tests in a narrow setting. |
+| 100 | Nagler (2023). Statistical Foundations of Prior-Data Fitted Networks. ICML 2023, PMLR 202 (arXiv journal-ref). | 2305.11097 | PDF-verified: "a purely frequentistic interpretation of PFNs as pre-tuned, but untrained predictors explains their behavior". | Counterpoint: PFN behaviour need not be Bayesian; relevant to how we phrase "behaves like Bayes". |
+| 101 | Elmoznino, Marty, Kasetty, Gagnon, Mittal, Fathi, Sridhar, Lajoie (2024-2025). In-context learning and Occam's razor. arXiv preprint; venue unverified. | 2410.14086 | PDF-verified: "the next-token prediction loss used to train in-context learners is directly equivalent to a data compression technique called prequential coding". | Justifies cumulative log score over the context as the natural ICL metric. |
+| 102 | Kwon, Xu, Yaras, Song, Balzano, Qu (2026). The Effect of Training Task Diversity on In-Context Learning through the Lens of Low-Dimensional Subspaces. arXiv preprint; venue unverified. | 2606.06814 | PDF-verified: "By modeling the training task vectors as a mixture of low-rank Gaussians". | Task-diversity theory (second definition: number of function classes). Background for the K sweep. |
+
+### 10b. Dynamical systems, chaos, time-series foundation models
+
+| # | Reference | ID | Claim (checked) | Use |
+|---|---|---|---|---|
+| 103 | Hemmer, Plaswig, Durstewitz (2026). A Minimal Interpretable Architecture for Zero-Shot Reconstruction of Dynamical Systems. arXiv preprint; venue unverified. | 2607.14937 | PDF-verified: "DynaBase produces forecasts through a linear blend of the current latent state and the nearest in-context neighbor and its temporal successor"; context parroting is one end of its 1-parameter family. | A two-parameter context-only predictor competitive with foundation models on chaotic systems: more support for hypothesis (iii). |
+| 104 | Moroshan, Siems, Zela, Carstensen, Hutter (2025-2026). TempoPFN: Synthetic Pre-training of Linear RNNs for Zero-shot Time Series Forecasting. NeurIPS 2026 (neurips.cc poster page 155999). | 2510.25502 | PDF-verified: a univariate model "pre-trained exclusively on synthetic data" (SDEs, GPs, audio synthesis). | A public synthetic-prior forecaster that could be scored against our references (scenario S3). |
+| 105 | Ansari, Shchur, Küken, et al. (2025). Chronos-2: From Univariate to Universal Forecasting. arXiv preprint (technical report); venue unverified. | 2510.15821 | PDF-verified: "training on synthetic datasets that impose diverse multivariate structures on univariate series". | Multivariate ICL forecaster; candidate for the F2 (VAR) comparison. |
+| 106 | Auer, Podest, Klotz, Böck, Klambauer, Hochreiter (2025). TiRex: Zero-Shot Forecasting Across Long and Short Horizons with Enhanced In-Context Learning. NeurIPS 2025 (arXiv comment "presented at NeurIPS 2025"). | 2505.23719 | PDF-verified: "TiRex retains state-tracking, a critical property for long-horizon forecasting". | Background; a non-transformer ICL forecaster. |
+| 107 | Datta Gupta (2025). Evaluating Time Series Foundation Models on Noisy Periodic Time Series. arXiv preprint; venue unverified. | 2501.00889 | PDF-verified: TSFM "forecasting abilities deteriorate with longer periods, higher noise levels, lower sampling rates and more complex shapes of the time series"; baselines FFT and a linear AR model. | Synthetic-process evaluation of TSFMs against classical AR, not against a Bayes reference. |
+
+### 10c. Statistical power, significance testing and pre-registration in ML
+
+| # | Reference | ID | Claim (checked) | Use |
+|---|---|---|---|---|
+| 108 | Card, Henderson, Khandelwal, Jia, Mahowald, Jurafsky (2020). With Little Power Comes Great Responsibility. EMNLP 2020 (arXiv comment "To appear at EMNLP 2020"). | 2010.06595 | PDF-verified: "underpowered experiments are common in the NLP literature". | Precedent for sizing studies by power against a minimum effect (our delta). |
+| 109 | Dror, Baumer, Shlomov, Reichart (2018). The Hitchhiker's Guide to Testing Statistical Significance in Natural Language Processing. ACL 2018 (Long Papers), pp. 1383-1392 (PDF footer). | ACL Anthology P18-1128 | PDF-verified: "statistical significance testing is often ignored or misused". | Test-selection background. |
+| 110 | Bertinetto, Henriques, Albanie, Paganini, Varol (2021). Preface. NeurIPS 2020 Workshop on Pre-registration in Machine Learning, PMLR 148 (PMLR page). | proceedings.mlr.press/v148/bertinetto21a | PDF-verified: "A preregistered paper is a regular paper that is submitted for peer-review without any experimental results"; "38 (53%) were accepted to the workshop". | **The ML precedent for pre-registration** (two-stage review). |
+| 111 | Hofman, Chatzimparmpas, Sharma, Watts, Hullman (2023). Pre-registration for Predictive Modeling. arXiv preprint; venue unverified. | 2311.18807 | PDF-verified: they "introduce a lightweight pre-registration template". | Template to compare with our PREREG documents. |
+| 112 | van Miltenburg, van der Lee, Krahmer (2021). Preregistering NLP Research. NAACL 2021 (arXiv comment "Accepted at NAACL2021"). | 2103.06944 | PDF-verified: "we argue in favour of registered reports". | Pre-registration argument in an ML-adjacent field. |
+| 113 | Herrmann, Lange, Eggensperger, Casalicchio, Wever, Feurer, Rügamer, Hüllermeier, Boulesteix, Bischl (2024). Position: Why We Must Rethink Empirical Research in Machine Learning. ICML 2024 position paper (arXiv comment). | 2405.02200 | PDF-verified: "most current empirical machine learning research is fashioned as confirmatory research while it should rather be considered exploratory". | Framing for separating our confirmatory (pre-registered) from exploratory analyses. |
+| 114 | Leech, Vazquez, Kupper, Yagudin, Aitchison (2024). Questionable practices in machine learning. arXiv preprint; venue unverified. | 2407.12220 | PDF-verified: "We describe 44 such practices which can undermine reported results". | Checklist of practices our design guards against. |
+| 115 | Bell, Kampman (2021). Perspectives on Machine Learning from Psychology's Reproducibility Crisis. arXiv preprint; venue unverified. | 2104.08878 | PDF-verified: "we present select ideas from psychology's reformation". | Background. |
+| 116 | Vaccaro (2026). Preregistration for Experiments with AI Agents. ICML 2026 position paper, spotlight (arXiv comment). | 2606.11217 | PDF-verified: "We propose a preregistration template tailored to experiments with AI agents". | Recent sign that pre-registration is being argued for at main ML venues. |
+
 ## Excluded (not fetched or not verified; not cited)
 
 * Seen only in search results: "Filtering Beats Fine-Tuning" (2601.06100), LaT-PFN (2405.10093), TempoPFN, ApolloPFN (2603.15802), SarSim0,
   "Position: The Future of Bayesian Prediction Is Prior-Fitted" (2505.23947), Rufolo et al. (2410.03291), Zekri et al. (2410.02724),
   "Kalman Linear Attention" (2602.10743), 2505.17838, "In-Context Learning Is Provably Bayesian Inference" (2510.10981), AutoTimes,
   2512.07705, Foundation Inference Models for Markov jump processes / FIM-ODE, Berkeley EECS tech reports on transformers and dynamical systems.
+  **Update 2026-10-27:** 2505.23947 (now entry 99), 2410.03291 (now entry 96) and 2510.10981 (now entry 92) were retrieved and read and are
+  no longer excluded; 2601.06100 and TempoPFN (now entry 104) were read too (2601.06100 not added, see SEARCH_LOG.md). The rest of this bullet stays excluded.
 * Cited by Cole et al. but not retrieved: Wu et al. 2025, Guo et al. 2023, Huang et al. 2024.
 * Not searched: Zellner's Bayesian econometrics.
 * Wrong identifiers caught: Sims & Uhlig DOI 10.2307/2938223 resolves to a different paper; arXiv 2502.05787 is unrelated (Goddard et al. is 2506.05574).
 * A remembered title for Ye & Namkoong ("... IS Bayesian inference a la De Finetti") was not found; the fetched title is entry 27.
 * Claim excluded: a search-summary statement attributed to Akram & Vikalo about smaller models emulating linear regression (not in the fetched abstracts).
+* 2026-10-27: seen only in search results, not opened, not cited: 2409.12293, 2405.14982, 2604.00064, 2606.31184, 2606.11473, 2603.15802,
+  2609.07257, 2406.02550, 2405.02154, 2410.20357, 2312.04509, 2512.16902, 2603.10573, 2605.00428, 2512.24145, 2510.11595, 2506.14652, 2601.19040,
+  2503.11411, 2609.09586, 2510.08445, 2605.24381, 2401.13912, 2604.25858, 2601.22364, 2104.12119, 2209.02188, 2603.21075, 2008.08400; the ICCV 2019
+  "Should We Preregister Experiments In Computer Vision?" workshop call (seen only on a third-party mirror); Bruttel & Nithammer 2025 (ScienceDirect).
+* 2026-10-27: entry 41 (Tseran & Imaizumi) and entry 79 (Sims & Uhlig): no PDF accessible; they stay abstract-level.

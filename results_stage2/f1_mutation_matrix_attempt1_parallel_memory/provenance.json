@@ -1,0 +1,22 @@
+{
+ "command": "python.exe scripts/stage2_f1_mutation_matrix.py --out results_stage2/f1_mutation_matrix --jobs 7",
+ "python": "3.13.5",
+ "platform": "Windows-11-10.0.26100-SP0",
+ "seconds": 342.1,
+ "sources_sha256": {
+  "dynaicl_families/ar1_unknown_sigma.py": "77aada85acfb2f8bfbb5e521cea34db8474fd9464de4e25a6ed5f2cc029e6023",
+  "dynaicl_families/sampling.py": "f3a3bc006d0ae7d43ea81c2f38318638a17f60ccf4a1fbf63ade5426ccafdbaf",
+  "dynaicl_families/ar1_known_sigma.py": "508369947b64b3229a9fa05a88f7c3a6851ed39d9ad22599af48f4b66ab5de68",
+  "tests_stage1/test_f1_references.py": "909020503773173b4e6576cebfa19366646899d65c70ea9d1f0eec7a78f2b6c1",
+  "dynaicl_families/stage2/f1_mutations.py": "e164e86e175fef86e05eb77c70f81e6dabbbbbef53393a8f17f4d54bd8e1f4bc",
+  "dynaicl_families/stage2/f1_plugin.py": "02ee8b3495f2a32d09036e826c53943579da162d5547e9fcdb91dc51f5e615a5",
+  "dynaicl_families/stage2/f1_checks.py": "9df78adc3d5ab6059231e4a525975d1d1dae9777bb2c59479e3f19b834abd3e1",
+  "dynaicl_families/stage2/f1_detect.py": "73784f170c64cc2718c220567f636797e4d5236937598d2bd2ccd35b990e14a8",
+  "config/stage2_seed_manifest.yaml": "557c6a627653bda396c84d64f7739360bf5b387aea276e23b27205d23cf8f902",
+  "scripts/stage2_f1_mutation_matrix.py": "2baff4f385c52496a1dd42cd4c2198e40a6dd354593d985bc2714d27152e0cda"
+ },
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "git_head": "d8ba4f6dd6b8e4caf276b63302bbb1b8add64943",
+ "git_dirty_tracked": false
+}

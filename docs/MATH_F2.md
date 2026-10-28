@@ -72,6 +72,33 @@ Sigma_j are discarded), s_j = 1[rho(B_j) < c], f_j(y) = p(y | B_j, D).
 * **Diagnostic:** per item, J, J_acc, q, the estimator used, SE(log p_hat); summary quantiles per cell. A cell where the
   rejection fraction under the context-only posterior approaches 1 (explosive-looking contexts) is flagged.
 
+## 5b. Interval Rao-Blackwell estimator I (DERIVED; the default for h = 1, added 2026-10-28 after timing)
+**Why.** Timing (disclosure S30) showed that estimators R and C cannot meet the 2e-4 target for the context-only reference
+at n <= 5 within 2^21 draws: the untruncated posterior puts up to 99% of its mass on unstable B, and the 0/1 indicator
+dominates the variance. Estimator I removes the indicator and Sigma from the Monte Carlo.
+**Stable interval.** For a real 2 x 2 matrix, both eigenvalues have modulus < c iff |det| < c^2 and |tr| < c + det / c (Jury
+conditions, scaled by c). With b12, b21, b22 fixed, det = b22 b11 - b12 b21 and tr = b11 + b22 are linear in b11, so each
+condition is a half-line in b11 and the stable set is an interval (L, U) (possibly empty). TESTED: F2-V5b (equality with the
+spectral-radius test on a grid).
+**Conditional of b11 (Sigma integrated).** B | D is matrix-t: p(B | D) proportional to |Psi_n + D^T W D|^{-(nu_n + d)/2},
+D = B - B_n, W = V_n^{-1} (integrate Sigma ~ IW out of the matrix normal). With only D_00 = e free, the entries of D^T W D are
+quadratic (Q_00), linear (Q_01) or constant (Q_11) in e, so the determinant is alpha e^2 + beta e + gamma and
+e | rest ~ t_{nu'}(-beta / (2 alpha), (gamma - beta^2 / (4 alpha)) / (alpha nu')), nu' = nu_n + d - 1. (For d = 1: t_{nu_n}
+with scale^2 Psi_n / (W nu_n).)
+**Estimator.** With draws of (b12, b21, b22) from the untruncated posterior (b11 and Sigma of the draw are discarded):
+a_j = P(b11 in (L, U) | rest) (Student-t CDF, closed form) and g_j(y) = integral over (L, U) of p(y | B, D) p(b11 | rest)
+d b11, with p(y | B, D) the Student-t of section 4. Then p_c(y | D) = E[g] / E[a] (both expectations under the untruncated
+posterior), estimated by sum_j g_j / sum_j a_j, a ratio of means of smooth draw-wise quantities; SE of the log by the delta
+method for a ratio of means, Var = (Var(g) - 2 p Cov(g, a) + p^2 Var(a)) / (J mean(a)^2).
+**Inner integral.** b11 = m* + s* tan(theta), m*, s* the location and scale of the product of p(b11 | rest) and a Gaussian
+approximation of the y-likelihood in b11 (through y_0 | y_1 at b11 = location); theta over (atan((L - m*)/s*),
+atan((U - m*)/s*)); 32-point Gauss-Legendre. The integrand is bounded and decays like cos(theta)^nu' at the ends.
+NUMERICALLY APPROXIMATED with verified convergence: in the d = 1 case the estimator is deterministic and matches nested
+scipy quadrature to 1e-14 at 32 nodes (16 nodes: about 5e-7); node doubling 32 -> 64 <= 1e-9 relative (F2-V5d).
+Two earlier variants were rejected on measured evidence (disclosure S30): sampling Sigma and integrating b11 against a
+Gaussian (closed form, but the Sigma noise needed > 4M draws per item for population contexts that estimator C handled with
+25k), and Gauss-Legendre in the conditional CDF variable (algebraic convergence: 2.5e-6 nats error at 128 nodes).
+
 ## 6. h-step predictive (h > 1)
 Given (B, Sigma), x_{n+h} | D ~ N(A^h x_n, sum_{k=0}^{h-1} A^k Sigma (A^k)^T) (DERIVED by iterating the recursion). The sum
 is linear in Sigma but not of the form C Sigma C^T, so Sigma cannot be integrated to a Student-t: for h > 1 both B and Sigma
