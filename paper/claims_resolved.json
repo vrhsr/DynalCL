@@ -563,25 +563,231 @@
  },
  {
   "id": "F1-V9",
-  "label": "PENDING",
-  "text": "F1-V9 mutation matrix: every mutation detected, clean baseline passes.",
-  "ref": "origin/results-stage2-cpu-batch1",
+  "label": "VERIFIED",
+  "text": "F1-V9 mutation matrix: all 6 injected bugs detected; clean baseline passes all 19 frozen F1 tests and every extra detector (wrong truncation is caught only by the structural matched-prior guard).",
+  "ref": "50a7664a07759c4a05d27cadc093c19787706a8c",
   "path": "results_stage2/f1_mutation_matrix/f1_mutation_matrix.json",
-  "commit": null,
-  "sha256": null,
-  "checks": [],
-  "status": "PENDING"
+  "commit": "50a7664a07759c4a05d27cadc093c19787706a8c",
+  "sha256": "b892945a74ed5d4d74fcd76605cc88d39036df50c833ce9be4bbed507c5a1a53",
+  "checks": [
+   {
+    "spec": {
+     "json": "pass"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "baseline_pass"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json_len": "rows"
+    },
+    "expect": 7,
+    "got": 7,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "rows.5.detector_failures"
+    },
+    "expect": [
+     "matched_guard"
+    ],
+    "got": [
+     "matched_guard"
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "rows.5.failed_tests"
+    },
+    "expect": [],
+    "got": [],
+    "pass": true
+   }
+  ],
+  "status": "PASS"
  },
  {
   "id": "F3-MAP",
-  "label": "PENDING",
-  "text": "F3 short-context map (noisy observations): where pop vs stab and library vs continuous are identifiable for n = 2..9.",
-  "ref": "origin/results-stage2-cpu-batch1",
+  "label": "VERIFIED",
+  "text": "F3 map (noisy observations, n = 2..9): VALID; held-out pop vs stab IDENTIFIABLE only at h = 1 for q = 0 (up to n = 7) and q = 0.755 (n = 2); largest h = 1 gap 0.047 / 0.028 / 0.015 / 0.011 nats at q = 0 / 0.755 / 2.56 / 6.5.",
+  "ref": "50a7664a07759c4a05d27cadc093c19787706a8c",
   "path": "results_stage2/f3_map/map_decisions.csv",
-  "commit": null,
-  "sha256": null,
-  "checks": [],
-  "status": "PENDING"
+  "commit": "50a7664a07759c4a05d27cadc093c19787706a8c",
+  "sha256": "d569fcd50abb8a76a0f6631d61d7f8ea891d738ef1a70cf8cb52ec2554eb396d",
+  "checks": [
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "pair": "pop-stab",
+      "q": "0.0",
+      "h": "1",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 7,
+    "got": 7,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "pair": "pop-stab",
+      "q": "0.755",
+      "h": "1",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 2,
+    "got": 2,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "pair": "pop-stab",
+      "q": "0.0",
+      "h": "1"
+     }
+    },
+    "expect": 0.0467,
+    "got": 0.04674448429414582,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "pair": "pop-stab",
+      "q": "0.755",
+      "h": "1"
+     }
+    },
+    "expect": 0.0278,
+    "got": 0.027822011825138413,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "pair": "pop-stab",
+      "q": "2.56",
+      "h": "1"
+     }
+    },
+    "expect": 0.0147,
+    "got": 0.014724899858976806,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "pair": "pop-stab",
+      "q": "6.5",
+      "h": "1"
+     }
+    },
+    "expect": 0.011,
+    "got": 0.011008093902811569,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F3-MAP-VALID",
+  "label": "VERIFIED",
+  "text": "F3 map validity checks: node doubling 4.4e-15 nats, library vs an independent Kalman filter 5.1e-15, disjointness 0, q = 0 control vs the Stage 1A map |z| <= 2.19.",
+  "ref": "50a7664a07759c4a05d27cadc093c19787706a8c",
+  "path": "results_stage2/f3_map/map_checks.json",
+  "commit": "50a7664a07759c4a05d27cadc093c19787706a8c",
+  "sha256": "f337876e139953837d0ece7bf218931dc2e72b3ce629aded44035c61444e5474",
+  "checks": [
+   {
+    "spec": {
+     "json": "valid"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "checks.i_node_doubling.max_abs_nats"
+    },
+    "expect": 4.4e-15,
+    "got": 4.440892098500626e-15,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "checks.iv_disjointness.held_coefficients_equal_to_an_atom"
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F1-LOOKUP",
+  "label": "VERIFIED",
+  "text": "F1 power lookup (bootstrap critical value; frozen Stage 1A rule): Q1 s* = 0.01 / 0.02 / 0.03 and Q2 s* = 0.10 at M = 32 / 64 / 128.",
+  "ref": "c073522bf585b2af1cd3e57092d417d64615f5c5",
+  "path": "results_stage2/f1_power_lookup/f1_power_lookup.json",
+  "commit": "c073522bf585b2af1cd3e57092d417d64615f5c5",
+  "sha256": "76cb0d76b77d74756904ae7e9b5354fce10fbf8615c4c7d415d255501172258e",
+  "checks": [
+   {
+    "spec": {
+     "json": "Q1"
+    },
+    "expect": {
+     "32": 0.01,
+     "64": 0.02,
+     "128": 0.03
+    },
+    "got": {
+     "32": 0.01,
+     "64": 0.02,
+     "128": 0.03
+    },
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "Q2"
+    },
+    "expect": {
+     "32": 0.1,
+     "64": 0.1,
+     "128": 0.1
+    },
+    "got": {
+     "32": 0.1,
+     "64": 0.1,
+     "128": 0.1
+    },
+    "pass": true
+   }
+  ],
+  "status": "PASS"
  },
  {
   "id": "F2-MAP",

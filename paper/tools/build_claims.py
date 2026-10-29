@@ -66,6 +66,8 @@ def extract(raw: bytes, spec: dict):
     if "csv_minmax" in spec:
         vals = [float(r[spec["csv_minmax"]]) for r in _rows(raw, spec.get("where", {}))]
         return [min(vals), max(vals)]
+    if "csv_max" in spec:
+        return max(float(r[spec["csv_max"]]) for r in _rows(raw, spec.get("where", {})))
     if "csv_max_int" in spec:
         return max(int(float(r[spec["csv_max_int"]])) for r in _rows(raw, spec.get("where", {})))
     if "csv_min_int" in spec:

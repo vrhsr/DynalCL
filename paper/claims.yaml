@@ -95,13 +95,32 @@ claims:
     source: {ref: ac8aecb13448efaff908df010ce1dc606e631ff2, path: results_stage2/f1_validation/f1_validation.json}
     extract: [{json: pass, expect: true}, {json: n_tests, expect: 180}, {json: family_alpha, expect: 0.01}]
   - id: F1-V9
-    text: "F1-V9 mutation matrix: every mutation detected, clean baseline passes."
-    label: PENDING
-    source: {ref: origin/results-stage2-cpu-batch1, path: results_stage2/f1_mutation_matrix/f1_mutation_matrix.json}
+    text: "F1-V9 mutation matrix: all 6 injected bugs detected; clean baseline passes all 19 frozen F1 tests and every extra detector (wrong truncation is caught only by the structural matched-prior guard)."
+    label: VERIFIED
+    source: {ref: 50a7664a07759c4a05d27cadc093c19787706a8c, path: results_stage2/f1_mutation_matrix/f1_mutation_matrix.json}
+    extract: [{json: pass, expect: true}, {json: baseline_pass, expect: true}, {json_len: rows, expect: 7},
+              {json: rows.5.detector_failures, expect: [matched_guard]}, {json: rows.5.failed_tests, expect: []}]
   - id: F3-MAP
-    text: "F3 short-context map (noisy observations): where pop vs stab and library vs continuous are identifiable for n = 2..9."
-    label: PENDING
-    source: {ref: origin/results-stage2-cpu-batch1, path: results_stage2/f3_map/map_decisions.csv}
+    text: "F3 map (noisy observations, n = 2..9): VALID; held-out pop vs stab IDENTIFIABLE only at h = 1 for q = 0 (up to n = 7) and q = 0.755 (n = 2); largest h = 1 gap 0.047 / 0.028 / 0.015 / 0.011 nats at q = 0 / 0.755 / 2.56 / 6.5."
+    label: VERIFIED
+    source: {ref: 50a7664a07759c4a05d27cadc093c19787706a8c, path: results_stage2/f3_map/map_decisions.csv}
+    extract: [{csv_max_int: n, where: {pair: pop-stab, q: "0.0", h: "1", decision: IDENTIFIABLE}, expect: 7},
+              {csv_max_int: n, where: {pair: pop-stab, q: "0.755", h: "1", decision: IDENTIFIABLE}, expect: 2},
+              {csv_max: estimate, where: {pair: pop-stab, q: "0.0", h: "1"}, expect: 0.0467, tol: 0.00005},
+              {csv_max: estimate, where: {pair: pop-stab, q: "0.755", h: "1"}, expect: 0.0278, tol: 0.00005},
+              {csv_max: estimate, where: {pair: pop-stab, q: "2.56", h: "1"}, expect: 0.0147, tol: 0.00005},
+              {csv_max: estimate, where: {pair: pop-stab, q: "6.5", h: "1"}, expect: 0.0110, tol: 0.00005}]
+  - id: F3-MAP-VALID
+    text: "F3 map validity checks: node doubling 4.4e-15 nats, library vs an independent Kalman filter 5.1e-15, disjointness 0, q = 0 control vs the Stage 1A map |z| <= 2.19."
+    label: VERIFIED
+    source: {ref: 50a7664a07759c4a05d27cadc093c19787706a8c, path: results_stage2/f3_map/map_checks.json}
+    extract: [{json: valid, expect: true}, {json: checks.i_node_doubling.max_abs_nats, expect: 4.4e-15, tol: 1e-15},
+              {json: checks.iv_disjointness.held_coefficients_equal_to_an_atom, expect: 0}]
+  - id: F1-LOOKUP
+    text: "F1 power lookup (bootstrap critical value; frozen Stage 1A rule): Q1 s* = 0.01 / 0.02 / 0.03 and Q2 s* = 0.10 at M = 32 / 64 / 128."
+    label: VERIFIED
+    source: {ref: c073522bf585b2af1cd3e57092d417d64615f5c5, path: results_stage2/f1_power_lookup/f1_power_lookup.json}
+    extract: [{json: Q1, expect: {"32": 0.01, "64": 0.02, "128": 0.03}}, {json: Q2, expect: {"32": 0.1, "64": 0.1, "128": 0.1}}]
   - id: F2-MAP
     text: "F2 (bivariate VAR(1)) separability map."
     label: PENDING
