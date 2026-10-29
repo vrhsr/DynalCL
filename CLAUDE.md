@@ -25,14 +25,15 @@ chronological order; older ones (1-2g, 7-8) are historical where they say "not s
   Amendment 2 / v3 freeze, any confirmatory run or authorization, any torch/GPU job, any F1/F2 neural training.
   CPU workstreams (code outside the Stage 1 freeze globs: `dynaicl_families/stage2/`, `tests_stage2/`, `scripts/stage2_*`,
   seeds in `config/stage2_seed_manifest.yaml`; disclosures S28-S31 in docs/DISCLOSURE_LOG_STAGE1.md):
-  A (F1): A2 validation PASS (`results_stage2/f1_validation/`); A1 mutation matrix and the F1 operating characteristics wait for
-  the box (relay `pilot_tooling/RELAY_stage2_cpu_jobs.md`, CPU batch 1; attempt 1 locally failed through MemoryError, S29);
-  A3 DRAFT `docs/PREREG_stage2_F1.md`. B (F2): `docs/MATH_F2.md`, `dynaicl_families/stage2/f2_var.py`, tests; the per-item
+  A (F1): A2 validation PASS (`results_stage2/f1_validation/`); box CPU batch 1 (`results-stage2-cpu-batch1` @ `50a7664`,
+  verified S33): F1-V9 mutation matrix PASS, F1 power lookup (Q1 0.01/0.02/0.03, Q2 0.10 at M = 32/64/128); A3 DRAFT
+  `docs/PREREG_stage2_F1.md` (section 7 filled). B (F2): `docs/MATH_F2.md`, `dynaicl_families/stage2/f2_var.py`, tests; the per-item
   Monte Carlo target 2e-4 is infeasible for the context-only reference at n <= 5 (S30; user decision pending); map spec NOT written.
-  C (F3): spec `docs/STAGE2_F3_MAP_SPEC.md` committed before the run; smoke VALID; full map in CPU batch 1 (box).
-  D: literature D1/D2/D4 done (`docs/literature/SEARCH_LOG.md`, `VENUES.md`); GAP_AND_NOVELTY.md update waits for the maps.
+  C (F3): map VALID (batch 1, S33): pop vs stab identifiable only at q = 0 (n <= 7) and q = 0.755 (n = 2), h = 1; nothing at
+  q >= 2.56 or h = 5; library vs continuous never on held-out systems.
+  D: literature D1/D2/D4 done; GAP_AND_NOVELTY.md section 8 (2026-10-29) updated after the F1/F3 maps.
   E: branch `paper-draft`: `paper/claims.yaml` + `paper/tools/build_claims.py` (re-extracts every number from pinned commits;
-  PASS 13 verified) and `paper/OUTLINE_track1.md` (CP4, waiting for the user before any full text).
+  PASS 17 verified, 1 pending) and `paper/OUTLINE_track1.md` (CP4, waiting for the user before any full text).
 * Rules that bite most often: never edit a frozen file or manifest; disclosure logs are append-only; never open pilot effect files
   (`results_stage1/pilot/eval/`, `phase_d_pilot/PILOT_ONLY_do_not_open_effects.json`); never ask for, store or print a key;
   compute over ~10-15 min runs on the box (detached in tmux, one background waiter, no polling loops); stop at every checkpoint.
