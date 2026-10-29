@@ -21,9 +21,10 @@ value in the operating characteristics; S21: convergence criterion; S28: the gat
 * pop: a ~ TN(0.4, 0.3^2; +/-0.95), sigma^2 ~ IG(3, 2), independent. ctx: a ~ U(+/-0.999), log sigma ~ U(log 0.01, log 100).
   lib_K: uniform over the model's own K atoms (a_k, sigma_k) from pop. Implementation `dynaicl_families/ar1_unknown_sigma.py`
   (frozen in Stage 1 v2).
-* Validation: F1-V1..V8 (frozen tests; 19/19 pass, re-run 2026-10-27 alone in 390 s); calibration / SBC / coverage / optimality /
-  known-sigma limit at Stage-0 scale: `results_stage2/f1_validation/` (PENDING at the time of writing); F1-V9 mutation matrix:
-  PENDING (box, `pilot_tooling/RELAY_stage2_cpu_jobs.md`).
+* Validation (VERIFIED): F1-V1..V8 frozen tests 19/19; Stage-0-scale calibration / SBC / coverage / optimality / known-sigma
+  limit PASS (`results_stage2/f1_validation/`, 180 tests); F1-V9 mutation matrix PASS on the box (all 6 mutations detected,
+  clean baseline 19/19; `results-stage2-cpu-batch1` @ `50a7664`). Wrong truncation is detected only by the structural matched
+  guard (disclosure S33).
 
 ## 3. Arms (they differ only in the law of (a, sigma) during pretraining)
 | Arm | Law of (a, sigma) | Its Bayes predictor | Role |
@@ -70,13 +71,21 @@ penalty partly reflects coverage of the support edge, not only memorisation.
 C1: CTX-F1's regret against ctx on CTX systems, r in {0.25, 1, 4}, n in {2, 3}: upper band < 0.01. C2: every arm's regret against
 its own reference on its own distribution at n = 20: upper band < 0.01. V-RB, V-REF, V-CAUSAL, V-REPRO (1e-4) as Stage 1A.
 
-## 7. Operating characteristics and sample size (PENDING: box job 3 of CPU batch 1)
-`scripts/stage2_f1_operating_characteristics.py`: the Stage 1A v2 simulation model and grid with the 12 F1 Q1 cells (Delta and
-per-context sd from the map) and three designed-set Q2 cells; **critical value = the analysis's own hierarchical bootstrap**
-(audit A1), alpha 0.025, two replicates must agree. The power lookup s*(M) (largest seed sd with P_correct >= 0.8 for both
-pi = 0 and pi = 1, e <= 0.005, both rho_cell) is built from it with the frozen rule of `scripts/stage1_power_lookup.py`
-(min 32 models). The pilot rule then picks M exactly as Stage 1A. **Expectation (UNVERIFIED until the OC returns):** the
-F1 Q1 gaps are 3-6 times the Stage 1A gaps but the per-context sds are also larger (0.29-0.69 nats), so power need not be higher.
+## 7. Operating characteristics and sample size (VERIFIED 2026-10-29; box CPU batch 1, commit `50a7664`)
+`scripts/stage2_f1_operating_characteristics.py` on the box (provenance commit `f10dc8c`): the Stage 1A v2 simulation model and
+grid with the 12 F1 Q1 cells (Delta and per-context sd from the F1 map) and three designed-set Q2 cells; **critical value =
+the analysis's own hierarchical bootstrap** (audit A1), alpha 0.025, two replicates must agree. 360 Q1 settings x 200 studies;
+192 Q2 settings x 300 studies. Largest P_wrong over every setting: 0.0.
+Power lookup built with the frozen rule of `scripts/stage1_power_lookup.py` (P_correct >= 0.8 for both pi = 0 and pi = 1,
+e <= 0.005, both rho_cell; min 32 models): `results_stage2/f1_power_lookup/f1_power_lookup.json`.
+| M | Q1 s*(M) F1 (Stage 1A) | Q2 s*(M) F1 (Stage 1A) |
+|---|---|---|
+| 32 | 0.01 (0.01) | 0.10 (0.02) |
+| 64 | 0.02 (0.01) | 0.10 (0.05) |
+| 128 | 0.03 (0.02) | 0.10 (0.05) |
+Reading (DERIVED from the table, not a result about networks): F1's larger gaps buy tolerance for noisier seeds at M >= 64 (Q1)
+and at every M (Q2); at M = 32 the Q1 tolerance equals Stage 1A's. The UNIF-only spread read of Stage 1A (between-seed sd 0.0017
+at 10k, S20) suggests seed sds of this order are plausible, but no F1 network has been trained (UNVERIFIED for F1).
 
 ## 8. Program verdict
 BLOCKED / NOT RESOLVABLE (capability or compute) / PROCEED / REVISE, in that order, with the Stage 1A definitions.

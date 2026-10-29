@@ -1,0 +1,16 @@
+{
+ "Q1": {
+  "32": 0.01,
+  "64": 0.02,
+  "128": 0.03
+ },
+ "Q2": {
+  "32": 0.1,
+  "64": 0.1,
+  "128": 0.1
+ },
+ "min_models": 32,
+ "power": 0.8,
+ "source": "results-stage2-cpu-batch1@50a7664:results_stage2/f1_oc",
+ "note": "s*(M): largest grid seed sd with P_correct >= 0.8 in every qualifying setting"
+}
