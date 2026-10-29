@@ -34,6 +34,14 @@ chronological order; older ones (1-2g, 7-8) are historical where they say "not s
   D: literature D1/D2/D4 done; GAP_AND_NOVELTY.md section 8 (2026-10-29) updated after the F1/F3 maps.
   E: branch `paper-draft`: `paper/claims.yaml` + `paper/tools/build_claims.py` (re-extracts every number from pinned commits;
   PASS 17 verified, 1 pending) and `paper/OUTLINE_track1.md` (CP4, waiting for the user before any full text).
+* **UPDATE 2026-10-30 (user: "whichever is the best do it" = my recommendations, disclosure S34).** NO Amendment 2: the Stage 1A
+  result is NOT RESOLVABLE (compute); neural effort moves to F1 (CPU prep only; GPU/torch, freezes and confirmatory runs still
+  need the user's explicit go-ahead). F2 MC criterion: per-item SE <= 0.01 and cell-mean MC SE <= delta/100. `amendment2-candidate`
+  pushed as a backup. Box CPU batch 2 (F2 map + F1 head floor; `pilot_tooling/RELAY_stage2_cpu_batch2.md`) and batch 3 (F2
+  mutation matrix + F2 validation; `RELAY_stage2_cpu_batch3.md`) are relayed by the user; verify their pushed branches
+  (`results-stage2-cpu-batch2/3`) like batch 1 (S33). Paper: branch `paper-draft` (worktree `../DynaICL-paper`): Track 1 draft
+  + Track 2 skeleton; `python paper/build.py` = claims + number macros + tables + numbers audit + PDFs; fresh-clone build PASS.
+  A hostile-review sub-agent (F1 task) reads only the manuscript, claims and evidence files; fix real issues, log the rest.
 * Rules that bite most often: never edit a frozen file or manifest; disclosure logs are append-only; never open pilot effect files
   (`results_stage1/pilot/eval/`, `phase_d_pilot/PILOT_ONLY_do_not_open_effects.json`); never ask for, store or print a key;
   compute over ~10-15 min runs on the box (detached in tmux, one background waiter, no polling loops); stop at every checkpoint.
