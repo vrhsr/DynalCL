@@ -7,6 +7,7 @@ roles:
   f1_tests:            {seeds: [80301], use: "tests_stage2 unit tests of the F1 checks; never decisions", status: tests}
   f1_v9_detectors:     {seeds: [80101], use: "F1-V9 mutation matrix, detector checks (clean and mutated rows)", status: unused}
   f1_oc:               {seeds: [80111, 80112], use: "F1 neural pre-registration DRAFT: operating characteristics Q1, Q2 (synthetic)", status: unused}
+  f1n_head_floor:      {seeds: [81301], use: "F1 neural design: Gaussian-mixture head floor against the F1 references (reference-only)", status: unused}
   f1_a2_validation:    {seeds: [80201], use: "F1 calibration / SBC / coverage / optimality / known-sigma report (task A2)", status: unused}
   f2_tests:            {seeds: [80401], use: "tests_stage2 unit tests of the F2 references; never decisions", status: tests}
   f2_validation:       {seeds: [80501], use: "F2 reference validation report (IS convergence, calibration, optimality)", status: unused}
