@@ -1,0 +1,42 @@
+{
+ "valid": true,
+ "checks": {
+  "i_node_doubling": {
+   "max_abs_nats": 4.440892098500626e-15,
+   "tolerance": 1e-06,
+   "pass": true
+  },
+  "iii_library_vs_independent_kalman": {
+   "max_abs_nats": 5.10702591327572e-15,
+   "tolerance": 1e-10,
+   "pass": true
+  },
+  "iv_disjointness": {
+   "held_coefficients_equal_to_an_atom": 0,
+   "pass": true
+  },
+  "ii_q0_vs_stage1A_map": {
+   "z": {
+    "2": -0.18268924914086493,
+    "3": -2.1850225256053193,
+    "5": -0.10141590764697718
+   },
+   "bound": 4.0,
+   "pass": true,
+   "stage1A": {
+    "2": [
+     0.041463025258438084,
+     0.0004153198590822218
+    ],
+    "3": [
+     0.0358503734529325,
+     0.000384906876526067
+    ],
+    "5": [
+     0.02743305619981977,
+     0.00033115009100145897
+    ]
+   }
+  }
+ }
+}

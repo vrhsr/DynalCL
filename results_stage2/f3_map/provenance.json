@@ -1,0 +1,26 @@
+{
+ "command": "python scripts/stage2_f3_map.py --out results_stage2/f3_map --workers 16",
+ "python": "3.13.5",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "cpu_count": 32,
+ "workers": 16,
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "root_seed": 80701,
+ "smoke": false,
+ "seconds_this_invocation": 10079.0,
+ "sources_sha256": {
+  "dynaicl_families/stage2/f3_map.py": "12482a89713b76fe3c429b80095fc8cebd96a2fc6841527f47919c2959492f99",
+  "scripts/stage2_f3_map.py": "f09447cf11e290f10cdf55a61ea7b5a8acef02ed0ff3a727c90a27c7880542a2",
+  "docs/STAGE2_F3_MAP_SPEC.md": "626bbc1e833f0dbe34068f9284305f679d95dc84efe0f3d878f1a4022aba5d03",
+  "config/stage2_seed_manifest.yaml": "57d8e31688dd73da388ef5452cc80fa14ac6cae6846c1f73b790306859314a18",
+  "dynaicl/references/kalman_quadrature.py": "0ec62d75def942b976a862c84afa5322ed87e0962061ef7e92783b28ffe57199",
+  "dynaicl/systems/noisy.py": "fc9e79835d9acf78fe317fbaefca528fcf01abe310357d5619b4da00e0a14518",
+  "dynaicl/evaluation/noisy_harness.py": "398790c3f8772bf8299a2bc4a435803a42a6cd007850c9b884fb75096b9d4ff9",
+  "dynaicl/systems/splits.py": "d226f2693f87b9175df256b64b2990f7320674fd504fba05c70145eaa6993a9a",
+  "dynaicl/rng.py": "0e7557b181057f4985a36b27f0553770699e7ec8034131adabfa4596fdfd2fd4"
+ },
+ "stage1A_input_sha256": "cedb9b62df2c7273432b8ef6d05a59471fcc26de909a9b33b1bc3011ef8f3129",
+ "git_head": "f10dc8cee3cffe1b4df7e4b73fcf8031c1d9d57c",
+ "git_dirty_tracked": false
+}
