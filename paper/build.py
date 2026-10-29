@@ -43,10 +43,16 @@ def main() -> int:
         print("$", " ".join(cmd), flush=True)
         if subprocess.run(cmd, cwd=PAPER, env=env, stdout=subprocess.DEVNULL).returncode != 0:
             raise SystemExit(f"FAILED: {' '.join(cmd)} (see main.log / main.blg)")
-    log = (PAPER / "main.log").read_text(encoding="latin-1")
-    if "undefined" in log:
-        raise SystemExit("FAILED: undefined references or citations remain (see main.log)")
-    print("PDF built: paper/main.pdf")
+    for cmd in (["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main_track2.tex"], ["bibtex", "main_track2"],
+                ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main_track2.tex"],
+                ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main_track2.tex"]):
+        print("$", " ".join(cmd), flush=True)
+        if subprocess.run(cmd, cwd=PAPER, env=env, stdout=subprocess.DEVNULL).returncode != 0:
+            raise SystemExit(f"FAILED: {' '.join(cmd)} (see main_track2.log)")
+    for name in ("main", "main_track2"):
+        if "undefined" in (PAPER / f"{name}.log").read_text(encoding="latin-1"):
+            raise SystemExit(f"FAILED: undefined references or citations remain (see {name}.log)")
+    print("PDFs built: paper/main.pdf (Track 1) and paper/main_track2.pdf (Track 2 skeleton)")
     return 0
 
 

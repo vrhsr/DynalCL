@@ -13,3 +13,4 @@ paper/*.out
 paper/*.fls
 paper/*.fdb_latexmk
 paper/main.pdf
+paper/main_track2.pdf

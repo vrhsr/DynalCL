@@ -32,12 +32,24 @@ def scan(path: Path) -> list[str]:
     return bad
 
 
+PLACEHOLDER = re.compile(r"\\placeholder\{((?:[^{}]|\{[^{}]*\})*)\}", re.S)
+
+
+def placeholders_without_numbers(path: Path) -> list[str]:
+    """Track 2 rule (task E3): no placeholder may contain any digit."""
+    text = re.sub(r"(?<!\\)%.*$", "", path.read_text(encoding="utf-8"), flags=re.M)
+    names = re.compile(r"\b(?:F[123]|Q[12]|Track\s?[12])\b")       # family / question / track identifiers only
+    return [f"{path.name}: placeholder contains a digit: {m.group(1)[:80]!r}" for m in PLACEHOLDER.finditer(text)
+            if re.search(r"\d", names.sub("", m.group(1)))]
+
+
 def main() -> int:
-    files = sorted((ROOT / "paper" / "sections").glob("*.tex"))
+    files = sorted((ROOT / "paper" / "sections").glob("*.tex")) + sorted((ROOT / "paper" / "sections_track2").glob("*.tex"))
     if not files:
         print("FAIL: no section files found")
         return 1
     bad = [b for f in files for b in scan(f)]
+    bad += [b for f in files for b in placeholders_without_numbers(f)]
     defined = set(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}",
                              (ROOT / "paper" / "generated" / "numbers.tex").read_text(encoding="utf-8")))
     used = {m for f in files for m in re.findall(r"\\([A-Z][A-Za-z]+)", f.read_text(encoding="utf-8"))}
