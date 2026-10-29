@@ -102,3 +102,47 @@ Plainly: **the AR(1)-only study is not main-track material.** A main-track paper
 What most raises the odds is item (3) of plan section 12: a quantitative prediction (from the references alone, before training) of where trained models
 switch from memorising to generalising, then confirmed. That would be new relative to [1], [3] and [7], which report the transition empirically.
 I make no publishability claim.
+
+## 8. Update 2026-10-29 (after the F1 and F3 maps and the Stage 1A pilot; sections 1-7 above are kept as written on 2026-10-22)
+
+Sources: the bibliography as extended on 2026-10-27 (entries 90-116; quotes PDF-checked by the literature sub-agent, the two quotes
+of entry 90 re-checked by me) and our own result files (claims table `paper/CLAIMS.md` on branch `paper-draft`, every number
+re-extracted from a pinned commit). Labels as above.
+
+**What is known now that was not in sections 1-2.**
+* **Closest partial overlap (VERIFIED, entry [90]):** a network trained on a Bayesian AR(1) prior is compared with MCMC and beats a
+  per-series AR(1) fit "since the Bayesian model knows a little more information" (MSFE and log predictive score). That is our
+  population-advantage idea for a Bayesian AR(1), stated for one prior; it has no finite-library reference, no context-only
+  Bayes reference distinct from the population, no separability analysis and no pre-registration. G1 and G3 remain open; G2 is
+  now only partly open and [90] must be cited.
+* **Closed-form Bayes references with a measured "Bayes gap" (VERIFIED, [92], ICML 2026):** conjugate Gaussian references and the
+  result that task-mixture uncertainty vanishes exponentially fast in the number of examples, which is consistent with our
+  finding that population advantages live at short contexts.
+* **Short-context window for "implicit prior inference" (VERIFIED, [91]):** transformers beat OLS, ridge and l1 solvers only for
+  short contexts (k <= 30 there). **Correlated prompts act like shorter i.i.d. prompts (VERIFIED, [93], ICML 2026)**, which bears
+  on how our context length n should be read.
+* **Pre-registration in ML has precedents** (VERIFIED: the NeurIPS 2020 pre-registration workshop [110], templates [111], [116],
+  positions [113], [114]); power and significance practice [108], [109]. Our design is not the first pre-registered ML study; the
+  separability-first step (reference maps before any network) was not found in these sources.
+
+**What our new results add (VERIFIED from the claims table; relevance DERIVED).**
+* **F1 (unknown noise scale) gives more room than known-sigma AR(1):** held-out pop vs context-only gaps of 0.032-0.316 nats,
+  IDENTIFIABLE up to n = 10 at every r (Stage 1A: 0.023-0.054, n <= 5), and its operating characteristics give a looser seed-sd
+  tolerance at M >= 64 (Q1) and at every M (Q2).
+* **Observation noise erases the population advantage even at short contexts (F3):** largest h = 1 gap 0.047 / 0.028 / 0.015 /
+  0.011 nats at q = 0 / 0.755 / 2.56 / 6.5; nothing separable at q >= 2.56 or at h = 5; library vs continuous never separable on
+  held-out systems. This extends the Stage 0.6 STOP (long contexts) to n = 2..9.
+* **A pre-registered neural pilot ended NOT RESOLVABLE (compute)** under its own frozen rules; reported as such.
+
+**Is the question still open? (DERIVED)** The general memorisation-vs-generalisation question is not novel ([1], [3], [7], [9]).
+The separability-first contribution is: across four AR-family settings the references themselves rarely differ by a meaningful
+margin, the window is short-context and shrinks with observation noise, it widens when the noise scale is unknown, and library
+vs continuous is almost never identifiable by score on natural evaluation sets. The F2 (VAR(1)) map is still missing.
+
+**Venue tiers per scenario (my judgement, UNVERIFIED by any reviewer; venue facts in VENUES.md).**
+| Scenario | Contents | Realistic tier |
+|---|---|---|
+| T1 now | Reference-side paper: validated references (AR(1), noisy AR(1), F1), separability maps (Stage 0, 1A, F1, F3), Stage 0.5 REVISE, Stage 0.6 STOP, the pilot NOT RESOLVABLE, pre-registration and disclosure as method | TMLR (evidence and correctness over novelty) or a NeurIPS Evaluations & Datasets-style track framed as an evaluation protocol; a workshop paper at minimum |
+| T1 + F2 | adds the VAR(1) references and map | same tiers, stronger breadth; still not main track without a neural or theoretical predictive result |
+| T2 (neural F1 or Stage 1A with Amendment 2) | adds a seed-powered classification in the identifiable window | TMLR likely; main track only with a clear, predictive finding (for example the K* transition predicted from the references before training and then confirmed) |
+I make no publishability claim.
