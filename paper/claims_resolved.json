@@ -151,6 +151,20 @@
     "expect": false,
     "got": false,
     "pass": true
+   },
+   {
+    "spec": {
+     "json": "decision.P2_stable_across_n_by_h"
+    },
+    "expect": {
+     "1": true,
+     "5": false
+    },
+    "got": {
+     "1": true,
+     "5": false
+    },
+    "pass": true
    }
   ],
   "status": "PASS"
@@ -194,6 +208,14 @@
     },
     "expect": 0,
     "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "reliability.max_quadrature_error"
+    },
+    "expect": 1.3e-15,
+    "got": 1.3322676295501878e-15,
     "pass": true
    }
   ],
@@ -420,6 +442,42 @@
     },
     "expect": 20,
     "got": 20,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F1-MAP-VALID",
+  "label": "VERIFIED",
+  "text": "F1 map validity: 144 node-doubling checks, largest change 5.4e-12 nats (target 1e-6).",
+  "ref": "66c58460078b6a291242debfd5a783a9f54e47a4",
+  "path": "results_stage1/map_F1/f1_map_checks.json",
+  "commit": "66c58460078b6a291242debfd5a783a9f54e47a4",
+  "sha256": "f8e6c7d7c1c50f2a94cc4bb6a3c6b95d1aa1cb64c7891211f83183dff09a4d94",
+  "checks": [
+   {
+    "spec": {
+     "json": "valid"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "node_doubling_checks"
+    },
+    "expect": 144,
+    "got": 144,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "max_abs"
+    },
+    "expect": 5.36e-12,
+    "got": 5.361933119729656e-12,
     "pass": true
    }
   ],
@@ -740,6 +798,148 @@
     },
     "expect": 0,
     "got": 0,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F3-LIBRARY",
+  "label": "VERIFIED",
+  "text": "F3 map, library vs continuous: no held-out cell IDENTIFIABLE at any noise level; on in-library systems lib vs stab IDENTIFIABLE only at q = 0 and only for K >= 16.",
+  "ref": "50a7664a07759c4a05d27cadc093c19787706a8c",
+  "path": "results_stage2/f3_map/map_decisions.csv",
+  "commit": "50a7664a07759c4a05d27cadc093c19787706a8c",
+  "sha256": "d569fcd50abb8a76a0f6631d61d7f8ea891d738ef1a70cf8cb52ec2554eb396d",
+  "checks": [
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-lib",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "INLIB",
+      "pair": "lib-pop",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "INLIB",
+      "pair": "lib-stab",
+      "q": "0.755",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "INLIB",
+      "pair": "lib-stab",
+      "q": "2.56",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "INLIB",
+      "pair": "lib-stab",
+      "q": "6.5",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_min_int": "K",
+     "where": {
+      "set": "INLIB",
+      "pair": "lib-stab",
+      "q": "0.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 16,
+    "got": 16,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "DECISION-NO-AMENDMENT2",
+  "label": "VERIFIED",
+  "text": "A post-pilot budget increase (Amendment 2) was prepared and labelled as post-pilot, and not adopted; neural effort moves to F1.",
+  "ref": "b311efbf9dd9d749aa1bcf95dd0c7b34eae74fc7",
+  "path": "docs/DISCLOSURE_LOG_STAGE1.md",
+  "commit": "b311efbf9dd9d749aa1bcf95dd0c7b34eae74fc7",
+  "sha256": "a5127cd391aa38486e7fccd73eb2736d9535b77c5907b2c83878c957609e96ce",
+  "checks": [
+   {
+    "spec": {
+     "contains": "(1) **No Amendment 2.** The Stage 1A pre-registered outcome NOT RESOLVABLE (compute) is the Stage 1A result; neural effort moves to F1"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "GATE-DEFECT",
+  "label": "VERIFIED",
+  "text": "A hole in the authorization gate (a self-made test key passed it) was found and fixed before any confirmatory run used the gate.",
+  "ref": "b311efbf9dd9d749aa1bcf95dd0c7b34eae74fc7",
+  "path": "docs/DISCLOSURE_LOG_STAGE1.md",
+  "commit": "b311efbf9dd9d749aa1bcf95dd0c7b34eae74fc7",
+  "sha256": "a5127cd391aa38486e7fccd73eb2736d9535b77c5907b2c83878c957609e96ce",
+  "checks": [
+   {
+    "spec": {
+     "contains": "accepted a self-made `TEST-ONLY-` key with a matching test artifact for the frozen confirmatory config"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "contains": "No confirmatory run has ever been launched"
+    },
+    "expect": true,
+    "got": true,
     "pass": true
    }
   ],

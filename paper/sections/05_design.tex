@@ -1,0 +1,14 @@
+\section{Separability-first design}\label{sec:design}
+We fix a margin $\delta=\DeltaNats$ nats per forecast, chosen before any result as a small but practically meaningful
+difference in log score. For two references $P$ (the truth for the evaluation systems) and $Q$, the gap is the expected
+log-score difference $\mathbb E[\log p(y\mid\text{context})-\log q(y\mid\text{context})]$, which equals an expected
+Kullback--Leibler divergence and is non-negative. A map cell is a combination of family, initial-state scale $r$, context
+length $n$, horizon $h$ and, for libraries, library size $K$. The pre-registered rule marks a cell \textsc{identifiable} if
+estimate $-\,3\,$SE $\ge\delta$, \textsc{unidentifiable} if estimate $+\,3\,$SE $<\delta$, and \textsc{borderline} otherwise;
+library cells use the fraction of independent library draws that agree. Common random numbers are used throughout, so cells
+of one map are dependent; the maps guide design and are not confirmatory tests, and the expected number of mis-marked cells
+at the per-cell level is reported with each map. Each map's specification was committed to version control before its
+seed was first used.
+
+The point of the design is a precondition: a model can only be classified as ``population-like'' versus ``context-only'',
+or ``memorising'' versus ``generalising'', in cells where the corresponding references are separable.

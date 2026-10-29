@@ -1,0 +1,26 @@
+\section{Related work}
+\paragraph{Memorisation and generalisation in in-context learning.} The transition from finite-pool to continuous-prior Bayes
+as pretraining diversity grows is established for linear regression \citep{raventos2023,panwar2024}, with asymptotic theory
+\citep{lu2025} and a rational-strategy account \citep{wurgaft2025}; for sequential data it has been studied with discrete
+Markov chains and explicit memorising and generalising Bayes references scored in nats \citep{gibson2026}. Our references play
+the same roles for continuous-state dynamical systems, and we add a context-only Bayes reference distinct from the
+population-prior one.
+
+\paragraph{Networks as Bayesian predictors.} Prior-fitted networks approximate the posterior predictive of their training
+prior \citep{muller2022}; closed-form Bayes references with a measured gap to the trained model appear in recent theory
+\citep{wakayama2026}, which shows that task-mixture uncertainty vanishes quickly in the number of examples, consistent with
+our finding that population knowledge matters only at short contexts. Transformers have been reported to beat least-squares
+estimators only for short contexts \citep{cao2026}. Point-prediction comparisons are fragile for telling posteriors apart
+\citep{aswadi2026}; we therefore score full predictive distributions with the log score \citep{gneiting2007}.
+
+\paragraph{Dynamical systems.} In-context learning of noisy linear dynamical systems has approximation theory with
+least-squares references \citep{cole2025}. Context-only strategies can rival foundation models on dynamical data
+\citep{zhang2026parroting}. The closest work to ours trains a network on a Bayesian AR(1) prior and finds that it beats a
+per-series AR(1) fit ``since the Bayesian model knows a little more information'' \citep{koshelev2023}; that is the
+population-advantage idea for one prior, without a finite-library or a separate context-only Bayes reference, a separability
+analysis, or pre-registration.
+
+\paragraph{Variance and pre-registration in machine learning.} Seed variance and stratified inference over runs
+\citep{agarwal2021,sellam2022} shape our hierarchical bootstrap; pre-registration in machine learning has precedents
+\citep{bertinetto2021}. We did not find a design that maps the separability of the references before any network exists.
+(The working name of this project collided with an unrelated method \citep{zhou2023dynaicl}, hence the title.)

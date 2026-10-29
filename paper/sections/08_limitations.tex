@@ -1,0 +1,16 @@
+\section{Limitations}\label{sec:limits}
+\begin{itemize}
+\item \textbf{Simple families.} All results concern scalar autoregressive processes and, for F2, two dimensions with Gaussian
+noise; nothing here is claimed for nonlinear, chaotic or high-dimensional systems.
+\item \textbf{F2 is incomplete.} The VAR(1) references pass closed-form, oracle and independent-estimator checks, but their
+calibration, optimality and mutation tests and their separability map are not yet reported. At the shortest contexts the
+context-only VAR(1) reference cannot be computed to our Monte Carlo criterion (it has more parameters than the context has
+observations) and those cells are excluded by design.
+\item \textbf{Small effects, one platform.} The gaps of interest are a few hundredths of a nat; each confirmatory study ran
+on one platform, with two replicates.
+\item \textbf{Dependent cells.} Common random numbers make the cells of a map dependent; patterns across cells are
+descriptive. The maps use a per-cell rule without a global correction, so a few cells per map may be mis-marked by chance.
+\item \textbf{Designed sets.} Where library and continuous references separate on probe or out-of-support sets, the separation
+partly reflects how well the library covers the edge of the stable region, not memorisation alone.
+\item \textbf{No neural result.} The one neural study ended not resolvable; this paper makes no claim about trained models.
+\end{itemize}

@@ -1,0 +1,82 @@
+# Every result number printed in the manuscript is a LaTeX macro generated from this file (task E4). Each macro is
+# re-extracted from a pinned commit by paper/tools/build_numbers.py with the same extractors as the claims table; the text may
+# not contain any other decimal number or integer above 10 (paper/tools/check_numbers.py). `claim` ties the macro to the claim
+# that justifies it in paper/claims.yaml.
+schema: dynaicl-numbers/v1
+refs:
+  main: 3632e9edf7699d44613c6df53ebc97ec305b0f4e
+  s06: 18d34b099b6c836f1d0795afe0ce132cc5b428c7
+  map1a: a499874cad30de8d9a20759b3ce73c62436c8408
+  f1map: 66c58460078b6a291242debfd5a783a9f54e47a4
+  pilot: e260526d9f62c1ab9863e7293c68fcfb41d85af6
+  freeze: 3a29c1584bc8a322469842db13385a4b5dfa51f4
+  batch1: 50a7664a07759c4a05d27cadc093c19787706a8c
+  f1val: ac8aecb13448efaff908df010ce1dc606e631ff2
+  lookup: c073522bf585b2af1cd3e57092d417d64615f5c5
+files:
+  s0: {ref: main, path: runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json}
+  s05: {ref: main, path: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json}
+  s06: {ref: s06, path: results_stage06_confirmatory/phaseE-20261022/results/summary.json}
+  map1a: {ref: map1a, path: results_stage1/map_1A/map_decisions.csv}
+  f1map: {ref: f1map, path: results_stage1/map_F1/f1_map_decisions.csv}
+  pilot: {ref: pilot, path: results_stage1/pilot/pilot_decision.json}
+  stage1cfg: {ref: freeze, path: config/stage1.yaml}
+  f3map: {ref: batch1, path: results_stage2/f3_map/map_decisions.csv}
+  f3checks: {ref: batch1, path: results_stage2/f3_map/map_checks.json}
+  f1mm: {ref: batch1, path: results_stage2/f1_mutation_matrix/f1_mutation_matrix.json}
+  f1val: {ref: f1val, path: results_stage2/f1_validation/f1_validation.json}
+  lookup: {ref: lookup, path: results_stage2/f1_power_lookup/f1_power_lookup.json}
+  s06cfg: {ref: main, path: config/stage06.yaml}
+  f1mapchecks: {ref: f1map, path: results_stage1/map_F1/f1_map_checks.json}
+numbers:
+  # design constants (frozen Stage 0.6 confirmatory config; the same delta was fixed in Stage 0 and kept since)
+  - {macro: DeltaNats, file: s06cfg, claim: S06-VERDICT, x: {yaml: analysis.delta}, fmt: "{:.2f}"}
+  - {macro: PriorMean, file: s06cfg, claim: S06-VERDICT, x: {yaml: prior.mu0}, fmt: "{:.1f}"}
+  - {macro: PriorSd, file: s06cfg, claim: S06-VERDICT, x: {yaml: prior.tau0}, fmt: "{:.1f}"}
+  - {macro: PriorRho, file: s06cfg, claim: S06-VERDICT, x: {yaml: prior.rho}, fmt: "{:.2f}"}
+  - {macro: QOne, file: s06cfg, claim: F3-MAP, x: {yaml: "model.noise_ratios.1"}, fmt: "{:.3f}"}
+  - {macro: QTwo, file: s06cfg, claim: F3-MAP, x: {yaml: "model.noise_ratios.2"}, fmt: "{:.2f}"}
+  - {macro: QThree, file: s06cfg, claim: F3-MAP, x: {yaml: "model.noise_ratios.3"}, fmt: "{:.1f}"}
+  # Stage 0
+  - {macro: SzeroTone, file: s0, claim: S0-T1, x: {json: theorem_checks.T1_n_comparisons}, fmt: "{:d}"}
+  - {macro: SzeroTtwoCells, file: s0, claim: S0-T2, x: {json: theorem_checks.T2_n_cells}, fmt: "{:d}"}
+  - {macro: SzeroTtwoMinP, file: s0, claim: S0-T2, x: {json: theorem_checks.T2_min_p}, fmt: "{:.4f}"}
+  - {macro: SzeroCells, file: s0, claim: S0-SEP, x: {json: n_cells}, fmt: "{:d}"}
+  - {macro: SzeroAllPairs, file: s0, claim: S0-SEP, x: {json_len: all_pairs_separable_regimes}, fmt: "{:d}"}
+  - {macro: SzeroElibEquiv, file: s0, claim: S0-ELIB, x: {json: "separability_counts.E-LIB:matched_reference vs continuous_prior_bayes.equivalent"}, fmt: "{:d}"}
+  # Stage 0.5
+  - {macro: SfiveToneComparisons, file: s05, claim: S05-RELIABILITY, x: {json: reliability.T1_comparisons}, fmt: "{:d}"}
+  - {macro: SfiveTtwoCells, file: s05, claim: S05-RELIABILITY, x: {json: reliability.T2_cells}, fmt: "{:d}"}
+  - {macro: SfiveQuadErr, file: s05, claim: S05-RELIABILITY, x: {json: reliability.max_quadrature_error}, fmt: sci}
+  - {macro: FoneMapNodeDoubling, file: f1mapchecks, claim: F1-MAP-VALID, x: {json: max_abs}, fmt: sci}
+  - {macro: FoneMapChecks, file: f1mapchecks, claim: F1-MAP-VALID, x: {json: node_doubling_checks}, fmt: "{:d}"}
+  - {macro: FthreeNodeDoubling, file: f3checks, claim: F3-MAP-VALID, x: {json: checks.i_node_doubling.max_abs_nats}, fmt: sci}
+  # Stage 1A map
+  - {macro: OneAGapMin, file: map1a, claim: S1A-MAP-Q1, x: {csv_minmax: estimate, where: {set: HELD, pair: "pop|stab", decision: IDENTIFIABLE}}, pick: 0, fmt: "{:.3f}"}
+  - {macro: OneAGapMax, file: map1a, claim: S1A-MAP-Q1, x: {csv_minmax: estimate, where: {set: HELD, pair: "pop|stab", decision: IDENTIFIABLE}}, pick: 1, fmt: "{:.3f}"}
+  # F1 map
+  - {macro: FoneGapMin, file: f1map, claim: F1-MAP-Q1, x: {csv_minmax: estimate, where: {set: HELD, pair: "pop|ctx", decision: IDENTIFIABLE}}, pick: 0, fmt: "{:.3f}"}
+  - {macro: FoneGapMax, file: f1map, claim: F1-MAP-Q1, x: {csv_minmax: estimate, where: {set: HELD, pair: "pop|ctx", decision: IDENTIFIABLE}}, pick: 1, fmt: "{:.3f}"}
+  - {macro: FoneMaxN, file: f1map, claim: F1-MAP-Q1, x: {csv_max_int: n, where: {set: HELD, pair: "pop|ctx", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  # F3 map
+  - {macro: FthreeGapQzero, file: f3map, claim: F3-MAP, x: {csv_max: estimate, where: {pair: pop-stab, q: "0.0", h: "1"}}, fmt: "{:.3f}"}
+  - {macro: FthreeGapQone, file: f3map, claim: F3-MAP, x: {csv_max: estimate, where: {pair: pop-stab, q: "0.755", h: "1"}}, fmt: "{:.3f}"}
+  - {macro: FthreeGapQtwo, file: f3map, claim: F3-MAP, x: {csv_max: estimate, where: {pair: pop-stab, q: "2.56", h: "1"}}, fmt: "{:.3f}"}
+  - {macro: FthreeGapQthree, file: f3map, claim: F3-MAP, x: {csv_max: estimate, where: {pair: pop-stab, q: "6.5", h: "1"}}, fmt: "{:.3f}"}
+  - {macro: FthreeMaxNQzero, file: f3map, claim: F3-MAP, x: {csv_max_int: n, where: {pair: pop-stab, q: "0.0", h: "1", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  # F1 validation, mutation matrix, lookup
+  - {macro: FoneValTests, file: f1val, claim: F1-VALIDATION, x: {json: n_tests}, fmt: "{:d}"}
+  - {macro: FamilyAlpha, file: f1val, claim: F1-VALIDATION, x: {json: family_alpha}, fmt: "{:.2f}"}
+  - {macro: ConvTol, file: pilot, claim: S1A-PILOT-B, x: {json: convergence_tol}, fmt: "{:.3f}"}
+  - {macro: FoneMutations, file: f1mm, claim: F1-V9, x: {json_len: rows}, fmt: "{:d}", minus: 1}
+  - {macro: LookupQoneThirtyTwo, file: lookup, claim: F1-LOOKUP, x: {json: "Q1.32"}, fmt: "{:.2f}"}
+  - {macro: LookupQoneSixtyFour, file: lookup, claim: F1-LOOKUP, x: {json: "Q1.64"}, fmt: "{:.2f}"}
+  - {macro: LookupQoneHundred, file: lookup, claim: F1-LOOKUP, x: {json: "Q1.128"}, fmt: "{:.2f}"}
+  - {macro: LookupQtwo, file: lookup, claim: F1-LOOKUP, x: {json: "Q2.32"}, fmt: "{:.2f}"}
+  # Stage 1A pilot (reported exactly as it happened)
+  - {macro: PilotB, file: pilot, claim: S1A-PILOT, x: {json: B}, fmt: "{:,d}"}
+  - {macro: PilotCap, file: pilot, claim: S1A-PILOT, x: {json: cap}, fmt: "{:d}"}
+  - {macro: PilotImprovementTwentyFive, file: pilot, claim: S1A-PILOT-B, x: {json: "max_validation_nll_improvement_to_next.25000"}, fmt: "{:.5f}"}
+  - {macro: PilotImprovementFifty, file: pilot, claim: S1A-PILOT-B, x: {json: "max_validation_nll_improvement_to_next.50000"}, fmt: "{:.5f}"}
+  - {macro: MinModels, file: stage1cfg, claim: S1A-MIN32, x: {yaml: min_models}, fmt: "{:d}"}
+  - {macro: CapBudgetHours, file: stage1cfg, claim: S1A-MIN32, x: {yaml: cap_rule.gpu_hours_limit}, fmt: "{:.0f}"}

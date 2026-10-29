@@ -1,0 +1,14 @@
+\begin{abstract}
+Pretrained sequence models are often described as behaving ``like Bayes with prior $X$'', or as memorising their
+training tasks rather than generalising. Such statements are only testable where the candidate reference predictors
+themselves make different predictions. For in-context forecasting of autoregressive dynamical systems we build and validate
+three kinds of reference predictor (Bayes under the population prior, the posterior over a finite library of training
+systems, and a context-only Bayes predictor that knows only generic stability), and we map, under one pre-registered rule
+with margin $\delta=\DeltaNats$~nats per forecast, where they can be told apart. Across three scalar autoregressive families the answer is: rarely.
+With a known noise scale, population knowledge is worth only \OneAGapMin--\OneAGapMax~nats and only for very short
+contexts; with observation noise this advantage shrinks to \FthreeGapQthree~nats at the highest noise level and is never
+identifiable there; a finite library is almost never distinguishable from continuous-prior Bayes on natural evaluation
+sets. The window is wider when the noise scale is unknown (gaps up to \FoneGapMax~nats, identifiable up to $n=\FoneMaxN$).
+We also report a pre-registered neural pilot that ended, under its own frozen rules, as \emph{not resolvable} for compute
+reasons, and we document the pre-registration and disclosure trail as part of the method.
+\end{abstract}

@@ -1,0 +1,8 @@
+\section{Conclusion}
+Before asking whether a trained forecaster behaves like population Bayes, like a library posterior or like a context-only
+estimator, one should ask whether those references predict differently on the data at hand. For scalar autoregressive
+systems they mostly do not: population knowledge is worth a few hundredths of a nat and only at very short contexts,
+observation noise erases even that, and finite libraries are indistinguishable from continuous priors on natural evaluation
+data. The window opens when the noise scale is unknown, which is where we would place a neural study. We offer the
+references, the maps and the pre-registration machinery as a precondition for behavioural claims about in-context learners
+of dynamical systems.

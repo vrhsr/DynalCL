@@ -4,3 +4,12 @@ __pycache__/
 runs/
 dist/
 remote_results_*
+paper/generated/
+paper/*.aux
+paper/*.log
+paper/*.blg
+paper/*.bbl
+paper/*.out
+paper/*.fls
+paper/*.fdb_latexmk
+paper/main.pdf

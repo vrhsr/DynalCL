@@ -1,0 +1,22 @@
+\section{Setting and reference predictors}
+\paragraph{Families.} A system generates $x_t = a\,x_{t-1} + \sigma\varepsilon_t$ with $\varepsilon_t\sim\mathcal N(0,1)$ and
+$x_0\sim\mathcal N(0,r^2)$ drawn independently of the system, \rlist. A context holds $x_0,\dots,x_n$ ($n$ transitions)
+and the target is $x_{n+h}$. We use (a) known noise scale $\sigma=1$; (b) \emph{F3}: the same latent process observed as
+$y_t=x_t+v_t$, $v_t\sim\mathcal N(0,q)$, with noise ratios $q\in\{0,\QOne,\QTwo,\QThree\}$, and a Kalman likelihood;
+(c) \emph{F1}: unknown noise scale; (d) \emph{F2}: a bivariate VAR(1), $x_t=Ax_{t-1}+e_t$, $e_t\sim\mathcal N(0,\Sigma)$.
+In every family the likelihood is conditional on $x_0$, contexts are cut by a single function from the start of a
+trajectory, and every reference sees only the context.
+
+\paragraph{References.} \emph{Population Bayes} (pop) is the Bayes predictive under the prior from which systems are drawn:
+for (a)--(c), $a$ follows a normal distribution with mean \PriorMean and standard deviation \PriorSd truncated to
+$|a|<\PriorRho$;
+in F1 the noise variance follows an inverse-gamma prior; in F2, a matrix-normal-inverse-Wishart prior truncated to spectral
+radius below \PriorRho. \emph{Context-only Bayes} (stab or ctx) replaces the population prior by generic stability: $a$
+uniform on the stable interval and, in F1 and F2, a vague prior on the noise scale. \emph{Library Bayes} (lib$_K$) is the
+posterior over $K$ systems drawn from the population, with uniform weights. Matched priors are enforced by fingerprints:
+an optimality diagnostic refuses a reference whose prior differs from the data's.
+
+\paragraph{Computation.} Closed forms are used where they exist (conjugate updates, Student-$t$ predictives, library
+mixtures). Integrals over $a$ use composite Gauss--Legendre quadrature with adaptive panels; in F2 the stability truncation
+is handled by Monte Carlo over the posterior of $A$ with the noise covariance integrated analytically, and a control variate
+equal to the closed-form untruncated predictive. Every approximation reports its own measured error (Section~\ref{sec:val}).

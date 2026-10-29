@@ -34,13 +34,14 @@ claims:
     label: VERIFIED
     source: {ref: 3632e9edf7699d44613c6df53ebc97ec305b0f4e, path: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json}
     extract: [{json: decision.P1_reference_reliability, expect: true}, {json: decision.P2, expect: false},
-              {json: decision.P3, expect: false}]
+              {json: decision.P3, expect: false}, {json: decision.P2_stable_across_n_by_h, expect: {"1": true, "5": false}}]
   - id: S05-RELIABILITY
     text: "Stage 0.5 reliability: 0 of 2736 optimality comparisons violated; 0 of 288 calibration cells failed."
     label: VERIFIED
     source: {ref: 3632e9edf7699d44613c6df53ebc97ec305b0f4e, path: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json}
     extract: [{json: reliability.T1_comparisons, expect: 2736}, {json: reliability.T1_violations, expect: 0},
-              {json: reliability.T2_cells, expect: 288}, {json: reliability.T2_failures, expect: 0}]
+              {json: reliability.T2_cells, expect: 288}, {json: reliability.T2_failures, expect: 0},
+              {json: reliability.max_quadrature_error, expect: 1.3e-15, tol: 1e-16}]
   # ---------------------------------------------------------------- Stage 0.6 (noisy observations), confirmatory
   - id: S06-VERDICT
     text: "Stage 0.6 confirmatory verdict STOP: all 18 long-context gains have an adjusted upper bound below delta in both replicates; all six critical checks passed."
@@ -70,6 +71,11 @@ claims:
     extract: [{csv_minmax: estimate, where: {set: HELD, pair: "pop|ctx", decision: IDENTIFIABLE}, expect: [0.0324, 0.3165], tol: 0.0005},
               {csv_max_int: n, where: {set: HELD, pair: "pop|ctx", decision: IDENTIFIABLE}, expect: 10},
               {csv_min_int: n, where: {set: HELD, pair: "pop|ctx", decision: UNIDENTIFIABLE}, expect: 20}]
+  - id: F1-MAP-VALID
+    text: "F1 map validity: 144 node-doubling checks, largest change 5.4e-12 nats (target 1e-6)."
+    label: VERIFIED
+    source: {ref: 66c58460078b6a291242debfd5a783a9f54e47a4, path: results_stage1/map_F1/f1_map_checks.json}
+    extract: [{json: valid, expect: true}, {json: node_doubling_checks, expect: 144}, {json: max_abs, expect: 5.36e-12, tol: 1e-14}]
   # ---------------------------------------------------------------- Stage 1A neural pilot (reported exactly as it happened)
   - id: S1A-PILOT
     text: "Stage 1A pilot, pre-registered outcome NOT RESOLVABLE (compute): budget B = 50 000 steps chosen by the convergence rule; cap 24 models per arm < the 32-model minimum."
@@ -116,6 +122,27 @@ claims:
     source: {ref: 50a7664a07759c4a05d27cadc093c19787706a8c, path: results_stage2/f3_map/map_checks.json}
     extract: [{json: valid, expect: true}, {json: checks.i_node_doubling.max_abs_nats, expect: 4.4e-15, tol: 1e-15},
               {json: checks.iv_disjointness.held_coefficients_equal_to_an_atom, expect: 0}]
+  - id: F3-LIBRARY
+    text: "F3 map, library vs continuous: no held-out cell IDENTIFIABLE at any noise level; on in-library systems lib vs stab IDENTIFIABLE only at q = 0 and only for K >= 16."
+    label: VERIFIED
+    source: {ref: 50a7664a07759c4a05d27cadc093c19787706a8c, path: results_stage2/f3_map/map_decisions.csv}
+    extract: [{csv_count: decision, where: {set: HELD, pair: pop-lib, decision: IDENTIFIABLE}, expect: 0},
+              {csv_count: decision, where: {set: INLIB, pair: lib-pop, decision: IDENTIFIABLE}, expect: 0},
+              {csv_count: decision, where: {set: INLIB, pair: lib-stab, q: "0.755", decision: IDENTIFIABLE}, expect: 0},
+              {csv_count: decision, where: {set: INLIB, pair: lib-stab, q: "2.56", decision: IDENTIFIABLE}, expect: 0},
+              {csv_count: decision, where: {set: INLIB, pair: lib-stab, q: "6.5", decision: IDENTIFIABLE}, expect: 0},
+              {csv_min_int: K, where: {set: INLIB, pair: lib-stab, q: "0.0", decision: IDENTIFIABLE}, expect: 16}]
+  - id: DECISION-NO-AMENDMENT2
+    text: "A post-pilot budget increase (Amendment 2) was prepared and labelled as post-pilot, and not adopted; neural effort moves to F1."
+    label: VERIFIED
+    source: {ref: b311efbf9dd9d749aa1bcf95dd0c7b34eae74fc7, path: docs/DISCLOSURE_LOG_STAGE1.md}
+    extract: [{contains: "(1) **No Amendment 2.** The Stage 1A pre-registered outcome NOT RESOLVABLE (compute) is the Stage 1A result; neural effort moves to F1", expect: true}]
+  - id: GATE-DEFECT
+    text: "A hole in the authorization gate (a self-made test key passed it) was found and fixed before any confirmatory run used the gate."
+    label: VERIFIED
+    source: {ref: b311efbf9dd9d749aa1bcf95dd0c7b34eae74fc7, path: docs/DISCLOSURE_LOG_STAGE1.md}
+    extract: [{contains: "accepted a self-made `TEST-ONLY-` key with a matching test artifact for the frozen confirmatory config", expect: true},
+              {contains: "No confirmatory run has ever been launched", expect: true}]
   - id: F1-LOOKUP
     text: "F1 power lookup (bootstrap critical value; frozen Stage 1A rule): Q1 s* = 0.01 / 0.02 / 0.03 and Q2 s* = 0.10 at M = 32 / 64 / 128."
     label: VERIFIED

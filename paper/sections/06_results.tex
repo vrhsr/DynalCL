@@ -1,0 +1,30 @@
+\section{What the references can and cannot tell apart}\label{sec:results}
+\paragraph{Population versus context-only.} Table~\ref{tab:maps} summarises the held-out maps at horizon $h=1$. With a
+known noise scale the population prior is worth \OneAGapMin--\OneAGapMax nats per forecast, and only for very short contexts.
+The first map (Stage~0) found \SzeroAllPairs of \SzeroCells regimes in which all three strategy pairs were separable.
+\sHalf, pre-registered with fresh seeds, confirmed a population-specific advantage only at one-step horizons and the
+shortest contexts and returned the decision REVISE. With observation noise (F3) the advantage shrinks monotonically with the noise ratio: the
+largest $h=1$ gap is \FthreeGapQzero, \FthreeGapQone, \FthreeGapQtwo and \FthreeGapQthree nats at
+$q=0,\QOne,\QTwo,\QThree$; nothing is identifiable at the two larger noise levels, or at $h=5$. The pre-registered \sSix
+confirmatory study had already returned STOP for long contexts; the F3 map shows that short contexts do not rescue the
+population advantage under noise. When the noise scale is unknown (F1) the window is wider: gaps of
+\FoneGapMin--\FoneGapMax nats, identifiable up to $n=\FoneMaxN$ at every $r$, because the population then also carries
+information about the noise level.
+
+\begin{table}[t]
+\centering\small
+\input{generated/tab_maps.tex}
+\caption{Held-out systems, $h=1$: largest context length $n$ at which population Bayes and context-only Bayes are
+\textsc{identifiable}, with the range of identifiable gaps in nats (``none'': no identifiable cell; the largest gap is shown).
+Generated from the pinned map files. The noise-free F3 row agrees with the known-scale map within sampling error (a
+pre-registered validity check); its coarser realised-target estimator gives larger standard errors, which is why the
+$r=4$ cells are borderline there.}
+\label{tab:maps}
+\end{table}
+
+\paragraph{Library versus continuous prior.} On systems drawn from the library itself, the library posterior and the
+continuous-prior posterior were equivalent within $\delta$ in all \SzeroElibEquiv cells of the first map. In the noisy
+family no held-out cell separates the library from continuous-prior Bayes at any noise level; on in-library systems the
+library separates from the context-only reference only without noise and only for the larger libraries. Memorisation is
+therefore not visible by score on natural evaluation sets in these families; it becomes visible only on designed probe and
+out-of-support sets, where it is confounded with how well the library covers the edge of the stable region.

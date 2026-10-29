@@ -1,0 +1,26 @@
+\section{Introduction}
+A transformer trained on many synthetic tasks and asked to continue a new sequence is often analysed against Bayes-optimal
+reference predictors. Below a task-diversity threshold such models track the posterior over the finite pool of training
+tasks; above it they track the Bayes predictor of the continuous task prior \citep{raventos2023,lu2025,panwar2024}. The same
+memorising-versus-generalising contrast has been drawn for discrete Markov chains \citep{gibson2026,wurgaft2025}. In each
+case the behavioural claim rests on an implicit premise: that the candidate references predict differently on the
+evaluation data, by more than the analysis can resolve.
+
+We study this premise directly for in-context forecasting of autoregressive dynamical systems, before any network is
+trained. The question we ask of the references themselves is: \emph{where could a model's behaviour be classified at all?}
+We distinguish three reference predictors: Bayes under the population prior from which training systems are drawn; the
+posterior over a finite library of training systems (memorisation); and a \emph{context-only} Bayes predictor that knows
+only generic structure (stability) and nothing about the population. The last one matters: in the regression settings
+above, ridge regression is at once the continuous-prior Bayes predictor and the context-only estimator, so population
+knowledge and context-only inference are never separated.
+
+\paragraph{Contributions.}
+(i) Validated reference predictors for scalar AR(1) with known noise scale, AR(1) observed through Gaussian noise (Kalman
+likelihood) and AR(1) with unknown noise scale, each with measured numerical error and calibration, optimality and
+mutation tests; and a bivariate VAR(1) with a stability-truncated conjugate prior, so far checked against closed forms,
+independent quadrature and sampling oracles, and an independent Monte Carlo estimator. (ii) Separability maps of these references under one
+pre-registered rule, which show that the window in which population knowledge, library memorisation and context-only
+inference can be told apart is narrow, short-context, and erased by observation noise. (iii) Pre-registered confirmatory
+results, including a null (\sSix: STOP) and a neural pilot that its own frozen rules declared not resolvable for compute
+reasons. (iv) The machinery that kept these results honest (freeze manifests, append-only disclosure logs, an authorization
+gate, and a claims table that re-derives every number in this paper from pinned commits), offered as methodology.

@@ -1,0 +1,33 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,xspace,hyperref,natbib}
+\bibliographystyle{plainnat}
+
+% All result numbers come from generated/numbers.tex (re-extracted from pinned commits by tools/build_numbers.py);
+% the sections are audited by tools/check_numbers.py. Names with digits are defined here, outside the audited sections.
+\input{generated/numbers.tex}
+\newcommand{\sHalf}{Stage~0.5\xspace}
+\newcommand{\sSix}{Stage~0.6\xspace}
+\newcommand{\rlist}{$r\in\{0.25,1,4\}$\xspace}
+\newcommand{\Klarge}{$K\ge 16$\xspace}
+\newcommand{\shaname}{SHA-256\xspace}
+
+\title{Identifiability First: Pre-Registered Reference Maps for\\ In-Context Learning of Linear Dynamical Systems}
+\author{[AUTHOR NAMES AND AFFILIATIONS: placeholders, to be filled by the authors]}
+\date{Draft (Track 1, reference-side paper); not for circulation}
+
+\begin{document}
+\maketitle
+\input{sections/00_abstract}
+\input{sections/01_introduction}
+\input{sections/02_related}
+\input{sections/03_setting}
+\input{sections/04_validation}
+\input{sections/05_design}
+\input{sections/06_results}
+\input{sections/07_pilot}
+\input{sections/08_limitations}
+\input{sections/09_methodology}
+\input{sections/10_conclusion}
+\bibliography{references}
+\end{document}
