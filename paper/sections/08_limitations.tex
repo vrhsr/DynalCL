@@ -1,16 +1,21 @@
 \section{Limitations}\label{sec:limits}
 \begin{itemize}
-\item \textbf{Simple families.} All results concern scalar autoregressive processes and, for F2, two dimensions with Gaussian
-noise; nothing here is claimed for nonlinear, chaotic or high-dimensional systems.
-\item \textbf{F2 is incomplete.} The VAR(1) references pass closed-form, oracle and independent-estimator checks, but their
-calibration, optimality and mutation tests and their separability map are not yet reported. At the shortest contexts the
-context-only VAR(1) reference cannot be computed to our Monte Carlo criterion (it has more parameters than the context has
-observations) and those cells are excluded by design.
-\item \textbf{Small effects, one platform.} The gaps of interest are a few hundredths of a nat; each confirmatory study ran
-on one platform, with two replicates.
-\item \textbf{Dependent cells.} Common random numbers make the cells of a map dependent; patterns across cells are
-descriptive. The maps use a per-cell rule without a global correction, so a few cells per map may be mis-marked by chance.
-\item \textbf{Designed sets.} Where library and continuous references separate on probe or out-of-support sets, the separation
-partly reflects how well the library covers the edge of the stable region, not memorisation alone.
+\item \textbf{One prior, one comparator per family.} Every map uses a single population prior and a single context-only
+comparator. The gaps depend on both: a more concentrated population prior, a vaguer or sharper context-only noise prior in
+F1, or a different comparator (least squares plug-in, a scale-agnostic prior in the known-scale family) would move the
+windows. We have not mapped this dependence; the F1 window in particular may partly reflect how vague the context-only noise
+prior is.
+\item \textbf{Margin.} The window depends on $\delta$ (Table~\ref{tab:delta}); $\delta$ was fixed in advance as a small
+log-score difference, not derived from the seed variance of trained models.
+\item \textbf{Power.} The F3 map is underpowered at moderate noise; its estimator could be replaced by a Rao--Blackwellised
+one, as in the 1A map, or its sample size increased.
+\item \textbf{Per-cell rules and dependence.} The maps use per-cell rules without a global correction and common random
+numbers, so a few cells per map may be mis-marked by chance and patterns across cells are descriptive. Pooled tests could
+separate references in cells where each per-cell gap is below $\delta$.
+\item \textbf{Designed sets.} Where library and continuous references separate on probe or out-of-support sets, the gap is
+not a divergence and partly reflects how well the library covers the edge of the stable region.
+\item \textbf{Simple families.} All results concern scalar autoregressive processes with Gaussian noise; the bivariate family
+is not yet reported, and nothing is claimed for nonlinear, chaotic or high-dimensional systems. Each confirmatory study ran
+on one platform with two replicates.
 \item \textbf{No neural result.} The one neural study ended not resolvable; this paper makes no claim about trained models.
 \end{itemize}

@@ -1,14 +1,31 @@
 \section{Separability-first design}\label{sec:design}
-We fix a margin $\delta=\DeltaNats$ nats per forecast, chosen before any result as a small but practically meaningful
-difference in log score. For two references $P$ (the truth for the evaluation systems) and $Q$, the gap is the expected
-log-score difference $\mathbb E[\log p(y\mid\text{context})-\log q(y\mid\text{context})]$, which equals an expected
-Kullback--Leibler divergence and is non-negative. A map cell is a combination of family, initial-state scale $r$, context
-length $n$, horizon $h$ and, for libraries, library size $K$. The pre-registered rule marks a cell \textsc{identifiable} if
-estimate $-\,3\,$SE $\ge\delta$, \textsc{unidentifiable} if estimate $+\,3\,$SE $<\delta$, and \textsc{borderline} otherwise;
-library cells use the fraction of independent library draws that agree. Common random numbers are used throughout, so cells
-of one map are dependent; the maps guide design and are not confirmatory tests, and the expected number of mis-marked cells
-at the per-cell level is reported with each map. Each map's specification was committed to version control before its
-seed was first used.
+\paragraph{Margin and gap.} We use a margin $\delta=\DeltaNats$ nats per forecast, fixed before any result in the first
+study and kept since. For a pair of references $P$ and $Q$ on a set of evaluation systems, the gap is the expected
+log-score difference $\mathbb E[\log p(y\mid\text{context})-\log q(y\mid\text{context})]$ over contexts and targets from
+those systems. When $P$ is the predictive of the process that generated the systems (population Bayes on held-out systems,
+library Bayes on in-library systems), the gap equals an expected Kullback--Leibler divergence and is non-negative. On
+designed sets (probe grids, out-of-support systems) neither reference is the truth, the gap can have either sign, and it
+measures a behavioural difference rather than a divergence; we therefore report designed sets separately and do not use
+them for the headline statements below.
 
-The point of the design is a precondition: a model can only be classified as ``population-like'' versus ``context-only'',
-or ``memorising'' versus ``generalising'', in cells where the corresponding references are separable.
+\paragraph{Rules.} The studies used different pre-registered decision rules with the same margin: Stage~0 classified each
+regime by an interval rule against a flat-prior frontier; \sHalf used intervals of $\pm$\SfiveIntervalSE standard errors with two
+replicates that had to agree; \sSix used a studentised max-$|t|$ bootstrap over all contrasts. The reference-only maps
+(1A, F1, F3) mark a cell \textsc{identifiable} if estimate $-\,3\,$SE $\ge\delta$, \textsc{unidentifiable} if
+estimate $+\,3\,$SE $<\delta$, and \textsc{borderline} otherwise; the F1 map applies this to the absolute gap (two-sided),
+which only matters on designed sets. For libraries each map draws several independent libraries per size $K$ (more in the
+1A and F1 maps than in F3), applies the cell rule per draw, and marks a cell \textsc{identifiable} or \textsc{unidentifiable}
+only if at least nine in ten draws agree, otherwise \textsc{partial}. Because a trained model sees one library, a
+\textsc{partial} cell means that some libraries are separable from the continuous prior and others are not; we report
+per-draw agreement rather than hide it. The maps use common random numbers, so their cells are dependent and patterns across
+cells are descriptive; the rule is applied per cell without a global correction, and the maps guide design rather than test
+hypotheses. Each map's specification was committed before its seed was first used.
+
+\paragraph{What ``identifiable'' does and does not mean.} Here it is a property of two reference predictors at a
+precision: their expected gap exceeds $\delta$ by more than three standard errors. It is necessary in our designs for a
+per-cell behavioural classification at margin $\delta$, but not sufficient: a trained model is a random object whose seed
+variance enters any classification. For F1, the bootstrap-calibrated operating characteristics of our pre-registered
+classification rule imply that, with \MinModels models per arm, a population-like versus context-only classification has
+at least eighty per cent power only if the between-seed standard deviation of a model's regret is at most
+\LookupQoneThirtyTwo nats (\LookupQoneSixtyFour at twice as many models). Evidence pooled over many cells, for example
+by a sequence-level test, could also separate references whose per-cell gaps are below $\delta$; our maps do not use it.

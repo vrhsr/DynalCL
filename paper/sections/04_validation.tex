@@ -1,31 +1,30 @@
 \section{Validation of the references}\label{sec:val}
 A wrong reference silently invalidates every later classification, so each reference was validated before it was used,
-with tolerances fixed in advance and every failure disclosed.
+with tolerances fixed in advance and every failure disclosed. The statistical checks below are deliberately conservative
+(Bonferroni-corrected at family level, with correspondingly strict per-test thresholds), so they detect gross errors rather
+than certify small ones; the mutation tests show which injected errors they do detect.
 
 \paragraph{Known noise scale.} The matched reference passed an optimality check (no context-only or library reference beats
 it in expectation on its own systems) with no violation in \SzeroTone paired comparisons, and a calibration check (PIT,
 coverage, simulation-based calibration \citep{talts2018}) with no failing cell out of \SzeroTtwoCells (smallest $p$-value
-\SzeroTtwoMinP). The \sHalf re-run of these checks, with fresh seeds, found no violation in \SfiveToneComparisons comparisons
-and no failing cell out of \SfiveTtwoCells. Where an integral over $a$ is computed by quadrature it is numerically
-approximated with verified convergence against a pre-set target of $10^{-6}$ nats: the largest quadrature error in the
-\sHalf study was \SfiveQuadErr nats, and node doubling changed log scores by at most \FoneMapNodeDoubling nats over
-\FoneMapChecks checks in the F1 map and \FthreeNodeDoubling nats in the F3 map.
+\SzeroTtwoMinP). The \sHalf re-run, with fresh seeds, found no violation in \SfiveToneComparisons comparisons and no failing
+cell out of \SfiveTtwoCells. Where an integral over $a$ is computed by quadrature it is numerically approximated with
+verified convergence against a pre-set target of $10^{-6}$ nats: the largest quadrature error in the \sHalf study was
+\SfiveQuadErr nats, and node doubling changed log scores by at most \FoneMapNodeDoubling nats over \FoneMapChecks checks in
+the F1 map and \FthreeNodeDoubling nats in the F3 map.
 
 \paragraph{Unknown noise scale (F1).} The noise variance is integrated in closed form and $a$ by quadrature; closed forms were
 checked against adaptive one-dimensional integration, the predictive against a dense two-dimensional grid, and a
-known-scale limit was confirmed. At the scale of the first study the F1 references passed all \FoneValTests calibration,
-coverage, simulation-based-calibration and optimality tests at family level \FamilyAlpha (Bonferroni). A mutation matrix
-injected \FoneMutations plausible bugs (wrong prior, off-by-one likelihood, leaked target, unmatched reference, wrong
-truncation, wrong noise integration); every one was detected and the clean code passed. One honest weakness: the wrong
-truncation bound is caught only by the structural prior-matching guard, not by any statistical check, because it moves
-little prior mass.
+known-scale limit was confirmed. The F1 references passed all \FoneValTests calibration, coverage,
+simulation-based-calibration and optimality tests at family level \FamilyAlpha (Bonferroni). A mutation matrix injected
+\FoneMutations plausible bugs (wrong prior, off-by-one likelihood, leaked target, unmatched reference, wrong truncation,
+wrong noise integration); every one was detected and the clean code passed. The wrong truncation bound is caught only by
+the structural prior-matching guard, not by any statistical check, because it moves little prior mass.
 
-\paragraph{Bivariate VAR(1) (F2).} The conjugate update, the Student-$t$ predictives with and without the noise covariance
-integrated, and the library mixture match closed forms or \texttt{scipy} to $10^{-10}$; the stability-truncated predictive
-matches nested quadrature in the one-dimensional reduction, agrees with an independent prior-sampling estimator and with an
-independent interval-integration estimator, and its Monte Carlo error is reported per item. Calibration, optimality and
-mutation tests for F2 are not yet run (Section~\ref{sec:limits}).
+\paragraph{Noisy observations (F3).} The Kalman-likelihood references were frozen and validated in the \sSix study, whose
+mutation matrix killed all \SsixMutations injected bugs with a clean baseline; the F3 map additionally checked node
+doubling, a library predictor against an independently written scalar Kalman filter, and its noise-free column against the
+known-scale map on three cells.
 
-\paragraph{Noisy observations (F3).} The Kalman-likelihood references were frozen and validated in the \sSix study (their own
-pre-registered critical checks all passed); the F3 map additionally checked node doubling, a library predictor against an
-independently written scalar Kalman filter, and agreement of its noise-free column with the known-scale map.
+\paragraph{Bivariate VAR(1) (F2).} The F2 references are implemented and their tests pass locally; their calibration,
+optimality and mutation results are not yet available and nothing in this paper depends on them.

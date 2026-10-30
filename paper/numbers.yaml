@@ -13,6 +13,7 @@ refs:
   batch1: 50a7664a07759c4a05d27cadc093c19787706a8c
   f1val: ac8aecb13448efaff908df010ce1dc606e631ff2
   lookup: c073522bf585b2af1cd3e57092d417d64615f5c5
+  freezev1: f8e1dab822b62e29ebb4fc65efbfc239f0616a60
 files:
   s0: {ref: main, path: runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json}
   s05: {ref: main, path: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json}
@@ -28,6 +29,9 @@ files:
   lookup: {ref: lookup, path: results_stage2/f1_power_lookup/f1_power_lookup.json}
   s06cfg: {ref: main, path: config/stage06.yaml}
   f1mapchecks: {ref: f1map, path: results_stage1/map_F1/f1_map_checks.json}
+  stage1cfgv1: {ref: freezev1, path: config/stage1.yaml}
+  s06mut: {ref: main, path: docs/STAGE06_MUTATION_MATRIX_v2.md}
+  s05prereg: {ref: main, path: docs/PREREG_stage05.md}
 numbers:
   # design constants (frozen Stage 0.6 confirmatory config; the same delta was fixed in Stage 0 and kept since)
   - {macro: DeltaNats, file: s06cfg, claim: S06-VERDICT, x: {yaml: analysis.delta}, fmt: "{:.2f}"}
@@ -80,3 +84,16 @@ numbers:
   - {macro: PilotImprovementFifty, file: pilot, claim: S1A-PILOT-B, x: {json: "max_validation_nll_improvement_to_next.50000"}, fmt: "{:.5f}"}
   - {macro: MinModels, file: stage1cfg, claim: S1A-MIN32, x: {yaml: min_models}, fmt: "{:d}"}
   - {macro: CapBudgetHours, file: stage1cfg, claim: S1A-MIN32, x: {yaml: cap_rule.gpu_hours_limit}, fmt: "{:.0f}"}
+  # review revisions (library results, borderline cells, budget history)
+  - {macro: LibSfiveDist, file: s05, claim: LIB-S05, x: {json_keycount: confirmed_secondary, key_fields: {"0": E-CONT, "2": "2"}, value: DISTINGUISHABLE}, fmt: "{:d}"}
+  - {macro: LibSfiveCells, file: s05, claim: LIB-S05, x: {json_keycount: confirmed_secondary, key_fields: {"0": E-CONT, "2": "2"}}, fmt: "{:d}"}
+  - {macro: LibOneAKone, file: map1a, claim: LIB-1A, x: {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "1", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: LibOneACells, file: map1a, claim: LIB-1A, x: {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "1"}}, fmt: "{:d}"}
+  - {macro: LibFoneKfour, file: f1map, claim: LIB-F1, x: {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "4", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: LibFoneCells, file: f1map, claim: LIB-F1, x: {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "4"}}, fmt: "{:d}"}
+  - {macro: FthreeBorderline, file: f3map, claim: F3-BORDERLINE, x: {csv_count: decision, where: {pair: pop-stab, h: "1", decision: BORDERLINE}, ge: {estimate: 0.02}}, fmt: "{:d}"}
+  - {macro: FthreeBorderlineQone, file: f3map, claim: F3-BORDERLINE, x: {csv_count: decision, where: {pair: pop-stab, h: "1", q: "0.755", decision: BORDERLINE}, ge: {estimate: 0.02}}, fmt: "{:d}"}
+  - {macro: FthreeLibKtwo, file: f3map, claim: F3-LIB-K2, x: {csv_max: estimate, where: {set: HELD, pair: pop-lib, K: "2"}}, fmt: "{:.3f}"}
+  - {macro: CapBudgetHoursOriginal, file: stage1cfgv1, claim: AMENDMENT1, x: {yaml: cap_rule.gpu_hours_limit}, fmt: "{:.0f}"}
+  - {macro: SfiveIntervalSE, file: s05prereg, claim: DESIGN-RULES, x: {regex_float: 'decision interval is mean \+/- (\d+\.\d+) SE'}, fmt: "{:.2f}"}
+  - {macro: SsixMutations, file: s06mut, claim: S06-MUTATION, x: {regex_int: 'intended detector: \*\*(\d+)/\d+\*\*'}, fmt: "{:d}"}

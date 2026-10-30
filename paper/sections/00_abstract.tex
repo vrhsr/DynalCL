@@ -1,14 +1,17 @@
 \begin{abstract}
 Pretrained sequence models are often described as behaving ``like Bayes with prior $X$'', or as memorising their
 training tasks rather than generalising. Such statements are only testable where the candidate reference predictors
-themselves make different predictions. For in-context forecasting of autoregressive dynamical systems we build and validate
+themselves make different predictions. For in-context forecasting of scalar autoregressive systems we build and validate
 three kinds of reference predictor (Bayes under the population prior, the posterior over a finite library of training
-systems, and a context-only Bayes predictor that knows only generic stability), and we map, under one pre-registered rule
-with margin $\delta=\DeltaNats$~nats per forecast, where they can be told apart. Across three scalar autoregressive families the answer is: rarely.
-With a known noise scale, population knowledge is worth only \OneAGapMin--\OneAGapMax~nats and only for very short
-contexts; with observation noise this advantage shrinks to \FthreeGapQthree~nats at the highest noise level and is never
-identifiable there; a finite library is almost never distinguishable from continuous-prior Bayes on natural evaluation
-sets. The window is wider when the noise scale is unknown (gaps up to \FoneGapMax~nats, identifiable up to $n=\FoneMaxN$).
-We also report a pre-registered neural pilot that ended, under its own frozen rules, as \emph{not resolvable} for compute
-reasons, and we document the pre-registration and disclosure trail as part of the method.
+systems, and a context-only Bayes predictor that knows the noise model and generic stability but nothing about the
+population), and we map, at a common margin of $\delta=\DeltaNats$~nats per forecast, where they can be told apart.
+With a known noise scale, population knowledge is worth \OneAGapMin--\OneAGapMax~nats and is separable only at very short
+contexts; under additive observation noise the largest gap falls to \FthreeGapQthree~nats at the highest noise level and
+no cell is separable at the two larger noise levels, while at moderate noise our map is underpowered. When the noise scale
+is unknown the window is much wider (gaps up to \FoneGapMax~nats, separable up to $n=\FoneMaxN$). Libraries of one to four
+systems are distinguishable from continuous-prior Bayes on held-out systems in many cells; with a known noise scale,
+libraries of sixteen or more systems never are in our map, while with an unknown noise scale only very large libraries are
+uniformly indistinguishable. The map conclusions depend on $\delta$, on the comparator and on the single population prior,
+and we report how. We also report a pre-registered neural pilot that ended, under its own frozen rules, as \emph{not
+resolvable} for compute reasons, and document the pre-registration and disclosure trail as part of the method.
 \end{abstract}

@@ -1,30 +1,54 @@
 \section{What the references can and cannot tell apart}\label{sec:results}
-\paragraph{Population versus context-only.} Table~\ref{tab:maps} summarises the held-out maps at horizon $h=1$. With a
-known noise scale the population prior is worth \OneAGapMin--\OneAGapMax nats per forecast, and only for very short contexts.
-The first map (Stage~0) found \SzeroAllPairs of \SzeroCells regimes in which all three strategy pairs were separable.
-\sHalf, pre-registered with fresh seeds, confirmed a population-specific advantage only at one-step horizons and the
-shortest contexts and returned the decision REVISE. With observation noise (F3) the advantage shrinks monotonically with the noise ratio: the
-largest $h=1$ gap is \FthreeGapQzero, \FthreeGapQone, \FthreeGapQtwo and \FthreeGapQthree nats at
-$q=0,\QOne,\QTwo,\QThree$; nothing is identifiable at the two larger noise levels, or at $h=5$. The pre-registered \sSix
-confirmatory study had already returned STOP for long contexts; the F3 map shows that short contexts do not rescue the
-population advantage under noise. When the noise scale is unknown (F1) the window is wider: gaps of
-\FoneGapMin--\FoneGapMax nats, identifiable up to $n=\FoneMaxN$ at every $r$, because the population then also carries
-information about the noise level.
+\paragraph{Population versus context-only.} Table~\ref{tab:maps} summarises the held-out maps at horizon $h=1$; each map has
+its own grid of context lengths, given in the table. With a known noise scale the population prior is worth
+\OneAGapMin--\OneAGapMax nats per forecast and is identifiable only at very short contexts. The first study (Stage~0, a
+different comparator and rule) found \SzeroAllPairs of \SzeroCells regimes in which all three strategy pairs were
+separable. \sHalf, pre-registered with fresh seeds, confirmed a population-specific advantage at one-step but not at
+five-step horizons and returned the decision REVISE. With observation noise (F3) the largest $h=1$ gap is
+\FthreeGapQzero, \FthreeGapQone, \FthreeGapQtwo and \FthreeGapQthree nats at $q=0,\QOne,\QTwo,\QThree$. No cell is
+identifiable at the two larger noise levels or at $h=5$. At moderate noise the F3 map is underpowered: its realised-target
+estimator has standard errors several times those of the 1A map, and \FthreeBorderline of its $h=1$ cells (\FthreeBorderlineQone
+at $q=\QOne$) are borderline although their point estimates already reach $\delta$. The noise-free F3 row agrees with the
+1A map on the three cells compared ($r=1$, $n\le 5$), but the rows differ elsewhere for two reasons visible in the table:
+the grids differ (only F3 has $n$ between six and nine, which is why its window at \rsmall ends later), and at $r=4$ the
+F3 cells are borderline or unidentifiable where the more precise 1A map is identifiable for the shortest contexts. The
+pre-registered \sSix study had already returned STOP for long contexts. When the noise scale is unknown (F1) the window is
+much wider: gaps of \FoneGapMin--\FoneGapMax nats, identifiable up to $n=\FoneMaxN$ at every $r$, because the population
+also carries information about the noise level, which the context-only reference lacks.
 
 \begin{table}[t]
-\centering\small
+\centering\scriptsize
 \input{generated/tab_maps.tex}
-\caption{Held-out systems, $h=1$: largest context length $n$ at which population Bayes and context-only Bayes are
-\textsc{identifiable}, with the range of identifiable gaps in nats (``none'': no identifiable cell; the largest gap is shown).
-Generated from the pinned map files. The noise-free F3 row agrees with the known-scale map within sampling error (a
-pre-registered validity check); its coarser realised-target estimator gives larger standard errors, which is why the
-$r=4$ cells are borderline there.}
+\caption{Held-out systems, $h=1$: each map's grid of context lengths $n$; the largest $n$ at which population and
+context-only Bayes are \textsc{identifiable}, with the range of identifiable gaps in nats; and the number of
+\textsc{borderline} cells whose point estimate already reaches $\delta$ (``none'': no identifiable cell; the largest gap
+is shown). Generated from the pinned map files.}
 \label{tab:maps}
 \end{table}
 
-\paragraph{Library versus continuous prior.} On systems drawn from the library itself, the library posterior and the
-continuous-prior posterior were equivalent within $\delta$ in all \SzeroElibEquiv cells of the first map. In the noisy
-family no held-out cell separates the library from continuous-prior Bayes at any noise level; on in-library systems the
-library separates from the context-only reference only without noise and only for the larger libraries. Memorisation is
-therefore not visible by score on natural evaluation sets in these families; it becomes visible only on designed probe and
-out-of-support sets, where it is confounded with how well the library covers the edge of the stable region.
+\paragraph{Sensitivity to the margin.} Table~\ref{tab:delta} repeats the held-out comparison at half and twice the
+margin. The window moves with $\delta$: with a known noise scale it extends to $n=\FoneMaxN$ at the smaller margin and
+shrinks to the two shortest contexts at the larger one. The ordering of the families does not change: the unknown-noise
+family keeps the widest window, and the two noisiest settings separate at no margin in this range.
+
+\begin{table}[t]
+\centering\small
+\input{generated/tab_delta.tex}
+\caption{Largest identifiable context length $n$ ($r=1$, $h=1$, held-out) at three margins; ``--'': none. Same files and
+three-standard-error rule as Table~\ref{tab:maps}.}
+\label{tab:delta}
+\end{table}
+
+\paragraph{Library versus continuous prior.} Small libraries are distinguishable from continuous-prior Bayes on held-out
+systems; large ones are not. In \sHalf, a library of two systems was distinguishable from the continuous prior on
+held-out systems in \LibSfiveDist of \LibSfiveCells confirmatory cells. In the 1A map a single-system library is
+identifiable in \LibOneAKone of \LibOneACells held-out cells, and every cell with sixteen or more systems is
+unidentifiable. In the F1 map every one- and two-system cell is identifiable and \LibFoneKfour of \LibFoneCells
+four-system cells are; with sixteen or thirty-two systems every cell is \textsc{partial}, and only the largest libraries
+(several hundred systems) are unidentifiable throughout. In F3 no held-out cell is identifiable, but for two-system
+libraries the mean gap reaches \FthreeLibKtwo nats and the cells are \textsc{partial}: some of the libraries drawn are
+separable and others are not, so whether a particular trained model's library is separable has to be checked for that
+library. On in-library systems the first map found library and continuous posteriors equivalent within $\delta$ in all
+\SzeroElibEquiv cells. In short: memorisation of a few systems is visible by score on held-out systems; with a known noise
+scale, memorisation of sixteen or more systems is not; with an unknown noise scale, mid-sized libraries are separable for
+some draws and not others, and only very large libraries are uniformly inseparable.

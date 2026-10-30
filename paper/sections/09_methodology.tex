@@ -4,8 +4,10 @@ Each confirmatory study was frozen before it ran: a manifest lists every code, c
 new documents frozen in a new manifest next to the old one, which is never edited, and each amendment states what had been
 seen when it was made. Every deviation, failed attempt, changed test and corrected number is recorded in an append-only
 disclosure log, including our own mistakes (for example a test bound that had no error-budget justification, which failed
-and was replaced by a justified one, with both versions and the reason recorded). A keyed authorization gate binds a confirmatory run to the frozen state, the pilot decision and the seed
-set; while preparing a later run we found and fixed a hole in this gate (a self-made test key could pass it) before any
-confirmatory run used it. Finally, every number in this paper is a macro re-extracted from a result file at a pinned commit,
-and the build fails if the text contains any other number. We think these tools cost little and make null and
+and was replaced by a justified one, with both versions and the reason recorded). A keyed authorization gate binds a
+confirmatory run to the frozen state, the pilot decision and the seed set; while preparing a later run we found a hole in
+this gate (a self-made test key could pass it) before any confirmatory run used it, and wrote a fix that is to be included
+in the next frozen release. Finally, every result number in this paper is a macro re-extracted from a result file at a
+pinned commit, and the build fails if the audited text contains any other decimal or any integer above ten (small integers
+such as horizons and the exponents of tolerances are exempt). We think these tools cost little and make null and
 not-resolvable outcomes as reportable as positive ones.

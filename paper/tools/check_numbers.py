@@ -50,6 +50,14 @@ def main() -> int:
         return 1
     bad = [b for f in files for b in scan(f)]
     bad += [b for f in files for b in placeholders_without_numbers(f)]
+    # control characters in any source (a shell heredoc once turned "\textsc" into a TAB + "extsc"; disclosure S37)
+    sources = files + [ROOT / "paper" / n for n in ("main.tex", "main_track2.tex", "references.bib", "numbers.yaml",
+                                                     "claims.yaml")] + sorted((ROOT / "paper" / "tools").glob("*.py"))
+    for f in sources:
+        t = f.read_text(encoding="utf-8")
+        for ch in set(t):
+            if (ord(ch) < 32 and ch != "\n") or ord(ch) == 127:
+                bad.append(f"{f.name}: control character U+{ord(ch):04X} ({t.count(ch)} occurrence(s))")
     defined = set(re.findall(r"\\newcommand\{\\([A-Za-z]+)\}",
                              (ROOT / "paper" / "generated" / "numbers.tex").read_text(encoding="utf-8")))
     used = {m for f in files for m in re.findall(r"\\([A-Z][A-Za-z]+)", f.read_text(encoding="utf-8"))}

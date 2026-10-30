@@ -39,9 +39,11 @@ def _get(d, dotted: str):
     return d
 
 
-def _rows(raw: bytes, where: dict) -> list[dict]:
+def _rows(raw: bytes, where: dict, ge: dict | None = None, lt: dict | None = None) -> list[dict]:
     rows = list(csv.DictReader(io.StringIO(raw.decode("utf-8"))))
-    return [r for r in rows if all(str(r[k]) == str(v) for k, v in where.items())]
+    rows = [r for r in rows if all(str(r[k]) == str(v) for k, v in where.items())]
+    rows = [r for r in rows if all(float(r[k]) >= float(v) for k, v in (ge or {}).items())]
+    return [r for r in rows if all(float(r[k]) < float(v) for k, v in (lt or {}).items())]
 
 
 def _same(got, want, tol) -> bool:
@@ -68,8 +70,26 @@ def extract(raw: bytes, spec: dict):
         return [min(vals), max(vals)]
     if "contains" in spec:
         return spec["contains"] in raw.decode("utf-8")
+    if "regex_int" in spec:
+        import re
+        m = re.search(spec["regex_int"], raw.decode("utf-8"))
+        if m is None:
+            raise ValueError(f"pattern not found: {spec['regex_int']}")
+        return int(m.group(1))
+    if "regex_float" in spec:
+        import re
+        m = re.search(spec["regex_float"], raw.decode("utf-8"))
+        if m is None:
+            raise ValueError(f"pattern not found: {spec['regex_float']}")
+        return float(m.group(1))
     if "csv_count" in spec:
-        return len(_rows(raw, spec.get("where", {})))
+        return len(_rows(raw, spec.get("where", {}), spec.get("ge"), spec.get("lt")))
+    if "json_keycount" in spec:
+        # count entries of a dict keyed "a|b|c|..." whose '|'-separated fields match key_fields and whose value matches
+        d = _get(json.loads(raw), spec["json_keycount"])
+        kf = {int(i): str(v) for i, v in spec.get("key_fields", {}).items()}
+        return sum(1 for k, v in d.items() if all(k.split("|")[i] == want for i, want in kf.items())
+                   and ("value" not in spec or v == spec["value"]))
     if "csv_max" in spec:
         return max(float(r[spec["csv_max"]]) for r in _rows(raw, spec.get("where", {})))
     if "csv_max_int" in spec:
