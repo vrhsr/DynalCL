@@ -17,11 +17,12 @@ the population-specific part of the advantage can be measured.
 
 \paragraph{Contributions.}
 (i) Validated reference predictors for scalar AR(1) with known noise scale, AR(1) observed through Gaussian noise (Kalman
-likelihood) and AR(1) with unknown noise scale, with measured numerical error and calibration and optimality tests, and
-mutation tests for the latter two families. (ii) Separability maps of these references at a common margin, reported
+likelihood), AR(1) with unknown noise scale, and a bivariate VAR(1) with a stability-truncated conjugate prior, with
+measured numerical error and calibration and optimality tests, and mutation tests for the last three families. (ii) Separability maps of these references at a common margin, reported
 cell by cell with their power limits and a sensitivity analysis in $\delta$: the population-specific window is short-context
-for a known noise scale, shrinks under observation noise, and widens markedly when the noise scale is unknown; libraries
-are distinguishable from continuous priors only when small. (iii) Pre-registered results, including a null (\sSix: STOP)
+for a known noise scale, shrinks under observation noise, and widens markedly when the noise scale is unknown or the
+system is bivariate; in scalar families libraries are distinguishable from continuous priors only when small, in the
+bivariate family also when large. (iii) Pre-registered results, including a null (\sSix: STOP)
 and a neural pilot that its own frozen rules declared not resolvable for compute reasons. (iv) The machinery that kept
 these results honest (freeze manifests, append-only disclosure logs, an authorization gate, and a claims table that
 re-derives every number in this paper from pinned commits), offered as methodology.

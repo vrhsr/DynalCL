@@ -26,5 +26,11 @@ mutation matrix killed all \SsixMutations injected bugs with a clean baseline; t
 doubling, a library predictor against an independently written scalar Kalman filter, and its noise-free column against the
 known-scale map on three cells.
 
-\paragraph{Bivariate VAR(1) (F2).} The F2 references are implemented and their tests pass locally; their calibration,
-optimality and mutation results are not yet available and nothing in this paper depends on them.
+\paragraph{Bivariate VAR(1) (F2).} The stability-truncated predictive is a Monte Carlo estimate with a per-item standard
+error of at most \ItemSETarget nats on the log density, checked against nested quadrature in the one-dimensional reduction and
+against two independent estimators. The F2 references passed all \FtwoValTests calibration (marginal PIT and coverage,
+simulation-based calibration of the spectral radius) and optimality tests at family level \FamilyAlpha, and a mutation
+matrix of \FtwoMutations injected bugs detected every one; as in F1, an unmatched reference and a wrong truncation bound are
+caught only by the dedicated detectors, not by the reference tests themselves. At the shortest contexts ($n\le 3$) the
+context-only VAR(1) reference cannot be computed to this criterion: it has more parameters than the context has
+observations.

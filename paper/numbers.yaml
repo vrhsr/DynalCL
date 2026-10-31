@@ -14,6 +14,8 @@ refs:
   f1val: ac8aecb13448efaff908df010ce1dc606e631ff2
   lookup: c073522bf585b2af1cd3e57092d417d64615f5c5
   freezev1: f8e1dab822b62e29ebb4fc65efbfc239f0616a60
+  batch23: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3
+  f2code: 77f8ad37ec6107f3d9ae42866dd168ce5efb03ce
 files:
   s0: {ref: main, path: runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json}
   s05: {ref: main, path: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json}
@@ -32,7 +34,12 @@ files:
   stage1cfgv1: {ref: freezev1, path: config/stage1.yaml}
   s06mut: {ref: main, path: docs/STAGE06_MUTATION_MATRIX_v2.md}
   s05prereg: {ref: main, path: docs/PREREG_stage05.md}
+  f2map: {ref: batch23, path: results_stage2/f2_map/map_decisions.csv}
+  f2val: {ref: batch23, path: results_stage2/f2_validation/f2_validation.json}
+  f2mm: {ref: batch23, path: results_stage2/f2_mutation_matrix/f2_mutation_matrix.json}
+  f2mapcode: {ref: f2code, path: dynaicl_families/stage2/f2_map.py}
 numbers:
+  - {macro: ItemSETarget, file: f2mapcode, claim: F2-MAP, x: {regex_float: 'ITEM_SE_TARGET = (\d+\.\d+)'}, fmt: "{:.2f}"}
   # design constants (frozen Stage 0.6 confirmatory config; the same delta was fixed in Stage 0 and kept since)
   - {macro: DeltaNats, file: s06cfg, claim: S06-VERDICT, x: {yaml: analysis.delta}, fmt: "{:.2f}"}
   - {macro: PriorMean, file: s06cfg, claim: S06-VERDICT, x: {yaml: prior.mu0}, fmt: "{:.1f}"}
@@ -97,3 +104,11 @@ numbers:
   - {macro: CapBudgetHoursOriginal, file: stage1cfgv1, claim: AMENDMENT1, x: {yaml: cap_rule.gpu_hours_limit}, fmt: "{:.0f}"}
   - {macro: SfiveIntervalSE, file: s05prereg, claim: DESIGN-RULES, x: {regex_float: 'decision interval is mean \+/- (\d+\.\d+) SE'}, fmt: "{:.2f}"}
   - {macro: SsixMutations, file: s06mut, claim: S06-MUTATION, x: {regex_int: 'intended detector: \*\*(\d+)/\d+\*\*'}, fmt: "{:d}"}
+  # F2
+  - {macro: FtwoGapMin, file: f2map, claim: F2-MAP, x: {csv_minmax: estimate, where: {set: HELD, pair: pop-ctx, decision: IDENTIFIABLE}}, pick: 0, fmt: "{:.3f}"}
+  - {macro: FtwoGapMax, file: f2map, claim: F2-MAP, x: {csv_minmax: estimate, where: {set: HELD, pair: pop-ctx, decision: IDENTIFIABLE}}, pick: 1, fmt: "{:.3f}"}
+  - {macro: FtwoLibSixteen, file: f2map, claim: F2-MAP, x: {csv_count: decision, where: {set: HELD, pair: pop-lib, K: "16", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: FtwoLibSixtyFour, file: f2map, claim: F2-MAP, x: {csv_count: decision, where: {set: HELD, pair: pop-lib, K: "64", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: FtwoLibCells, file: f2map, claim: F2-MAP, x: {csv_count: decision, where: {set: HELD, pair: pop-lib, K: "64"}}, fmt: "{:d}"}
+  - {macro: FtwoValTests, file: f2val, claim: F2-VALIDATION, x: {json: n_tests}, fmt: "{:d}"}
+  - {macro: FtwoMutations, file: f2mm, claim: F2-V11, x: {json_len: rows}, fmt: "{:d}", minus: 1}

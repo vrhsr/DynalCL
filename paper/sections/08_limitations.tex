@@ -14,8 +14,13 @@ numbers, so a few cells per map may be mis-marked by chance and patterns across 
 separate references in cells where each per-cell gap is below $\delta$.
 \item \textbf{Designed sets.} Where library and continuous references separate on probe or out-of-support sets, the gap is
 not a divergence and partly reflects how well the library covers the edge of the stable region.
-\item \textbf{Simple families.} All results concern scalar autoregressive processes with Gaussian noise; the bivariate family
-is not yet reported, and nothing is claimed for nonlinear, chaotic or high-dimensional systems. Each confirmatory study ran
-on one platform with two replicates.
+\item \textbf{Simple families.} All results concern linear autoregressive processes with Gaussian noise, scalar or
+bivariate; nothing is claimed for nonlinear, chaotic or high-dimensional systems. Each confirmatory study ran on one platform
+with two replicates.
+\item \textbf{Monte Carlo limits in F2.} The bivariate context-only reference is not computable to our criterion at the
+shortest contexts, so the F2 population window is not mapped there. Because the cell-level Monte Carlo criterion tightens as
+the number of evaluation items falls, several in-library F2 cells with fewer items are also \textsc{mc-limited}; the sample
+sizes were fixed before this was seen. The explanation offered for the bivariate library result (sparse coverage of a
+four-coefficient space) is a hypothesis, not a tested claim.
 \item \textbf{No neural result.} The one neural study ended not resolvable; this paper makes no claim about trained models.
 \end{itemize}

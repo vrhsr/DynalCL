@@ -4,7 +4,7 @@ $x_0\sim\mathcal N(0,r^2)$ drawn independently of the system, \rlist. A context 
 and the target is $x_{n+h}$. We use (a) a known noise scale ($\sigma=1$ in the maps; the first study also used a second
 scale); (b) \emph{F3}: the same latent process observed as $y_t=x_t+v_t$, $v_t\sim\mathcal N(0,q)$, with noise ratios
 $q\in\{0,\QOne,\QTwo,\QThree\}$, and a Kalman likelihood; (c) \emph{F1}: unknown noise scale; (d) \emph{F2}: a bivariate
-VAR(1), $x_t=Ax_{t-1}+e_t$, $e_t\sim\mathcal N(0,\Sigma)$ (references built, validation and map in progress). In every
+VAR(1), $x_t=Ax_{t-1}+e_t$, $e_t\sim\mathcal N(0,\Sigma)$, with $x_0\sim\mathcal N(0,r^2 I)$. In every
 family the likelihood is conditional on $x_0$, contexts are cut by a single function from the start of a trajectory, and
 every reference sees only the context.
 

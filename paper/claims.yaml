@@ -240,6 +240,34 @@ claims:
     extract: [{json: Q1, expect: {"32": 0.01, "64": 0.02, "128": 0.03}}, {json: Q2, expect: {"32": 0.1, "64": 0.1, "128": 0.1}},
               {json: power, expect: 0.8}]
   - id: F2-MAP
-    text: "F2 (bivariate VAR(1)) separability map."
-    label: PENDING
-    source: {ref: none, path: none}
+    text: "F2 (bivariate VAR(1)) map VALID: held-out pop vs ctx IDENTIFIABLE at n = 10 and 20 for every r (0.070-0.338 nats), MC-LIMITED at n = 5; held-out pop vs lib IDENTIFIABLE in 15 of 15 cells for K = 2 and K = 16 and in 13 of 15 for K = 64."
+    label: VERIFIED
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f2_map/map_decisions.csv}
+    extract: [{csv_count: decision, where: {set: HELD, pair: pop-ctx, decision: IDENTIFIABLE}, expect: 6},
+              {csv_count: decision, where: {set: HELD, pair: pop-ctx, n: "5", decision: MC-LIMITED}, expect: 3},
+              {csv_minmax: estimate, where: {set: HELD, pair: pop-ctx, decision: IDENTIFIABLE}, expect: [0.0704, 0.3375], tol: 0.00005},
+              {csv_count: decision, where: {set: HELD, pair: pop-lib, K: "2", decision: IDENTIFIABLE}, expect: 15},
+              {csv_count: decision, where: {set: HELD, pair: pop-lib, K: "16", decision: IDENTIFIABLE}, expect: 15},
+              {csv_count: decision, where: {set: HELD, pair: pop-lib, K: "64", decision: IDENTIFIABLE}, expect: 13},
+              {csv_count: decision, where: {set: HELD, pair: pop-lib, K: "64"}, expect: 15}]
+  - id: F2-MAP-VALID
+    text: "F2 map validity: large-radius truncation exact, interval vs production estimator |z| <= 1.79 over 20 items, library vs scipy 1.2e-14, disjointness 0."
+    label: VERIFIED
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f2_map/map_checks.json}
+    extract: [{json: valid, expect: true}, {json: checks.ii_interval_vs_production.n, expect: 20},
+              {json: checks.iv_disjointness.held_systems_equal_to_an_atom, expect: 0}]
+  - id: F2-VALIDATION
+    text: "F2 references pass calibration (marginal PIT, coverage, SBC of the spectral radius) and optimality in 9 cells: 117 tests at family level 0.01, all pass."
+    label: VERIFIED
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f2_validation/f2_validation.json}
+    extract: [{json: pass, expect: true}, {json: n_tests, expect: 117}]
+  - id: F2-V11
+    text: "F2 mutation matrix: 7 injected bugs all detected, clean baseline passes; unmatched reference and wrong truncation caught only by the extra detectors."
+    label: VERIFIED
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f2_mutation_matrix/f2_mutation_matrix.json}
+    extract: [{json: pass, expect: true}, {json: baseline_pass, expect: true}, {json_len: rows, expect: 8}]
+  - id: F1-HEAD
+    text: "F1 head floor: the smallest Gaussian-mixture head meeting the 0.001-nat floor in every cell has m = 8 components."
+    label: VERIFIED
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f1_head_floor/f1_head_floor_summary.json}
+    extract: [{json: chosen_m, expect: 8}]

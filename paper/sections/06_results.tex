@@ -14,7 +14,10 @@ the grids differ (only F3 has $n$ between six and nine, which is why its window 
 F3 cells are borderline or unidentifiable where the more precise 1A map is identifiable for the shortest contexts. The
 pre-registered \sSix study had already returned STOP for long contexts. When the noise scale is unknown (F1) the window is
 much wider: gaps of \FoneGapMin--\FoneGapMax nats, identifiable up to $n=\FoneMaxN$ at every $r$, because the population
-also carries information about the noise level, which the context-only reference lacks.
+also carries information about the noise level, which the context-only reference lacks. In the bivariate family (F2) the
+population prior is worth \FtwoGapMin--\FtwoGapMax nats at the longest contexts mapped, identifiable at every tested length
+from the second grid point on and at every $r$; the shortest grid point is \textsc{mc-limited}: its gaps are large but the
+context-only reference cannot be estimated there to our Monte Carlo criterion.
 
 \begin{table}[t]
 \centering\scriptsize
@@ -39,8 +42,8 @@ three-standard-error rule as Table~\ref{tab:maps}.}
 \label{tab:delta}
 \end{table}
 
-\paragraph{Library versus continuous prior.} Small libraries are distinguishable from continuous-prior Bayes on held-out
-systems; large ones are not. In \sHalf, a library of two systems was distinguishable from the continuous prior on
+\paragraph{Library versus continuous prior.} In the scalar families, small libraries are distinguishable from
+continuous-prior Bayes on held-out systems and large ones are not; in the bivariate family even large libraries are. In \sHalf, a library of two systems was distinguishable from the continuous prior on
 held-out systems in \LibSfiveDist of \LibSfiveCells confirmatory cells. In the 1A map a single-system library is
 identifiable in \LibOneAKone of \LibOneACells held-out cells, and every cell with sixteen or more systems is
 unidentifiable. In the F1 map every one- and two-system cell is identifiable and \LibFoneKfour of \LibFoneCells
@@ -49,6 +52,10 @@ four-system cells are; with sixteen or thirty-two systems every cell is \textsc{
 libraries the mean gap reaches \FthreeLibKtwo nats and the cells are \textsc{partial}: some of the libraries drawn are
 separable and others are not, so whether a particular trained model's library is separable has to be checked for that
 library. On in-library systems the first map found library and continuous posteriors equivalent within $\delta$ in all
-\SzeroElibEquiv cells. In short: memorisation of a few systems is visible by score on held-out systems; with a known noise
-scale, memorisation of sixteen or more systems is not; with an unknown noise scale, mid-sized libraries are separable for
-some draws and not others, and only very large libraries are uniformly inseparable.
+\SzeroElibEquiv cells. In the bivariate family the picture changes: on held-out systems a library of sixteen systems is
+identifiable in \FtwoLibSixteen of \FtwoLibCells cells and a library of sixty-four in \FtwoLibSixtyFour of
+\FtwoLibCells. A plausible reason (not tested here) is that a finite set of systems covers a four-coefficient dynamics
+space far more sparsely than an interval of scalar coefficients, so the library posterior stays visibly different from the
+continuous prior. In short: in scalar families memorisation of a few systems is visible by score on held-out systems; with a
+known noise scale memorisation of sixteen or more is not; with an unknown noise scale mid-sized libraries are separable for
+some draws only; and in the bivariate family memorisation of sixty-four systems is still visible in most cells.

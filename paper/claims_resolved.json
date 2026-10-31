@@ -1555,13 +1555,235 @@
  },
  {
   "id": "F2-MAP",
-  "label": "PENDING",
-  "text": "F2 (bivariate VAR(1)) separability map.",
-  "ref": "none",
-  "path": "none",
-  "commit": null,
-  "sha256": null,
-  "checks": [],
-  "status": "PENDING"
+  "label": "VERIFIED",
+  "text": "F2 (bivariate VAR(1)) map VALID: held-out pop vs ctx IDENTIFIABLE at n = 10 and 20 for every r (0.070-0.338 nats), MC-LIMITED at n = 5; held-out pop vs lib IDENTIFIABLE in 15 of 15 cells for K = 2 and K = 16 and in 13 of 15 for K = 64.",
+  "ref": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "path": "results_stage2/f2_map/map_decisions.csv",
+  "commit": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "sha256": "b70f2c8ccbac4eb178e4c7fa251ac0239ce70ec2a1fbc16e9bf38387359f9d56",
+  "checks": [
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-ctx",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 6,
+    "got": 6,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-ctx",
+      "n": "5",
+      "decision": "MC-LIMITED"
+     }
+    },
+    "expect": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_minmax": "estimate",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-ctx",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": [
+     0.0704,
+     0.3375
+    ],
+    "got": [
+     0.0704149957870247,
+     0.337536110262428
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-lib",
+      "K": "2",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 15,
+    "got": 15,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-lib",
+      "K": "16",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 15,
+    "got": 15,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-lib",
+      "K": "64",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 13,
+    "got": 13,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "set": "HELD",
+      "pair": "pop-lib",
+      "K": "64"
+     }
+    },
+    "expect": 15,
+    "got": 15,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F2-MAP-VALID",
+  "label": "VERIFIED",
+  "text": "F2 map validity: large-radius truncation exact, interval vs production estimator |z| <= 1.79 over 20 items, library vs scipy 1.2e-14, disjointness 0.",
+  "ref": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "path": "results_stage2/f2_map/map_checks.json",
+  "commit": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "sha256": "621bef08606434842fbc6262f025f97c85970cd7c41d178f3d541c56d40893b5",
+  "checks": [
+   {
+    "spec": {
+     "json": "valid"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "checks.ii_interval_vs_production.n"
+    },
+    "expect": 20,
+    "got": 20,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "checks.iv_disjointness.held_systems_equal_to_an_atom"
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F2-VALIDATION",
+  "label": "VERIFIED",
+  "text": "F2 references pass calibration (marginal PIT, coverage, SBC of the spectral radius) and optimality in 9 cells: 117 tests at family level 0.01, all pass.",
+  "ref": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "path": "results_stage2/f2_validation/f2_validation.json",
+  "commit": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "sha256": "02fa6aaf11a87fa1dbf83abac1b8259bb28340371357e33f80c4508aa1dec558",
+  "checks": [
+   {
+    "spec": {
+     "json": "pass"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "n_tests"
+    },
+    "expect": 117,
+    "got": 117,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F2-V11",
+  "label": "VERIFIED",
+  "text": "F2 mutation matrix: 7 injected bugs all detected, clean baseline passes; unmatched reference and wrong truncation caught only by the extra detectors.",
+  "ref": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "path": "results_stage2/f2_mutation_matrix/f2_mutation_matrix.json",
+  "commit": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "sha256": "39a2bef5f7564ca4fa3a8eba53ef74390ffbd34ddfbfe82c6af367c430075efa",
+  "checks": [
+   {
+    "spec": {
+     "json": "pass"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json": "baseline_pass"
+    },
+    "expect": true,
+    "got": true,
+    "pass": true
+   },
+   {
+    "spec": {
+     "json_len": "rows"
+    },
+    "expect": 8,
+    "got": 8,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "F1-HEAD",
+  "label": "VERIFIED",
+  "text": "F1 head floor: the smallest Gaussian-mixture head meeting the 0.001-nat floor in every cell has m = 8 components.",
+  "ref": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "path": "results_stage2/f1_head_floor/f1_head_floor_summary.json",
+  "commit": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3",
+  "sha256": "ddfb88f1f720f0b06824ba91bf4272d55e0481189f9233780103822c6ecf4303",
+  "checks": [
+   {
+    "spec": {
+     "json": "chosen_m"
+    },
+    "expect": 8,
+    "got": 8,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
  }
 ]
