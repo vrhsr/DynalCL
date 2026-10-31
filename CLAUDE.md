@@ -1,7 +1,7 @@
 # CLAUDE.md: DynaICL orientation (read this first)
 
 This file gives a new session full context in one read. Details are in the files it points to.
-Last updated: 2026-10-27. **Start with section 0 (where things stand now)**, then 2h-quater (Stage 1 pilot result). Sections are in
+Last updated: 2026-10-31. **Start with section 0 (where things stand now)**, then 2h-quater (Stage 1 pilot result). Sections are in
 chronological order; older ones (1-2g, 7-8) are historical where they say "not started / not authorised / not a git repo".
 
 ## 0. Where things stand now (2026-10-27): read this first
@@ -48,6 +48,16 @@ chronological order; older ones (1-2g, 7-8) are historical where they say "not s
   Paper (`paper-draft`, worktree `../DynaICL-paper`): revised after internal hostile review 1 (S37; response
   `paper/REVIEW_RESPONSE_1.md`), F2 added; claims 41 verified / 0 pending; 10-page Track 1. OPEN analyses (need compute
   decisions): comparator frontier, prior sensitivity, F3 Rao-Blackwellised re-run, per-draw library tables, sequence-level test.
+* **UPDATE 2026-10-31 later (user: "do it whichever is best go ahead", disclosure S39).** (1) The review's open analyses run as
+  box CPU batch 4: spec `docs/STAGE2_SENSITIVITY_SPEC.md` (committed before the run), `dynaicl_families/stage2/sensitivity.py`,
+  `scripts/stage2_sensitivity.py`, seed roles `sensitivity` 81501 / `f3_precision` 81601, relay
+  `pilot_tooling/RELAY_stage2_cpu_batch4.md` (commit `67f773c`). WAITING for the box branch `results-stage2-cpu-batch4`: verify
+  provenance (commit >= `67f773c`, clean tree), append S40, put the results in the paper (claims, macros, tables), close the
+  matching OPEN items in `paper/REVIEW_RESPONSE_1.md`. (2) Neural order: F1 first (population knowledge, head m = 8), then F2
+  (memorisation); both stay frozen drafts until an explicit GPU go. Per-draw library table done from existing map files
+  (`paper-draft` @ `bd4d390`, `generated/tab_library.tex`): unknown sigma K = 16 separable in 10% of (cell, draw) pairs, K = 32 in
+  0%; known sigma K >= 16 0%; VAR(1) K = 64 97%. Track 1 still needs: sensitivity results, figures/appendices, remaining literature,
+  bib first names, a second hostile review, TMLR format, code/data DOI, author names.
 * Rules that bite most often: never edit a frozen file or manifest; disclosure logs are append-only; never open pilot effect files
   (`results_stage1/pilot/eval/`, `phase_d_pilot/PILOT_ONLY_do_not_open_effects.json`); never ask for, store or print a key;
   compute over ~10-15 min runs on the box (detached in tmux, one background waiter, no polling loops); stop at every checkpoint.
