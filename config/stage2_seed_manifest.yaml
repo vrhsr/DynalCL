@@ -14,4 +14,6 @@ roles:
   f2_v_mutation:       {seeds: [80801], use: "F2 mutation matrix detector checks", status: unused}
   f2_map:              {seeds: [80601], use: "F2 separability map (reference-only); spec committed before use", status: unused}
   f3_map:              {seeds: [80701], use: "F3 short-context Kalman map (reference-only); spec committed before use", status: unused}
+  sensitivity:         {seeds: [81501], use: "comparator frontier and prior dependence (docs/STAGE2_SENSITIVITY_SPEC.md); spec committed before use", status: unused}
+  f3_precision:        {seeds: [81601], use: "F3 pop vs stab at higher precision (docs/STAGE2_SENSITIVITY_SPEC.md); spec committed before use", status: unused}
   f3_tests:            {seeds: [80901], use: "tests_stage2 unit tests and timing probes of the F3 map code; never decisions", status: tests}
