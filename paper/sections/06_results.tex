@@ -47,15 +47,26 @@ continuous-prior Bayes on held-out systems and large ones are not; in the bivari
 held-out systems in \LibSfiveDist of \LibSfiveCells confirmatory cells. In the 1A map a single-system library is
 identifiable in \LibOneAKone of \LibOneACells held-out cells, and every cell with sixteen or more systems is
 unidentifiable. In the F1 map every one- and two-system cell is identifiable and \LibFoneKfour of \LibFoneCells
-four-system cells are; with sixteen or thirty-two systems every cell is \textsc{partial}, and only the largest libraries
-(several hundred systems) are unidentifiable throughout. In F3 no held-out cell is identifiable, but for two-system
-libraries the mean gap reaches \FthreeLibKtwo nats and the cells are \textsc{partial}: some of the libraries drawn are
-separable and others are not, so whether a particular trained model's library is separable has to be checked for that
-library. On in-library systems the first map found library and continuous posteriors equivalent within $\delta$ in all
+four-system cells are; with sixteen or thirty-two systems every cell is \textsc{partial}, mostly because many draws are
+borderline rather than separable. In F3 no held-out cell is identifiable, but for two-system libraries the mean gap reaches
+\FthreeLibKtwo nats and the cells are \textsc{partial}. Because a trained model sees one library, Table~\ref{tab:library}
+gives the share of individual (cell, library) pairs that are separable: it falls with library size in every scalar family
+and stays near one in the bivariate family.
+
+\begin{table}[t]
+\centering\small
+\input{generated/tab_library.tex}
+\caption{Held-out systems, library versus population Bayes: percentage of (cell, library draw) pairs whose lower bound
+(estimate $-\,3\,$SE) reaches $\delta$, by library size $K$ (blank: size not mapped). Noisy family at $h=1$. Generated from the
+pinned map files.}
+\label{tab:library}
+\end{table}
+
+On in-library systems the first map found library and continuous posteriors equivalent within $\delta$ in all
 \SzeroElibEquiv cells. In the bivariate family the picture changes: on held-out systems a library of sixteen systems is
 identifiable in \FtwoLibSixteen of \FtwoLibCells cells and a library of sixty-four in \FtwoLibSixtyFour of
 \FtwoLibCells. A plausible reason (not tested here) is that a finite set of systems covers a four-coefficient dynamics
 space far more sparsely than an interval of scalar coefficients, so the library posterior stays visibly different from the
 continuous prior. In short: in scalar families memorisation of a few systems is visible by score on held-out systems; with a
-known noise scale memorisation of sixteen or more is not; with an unknown noise scale mid-sized libraries are separable for
-some draws only; and in the bivariate family memorisation of sixty-four systems is still visible in most cells.
+known noise scale memorisation of sixteen or more is not; with an unknown noise scale separable libraries become rare beyond
+eight systems; and in the bivariate family memorisation of sixty-four systems is still visible in most cells.

@@ -38,6 +38,8 @@ files:
   f2val: {ref: batch23, path: results_stage2/f2_validation/f2_validation.json}
   f2mm: {ref: batch23, path: results_stage2/f2_mutation_matrix/f2_mutation_matrix.json}
   f2mapcode: {ref: f2code, path: dynaicl_families/stage2/f2_map.py}
+  f3rows: {ref: batch1, path: results_stage2/f3_map/map_rows.csv.gz}
+  f2rows: {ref: batch23, path: results_stage2/f2_map/map_rows.csv.gz}
 numbers:
   - {macro: ItemSETarget, file: f2mapcode, claim: F2-MAP, x: {regex_float: 'ITEM_SE_TARGET = (\d+\.\d+)'}, fmt: "{:.2f}"}
   # design constants (frozen Stage 0.6 confirmatory config; the same delta was fixed in Stage 0 and kept since)
