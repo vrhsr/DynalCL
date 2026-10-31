@@ -1,0 +1,1422 @@
+{
+ "pass": true,
+ "baseline_pass": true,
+ "rows": [
+  {
+   "mutation": "baseline",
+   "pytest_exit": 0,
+   "pytest_summary": "15 passed in 499.51s (0:08:19)",
+   "failed_tests": [],
+   "failed_other_exception": [],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 0,
+   "detector_failures": [],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "baseline",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": true,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": true,
+      "problems": []
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": true,
+      "max_rel_err": 3.728908241812576e-15
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.16097216448539176,
+       "coverage_0_0.5": 0.9080725552559752,
+       "coverage_0_0.8": 0.665005542102029,
+       "coverage_0_0.95": 1.0,
+       "pit_ks_1": 0.452852858191806,
+       "coverage_1_0.5": 1.0,
+       "coverage_1_0.8": 0.11235119769046381,
+       "coverage_1_0.95": 0.18532630419857976,
+       "sbc_rho_ks": 0.750795191437787
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.06814304210252431,
+       "coverage_0_0.5": 0.8173613313851769,
+       "coverage_0_0.8": 0.24821307898992362,
+       "coverage_0_0.95": 0.5962416305866569,
+       "pit_ks_1": 0.4591546807001199,
+       "coverage_1_0.5": 0.9080725552559752,
+       "coverage_1_0.8": 0.1489146731787656,
+       "coverage_1_0.95": 0.42677673653298376,
+       "sbc_rho_ks": 0.5691936903452682
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 0.881311654225867,
+        "se": 0.09581255475365621,
+        "z": 9.198289895221023
+       },
+       "LIB-16": {
+        "mean": 0.21340097980514897,
+        "se": 0.035982544677739814,
+        "z": 5.930680604064309
+       },
+       "LIB-64": {
+        "mean": 0.10886591011950009,
+        "se": 0.024773319042625665,
+        "z": 4.394482222272371
+       },
+       "context_only": {
+        "mean": 0.3175443795982397,
+        "se": 0.039724836392481776,
+        "z": 7.993598172712359,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 740.6
+  },
+  {
+   "mutation": "wrong_prior",
+   "pytest_exit": 1,
+   "pytest_summary": "1 failed, 14 passed in 532.98s (0:08:52)",
+   "failed_tests": [
+    "test_v5c_interval_estimator_agrees_with_plain_estimator"
+   ],
+   "failed_other_exception": [],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 2,
+   "detector_failures": [
+    "matched_guard"
+   ],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "wrong_prior",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": false,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         2.0,
+         0.0
+        ],
+        [
+         0.0,
+         2.0
+        ]
+       ],
+       "c": 0.95
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": true,
+      "problems": []
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": true,
+      "max_rel_err": 3.728908241812576e-15
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.11472154256462064,
+       "coverage_0_0.5": 0.29869755599497017,
+       "coverage_0_0.8": 0.7728299926844475,
+       "coverage_0_0.95": 1.0,
+       "pit_ks_1": 0.41632675715895817,
+       "coverage_1_0.5": 1.0,
+       "coverage_1_0.8": 0.1489146731787656,
+       "coverage_1_0.95": 0.28931483238198796,
+       "sbc_rho_ks": 0.8860496567058462
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.0631562329753963,
+       "coverage_0_0.5": 0.7290344895388041,
+       "coverage_0_0.8": 0.1489146731787656,
+       "coverage_0_0.95": 0.18532630419857976,
+       "pit_ks_1": 0.46366694539722064,
+       "coverage_1_0.5": 0.3556110610952391,
+       "coverage_1_0.8": 0.11235119769046381,
+       "coverage_1_0.95": 0.42677673653298376,
+       "sbc_rho_ks": 0.8083416752936631
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 0.680519611570019,
+        "se": 0.10927639258376126,
+        "z": 6.227508023275887
+       },
+       "LIB-16": {
+        "mean": 0.12824218870384346,
+        "se": 0.024401510884973845,
+        "z": 5.2555019772490175
+       },
+       "LIB-64": {
+        "mean": 0.10137973074758104,
+        "se": 0.02525473427764135,
+        "z": 4.014286178308162
+       },
+       "context_only": {
+        "mean": 0.3308949823159314,
+        "se": 0.03877819765016892,
+        "z": 8.533016033933439,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 770.7,
+   "detected_by_assertion": true
+  },
+  {
+   "mutation": "off_by_one_likelihood",
+   "pytest_exit": 1,
+   "pytest_summary": "4 failed, 11 passed in 361.37s (0:06:01)",
+   "failed_tests": [
+    "test_v8_library_matches_brute_force",
+    "test_v6_reduced_case_d1_against_nested_quadrature",
+    "test_v6b_interval_estimator_d1_against_nested_quadrature",
+    "test_v5d_interval_quadrature_node_doubling"
+   ],
+   "failed_other_exception": [],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 8,
+   "detector_failures": [],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "off_by_one_likelihood",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": true,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": true,
+      "problems": []
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": true,
+      "max_rel_err": 3.728908241812576e-15
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.18782775514818606,
+       "coverage_0_0.5": 0.7290344895388041,
+       "coverage_0_0.8": 0.7728299926844475,
+       "coverage_0_0.95": 0.7910815129207818,
+       "pit_ks_1": 0.7611790892579131,
+       "coverage_1_0.5": 0.9080725552559752,
+       "coverage_1_0.8": 0.06060196971200604,
+       "coverage_1_0.95": 0.034069195144144,
+       "sbc_rho_ks": 0.6240971014719725
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.08862698245500555,
+       "coverage_0_0.5": 0.5637028616507731,
+       "coverage_0_0.8": 0.24821307898992362,
+       "coverage_0_0.95": 0.42677673653298376,
+       "pit_ks_1": 0.48340368242924203,
+       "coverage_1_0.5": 1.0,
+       "coverage_1_0.8": 0.1489146731787656,
+       "coverage_1_0.95": 0.42677673653298376,
+       "sbc_rho_ks": 0.4907006642962174
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 0.8861789753897916,
+        "se": 0.0969465535499399,
+        "z": 9.14090231101713
+       },
+       "LIB-16": {
+        "mean": 0.2080362622960532,
+        "se": 0.03579486113593353,
+        "z": 5.811903041222054
+       },
+       "LIB-64": {
+        "mean": 0.10553324979018221,
+        "se": 0.024383131207961182,
+        "z": 4.328125411379701
+       },
+       "context_only": {
+        "mean": 0.39698111015943455,
+        "se": 0.04567300841514362,
+        "z": 8.691809975622474,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 635.8,
+   "detected_by_assertion": true
+  },
+  {
+   "mutation": "leaked_target",
+   "pytest_exit": 1,
+   "pytest_summary": "1 failed, 14 passed in 291.42s (0:04:51)",
+   "failed_tests": [
+    "test_contexts_are_cut_by_the_frozen_harness"
+   ],
+   "failed_other_exception": [],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 1,
+   "detector_failures": [
+    "calibration_n20_r0.25",
+    "calibration_n5_r1.0",
+    "leakage"
+   ],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "leaked_target",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": true,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": false,
+      "problems": [
+       "n=2: context is not x_0..x_n",
+       "n=2: context depends on values after x_n",
+       "n=5: context is not x_0..x_n",
+       "n=5: context depends on values after x_n",
+       "n=20: context is not x_0..x_n",
+       "n=20: context depends on values after x_n"
+      ]
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": true,
+      "max_rel_err": 3.728908241812576e-15
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 7.256026797525216e-05,
+       "coverage_0_0.5": 4.648082117735153e-11,
+       "coverage_0_0.8": 4.262191597843584e-12,
+       "coverage_0_0.95": 0.0005736335109885652,
+       "pit_ks_1": 0.00025494815499279183,
+       "coverage_1_0.5": 1.5311802195839296e-08,
+       "coverage_1_0.8": 1.822424891215465e-13,
+       "coverage_1_0.95": 0.00020833380892646618,
+       "sbc_rho_ks": 0.7968074709828505
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": false
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.004369299183242276,
+       "coverage_0_0.5": 1.9199008249915258e-09,
+       "coverage_0_0.8": 1.8108397774948144e-08,
+       "coverage_0_0.95": 0.0005736335109885652,
+       "pit_ks_1": 0.013608231865888132,
+       "coverage_1_0.5": 6.689622226171879e-06,
+       "coverage_1_0.8": 1.8108397774948144e-08,
+       "coverage_1_0.95": 0.0005736335109885652,
+       "sbc_rho_ks": 0.6974894671030416
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": false
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 1.3657067103524172,
+        "se": 0.09375193125054686,
+        "z": 14.567238158568077
+       },
+       "LIB-16": {
+        "mean": 0.07277573545826506,
+        "se": 0.0232957377828621,
+        "z": 3.123993587865835
+       },
+       "LIB-64": {
+        "mean": 0.07363761293560582,
+        "se": 0.018251931165352828,
+        "z": 4.034510774147024
+       },
+       "context_only": {
+        "mean": 0.21462376593949464,
+        "se": 0.03209345889666921,
+        "z": 6.687461349383228,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 474.4,
+   "detected_by_assertion": true
+  },
+  {
+   "mutation": "unmatched_reference",
+   "pytest_exit": 0,
+   "pytest_summary": "15 passed in 596.39s (0:09:56)",
+   "failed_tests": [],
+   "failed_other_exception": [],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 0,
+   "detector_failures": [
+    "calibration_n20_r0.25",
+    "calibration_n5_r1.0"
+   ],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "unmatched_reference",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": true,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": true,
+      "problems": []
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": true,
+      "max_rel_err": 3.728908241812576e-15
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.1511629673129855,
+       "coverage_0_0.5": 0.8173613313851769,
+       "coverage_0_0.8": 0.47048642205878966,
+       "coverage_0_0.95": 0.7910815129207818,
+       "pit_ks_1": 0.07266281744162606,
+       "coverage_1_0.5": 0.4884223166225936,
+       "coverage_1_0.8": 0.014137969455911462,
+       "coverage_1_0.95": 0.18532630419857976,
+       "sbc_rho_ks": 3.114835031492813e-35
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": false
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.043192693391358006,
+       "coverage_0_0.5": 0.8173613313851769,
+       "coverage_0_0.8": 0.47048642205878966,
+       "coverage_0_0.95": 1.0,
+       "pit_ks_1": 0.4606617514812761,
+       "coverage_1_0.5": 0.8173613313851769,
+       "coverage_1_0.8": 0.47048642205878966,
+       "coverage_1_0.95": 0.18532630419857976,
+       "sbc_rho_ks": 1.2392490485238493e-14
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": false
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 0.6753609577088889,
+        "se": 0.10434784004555092,
+        "z": 6.4722083122570995
+       },
+       "LIB-16": {
+        "mean": 0.3347628856460181,
+        "se": 0.06129759049002207,
+        "z": 5.461273158861118
+       },
+       "LIB-64": {
+        "mean": 0.11176569786354319,
+        "se": 0.027220484683737875,
+        "z": 4.105940770787028
+       },
+       "context_only": {
+        "mean": 0.28372829345048856,
+        "se": 0.04214264500681654,
+        "z": 6.732569666773306,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 863.5,
+   "detected_by_assertion": true
+  },
+  {
+   "mutation": "wrong_truncation",
+   "pytest_exit": 0,
+   "pytest_summary": "15 passed in 746.22s (0:12:26)",
+   "failed_tests": [],
+   "failed_other_exception": [],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 0,
+   "detector_failures": [
+    "matched_guard"
+   ],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "wrong_truncation",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": false,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.999
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": true,
+      "problems": []
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": true,
+      "max_rel_err": 3.728908241812576e-15
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.12381962341690578,
+       "coverage_0_0.5": 1.0,
+       "coverage_0_0.8": 0.665005542102029,
+       "coverage_0_0.95": 1.0,
+       "pit_ks_1": 0.5142202672362393,
+       "coverage_1_0.5": 1.0,
+       "coverage_1_0.8": 0.08326451666355032,
+       "coverage_1_0.95": 0.18532630419857976,
+       "sbc_rho_ks": 0.8133149090907996
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.09594478880355262,
+       "coverage_0_0.5": 0.9080725552559752,
+       "coverage_0_0.8": 0.1939308522824107,
+       "coverage_0_0.95": 0.5962416305866569,
+       "pit_ks_1": 0.41050482646893627,
+       "coverage_1_0.5": 0.7290344895388041,
+       "coverage_1_0.8": 0.1939308522824107,
+       "coverage_1_0.95": 0.42677673653298376,
+       "sbc_rho_ks": 0.5069391383826731
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 0.9648280013592082,
+        "se": 0.12477911773599659,
+        "z": 7.73228741206969
+       },
+       "LIB-16": {
+        "mean": 0.24362893257565874,
+        "se": 0.03973329693907593,
+        "z": 6.131606268395526
+       },
+       "LIB-64": {
+        "mean": 0.12949110782559858,
+        "se": 0.027306098514983855,
+        "z": 4.742204667376487
+       },
+       "context_only": {
+        "mean": 0.32292599363620766,
+        "se": 0.0401450842220253,
+        "z": 8.043973499974294,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 972.1,
+   "detected_by_assertion": true
+  },
+  {
+   "mutation": "missing_sigma_integration",
+   "pytest_exit": 1,
+   "pytest_summary": "6 failed, 9 passed in 233.24s (0:03:53)",
+   "failed_tests": [
+    "test_v5_estimators_agree_and_large_radius_is_exact",
+    "test_v6_reduced_case_d1_against_nested_quadrature",
+    "test_v6b_interval_estimator_d1_against_nested_quadrature",
+    "test_v5c_interval_estimator_agrees_with_plain_estimator",
+    "test_v5d_interval_quadrature_node_doubling"
+   ],
+   "failed_other_exception": [
+    "test_v3_rao_blackwell_identity (A)"
+   ],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 12,
+   "detector_failures": [],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "missing_sigma_integration",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": true,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": true,
+      "problems": []
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": true,
+      "max_rel_err": 3.728908241812576e-15
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.16097216448539176,
+       "coverage_0_0.5": 0.9080725552559752,
+       "coverage_0_0.8": 0.665005542102029,
+       "coverage_0_0.95": 1.0,
+       "pit_ks_1": 0.452852858191806,
+       "coverage_1_0.5": 1.0,
+       "coverage_1_0.8": 0.11235119769046381,
+       "coverage_1_0.95": 0.18532630419857976,
+       "sbc_rho_ks": 0.750795191437787
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.06814304210252431,
+       "coverage_0_0.5": 0.8173613313851769,
+       "coverage_0_0.8": 0.24821307898992362,
+       "coverage_0_0.95": 0.5962416305866569,
+       "pit_ks_1": 0.4591546807001199,
+       "coverage_1_0.5": 0.9080725552559752,
+       "coverage_1_0.8": 0.1489146731787656,
+       "coverage_1_0.95": 0.42677673653298376,
+       "sbc_rho_ks": 0.5691936903452682
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 0.8816209765865944,
+        "se": 0.09593378192536697,
+        "z": 9.189890765199518
+       },
+       "LIB-16": {
+        "mean": 0.21371030216587641,
+        "se": 0.03611611748896767,
+        "z": 5.9173110794967965
+       },
+       "LIB-64": {
+        "mean": 0.10917523248022755,
+        "se": 0.02487373281106091,
+        "z": 4.389177664225743
+       },
+       "context_only": {
+        "mean": 0.3096192227896869,
+        "se": 0.039005198294677565,
+        "z": 7.937896391413445,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 528.2,
+   "detected_by_assertion": true
+  },
+  {
+   "mutation": "wrong_spectral_radius",
+   "pytest_exit": 1,
+   "pytest_summary": "3 failed, 12 passed in 728.66s (0:12:08)",
+   "failed_tests": [
+    "test_v1_spectral_radius_closed_form",
+    "test_v5b_stable_interval_matches_spectral_radius",
+    "test_v5c_interval_estimator_agrees_with_plain_estimator"
+   ],
+   "failed_other_exception": [],
+   "errored_tests": [],
+   "assertion_failures_in_pytest": 6,
+   "detector_failures": [
+    "spectral_radius"
+   ],
+   "detector_crashes": [],
+   "detectors": {
+    "mutation": "wrong_spectral_radius",
+    "family_alpha": 0.01,
+    "n_tests": 22,
+    "alpha_per_test": 0.00045454545454545455,
+    "checks": {
+     "matched_guard": {
+      "check": "matched_guard",
+      "pass": true,
+      "reference": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      },
+      "design": {
+       "b0": [
+        [
+         0.4,
+         0.0
+        ],
+        [
+         0.0,
+         0.4
+        ]
+       ],
+       "v0": [
+        [
+         0.09,
+         0.0
+        ],
+        [
+         0.0,
+         0.09
+        ]
+       ],
+       "nu0": 7.0,
+       "psi0": [
+        [
+         4.0,
+         0.0
+        ],
+        [
+         0.0,
+         4.0
+        ]
+       ],
+       "c": 0.95
+      }
+     },
+     "leakage": {
+      "check": "leakage",
+      "pass": true,
+      "problems": []
+     },
+     "spectral_radius": {
+      "check": "spectral_radius",
+      "pass": false,
+      "max_rel_err": 1.25134819115864
+     },
+     "calibration_n5_r1.0": {
+      "check": "calibration",
+      "n": 5,
+      "r": 1.0,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.17462237307438555,
+       "coverage_0_0.5": 0.9080725552559752,
+       "coverage_0_0.8": 1.0,
+       "coverage_0_0.95": 0.7910815129207818,
+       "pit_ks_1": 0.337942483733924,
+       "coverage_1_0.5": 0.7290344895388041,
+       "coverage_1_0.8": 0.11235119769046381,
+       "coverage_1_0.95": 0.06368977513662881,
+       "sbc_rho_ks": 0.4230498590387971
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "calibration_n20_r0.25": {
+      "check": "calibration",
+      "n": 20,
+      "r": 0.25,
+      "items": 300,
+      "p_values": {
+       "pit_ks_0": 0.08726495899144404,
+       "coverage_0_0.5": 0.9080725552559752,
+       "coverage_0_0.8": 0.24821307898992362,
+       "coverage_0_0.95": 0.42677673653298376,
+       "pit_ks_1": 0.5593885394803678,
+       "coverage_1_0.5": 0.6441672226837103,
+       "coverage_1_0.8": 0.1939308522824107,
+       "coverage_1_0.95": 0.42677673653298376,
+       "sbc_rho_ks": 0.7135091817347803
+      },
+      "alpha_per_test": 0.00045454545454545455,
+      "pass": true
+     },
+     "optimality_n10_r1.0": {
+      "check": "optimality",
+      "n": 10,
+      "r": 1.0,
+      "items": 800,
+      "z_crit": 3.317247361552454,
+      "rows": {
+       "LIB-2": {
+        "mean": 1.7821132585498152,
+        "se": 0.5573235991029863,
+        "z": 3.1976274850340642
+       },
+       "LIB-16": {
+        "mean": 0.7697932768014694,
+        "se": 0.37296987679740157,
+        "z": 2.063955629370099
+       },
+       "LIB-64": {
+        "mean": 0.2021871093071115,
+        "se": 0.04711865380203838,
+        "z": 4.291020498093364
+       },
+       "context_only": {
+        "mean": 0.32301249346737715,
+        "se": 0.04051095238061945,
+        "z": 7.973460866397879,
+        "non_finite": 0
+       }
+      },
+      "pass": true
+     }
+    }
+   },
+   "seconds": 974.6,
+   "detected_by_assertion": true
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "command": "python scripts/stage2_f1_head_floor.py --out results_stage2/f1_head_floor --contexts 100 --workers 16",
+ "python": "3.13.5",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "cpu_count": 32,
+ "workers": 16,
+ "sources_sha256": {
+  "scripts/stage2_f1_head_floor.py": "4947347d059f0a05d9940c813bd067774ddfbf604104967560433aee4e8af2f2",
+  "scripts/stage1_head_floor.py": "7ab4be908d434819494056b460d9df67eed55072b33cbd4234e8489390f58c63",
+  "dynaicl_families/ar1_unknown_sigma.py": "77aada85acfb2f8bfbb5e521cea34db8474fd9464de4e25a6ed5f2cc029e6023",
+  "dynaicl_families/sampling.py": "f3a3bc006d0ae7d43ea81c2f38318638a17f60ccf4a1fbf63ade5426ccafdbaf",
+  "config/stage2_seed_manifest.yaml": "d55295acc0db27cd3165726362094440110470cc2da5c773d8f3f9ccc124b6ce"
+ },
+ "git_head": "77f8ad37ec6107f3d9ae42866dd168ce5efb03ce",
+ "git_dirty_tracked": false
+}

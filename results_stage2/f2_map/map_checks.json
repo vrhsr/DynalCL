@@ -1,0 +1,22 @@
+{
+ "valid": true,
+ "checks": {
+  "i_large_radius_exact": {
+   "max_abs_nats": 0.0,
+   "pass": true
+  },
+  "ii_interval_vs_production": {
+   "max_abs_z": 1.7852810899020526,
+   "n": 20,
+   "pass": true
+  },
+  "iii_library_vs_scipy": {
+   "max_abs_nats": 1.1546319456101628e-14,
+   "pass": true
+  },
+  "iv_disjointness": {
+   "held_systems_equal_to_an_atom": 0,
+   "pass": true
+  }
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "command": "python scripts/stage2_f2_map.py --out results_stage2/f2_map --workers 16",
+ "python": "3.13.5",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "cpu_count": 32,
+ "workers": 16,
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "root_seed": 80601,
+ "smoke": false,
+ "seconds_this_invocation": 10832.1,
+ "sources_sha256": {
+  "dynaicl_families/stage2/f2_map.py": "c3a6051270373660919f1ac18b368b3b9713f9be3483f2664be1df7353509e74",
+  "dynaicl_families/stage2/f2_var.py": "33531841a161ba7591c686b68bac66869fa72d65fe1d6952868614d2dcb1c82e",
+  "scripts/stage2_f2_map.py": "a5e079e748cb154f46bfb6ef7d90599da8efe1fa61166e7ab3d9e2755a82a019",
+  "docs/STAGE2_F2_MAP_SPEC.md": "1f7d1c6549d9441c342739702e863d4dc36d40494d56fa7e5f80f6cb9378abb7",
+  "docs/MATH_F2.md": "6427cdcd455b95234a3bdd1f1d03bf31a3fb9804bcafe84c639204ce8bc200ff",
+  "config/stage2_seed_manifest.yaml": "d55295acc0db27cd3165726362094440110470cc2da5c773d8f3f9ccc124b6ce"
+ },
+ "git_head": "77f8ad37ec6107f3d9ae42866dd168ce5efb03ce",
+ "git_dirty_tracked": false
+}

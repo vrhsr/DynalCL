@@ -1,0 +1,41 @@
+{
+ "role": "f1n_head_floor",
+ "chosen_m": 8,
+ "rule": "smallest m with mean floor <= 0.001 in every cell (Stage 1A rule)",
+ "worst_cell_per_m": {
+  "1": {
+   "set": "OWN",
+   "ref": "ctx",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.857181799663949,
+   "max_floor": 2.3296158377521294
+  },
+  "2": {
+   "set": "OWN",
+   "ref": "ctx",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.08057719839348616,
+   "max_floor": 0.22007272046241128
+  },
+  "4": {
+   "set": "OWN",
+   "ref": "ctx",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.003908279498312985,
+   "max_floor": 0.012584276972736567
+  },
+  "8": {
+   "set": "HELD",
+   "ref": "ctx",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.00079637201894407,
+   "max_floor": 0.00194226781913661
+  }
+ },
+ "max_mass_err": 4.785702945042658e-10,
+ "seconds": 3715.0
+}

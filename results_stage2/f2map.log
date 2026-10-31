@@ -1,0 +1,114 @@
+F2 map: 87 units, 0 done, 87 to run, workers=16
+/home/rama_11187/projects/dynacl/dynaicl_families/stage2/f2_var.py:307: RuntimeWarning: invalid value encountered in log
+  return TruncatedEstimate(log_pu + np.log(p), se, n_all, n_acc, est, not done)
+/home/rama_11187/projects/dynacl/dynaicl_families/stage2/f2_var.py:307: RuntimeWarning: invalid value encountered in log
+  return TruncatedEstimate(log_pu + np.log(p), se, n_all, n_acc, est, not done)
+/home/rama_11187/projects/dynacl/dynaicl_families/stage2/f2_var.py:307: RuntimeWarning: invalid value encountered in log
+  return TruncatedEstimate(log_pu + np.log(p), se, n_all, n_acc, est, not done)
+/home/rama_11187/projects/dynacl/dynaicl_families/stage2/f2_var.py:307: RuntimeWarning: invalid value encountered in log
+  return TruncatedEstimate(log_pu + np.log(p), se, n_all, n_acc, est, not done)
+/home/rama_11187/projects/dynacl/dynaicl_families/stage2/f2_var.py:307: RuntimeWarning: invalid value encountered in log
+  return TruncatedEstimate(log_pu + np.log(p), se, n_all, n_acc, est, not done)
+/home/rama_11187/projects/dynacl/dynaicl_families/stage2/f2_var.py:307: RuntimeWarning: invalid value encountered in log
+  return TruncatedEstimate(log_pu + np.log(p), se, n_all, n_acc, est, not done)
+/home/rama_11187/projects/dynacl/dynaicl_families/stage2/f2_var.py:307: RuntimeWarning: invalid value encountered in log
+  return TruncatedEstimate(log_pu + np.log(p), se, n_all, n_acc, est, not done)
+02:07:22 [1/87] held_r0.25_n5.json
+02:07:22 [2/87] held_r1.0_n5.json
+02:07:22 [3/87] held_r4.0_n5.json
+02:07:22 [4/87] held_r0.25_n2.json
+02:07:22 [5/87] held_r0.25_n3.json
+02:07:22 [6/87] held_r0.25_n10.json
+02:07:22 [7/87] held_r0.25_n20.json
+02:07:22 [8/87] held_r1.0_n2.json
+02:07:22 [9/87] held_r1.0_n3.json
+02:07:22 [10/87] held_r1.0_n10.json
+02:07:22 [11/87] held_r1.0_n20.json
+02:07:22 [12/87] held_r4.0_n2.json
+02:07:22 [13/87] held_r4.0_n3.json
+02:07:22 [14/87] held_r4.0_n10.json
+02:07:22 [15/87] held_r4.0_n20.json
+02:07:22 [16/87] inlib_r0.25_K2_d0.json
+02:07:22 [17/87] inlib_r0.25_K2_d1.json
+02:07:22 [18/87] inlib_r0.25_K2_d2.json
+02:07:22 [19/87] inlib_r0.25_K2_d3.json
+02:07:22 [20/87] inlib_r0.25_K2_d4.json
+02:07:22 [21/87] inlib_r0.25_K2_d5.json
+02:07:22 [22/87] inlib_r0.25_K2_d6.json
+02:07:22 [23/87] inlib_r0.25_K2_d7.json
+02:07:22 [24/87] inlib_r0.25_K16_d0.json
+02:07:22 [25/87] inlib_r0.25_K16_d1.json
+02:07:22 [26/87] inlib_r0.25_K16_d2.json
+02:07:22 [27/87] inlib_r0.25_K16_d3.json
+02:07:22 [28/87] inlib_r0.25_K16_d4.json
+02:07:22 [29/87] inlib_r0.25_K16_d5.json
+02:07:22 [30/87] inlib_r0.25_K16_d6.json
+02:07:22 [31/87] inlib_r0.25_K16_d7.json
+02:07:22 [32/87] inlib_r0.25_K64_d0.json
+02:07:22 [33/87] inlib_r0.25_K64_d1.json
+02:07:22 [34/87] inlib_r0.25_K64_d2.json
+02:07:22 [35/87] inlib_r0.25_K64_d3.json
+02:07:22 [36/87] inlib_r0.25_K64_d4.json
+02:07:22 [37/87] inlib_r0.25_K64_d5.json
+02:07:22 [38/87] inlib_r0.25_K64_d6.json
+02:07:22 [39/87] inlib_r0.25_K64_d7.json
+02:07:22 [40/87] inlib_r1.0_K2_d0.json
+02:07:22 [41/87] inlib_r1.0_K2_d1.json
+02:07:22 [42/87] inlib_r1.0_K2_d2.json
+02:07:22 [43/87] inlib_r1.0_K2_d3.json
+02:07:22 [44/87] inlib_r1.0_K2_d4.json
+02:07:22 [45/87] inlib_r1.0_K2_d5.json
+02:07:22 [46/87] inlib_r1.0_K2_d6.json
+02:07:22 [47/87] inlib_r1.0_K2_d7.json
+02:07:22 [48/87] inlib_r1.0_K16_d0.json
+02:07:22 [49/87] inlib_r1.0_K16_d1.json
+02:07:22 [50/87] inlib_r1.0_K16_d2.json
+02:07:22 [51/87] inlib_r1.0_K16_d3.json
+02:07:22 [52/87] inlib_r1.0_K16_d4.json
+02:07:22 [53/87] inlib_r1.0_K16_d5.json
+02:07:22 [54/87] inlib_r1.0_K16_d6.json
+02:07:22 [55/87] inlib_r1.0_K16_d7.json
+02:07:22 [56/87] inlib_r1.0_K64_d0.json
+02:07:22 [57/87] inlib_r1.0_K64_d1.json
+02:07:22 [58/87] inlib_r1.0_K64_d2.json
+02:07:22 [59/87] inlib_r1.0_K64_d3.json
+02:07:22 [60/87] inlib_r1.0_K64_d4.json
+02:07:22 [61/87] inlib_r1.0_K64_d5.json
+02:07:22 [62/87] inlib_r1.0_K64_d6.json
+02:07:22 [63/87] inlib_r1.0_K64_d7.json
+02:07:22 [64/87] inlib_r4.0_K2_d0.json
+02:07:22 [65/87] inlib_r4.0_K2_d1.json
+02:07:22 [66/87] inlib_r4.0_K2_d2.json
+02:07:22 [67/87] inlib_r4.0_K2_d3.json
+02:07:22 [68/87] inlib_r4.0_K2_d4.json
+02:07:22 [69/87] inlib_r4.0_K2_d5.json
+02:07:22 [70/87] inlib_r4.0_K2_d6.json
+02:07:22 [71/87] inlib_r4.0_K2_d7.json
+02:07:22 [72/87] inlib_r4.0_K16_d0.json
+02:07:22 [73/87] inlib_r4.0_K16_d1.json
+02:07:22 [74/87] inlib_r4.0_K16_d2.json
+02:07:22 [75/87] inlib_r4.0_K16_d3.json
+02:07:22 [76/87] inlib_r4.0_K16_d4.json
+02:07:22 [77/87] inlib_r4.0_K16_d5.json
+02:07:22 [78/87] inlib_r4.0_K16_d6.json
+02:07:22 [79/87] inlib_r4.0_K16_d7.json
+02:07:22 [80/87] inlib_r4.0_K64_d0.json
+02:07:22 [81/87] inlib_r4.0_K64_d1.json
+02:07:22 [82/87] inlib_r4.0_K64_d2.json
+02:07:22 [83/87] inlib_r4.0_K64_d3.json
+02:07:22 [84/87] inlib_r4.0_K64_d4.json
+02:07:22 [85/87] inlib_r4.0_K64_d5.json
+02:07:22 [86/87] inlib_r4.0_K64_d6.json
+02:07:22 [87/87] inlib_r4.0_K64_d7.json
+# F2 separability map (map; seed role f2_map)
+
+Validity: VALID
+
+* i_large_radius_exact: pass {"max_abs_nats": 0.0}
+* ii_interval_vs_production: pass {"max_abs_z": 1.7852810899020526, "n": 20}
+* iii_library_vs_scipy: pass {"max_abs_nats": 1.1546319456101628e-14}
+* iv_disjointness: pass {"held_systems_equal_to_an_atom": 0}
+
+| set | pair | r | n | K | estimate | decision |
+|---|---|---|---|---|---|---|
+| HELD | pop-ctx | 0.25 | 5 |  | +1.2818 | MC-LIMITED |
