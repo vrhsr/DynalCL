@@ -41,9 +41,13 @@ value in the operating characteristics; S21: convergence criterion; S28: the gat
 ## 4. Models and training
 * As Stage 1A (causal transformer size M, AdamW, batch 256, warmup and cosine schedule, float32, deterministic algorithms), so
   that the F1 and Stage 1A results are comparable. Output head: Gaussian mixture with m components.
-* **PENDING: head floor for F1.** The F1 predictives are Student-t mixtures (heavy tails at small n, especially for ctx); the
-  smallest m with mean KL floor <= 0.001 nats in every cell must be re-measured for F1 (Stage 1A found m = 2). If no m <= 8 meets
-  the floor, the head family must change (for example a Student-t mixture head) and that is a design decision for the user.
+* **Head: m = 8 Gaussian components (VERIFIED, `results-stage2-cpu-batch23` @ `56e73a8`, `results_stage2/f1_head_floor/`).**
+  The Stage 1A rule (smallest m in {1, 2, 4, 8} whose mean KL floor is <= 0.001 nats in every cell) applied to the F1
+  references (pop, ctx, lib_2/16/256; HELD and each arm's own law; n in {2, 3, 5, 10, 20} x r in {0.25, 1, 4}; 100 contexts per
+  cell; whole-line quadrature, max mass error 4.8e-10) selects m = 8: the hardest cell is the context-only reference at
+  r = 4, n = 2 (mean floor 0.0039 at m = 4; 0.00080 at m = 8, worst single context 0.0019). Stage 1A used m = 2. Consequence
+  (DERIVED): the heavy-tailed context-only predictive at the shortest contexts sits close to the floor even at m = 8, so the
+  CTX-F1 arm's control C1 at n = 2 carries a representational component of up to about 0.001 nats on average.
 * Budget grid {10k, 25k, 50k, 100k} with the Stage 1A convergence criterion (validation NLL at positions 0-2 improves by < 0.002
   nats to the next grid point; the last point cannot qualify). Cap rule as Stage 1A with the budget the user sets (PENDING the
   Stage 1A Amendment 2 decision, which sets the precedent).
@@ -101,6 +105,6 @@ Stage 1A arms; no effect information). No F1 neural model exists.
 
 ## 11. Open decisions (the user's)
 1. Whether to pursue F1 neural at all, and whether before or after the Stage 1A Amendment 2 decision.
-2. Head family if the F1 head floor fails at m <= 8.
+2. (Resolved 2026-10-31: the head floor selects m = 8 Gaussian components; no change of head family needed.)
 3. Input normalisation for the CTX-F1 arm (affects what "context-only" means for the network).
 4. GPU budget for F1 (sets the cap).
