@@ -42,6 +42,12 @@ chronological order; older ones (1-2g, 7-8) are historical where they say "not s
   (`results-stage2-cpu-batch2/3`) like batch 1 (S33). Paper: branch `paper-draft` (worktree `../DynaICL-paper`): Track 1 draft
   + Track 2 skeleton; `python paper/build.py` = claims + number macros + tables + numbers audit + PDFs; fresh-clone build PASS.
   A hostile-review sub-agent (F1 task) reads only the manuscript, claims and evidence files; fix real issues, log the rest.
+* **UPDATE 2026-10-31.** Batches 2-3 verified (S38, `results-stage2-cpu-batch23` @ `56e73a8`): F2 map VALID (pop vs ctx
+  identifiable at n = 10, 20; MC-limited at n = 5; held-out libraries of 16 and 64 still separable), F1 head floor m = 8,
+  F2 mutation matrix and F2 validation PASS. Drafts: `docs/PREREG_stage2_F1.md` (head set), `docs/PREREG_stage3_F2.md` (B4).
+  Paper (`paper-draft`, worktree `../DynaICL-paper`): revised after internal hostile review 1 (S37; response
+  `paper/REVIEW_RESPONSE_1.md`), F2 added; claims 41 verified / 0 pending; 10-page Track 1. OPEN analyses (need compute
+  decisions): comparator frontier, prior sensitivity, F3 Rao-Blackwellised re-run, per-draw library tables, sequence-level test.
 * Rules that bite most often: never edit a frozen file or manifest; disclosure logs are append-only; never open pilot effect files
   (`results_stage1/pilot/eval/`, `phase_d_pilot/PILOT_ONLY_do_not_open_effects.json`); never ask for, store or print a key;
   compute over ~10-15 min runs on the box (detached in tmux, one background waiter, no polling loops); stop at every checkpoint.
