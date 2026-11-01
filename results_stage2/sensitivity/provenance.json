@@ -1,0 +1,28 @@
+{
+ "command": "python scripts/stage2_sensitivity.py --out results_stage2/sensitivity --workers 16",
+ "python": "3.13.5",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "cpu_count": 32,
+ "workers": 16,
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "smoke": false,
+ "roots": [
+  81501,
+  81601
+ ],
+ "seconds_this_invocation": 3773.5,
+ "sources_sha256": {
+  "dynaicl_families/stage2/sensitivity.py": "2d95f6ff5edad78b793d2c8e9e0e50e8407644b572f4022ce3d078f11691c810",
+  "dynaicl_families/stage2/f3_map.py": "12482a89713b76fe3c429b80095fc8cebd96a2fc6841527f47919c2959492f99",
+  "scripts/stage2_sensitivity.py": "2286022f7a09c88e9f7c4b968cc6c2b4ae64a47d508458911f5da09ea1d62b38",
+  "docs/STAGE2_SENSITIVITY_SPEC.md": "76ed5a90144ad61599df5ece7756df55284f4dfb2c1de8e2907060cd930fdfa2",
+  "config/stage2_seed_manifest.yaml": "ae2a5439e4b147a93e96e3e8ee38abad503fea66fb32e5d82b6b436f668fcef0",
+  "dynaicl_families/ar1_known_sigma.py": "508369947b64b3229a9fa05a88f7c3a6851ed39d9ad22599af48f4b66ab5de68",
+  "dynaicl_families/ar1_unknown_sigma.py": "77aada85acfb2f8bfbb5e521cea34db8474fd9464de4e25a6ed5f2cc029e6023",
+  "dynaicl/baselines/ols.py": "7a19c1de05584f348548e9050c2330aa7ee190f497307da06043c199c0ab833e",
+  "dynaicl/references/kalman_quadrature.py": "0ec62d75def942b976a862c84afa5322ed87e0962061ef7e92783b28ffe57199"
+ },
+ "git_head": "6a670ca6e4522b0f4f45d99357f05881e966be3d",
+ "git_dirty_tracked": false
+}

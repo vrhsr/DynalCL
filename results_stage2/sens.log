@@ -1,0 +1,50 @@
+sensitivity: 162 units, 0 done, 162 to run, workers=16
+20:22:12 [20/162] prior_f1_0.6_3.0_2_0.25_20000
+20:22:12 [40/162] prior_f1_0.6_3.0_5_0.25_20000
+20:22:12 [60/162] prior_f1_0.6_3.0_20_0.25_20000
+20:22:12 [80/162] prior_f1_0.6_3.0_3_1.0_20000
+20:22:12 [100/162] prior_f1_0.6_3.0_10_1.0_20000
+20:22:12 [120/162] prior_f1_0.6_3.0_2_4.0_20000
+20:22:12 [140/162] prior_f1_0.6_3.0_5_4.0_20000
+20:22:12 [160/162] prior_f1_0.6_3.0_20_4.0_20000
+20:22:12 [162/162] prior_f1_0.3_10.0_20_4.0_20000
+# Sensitivity analyses (full)
+
+Largest IDENTIFIABLE n per (analysis, family, variant, r[, h]); '-' none.
+
+| analysis | family | variant | r | h | largest identifiable n | max estimate |
+|---|---|---|---|---|---|---|
+| f3_precision | noisy | q_0.0 | 0.25 | 1 | 7 | +0.0478 |
+| f3_precision | noisy | q_0.0 | 0.25 | 5 | - | +0.0157 |
+| f3_precision | noisy | q_0.0 | 1.0 | 1 | 6 | +0.0416 |
+| f3_precision | noisy | q_0.0 | 1.0 | 5 | - | +0.0153 |
+| f3_precision | noisy | q_0.0 | 4.0 | 1 | 2 | +0.0216 |
+| f3_precision | noisy | q_0.0 | 4.0 | 5 | - | +0.0120 |
+| f3_precision | noisy | q_0.755 | 0.25 | 1 | 5 | +0.0253 |
+| f3_precision | noisy | q_0.755 | 0.25 | 5 | - | +0.0098 |
+| f3_precision | noisy | q_0.755 | 1.0 | 1 | 4 | +0.0263 |
+| f3_precision | noisy | q_0.755 | 1.0 | 5 | - | +0.0106 |
+| f3_precision | noisy | q_0.755 | 4.0 | 1 | - | +0.0176 |
+| f3_precision | noisy | q_0.755 | 4.0 | 5 | - | +0.0103 |
+| f3_precision | noisy | q_2.56 | 0.25 | 1 | - | +0.0117 |
+| f3_precision | noisy | q_2.56 | 0.25 | 5 | - | +0.0054 |
+| f3_precision | noisy | q_2.56 | 1.0 | 1 | - | +0.0122 |
+| f3_precision | noisy | q_2.56 | 1.0 | 5 | - | +0.0058 |
+| f3_precision | noisy | q_2.56 | 4.0 | 1 | - | +0.0145 |
+| f3_precision | noisy | q_2.56 | 4.0 | 5 | - | +0.0083 |
+| f3_precision | noisy | q_6.5 | 0.25 | 1 | - | +0.0051 |
+| f3_precision | noisy | q_6.5 | 0.25 | 5 | - | +0.0028 |
+| f3_precision | noisy | q_6.5 | 1.0 | 1 | - | +0.0053 |
+| f3_precision | noisy | q_6.5 | 1.0 | 5 | - | +0.0029 |
+| f3_precision | noisy | q_6.5 | 4.0 | 1 | - | +0.0108 |
+| f3_precision | noisy | q_6.5 | 4.0 | 5 | - | +0.0059 |
+| frontier | known_sigma | ols_t | 0.25 | 1 | 20 | +0.9810 |
+| frontier | known_sigma | ols_t | 1.0 | 1 | 20 | +0.7759 |
+| frontier | known_sigma | ols_t | 4.0 | 1 | 20 | +0.5917 |
+| frontier | known_sigma | sigma_agnostic | 0.25 | 1 | 20 | +0.3133 |
+| frontier | known_sigma | sigma_agnostic | 1.0 | 1 | 20 | +0.3616 |
+| frontier | known_sigma | sigma_agnostic | 4.0 | 1 | 20 | +0.3839 |
+| frontier | known_sigma | stab_0.95 | 0.25 | 1 | 5 | +0.0465 |
+| frontier | known_sigma | stab_0.95 | 1.0 | 1 | 5 | +0.0424 |
+| frontier | known_sigma | stab_0.95 | 4.0 | 1 | - | +0.0202 |
+| frontier | known_sigma | stab_0.999 | 0.25 | 1 | 5 | +0.0489 |
