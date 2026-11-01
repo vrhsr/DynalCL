@@ -1,0 +1,20 @@
+# Experiment gap analysis (Phase 5)
+
+What evidence is missing for the claims the paper makes or should make. Ranked by how much a claim depends on it. All CPU
+unless marked. "Spec first" = a specification committed before a new seed role is first used, plus a disclosure entry.
+
+| # | Gap | Claim affected | Why it matters | Analysis | Cost | Spec first? |
+|---|---|---|---|---|---|---|
+| G1 | **Noise-matched context-only comparator** in F1 (ctx knows sigma) and F2 (ctx knows Sigma) | "window widens when the noise scale is unknown / in the bivariate family" (abstract, contributions, conclusion) | Reviewers 1 and 3 (independently) and this audit: most of the F1 gap is the comparator's ignorance of the noise scale; F2 likely more so | Map held-out pop vs ctx-sigma-known for F1 (n = 2..40, three r) and F2 (n = 5..40); report dynamics-only gap and noise share | F1 laptop-to-box (F1 map took ~1 h at box scale for Q1 parts; ASSUMED similar); F2 box (~3 h at 16 workers, scaled from S38) | Yes (new role) |
+| G2 | Batch 4 results (comparator frontier 1A/F1, prior tau and alpha0, F3 at 10x N) | AB11 ("we report how" the conclusions depend on comparator and prior) | Currently the sentence is false; also resolves the F3 borderline cells | Already specified and relayed | ~12 CPU-h on the box (relayed) | Done (67f773c) |
+| G3 | Closed-form KL budget per family and the nearest-atom limit, overlaid on the maps | Novelty / interpretation of every map | Turns a descriptive map into a tested prediction; answers the "predictable from theory" rejection | Laptop scripts (prototypes exist in the audit scratchpad); F2 KL(P or Q) needs a Monte Carlo estimate | minutes | No new seeds needed if computed deterministically; a pinned script + output file for the claims pipeline |
+| G4 | F2 library map at larger K (256, 1024) and longer n (40) | prediction that F2 memorisation stays visible far beyond K = 64; any F2 neural Q2 design | The derived limit (0.165 nats at K = 256, 0.108 at 1024) must be checked by the map before it is used | Extend the F2 map (library pairs only, exact library predictive, MC pop) | box, several hours (K = 1024 library evaluation cost linear in K) | Yes |
+| G5 | Dense n grids where windows end (1A n in 5..10; F1 10..20; F2 20..80) | Table 2 ordering; "window up to n = X" statements | Grid censoring and coarseness drive the delta table | Add n points to the held-out pop vs ctx maps | box, ~1-2 h | Yes |
+| G6 | Expected number of wrongly marked cells; Holm version of Table 1 | 1A spec promise (never reported); multiplicity criticism | Closes a pre-registration deviation; shows multiplicity is negligible on headline cells | From existing files | seconds | No (analysis of existing files; disclosure entry) |
+| G7 | Cumulative (sequence-level) gap, especially for F3 / Stage 0.6 | "observation noise shrinks population knowledge"; per-cell framing | The budget is conserved; only the per-step gap shrinks. A cumulative view is the natural pooled test | From existing map rows (sum over n with interpolation) plus closed-form budget; a proper pooled test needs per-sequence log-likelihood ratios (new run) | minutes (descriptive); box hours (proper test) | descriptive: no; test: yes |
+| G8 | Trained-model seed variance | Feasibility of every neural plan; meaning of delta | No measured sd for any family except a UNIF-only proxy | **GPU** (P0 probe, ~6 h) | GPU | Yes (pre-registration) |
+| G9 | Bridge to published neural results (Raventos et al. linear regression) | "interest" for ML readers | Show the separability-first method predicts where their classifications were possible | Reference computations for d-dim Gaussian linear regression (closed forms: dMMSE vs ridge) | laptop/box, hours | Yes |
+| G10 | One non-linear or higher-dimensional family (e.g. VAR(1), d = 4) | generality | Reviewers 3 flags "too simple" | MC references; reuse F2 code with d = 4 | box; days of engineering | Yes |
+
+Not gaps (adequately evidenced): reference correctness (validation + mutation matrices, and now the 1A KL-budget agreement to
+about 3%); the pre-registered Stage 0.5 / 0.6 outcomes; the pilot outcome.
