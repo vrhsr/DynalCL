@@ -17,8 +17,9 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     replaces "identifiable"; venue TMLR without waiting for neural results; **neural order: seed-variance probe, then the
     memorisation transition (Q2)** (CPU drafts only; `docs/PREREG_stage2_F1.md` kept; no GPU without an explicit go).
   - Revision 1 (`c614a1e`, S42): build PASS (50 claims, 93 macros, numbers audit also bans number words above ten, 14-page PDF).
-    Changelog `paper/research_audit/CHANGELOG.md`. LLM-use statement drafted, **awaiting the user's approval**
-    (`paper/research_audit/LLM_USE_STATEMENT_DRAFT.md`, quotes TMLR's policy). Author names: the user will send them.
+    Changelog `paper/research_audit/CHANGELOG.md`. Revision 1a (`e077e1e`): Q1 sentence softened to the user's wording; LLM-use
+    statement approved and in the paper (`sections/11_llm_use.tex`, anonymised; modest wording "read the final text and checked
+    the main claims against the claims-to-evidence table", since the user's choice was left unfilled). Author names: "later".
   - **Batch 4** (sensitivity; unchanged) relayed by the user; verify its branch `results-stage2-cpu-batch4` as S43+ (commit >=
     `67f773c`, clean tree). **Batch 5** (spec `docs/STAGE2_BATCH5_SPEC.md` @ `6d8a9fd`, code `a5b969e`, relay
     `pilot_tooling/RELAY_stage2_cpu_batch5.md`): runs only after batch 4 is pushed; section E (theory) already run locally and
