@@ -153,3 +153,25 @@ numbers:
   - {macro: NaUnknownThirtyTwo, file: theory, claim: THEORY-NA, x: {json: nearest_atom.unknown_sigma.32.mean}, fmt: "{:.3f}"}
   - {macro: NaTwoSixtyFour, file: theory, claim: THEORY-NA, x: {json: nearest_atom.f2.64.mean}, fmt: "{:.2f}"}
   - {macro: NaTwoThousand, file: theory, claim: THEORY-NA, x: {json: nearest_atom.f2.1024.mean}, fmt: "{:.2f}"}
+# Figures (paper/tools/make_figures.py). Every series is a pinned file key above plus a row filter; to add batch 4 / 5 results,
+# pin the results commit under refs/files and declare the series here (no code change).
+figures:
+  delta: {file: s06cfg, x: {yaml: analysis.delta}}
+  gap:
+    panels:
+      # layout only (no data): legend in {ne, sw, se, nw}; opts = extra pgfplots axis options
+      - {panel: 'AR(1), known $\sigma$ (1A map)', file: map1a, where: {set: HELD, pair: "pop|stab"}, series: r, label: '$r={}$', legend: sw}
+      - {panel: 'noisy AR(1), $r=1$ (F3 map)', file: f3map, where: {pair: pop-stab, h: "1", r: "1.0"}, series: q, label: '$q={}$', legend: se, opts: 'ymin=0.0004, legend columns=2'}
+      - {panel: 'AR(1), unknown $\sigma$ (F1 map)', file: f1map, where: {set: HELD, pair: "pop|ctx"}, series: r, label: '$r={}$', legend: sw}
+      - {panel: 'bivariate VAR(1) (F2 map)', file: f2map, where: {set: HELD, pair: pop-ctx}, series: r, label: '$r={}$', legend: sw}
+  library:
+    provisional: true       # until the F2 library map reaches the largest K of the theory file (batch 5)
+    share:
+      - {label: 'known $\sigma$', file: map1a, where: {set: HELD, pair: "lib|pop"}, kind: frac}
+      - {label: 'unknown $\sigma$', file: f1map, where: {set: HELD, pair: "lib|pop"}, kind: frac}
+      - {label: 'noisy, $q=0$', file: f3rows, where: {set: HELD, pair: pop-lib, h: "1", q: "0.0"}, kind: rows}
+      - {label: 'bivariate', file: f2rows, where: {set: HELD, pair: pop-lib}, kind: rows}
+    limit:
+      - {label: 'known $\sigma$', file: theory, json: nearest_atom.known_sigma}
+      - {label: 'unknown $\sigma$', file: theory, json: nearest_atom.unknown_sigma}
+      - {label: 'bivariate', file: theory, json: nearest_atom.f2}

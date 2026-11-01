@@ -30,6 +30,7 @@ def main() -> int:
     run([py, "tools/build_claims.py"], PAPER)
     run([py, "tools/build_numbers.py"], PAPER)
     run([py, "tools/make_tables.py"], PAPER)
+    run([py, "tools/make_figures.py"], PAPER)
     run([py, "tools/check_numbers.py"], PAPER)
     if not shutil.which("pdflatex"):
         print("pdflatex not found: claims, numbers and audit passed; PDF not built")

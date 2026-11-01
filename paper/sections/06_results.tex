@@ -1,6 +1,6 @@
 \section{What the references can and cannot tell apart}\label{sec:results}
-\paragraph{Population versus context-only.} Table~\ref{tab:maps} summarises the held-out maps at horizon $h=1$; each map has
-its own grid of context lengths, given in the table. With a known noise scale the population gap is
+\paragraph{Population versus context-only.} Figure~\ref{fig:gap} shows the held-out gaps against context length and
+Table~\ref{tab:maps} summarises them at horizon $h=1$; each map has its own grid of context lengths, given in the table. With a known noise scale the population gap is
 \OneAGapMin--\OneAGapMax nats per forecast in the cells where it is separable, all at very short contexts; summed over all
 context lengths these gaps cannot exceed the \KLoneA-nat budget (Section~\ref{sec:theory}). The first study (Stage~0, a different comparator and rule)
 found \SzeroAllPairs of \SzeroCells regimes in which all three strategy pairs were separable. \sHalf, pre-registered with
@@ -22,6 +22,16 @@ the population gap is up to \FtwoGapMax nats at $n=10$ and \FtwoGapMin--\FtwoGap
 $n=\FtwoNmax$, where it is still separable at every $r$, so the end of the F2 window is not mapped; the shortest grid point is
 \textsc{mc-limited}: its gaps are large but the context-only reference cannot be estimated there to our Monte Carlo criterion.
 The F2 budget, \KLFtwo nats, falls to \KLFtwoNM when the context-only reference is given the population's noise prior.
+
+\begin{figure}[t]
+\centering
+\input{generated/fig_gap.tex}
+\caption{Held-out gap between population and context-only Bayes against context length (log-log), $h=1$. Filled marks:
+\textsc{separable} (estimate $-\,3\,$SE $\ge\delta$); open marks: not separable or borderline; crosses: \textsc{mc-limited};
+dashed line: $\delta$. In F1 and F2 the gap includes knowledge of the noise level (Section~\ref{sec:theory}). Generated from
+the pinned map files.}
+\label{fig:gap}
+\end{figure}
 
 \begin{table}[t]
 \centering\scriptsize
@@ -59,8 +69,19 @@ $K=\KSixteen$ (\NaUnknownSixteen nats) and just below it at $K=\KThirtyTwo$, so 
 separable at contexts longer than the map's longest ($n=\FoneLibNmax$), before which the library posterior has not yet
 concentrated. In F3 no held-out cell is separable, but for two-system libraries the mean gap
 reaches \FthreeLibKtwo nats and the cells are \textsc{partial}. Because a trained model sees one library, Table~\ref{tab:library}
-gives the share of individual (cell, library) pairs that are separable: it falls steeply with library size in every scalar
-family and stays near one in the bivariate family.
+and Figure~\ref{fig:library} give the share of individual (cell, library) pairs that are separable: it falls steeply with
+library size in every scalar family and stays near one in the bivariate family, in the order the long-context limits predict.
+
+\begin{figure}[t]
+\centering
+\input{generated/fig_library.tex}
+\caption{Library versus population Bayes on held-out systems. Left: share of (cell, library draw) pairs that are separable,
+pooled over each map's grid of context lengths (as Table~\ref{tab:library}). Right: the long-context limit of the gap, the
+expected divergence to the nearest library system (Monte Carlo; Section~\ref{sec:theory}), with $\delta$ dashed.
+\emph{Provisional}: the bivariate library map does not yet reach the largest library sizes of the right panel. Generated
+from the pinned result files.}
+\label{fig:library}
+\end{figure}
 
 \begin{table}[t]
 \centering\small
