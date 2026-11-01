@@ -1,15 +1,14 @@
 \section{Limitations}\label{sec:limits}
 \begin{itemize}
-\item \textbf{One prior, one comparator per family.} Every map uses a single population prior and a single context-only
-comparator, and the gaps depend on both. The budgets of Section~\ref{sec:theory} bound this dependence and show that in F1
-and F2 most of the room is knowledge of the noise level, but we have not mapped the per-forecast gaps under other comparators
-or other population priors here.
+\item \textbf{Priors and comparators.} Each map uses one population prior and one context-only comparator, and the gaps
+depend on both. Table~\ref{tab:sensitivity} varies both in the scalar families with a known or unknown noise scale, where the
+windows move as the budgets of Section~\ref{sec:theory} predict; we have not varied them in the noisy or bivariate families.
 \item \textbf{Margin.} The window depends on $\delta$ (Table~\ref{tab:delta}); $\delta$ was fixed in advance as a small
 log-score difference, not derived from the seed variance of trained models. The budget bounds what any pooling over
 forecasts can gain.
-\item \textbf{Power and grids.} The F3 map is underpowered at moderate noise; its estimator could be replaced by a
-Rao--Blackwellised one, as in the 1A map, or its sample size increased. The grids of context lengths are coarse and differ by
-map; where a window reaches the last grid point (F2, and F3 at the smallest margin) its end is not mapped.
+\item \textbf{Power and grids.} The F3 map is underpowered at moderate noise; with ten times its sample size the window there
+widens (Table~\ref{tab:sensitivity}). The grids of context lengths are coarse and differ by map; where a window reaches the
+last grid point (F2, and F3 at the smallest margin) its end is not mapped.
 \item \textbf{Per-cell rules and dependence.} The maps use per-cell rules without a global correction and common random
 numbers; the expected number of wrongly marked held-out population cells is below one per map, and patterns across cells are
 descriptive.

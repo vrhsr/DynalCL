@@ -18,6 +18,7 @@ refs:
   f2code: 77f8ad37ec6107f3d9ae42866dd168ce5efb03ce
   theory: cd2759f81aee7cc2f78a2248664d43fb9e038596
   b5spec: 6d8a9fd3cc4636822975b4249774035ffcc67116
+  batch4: 763e82bdb886d5525c81798e29102932212e2b05
 files:
   s0: {ref: main, path: runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json}
   s05: {ref: main, path: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json}
@@ -47,6 +48,7 @@ files:
   spec1a: {ref: map1a, path: docs/STAGE1_SEPARABILITY_MAP_SPEC.md}
   mathf1: {ref: freeze, path: docs/MATH_F1.md}
   b5spec: {ref: b5spec, path: docs/STAGE2_BATCH5_SPEC.md}
+  sens: {ref: batch4, path: results_stage2/sensitivity/sensitivity.csv}
 numbers:
   - {macro: ItemSETarget, file: f2mapcode, claim: F2-MAP, x: {regex_float: 'ITEM_SE_TARGET = (\d+\.\d+)'}, fmt: "{:.2f}"}
   # design constants (frozen Stage 0.6 confirmatory config; the same delta was fixed in Stage 0 and kept since)
@@ -153,6 +155,43 @@ numbers:
   - {macro: NaUnknownThirtyTwo, file: theory, claim: THEORY-NA, x: {json: nearest_atom.unknown_sigma.32.mean}, fmt: "{:.3f}"}
   - {macro: NaTwoSixtyFour, file: theory, claim: THEORY-NA, x: {json: nearest_atom.f2.64.mean}, fmt: "{:.2f}"}
   - {macro: NaTwoThousand, file: theory, claim: THEORY-NA, x: {json: nearest_atom.f2.1024.mean}, fmt: "{:.2f}"}
+  # batch 4 sensitivity analyses (results-stage2-cpu-batch4 @ 763e82b; S45)
+  - {macro: SensAgnosticMax, file: sens, claim: SENS-FRONTIER-1A, x: {csv_max: estimate, where: {analysis: frontier, family: known_sigma, variant: sigma_agnostic}}, fmt: "{:.2f}"}
+  - {macro: SensAgnosticN, file: sens, claim: SENS-FRONTIER-1A, x: {csv_max_int: n, where: {analysis: frontier, family: known_sigma, variant: sigma_agnostic, decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: SensOlsMax, file: sens, claim: SENS-FRONTIER-1A, x: {csv_max: estimate, where: {analysis: frontier, family: known_sigma, variant: ols_t}}, fmt: "{:.2f}"}
+  - {macro: SensTauSmallN, file: sens, claim: SENS-PRIOR-1A, x: {csv_max_int: n, where: {analysis: prior, family: known_sigma, variant: tau_0.15, r: "1.0", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: SensTauSmallMax, file: sens, claim: SENS-PRIOR-1A, x: {csv_max: estimate, where: {analysis: prior, family: known_sigma, variant: tau_0.15}}, fmt: "{:.3f}"}
+  - {macro: SensTauLargeMax, file: sens, claim: SENS-PRIOR-1A, x: {csv_max: estimate, where: {analysis: prior, family: known_sigma, variant: tau_0.6}}, fmt: "{:.3f}"}
+  - {macro: SensFoneNarrowMax, file: sens, claim: SENS-FRONTIER-F1, x: {csv_max: estimate, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.1_10.0}}, fmt: "{:.2f}"}
+  - {macro: SensFoneWideMax, file: sens, claim: SENS-FRONTIER-F1, x: {csv_max: estimate, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.001_1000.0}}, fmt: "{:.2f}"}
+  - {macro: SensFoneN, file: sens, claim: SENS-FRONTIER-F1, x: {csv_max_int: n, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.1_10.0, decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: FthreePrecQoneN, file: sens, claim: SENS-F3, x: {csv_max_int: n, where: {analysis: f3_precision, variant: q_0.755, h: "1", r: "0.25", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  - {macro: FthreePrecQoneNr, file: sens, claim: SENS-F3, x: {csv_max_int: n, where: {analysis: f3_precision, variant: q_0.755, h: "1", r: "1.0", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+# Generated tables declared from pinned files (paper/tools/make_tables.py); rows are labels + row filters (h = 1 only).
+tables:
+  sensitivity:
+    file: sens
+    rows:
+      - {group: 'known $\sigma$, comparator', label: 'uniform on $(\pm0.95)$', where: {analysis: frontier, family: known_sigma, variant: stab_0.95}}
+      - {label: 'uniform on $(\pm0.999)$ (the maps)', where: {analysis: frontier, family: known_sigma, variant: stab_0.999}}
+      - {label: 'uniform on $(\pm0.9999)$', where: {analysis: frontier, family: known_sigma, variant: stab_0.9999}}
+      - {label: '$\sigma$-agnostic (F1 comparator)', where: {analysis: frontier, family: known_sigma, variant: sigma_agnostic}}
+      - {label: 'least-squares Student-$t$ plug-in', where: {analysis: frontier, family: known_sigma, variant: ols_t}}
+      - {group: 'known $\sigma$, population prior', label: '$\tau=0.15$', where: {analysis: prior, family: known_sigma, variant: tau_0.15}}
+      - {label: '$\tau=0.3$ (the maps)', where: {analysis: prior, family: known_sigma, variant: tau_0.3}}
+      - {label: '$\tau=0.6$', where: {analysis: prior, family: known_sigma, variant: tau_0.6}}
+      - {group: 'unknown $\sigma$, comparator', label: 'log-uniform $\sigma$ on $[0.1,10]$', where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.1_10.0}}
+      - {label: 'on $[0.01,100]$ (the maps)', where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.01_100.0}}
+      - {label: 'on $[0.001,1000]$', where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.001_1000.0}}
+      - {label: 'least-squares Student-$t$ plug-in', where: {analysis: frontier, family: unknown_sigma, variant: ols_t}}
+      - {group: 'unknown $\sigma$, population prior', label: '$\tau=0.15$', where: {analysis: prior, family: unknown_sigma, variant: tau_0.15_alpha_3.0}}
+      - {label: '$\tau=0.6$', where: {analysis: prior, family: unknown_sigma, variant: tau_0.6_alpha_3.0}}
+      - {label: '$\alpha_0=2$', where: {analysis: prior, family: unknown_sigma, variant: tau_0.3_alpha_2.0}}
+      - {label: '$\alpha_0=10$', where: {analysis: prior, family: unknown_sigma, variant: tau_0.3_alpha_10.0}}
+      - {group: 'noisy, ten times the sample size', label: '$q=0$', where: {analysis: f3_precision, variant: q_0.0}}
+      - {label: '$q=0.755$', where: {analysis: f3_precision, variant: q_0.755}}
+      - {label: '$q=2.56$', where: {analysis: f3_precision, variant: q_2.56}}
+      - {label: '$q=6.5$', where: {analysis: f3_precision, variant: q_6.5}}
 # Figures (paper/tools/make_figures.py). Every series is a pinned file key above plus a row filter; to add batch 4 / 5 results,
 # pin the results commit under refs/files and declare the series here (no code change).
 figures:

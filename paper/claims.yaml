@@ -310,6 +310,41 @@ claims:
     label: DESIGN
     source: {ref: 6d8a9fd3cc4636822975b4249774035ffcc67116, path: docs/STAGE2_BATCH5_SPEC.md}
     extract: [{regex_int: 'F2 \(K in \{2, 16, 64, 256, (\d+)\}', expect: 1024}, {regex_int: 'known sigma \(K in \{1,\s+2, 4, 8, (\d+),', expect: 16}]
+  - id: SENS-FRONTIER-1A
+    text: "Batch 4, known sigma, comparator frontier: U(+/-0.95), U(+/-0.999), U(+/-0.9999) all separable up to n = 5 at r = 1; the sigma-agnostic comparator is separable up to n = 20 (grid end) with gaps up to 0.384; OLS Student-t gaps up to 0.981."
+    label: VERIFIED
+    source: {ref: 763e82bdb886d5525c81798e29102932212e2b05, path: results_stage2/sensitivity/sensitivity.csv}
+    extract: [{csv_max_int: n, where: {analysis: frontier, family: known_sigma, variant: stab_0.95, r: "1.0", decision: IDENTIFIABLE}, expect: 5},
+              {csv_max_int: n, where: {analysis: frontier, family: known_sigma, variant: stab_0.999, r: "1.0", decision: IDENTIFIABLE}, expect: 5},
+              {csv_max_int: n, where: {analysis: frontier, family: known_sigma, variant: stab_0.9999, r: "1.0", decision: IDENTIFIABLE}, expect: 5},
+              {csv_count: decision, where: {analysis: frontier, family: known_sigma, variant: sigma_agnostic, n: "20", decision: IDENTIFIABLE}, expect: 3},
+              {csv_max: estimate, where: {analysis: frontier, family: known_sigma, variant: sigma_agnostic}, expect: 0.3839, tol: 0.0001},
+              {csv_max: estimate, where: {analysis: frontier, family: known_sigma, variant: ols_t}, expect: 0.9810, tol: 0.0001}]
+  - id: SENS-PRIOR-1A
+    text: "Batch 4, known sigma, prior dependence: tau = 0.15 separable up to n = 10 at r = 1 (gaps up to 0.061); tau = 0.6 separable nowhere (largest gap 0.016)."
+    label: VERIFIED
+    source: {ref: 763e82bdb886d5525c81798e29102932212e2b05, path: results_stage2/sensitivity/sensitivity.csv}
+    extract: [{csv_max_int: n, where: {analysis: prior, family: known_sigma, variant: tau_0.15, r: "1.0", decision: IDENTIFIABLE}, expect: 10},
+              {csv_max: estimate, where: {analysis: prior, family: known_sigma, variant: tau_0.15}, expect: 0.0609, tol: 0.0001},
+              {csv_count: decision, where: {analysis: prior, family: known_sigma, variant: tau_0.6, decision: IDENTIFIABLE}, expect: 0},
+              {csv_max: estimate, where: {analysis: prior, family: known_sigma, variant: tau_0.6}, expect: 0.0156, tol: 0.0001}]
+  - id: SENS-FRONTIER-F1
+    text: "Batch 4, F1 comparator frontier: log-uniform noise priors over two, four and six decades all separable up to n = 10; largest gaps 0.226 / 0.325 / 0.334."
+    label: VERIFIED
+    source: {ref: 763e82bdb886d5525c81798e29102932212e2b05, path: results_stage2/sensitivity/sensitivity.csv}
+    extract: [{csv_max_int: n, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.1_10.0, decision: IDENTIFIABLE}, expect: 10},
+              {csv_max_int: n, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.001_1000.0, decision: IDENTIFIABLE}, expect: 10},
+              {csv_max: estimate, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.1_10.0}, expect: 0.2258, tol: 0.0001},
+              {csv_max: estimate, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.001_1000.0}, expect: 0.3339, tol: 0.0001}]
+  - id: SENS-F3
+    text: "Batch 4, noisy family at 200 000 items per (q, r): q = 0.755, h = 1 separable up to n = 5 (r = 0.25) and n = 4 (r = 1); nothing separable at q >= 2.56 or at h = 5."
+    label: VERIFIED
+    source: {ref: 763e82bdb886d5525c81798e29102932212e2b05, path: results_stage2/sensitivity/sensitivity.csv}
+    extract: [{csv_max_int: n, where: {analysis: f3_precision, variant: q_0.755, h: "1", r: "0.25", decision: IDENTIFIABLE}, expect: 5},
+              {csv_max_int: n, where: {analysis: f3_precision, variant: q_0.755, h: "1", r: "1.0", decision: IDENTIFIABLE}, expect: 4},
+              {csv_count: decision, where: {analysis: f3_precision, variant: q_2.56, decision: IDENTIFIABLE}, expect: 0},
+              {csv_count: decision, where: {analysis: f3_precision, variant: q_6.5, decision: IDENTIFIABLE}, expect: 0},
+              {csv_count: decision, where: {analysis: f3_precision, h: "5", decision: IDENTIFIABLE}, expect: 0}]
   - id: THEORY-KL
     text: "Prior KL budgets (DERIVED, computed numerically; batch 5 section E): 1A 0.582 nats; F1 2.570 (noise part 1.989 for log-uniform [0.01, 100], 1.296 for [0.1, 10]); F2 17.37 (map comparator), 5.61 (noise-matched comparator)."
     label: VERIFIED

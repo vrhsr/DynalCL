@@ -10,7 +10,9 @@ REVISE. With observation noise (F3) the largest $h=1$ gap is \FthreeGapQzero, \F
 two larger noise levels or at $h=5$, and the pre-registered \sSix study had already returned STOP for long contexts. At
 moderate noise the F3 map is underpowered: its realised-target estimator has standard errors several times those of the 1A
 map, and \FthreeBorderline of its $h=1$ cells (\FthreeBorderlineQone at $q=\QOne$) are borderline although their point
-estimates already reach $\delta$. The noise-free F3 row agrees with the 1A map on the three cells compared ($r=1$, $n\le 5$),
+estimates already reach $\delta$; with ten times the sample size the window at $q=\QOne$ extends to $n\le\FthreePrecQoneN$
+(\rsmall) and $n\le\FthreePrecQoneNr$ ($r=1$), while the two larger noise levels and $h=5$ remain not separable
+(Table~\ref{tab:sensitivity}). The noise-free F3 row agrees with the 1A map on the three cells compared ($r=1$, $n\le 5$),
 but the rows differ elsewhere for two reasons visible in the table: the grids differ (only F3 has $n$ between six and nine,
 which is why its window at \rsmall ends later), and at $r=4$ the F3 cells are borderline or not separable where the more
 precise 1A map is separable for the shortest contexts.
@@ -55,6 +57,29 @@ every margin; and the two noisiest settings separate at no margin in this range.
 \caption{Largest separable context length $n$ ($r=1$, $h=1$, held-out) at three margins; ``--'': none; $^*$: last grid point.
 Same files and three-standard-error rule as Table~\ref{tab:maps}.}
 \label{tab:delta}
+\end{table}
+
+\paragraph{Sensitivity to the comparator and the prior.} Table~\ref{tab:sensitivity} repeats the held-out comparison under
+other comparators and population priors. These runs score realised targets on fewer items than the maps, so they are somewhat
+less precise: the maps' comparator at $r=4$, $n=2$ is borderline here and separable in the 1A map. In the known-scale family
+the width of the comparator's stable interval does not matter; three widths give the same window. What matters is what the
+comparator knows about the noise: a context-only reference that does not know the noise scale trails population Bayes by up
+to \SensAgnosticMax nats and stays separable to the last grid point, $n=\SensAgnosticN$; the least-squares plug-in, which is
+not a Bayes predictor, trails by up to \SensOlsMax. The population prior matters as the budget predicts: a more concentrated
+prior widens the window to $n\le\SensTauSmallN$ (gaps up to \SensTauSmallMax nats) and a vaguer one leaves no cell separable
+(largest gap \SensTauLargeMax). With an unknown noise scale the window is $n\le\SensFoneN$ whatever the width of the
+context-only noise range (two, four or six orders of magnitude), and for every population prior tried except one cell at
+$r=4$; only the size of the gaps changes (largest \SensFoneNarrowMax nats for the narrowest range and \SensFoneWideMax for the
+widest). The F1 grid jumps from ten to twice that, so these windows all end somewhere in between.
+
+\begin{table}[t]
+\centering\scriptsize
+\input{generated/tab_sensitivity.tex}
+\caption{Held-out population versus context-only Bayes, $h=1$, under other comparators, other population priors and, for the
+noisy family, ten times the sample size: largest separable $n$ per $r$ (``--'': none; $^*$: last grid point) and, in
+parentheses, the largest gap in nats. Rows marked ``the maps'' repeat the maps' choice. Generated from the pinned results
+file.}
+\label{tab:sensitivity}
 \end{table}
 
 \paragraph{Library versus continuous prior.} In the scalar families, small libraries are separable from continuous-prior Bayes

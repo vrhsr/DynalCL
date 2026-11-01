@@ -1995,6 +1995,318 @@
   "status": "PASS"
  },
  {
+  "id": "SENS-FRONTIER-1A",
+  "label": "VERIFIED",
+  "text": "Batch 4, known sigma, comparator frontier: U(+/-0.95), U(+/-0.999), U(+/-0.9999) all separable up to n = 5 at r = 1; the sigma-agnostic comparator is separable up to n = 20 (grid end) with gaps up to 0.384; OLS Student-t gaps up to 0.981.",
+  "ref": "763e82bdb886d5525c81798e29102932212e2b05",
+  "path": "results_stage2/sensitivity/sensitivity.csv",
+  "commit": "763e82bdb886d5525c81798e29102932212e2b05",
+  "sha256": "fd30d0d4b75535be0af7816ce1b62216559d942663604f2dde592308790f9687",
+  "checks": [
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "frontier",
+      "family": "known_sigma",
+      "variant": "stab_0.95",
+      "r": "1.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "frontier",
+      "family": "known_sigma",
+      "variant": "stab_0.999",
+      "r": "1.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "frontier",
+      "family": "known_sigma",
+      "variant": "stab_0.9999",
+      "r": "1.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "analysis": "frontier",
+      "family": "known_sigma",
+      "variant": "sigma_agnostic",
+      "n": "20",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "analysis": "frontier",
+      "family": "known_sigma",
+      "variant": "sigma_agnostic"
+     }
+    },
+    "expect": 0.3839,
+    "got": 0.3839260365404956,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "analysis": "frontier",
+      "family": "known_sigma",
+      "variant": "ols_t"
+     }
+    },
+    "expect": 0.981,
+    "got": 0.9810175175392342,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "SENS-PRIOR-1A",
+  "label": "VERIFIED",
+  "text": "Batch 4, known sigma, prior dependence: tau = 0.15 separable up to n = 10 at r = 1 (gaps up to 0.061); tau = 0.6 separable nowhere (largest gap 0.016).",
+  "ref": "763e82bdb886d5525c81798e29102932212e2b05",
+  "path": "results_stage2/sensitivity/sensitivity.csv",
+  "commit": "763e82bdb886d5525c81798e29102932212e2b05",
+  "sha256": "fd30d0d4b75535be0af7816ce1b62216559d942663604f2dde592308790f9687",
+  "checks": [
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "prior",
+      "family": "known_sigma",
+      "variant": "tau_0.15",
+      "r": "1.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 10,
+    "got": 10,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "analysis": "prior",
+      "family": "known_sigma",
+      "variant": "tau_0.15"
+     }
+    },
+    "expect": 0.0609,
+    "got": 0.06088495107010015,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "analysis": "prior",
+      "family": "known_sigma",
+      "variant": "tau_0.6",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "analysis": "prior",
+      "family": "known_sigma",
+      "variant": "tau_0.6"
+     }
+    },
+    "expect": 0.0156,
+    "got": 0.015582371842986822,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "SENS-FRONTIER-F1",
+  "label": "VERIFIED",
+  "text": "Batch 4, F1 comparator frontier: log-uniform noise priors over two, four and six decades all separable up to n = 10; largest gaps 0.226 / 0.325 / 0.334.",
+  "ref": "763e82bdb886d5525c81798e29102932212e2b05",
+  "path": "results_stage2/sensitivity/sensitivity.csv",
+  "commit": "763e82bdb886d5525c81798e29102932212e2b05",
+  "sha256": "fd30d0d4b75535be0af7816ce1b62216559d942663604f2dde592308790f9687",
+  "checks": [
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "frontier",
+      "family": "unknown_sigma",
+      "variant": "ctx_logunif_0.1_10.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 10,
+    "got": 10,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "frontier",
+      "family": "unknown_sigma",
+      "variant": "ctx_logunif_0.001_1000.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 10,
+    "got": 10,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "analysis": "frontier",
+      "family": "unknown_sigma",
+      "variant": "ctx_logunif_0.1_10.0"
+     }
+    },
+    "expect": 0.2258,
+    "got": 0.2258442253776625,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "analysis": "frontier",
+      "family": "unknown_sigma",
+      "variant": "ctx_logunif_0.001_1000.0"
+     }
+    },
+    "expect": 0.3339,
+    "got": 0.3338868762427962,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "SENS-F3",
+  "label": "VERIFIED",
+  "text": "Batch 4, noisy family at 200 000 items per (q, r): q = 0.755, h = 1 separable up to n = 5 (r = 0.25) and n = 4 (r = 1); nothing separable at q >= 2.56 or at h = 5.",
+  "ref": "763e82bdb886d5525c81798e29102932212e2b05",
+  "path": "results_stage2/sensitivity/sensitivity.csv",
+  "commit": "763e82bdb886d5525c81798e29102932212e2b05",
+  "sha256": "fd30d0d4b75535be0af7816ce1b62216559d942663604f2dde592308790f9687",
+  "checks": [
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "f3_precision",
+      "variant": "q_0.755",
+      "h": "1",
+      "r": "0.25",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "analysis": "f3_precision",
+      "variant": "q_0.755",
+      "h": "1",
+      "r": "1.0",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 4,
+    "got": 4,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "analysis": "f3_precision",
+      "variant": "q_2.56",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "analysis": "f3_precision",
+      "variant": "q_6.5",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "analysis": "f3_precision",
+      "h": "5",
+      "decision": "IDENTIFIABLE"
+     }
+    },
+    "expect": 0,
+    "got": 0,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
   "id": "THEORY-KL",
   "label": "VERIFIED",
   "text": "Prior KL budgets (DERIVED, computed numerically; batch 5 section E): 1A 0.582 nats; F1 2.570 (noise part 1.989 for log-uniform [0.01, 100], 1.296 for [0.1, 10]); F2 17.37 (map comparator), 5.61 (noise-matched comparator).",
