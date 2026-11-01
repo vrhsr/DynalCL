@@ -1,0 +1,29 @@
+{
+ "command": "python.exe scripts/stage2_batch5.py --out results_stage2/batch5 --theory",
+ "python": "3.13.5",
+ "platform": "Windows-11-10.0.26100-SP0",
+ "cpu_count": 8,
+ "workers": 8,
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "smoke": false,
+ "roots": {
+  "b5_theory": 85301
+ },
+ "seconds_this_invocation": 20.1,
+ "sources_sha256": {
+  "dynaicl_families/stage2/batch5.py": "9e67501d2ce5f5f76f07282e8b0c005402ec9660702cf3c7ad1f5f804f0f11f1",
+  "scripts/stage2_batch5.py": "159f6179a98bcffa828575307e6c99e29469941d9c361bc1411cae17d51e8b8a",
+  "docs/STAGE2_BATCH5_SPEC.md": "69c4d7cca4b6e1fdcbe7f92fa376a2e0eb6c4889e68a54087a1e242f98382754",
+  "config/stage2_seed_manifest.yaml": "ae2a5439e4b147a93e96e3e8ee38abad503fea66fb32e5d82b6b436f668fcef0",
+  "dynaicl_families/stage2/f2_map.py": "c3a6051270373660919f1ac18b368b3b9713f9be3483f2664be1df7353509e74",
+  "dynaicl_families/stage2/f2_var.py": "33531841a161ba7591c686b68bac66869fa72d65fe1d6952868614d2dcb1c82e",
+  "dynaicl_families/stage2/f3_map.py": "12482a89713b76fe3c429b80095fc8cebd96a2fc6841527f47919c2959492f99",
+  "dynaicl_families/ar1_known_sigma.py": "508369947b64b3229a9fa05a88f7c3a6851ed39d9ad22599af48f4b66ab5de68",
+  "dynaicl_families/ar1_unknown_sigma.py": "77aada85acfb2f8bfbb5e521cea34db8474fd9464de4e25a6ed5f2cc029e6023",
+  "dynaicl_families/sampling.py": "f3a3bc006d0ae7d43ea81c2f38318638a17f60ccf4a1fbf63ade5426ccafdbaf",
+  "dynaicl/references/kalman_quadrature.py": "0ec62d75def942b976a862c84afa5322ed87e0962061ef7e92783b28ffe57199"
+ },
+ "git_head": "a5b969ebd1857d65351fcd841465c0189d8cda77",
+ "git_dirty_tracked": false
+}
