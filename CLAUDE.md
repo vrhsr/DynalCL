@@ -28,6 +28,10 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
   - S43: figures built by `paper/tools/make_figures.py` from a `figures:` block in numbers.yaml (add batch 4/5 series by
     pinning, no code change; library figure provisional until batch 5); CPU drafts `docs/PREREG_seed_variance_probe.md` and
     `docs/PREREG_memorisation_transition.md` (committed prediction K_sep = 8 / 32 / >1024 for known sigma / F1 / F2).
+  - S44: probe adds an F2 LIB-64 arm (measures the F2 step cost); memorisation study = option B (F2) after the probe, A (F1)
+    fallback; GPU totals B 66/100/157 h, A 60/90/141 h. F2 design CPU work: spec `docs/STAGE3_F2_DESIGN_CPU_SPEC.md`
+    (roles f2n_head_floor 83301, f2_oc 83401), code `5d23547` (head floor by 2-D quadrature EM; Q2 OC reusing the F1
+    functions), relay `pilot_tooling/RELAY_stage2_cpu_batch6.md` (after batches 4 and 5). Box order: batch 4 -> 5 -> 6.
   - Next on `paper-revision`: cumulative-vs-budget figure (batch 5), batch 4/5 results,
     restructure history into an appendix, TMLR template, anonymised artefact, then a second independent review (Phase 11) and
     the readiness report (Phase 12). Draft the seed-variance probe and Q2 pre-registrations on CPU.
