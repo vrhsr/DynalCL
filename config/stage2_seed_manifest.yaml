@@ -17,3 +17,8 @@ roles:
   sensitivity:         {seeds: [81501], use: "comparator frontier and prior dependence (docs/STAGE2_SENSITIVITY_SPEC.md); spec committed before use", status: unused}
   f3_precision:        {seeds: [81601], use: "F3 pop vs stab at higher precision (docs/STAGE2_SENSITIVITY_SPEC.md); spec committed before use", status: unused}
   f3_tests:            {seeds: [80901], use: "tests_stage2 unit tests and timing probes of the F3 map code; never decisions", status: tests}
+  b5_f1_split:         {seeds: [85001], use: "batch 5 A and C: F1 gap split, F1 libraries at long n (docs/STAGE2_BATCH5_SPEC.md); spec committed before use", status: unused}
+  b5_f2:               {seeds: [85101], use: "batch 5 B: F2 gap split, longer n, larger libraries (docs/STAGE2_BATCH5_SPEC.md); spec committed before use", status: unused}
+  b5_cumulative:       {seeds: [85201], use: "batch 5 D: cumulative gaps 1A / F1 / F3 (docs/STAGE2_BATCH5_SPEC.md); spec committed before use", status: unused}
+  b5_theory:           {seeds: [85301], use: "batch 5 E: Monte Carlo theory quantities (F2 prior KL, nearest-atom limits) (docs/STAGE2_BATCH5_SPEC.md)", status: unused}
+  b5_tests:            {seeds: [85901], use: "batch 5 smoke runs and unit tests; never results", status: tests}
