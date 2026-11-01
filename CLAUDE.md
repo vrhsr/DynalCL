@@ -32,7 +32,9 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     fallback; GPU totals B 66/100/157 h, A 60/90/141 h. F2 design CPU work: spec `docs/STAGE3_F2_DESIGN_CPU_SPEC.md`
     (roles f2n_head_floor 83301, f2_oc 83401), code `5d23547` (head floor by 2-D quadrature EM; Q2 OC reusing the F1
     functions), relay `pilot_tooling/RELAY_stage2_cpu_batch6.md` (after batches 4 and 5). Box order: batch 4 -> 5 -> 6.
-  - Next on `paper-revision`: cumulative-vs-budget figure (batch 5), batch 4/5 results,
+  - S45: **batch 4 verified** (`results-stage2-cpu-batch4` @ `763e82b`, provenance `6a670ca` clean) and in the paper
+    (revision 2, `paper-revision` @ `3ed8c0e`: Table 3 sensitivity, 54 claims). Box: batch 5 next (relay by the user), then 6.
+  - Next on `paper-revision`: cumulative-vs-budget figure (batch 5), batch 5 results,
     restructure history into an appendix, TMLR template, anonymised artefact, then a second independent review (Phase 11) and
     the readiness report (Phase 12). Draft the seed-variance probe and Q2 pre-registrations on CPU.
 
