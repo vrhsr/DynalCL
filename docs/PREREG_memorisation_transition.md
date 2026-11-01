@@ -40,23 +40,34 @@ with both versions kept and the change disclosed; this table stays as the commit
   (networks memorise up to the limit of what can be classified; K_net, if any, is not identifiable by score in this family);
   networks never lib-like (generalisation from the smallest K).
 
-## 4. Design (proposed)
-* Option A, F1 (cheaper, scalar): arms LIB-K, K in {1, 2, 4, 8, 16, 32, 64} and CONT-F1; cells: held-out lib-vs-pop cells
-  IDENTIFIABLE or PARTIAL in the F1 map plus batch 5's long-context cells; the transition is classifiable only for K <= 16.
-* Option B, F2 (the family where the prediction leaves room): arms LIB-K, K in {2, 16, 64, 256, 1024} and CONT-F2; needs
-  the bivariate head floor and F2 operating characteristics first (PENDING, CPU).
+## 4. Design
+* **Option B, F2 (primary; user decision S44), after the seed-variance probe:** arms LIB-K, K in {2, 16, 64, 256, 1024} and
+  CONT-F2; cells: held-out lib-vs-pop cells separable or PARTIAL in the F2 map and its batch 5 extension (K up to 1024, n up
+  to 80). Prerequisites on CPU (`docs/STAGE3_F2_DESIGN_CPU_SPEC.md`): the bivariate head floor and the F2 operating
+  characteristics with a power lookup by the frozen rule.
+* **Option A, F1 (fallback if the F2 budget is not available):** arms LIB-K, K in {1, 2, 4, 8, 16, 32, 64} and CONT-F1;
+  cells: held-out lib-vs-pop cells separable or PARTIAL in the F1 map plus batch 5's long-context cells; the transition is
+  classifiable only for K <= 16.
 * Rules as the frozen Stage 1A Q2: per-model own-library gate, two-way rule `classify_memorisation`, hierarchical-bootstrap
   critical value (audit A1), alpha 0.025 per replicate, two replicates that must agree; models per arm from the lookup with
   the seed sd measured by the probe (minimum 32).
 
-## 5. Compute (estimate and basis)
-GPU-h = arms x models x replicates x B x 0.0114 s (contended J0, size M, S19) x 1.25 / 3600; measured pilot rate 0.01076 s
-(S26).
-* Option A (8 arms, 32 models, 2 replicates): B = 25k: **51 h**; B = 50k: **101 h**.
-* Option B (6 arms, 32 models, 2 replicates, ASSUMED 1.5x per step for d = 2): B = 50k: **114 h**.
-* Plus a pilot (pilot seeds; budget choice by the Stage 1A convergence rule) of about 10 h (32 models x 100k steps, S26
-  rate). The training budget B is chosen by the pilot, so the totals are ranges; the cap rule (frozen Stage 1A logic) decides
-  NOT RESOLVABLE (compute) before the confirmatory run if the budget the user sets cannot hold the required models.
+## 5. Compute: full GPU total and its basis
+Basis: GPU-h = arms x models x replicates x steps x t x 1.25 (safety) / 3600, with t = 0.0114 s per model-step (contended J0,
+size M, S19; the measured pilot rate was 0.01076 s, S26) and, for F2, an ASSUMED factor 1.5 that the probe's F2 arm measures
+and replaces before any freeze. The pilot follows the Stage 1A pattern (8 models per arm, trained to the last grid point
+100k; budget B chosen by the convergence rule from {10k, 25k, 50k}; 100k cannot qualify), so the confirmatory part is a range.
+
+| Part | Option B (F2, primary) | Option A (F1, fallback) |
+|---|---|---|
+| Seed-variance probe (F1 arms 9.5 h + F2 arm 4.75 h) | 14.3 h | 14.3 h (9.5 h without the F2 arm) |
+| Pilot: arms x 8 models x 100k steps | 6 x 8: **28.5 h** | 8 x 8: **25.3 h** |
+| Confirmatory: arms x 32 models x 2 replicates x B | 6 arms: **23 / 57 / 114 h** at B = 10k / 25k / 50k | 8 arms: **20 / 51 / 101 h** |
+| **Total** | **66 / 100 / 157 h** | **60 / 90 / 141 h** (55 / 86 / 136 h without the F2 probe arm) |
+
+If the probe's seed spread requires 64 models per arm instead of 32, the confirmatory part doubles (option B up to 228 h at
+B = 50k). The cap rule (frozen Stage 1A logic) declares NOT RESOLVABLE (compute) before the confirmatory run if the budget the
+user sets cannot hold the required models. The A4000 is shared; all GPU work waits for the user's go-ahead and a free GPU.
 
 ## 6. Seeds (proposed, UNUSED, NOT registered)
 mt_pilot_train 87001, mt_pilot_eval 87101, mt_pilot_library 87201, mt_pilot_bootstrap 87999; mt_confirmatory_train
@@ -66,6 +77,6 @@ mt_pilot_train 87001, mt_pilot_eval 87101, mt_pilot_library 87201, mt_pilot_boot
 All reference maps, the theory quantities (S41), the Stage 1A pilot's budget outcome, the UNIF spread read; not batch 4, not
 the box part of batch 5, no network result in any family.
 
-## 8. Open decisions (the user's)
-1. Option A (F1), Option B (F2), or A then B.
-2. GPU budget (sets the cap) and the go-ahead for the probe first.
+## 8. Decisions
+1. Decided (S44): option B (F2) after the probe; option A kept as the fallback if the F2 budget is not available.
+2. Open: GPU budget (sets the cap) and the go-ahead for the probe first.

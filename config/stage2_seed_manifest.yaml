@@ -22,3 +22,5 @@ roles:
   b5_cumulative:       {seeds: [85201], use: "batch 5 D: cumulative gaps 1A / F1 / F3 (docs/STAGE2_BATCH5_SPEC.md); spec committed before use", status: unused}
   b5_theory:           {seeds: [85301], use: "batch 5 E: Monte Carlo theory quantities (F2 prior KL, nearest-atom limits) (docs/STAGE2_BATCH5_SPEC.md)", status: unused}
   b5_tests:            {seeds: [85901], use: "batch 5 smoke runs and unit tests; never results", status: tests}
+  f2n_head_floor:      {seeds: [83301], use: "F2 neural design: bivariate mixture head floor against the F2 references (docs/STAGE3_F2_DESIGN_CPU_SPEC.md A); spec committed before use", status: unused}
+  f2_oc:               {seeds: [83401], use: "F2 Q2 operating characteristics and power lookup, synthetic (docs/STAGE3_F2_DESIGN_CPU_SPEC.md B); spec committed before use", status: unused}
