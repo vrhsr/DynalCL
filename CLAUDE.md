@@ -25,7 +25,10 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     `pilot_tooling/RELAY_stage2_cpu_batch5.md`): runs only after batch 4 is pushed; section E (theory) already run locally and
     pinned (`cd2759f`, `results_stage2/batch5/theory.json`). When batch 5 returns: verify, disclose, add F1/F2 split, cumulative
     curves and figures to the paper.
-  - Next on `paper-revision`: figures (gap vs n, library share vs K vs limit, cumulative vs budget), batch 4/5 results,
+  - S43: figures built by `paper/tools/make_figures.py` from a `figures:` block in numbers.yaml (add batch 4/5 series by
+    pinning, no code change; library figure provisional until batch 5); CPU drafts `docs/PREREG_seed_variance_probe.md` and
+    `docs/PREREG_memorisation_transition.md` (committed prediction K_sep = 8 / 32 / >1024 for known sigma / F1 / F2).
+  - Next on `paper-revision`: cumulative-vs-budget figure (batch 5), batch 4/5 results,
     restructure history into an appendix, TMLR template, anonymised artefact, then a second independent review (Phase 11) and
     the readiness report (Phase 12). Draft the seed-variance probe and Q2 pre-registrations on CPU.
 
