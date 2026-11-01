@@ -29,6 +29,13 @@ files), Track 1 PDF 14 pages with no overfull box, Track 2 PDF built.
 | 19 | Extractors: `ge`/`lt` filters for csv max/min, `csv_min_all`, `json_keys`; new claims LIB-1A-ALL, F2-LIB-KMAX, F2-LONGEST, MAP-1A-HALF-DELTA, DESIGN-DRAWS, DESIGN-F2-CTX, DESIGN-B5-GRID, THEORY-KL, THEORY-NA; LIB-F1 extended (longest library n) | tools, claims.yaml, numbers.yaml | pipeline | decision 5 |
 | 20 | Track 2 skeleton includes the new theory section (it reuses Track 1 sections) | main_track2.tex | build | - |
 
+## Revision 1a (user's approval of revision 1, 2026-11-01)
+
+| # | Change | Where | Type | Approved by |
+|---|---|---|---|---|
+| 21 | Q1 sentence softened to the user's wording: population Bayes minimises expected log loss, so a network at the population-risk minimum would equal it; at finite capacity and budget the population-vs-context-only comparison measures how close training gets; library memorisation vs generalisation is the open question the nearest-system limit locates. "predictable answer" and "almost by construction" removed | 07_pilot, 10_conclusion | content (softened) | user, item 1 |
+| 22 | LLM-use statement added as an unnumbered section (anonymised; no author, repository or machine names), in Track 1 and Track 2; the bracketed sentence uses the replacement wording "read the final text and checked the main claims against the claims-to-evidence table" (the user's template choice was left unfilled; the more modest wording was used, easy to switch) | sections/11_llm_use.tex, main.tex, main_track2.tex | statement | user, item 2 |
+
 Not yet done (planned): figures (gap vs n with bands; library share vs K against the nearest-system limit; cumulative gap vs
 budget, after batch 5); results of batches 4 and 5; the LLM-use statement (draft awaiting approval); author names; appendices;
 restructuring of the Stage 0/0.5/0.6 history into an appendix; TMLR template.

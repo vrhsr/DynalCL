@@ -14,8 +14,8 @@ uncertainty attached to that comparison by the rule; at the chosen point it was 
 allowed \PilotCap models per arm, below the minimum, so the pre-registered outcome is \textsc{not resolvable (compute)}. This
 is the result of the pre-registered study. No effect-bearing evaluation of the pilot models was run. A further, post-pilot
 budget increase was prepared, labelled as such, and not adopted. A pilot that ends by its own rules is evidence about what
-the design can resolve. Section~\ref{sec:theory} also changes what a later neural study should ask: a network trained to
-convergence on the population law approximates population Bayes, because that predictor minimises the expected log loss, so
-the question whether it is population-like has a predictable answer; whether a network trained on a finite library
-reproduces the library posterior or generalises is not fixed in this way, and the nearest-system limit says in which family
-the answer is visible by score.
+the design can resolve. Section~\ref{sec:theory} also changes what a later neural study should ask. Population Bayes
+minimises the expected log loss on the population law, so a network that reached the population-risk minimum would equal it;
+at finite capacity and training budget, the population-versus-context-only question therefore measures how close training
+gets (optimisation and capacity). Whether a network trained on a finite library memorises it or generalises is the open
+question, and the nearest-system limit locates the families in which the answer is visible by score.
