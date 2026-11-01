@@ -1,10 +1,34 @@
 # CLAUDE.md: DynaICL orientation (read this first)
 
 This file gives a new session full context in one read. Details are in the files it points to.
-Last updated: 2026-10-31. **Start with section 0 (where things stand now)**, then 2h-quater (Stage 1 pilot result). Sections are in
-chronological order; older ones (1-2g, 7-8) are historical where they say "not started / not authorised / not a git repo".
+Last updated: 2026-11-01. **Start with section 0 (where things stand now; the 2026-11-01 block first)**, then 2h-quater.
+Sections are in chronological order; older ones (1-2g, 7-8) are historical where they say "not started / not authorised / not a git repo".
 
-## 0. Where things stand now (2026-10-27): read this first
+## 0. Where things stand now: read this first
+
+* **LATEST (2026-11-01; disclosure S40-S42). Independent paper audit done; revision 1 on branch `paper-revision`.**
+  - Audit (19 docs) in `paper/research_audit/` on `paper-revision` (worktree `E:\study-buddy\DynaICL-paper-rev`); the original
+    manuscript stays untouched on `paper-draft` (`bd4d390`, worktree `../DynaICL-paper`). Brief: `docs/SESSION_PROMPT_paper_audit.md`.
+  - **Only this kind of session writes the disclosure log, the paper and CLAUDE.md** (user, S40). Box sessions only push results branches.
+  - Key findings: the 1A/F3 windows and the library results are predicted by two classical quantities (prior KL budget, chain
+    rule; nearest-system limit); the F1/F2 "wider windows" are mostly noise-level knowledge (budgets 0.58 / 2.57 / 17.4 nats).
+  - User decisions (S40): reframe around those quantities (classical, cited, not claimed new); title "Where Bayesian References
+    Disagree: Pre-Registered Separability Maps for In-Context Learning of Linear Dynamical Systems"; "separable at margin delta"
+    replaces "identifiable"; venue TMLR without waiting for neural results; **neural order: seed-variance probe, then the
+    memorisation transition (Q2)** (CPU drafts only; `docs/PREREG_stage2_F1.md` kept; no GPU without an explicit go).
+  - Revision 1 (`c614a1e`, S42): build PASS (50 claims, 93 macros, numbers audit also bans number words above ten, 14-page PDF).
+    Changelog `paper/research_audit/CHANGELOG.md`. LLM-use statement drafted, **awaiting the user's approval**
+    (`paper/research_audit/LLM_USE_STATEMENT_DRAFT.md`, quotes TMLR's policy). Author names: the user will send them.
+  - **Batch 4** (sensitivity; unchanged) relayed by the user; verify its branch `results-stage2-cpu-batch4` as S43+ (commit >=
+    `67f773c`, clean tree). **Batch 5** (spec `docs/STAGE2_BATCH5_SPEC.md` @ `6d8a9fd`, code `a5b969e`, relay
+    `pilot_tooling/RELAY_stage2_cpu_batch5.md`): runs only after batch 4 is pushed; section E (theory) already run locally and
+    pinned (`cd2759f`, `results_stage2/batch5/theory.json`). When batch 5 returns: verify, disclose, add F1/F2 split, cumulative
+    curves and figures to the paper.
+  - Next on `paper-revision`: figures (gap vs n, library share vs K vs limit, cumulative vs budget), batch 4/5 results,
+    restructure history into an appendix, TMLR template, anonymised artefact, then a second independent review (Phase 11) and
+    the readiness report (Phase 12). Draft the seed-variance probe and Q2 pre-registrations on CPU.
+
+### Earlier state (2026-10-27 to 10-31)
 
 * **Active work: Stage 1 (neural, working name IdentICL) on branch `stage1-planning`** (latest pushed commit: see `git log`).
   Never push `main` without asking; never `--force`.
