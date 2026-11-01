@@ -15,11 +15,19 @@ that it can represent each reference predictive it is compared with, to within t
 * Representation of the reference predictive per context: lib_K is an exact Gaussian mixture; pop is represented as the
   mixture of the Rao-Blackwellised Student-t predictives of J = 2000 accepted draws from its untruncated posterior (the
   production estimator R's mixture; MATH_F2 sections 4-5), which can be sampled and evaluated exactly.
-* Floor estimate per context and m in {1, 2, 4, 8, 16}: fit q_m by EM (full covariances; two starts; up to 300 iterations;
-  relative tolerance 1e-9; covariance floor 1e-9 times the sample scale) to S_train = 100 000 samples of p, then
-  KL(p || q_m) = mean over S_test = 20 000 independent samples of log p - log q_m, with its Monte Carlo SE. The fit is on
-  samples, so the estimate is biased upward by about (number of q parameters) / (2 S_train) (at most 4.8e-4 nats at m = 16),
-  which makes the rule conservative; the floor for m is the minimum over m' <= m (nested families).
+* Floor estimate per context and m in {1, 2, 4, 8} (the F1 grid): as the F1 head floor (weighted EM on quadrature nodes of
+  p), in two dimensions: a 96 x 96 tan-substitution Gauss-Legendre grid on coordinates whitened by p's moments; mass error
+  |sum w p - 1| checked per context (abort above 1e-5); q_m maximises sum_i a_i log q(y_i), a_i = w_i p(y_i) normalised
+  (full covariances; two starts; up to 300 iterations; relative tolerance 1e-8; covariance floor 1e-9 times the scale), which
+  minimises the quadrature KL(p || q_m) = sum_i a_i (log p - log q_m); the floor for m is the minimum over m' <= m (nested
+  families; local optima make each value an upper bound). If no m <= 8 qualifies, the rule reports none and m = 16 is a
+  follow-up.
+* **Amendment before any production seed was used (2026-11-01):** the first version of this section fitted q_m by EM to
+  100 000 samples and estimated the KL on 20 000 independent samples. The smoke on the `f2_tests` role showed about 270 s per
+  context (impractical), and reducing the sample size would bring the fitting bias (about parameters / (2 S)) close to the
+  0.001 threshold. Quadrature has no sampling bias and follows the F1 precedent; on one smoke context it agreed with the
+  sample-based estimate at m = 2 (1.6e-3 vs 1.5e-3 nats), with a mass error of about 1e-13 at a 128-point grid and 4e-12 at
+  96. Disclosed (S44).
 * Decision rule (as Stage 1A and F1): the head uses the smallest m whose mean floor is <= 0.001 nats in every cell; a cell
   whose mean-floor SE exceeds 2e-4 is flagged and reported.
 
