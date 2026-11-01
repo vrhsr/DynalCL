@@ -4,22 +4,27 @@ $x_0\sim\mathcal N(0,r^2)$ drawn independently of the system, \rlist. A context 
 and the target is $x_{n+h}$. We use (a) a known noise scale ($\sigma=1$ in the maps; the first study also used a second
 scale); (b) \emph{F3}: the same latent process observed as $y_t=x_t+v_t$, $v_t\sim\mathcal N(0,q)$, with noise ratios
 $q\in\{0,\QOne,\QTwo,\QThree\}$, and a Kalman likelihood; (c) \emph{F1}: unknown noise scale; (d) \emph{F2}: a bivariate
-VAR(1), $x_t=Ax_{t-1}+e_t$, $e_t\sim\mathcal N(0,\Sigma)$, with $x_0\sim\mathcal N(0,r^2 I)$. In every
-family the likelihood is conditional on $x_0$, contexts are cut by a single function from the start of a trajectory, and
-every reference sees only the context.
+VAR(1), $x_t=Ax_{t-1}+e_t$, $e_t\sim\mathcal N(0,\Sigma)$, with $x_0\sim\mathcal N(0,r^2 I)$. In every family the likelihood is
+conditional on $x_0$, contexts are cut from the start of a trajectory by one function (one per observation model), and every
+reference sees only the context.
 
 \paragraph{References.} \emph{Population Bayes} (pop) is the Bayes predictive under the prior from which systems are drawn:
 for (a)--(c), $a$ follows a normal distribution with mean \PriorMean and standard deviation \PriorSd truncated to
-$|a|<\PriorRho$; in F1 the noise variance has an inverse-gamma prior with unit mean and unit variance; in F2 a
-matrix-normal-inverse-Wishart prior truncated to spectral radius below \PriorRho. \emph{Context-only Bayes} (stab, or ctx in
-F1 and F2) replaces the population prior over the system by a uniform prior on a slightly wider stable interval than the
-population's support, and, in F1, a log-uniform prior on the noise scale over four orders of magnitude. In (a) and (b) the
-context-only reference is given the true noise model (the noise scale, and the observation-noise variance in F3), as is
-the population reference: the two differ only in their prior over $a$, so the gap isolates population knowledge about the
-dynamics. This is one choice of comparator; others (least squares plug-in, a scale-agnostic prior in (a)) would give other
-gaps, a dependence we return to in Section~\ref{sec:limits}. \emph{Library Bayes} (lib$_K$) is the posterior over $K$
-systems drawn from the population, with uniform weights. Matched priors are enforced by fingerprints: an optimality
-diagnostic refuses a reference whose prior differs from the data's.
+$|a|<\PriorRho$; in F1 the noise variance has an independent inverse-gamma prior with unit mean and unit variance; in F2 a
+matrix-normal-inverse-Wishart prior chosen to mirror F1 (each noise variance has the same inverse-gamma marginal, and at unit
+noise each coefficient has the same spread before truncation), truncated to spectral radius below \PriorRho.
+\emph{Context-only Bayes} (stab in (a) and (b), ctx in F1 and F2) knows stability but nothing about the population. In (a)
+and (b) it is a uniform prior on $a$ over $(-\StabBound,\StabBound)$, slightly wider than the population's support, and it is given
+the true noise model (the noise scale, and the observation-noise variance in F3), as is the population reference: the two
+differ only in their prior over $a$, so the gap isolates population knowledge about the dynamics. In F1 it adds a
+log-uniform prior on $\sigma$ over $[\SigLo,\SigHi]$. In F2 it is a conjugate prior with zero-mean, very diffuse
+coefficients (row covariance \FtwoCtxVzero times the identity) and an inverse-Wishart noise prior with \FtwoCtxNu degrees of
+freedom and scale \FtwoCtxPsi times the identity, truncated to spectral radius below \StabBound; a conjugate prior cannot be
+scale-free, so this comparator knows little, but not nothing, about the noise level. In F1 and F2 the gap therefore combines
+knowledge of the dynamics and of the noise level (Section~\ref{sec:theory}). \emph{Library Bayes} (lib$_K$) is the posterior
+over $K$ systems drawn from the population, with uniform weights; in F2 a library system has seven free parameters (four
+coefficients and three noise-covariance entries). Matched priors are enforced by fingerprints: an optimality diagnostic
+refuses a reference whose prior differs from the data's.
 
 \paragraph{Computation.} Closed forms are used where they exist (conjugate updates, Student-$t$ predictives, library
 mixtures). Integrals over $a$ use composite Gauss--Legendre quadrature with adaptive panels; in F2 the stability truncation

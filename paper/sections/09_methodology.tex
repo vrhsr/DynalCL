@@ -8,6 +8,8 @@ and was replaced by a justified one, with both versions and the reason recorded)
 confirmatory run to the frozen state, the pilot decision and the seed set; while preparing a later run we found a hole in
 this gate (a self-made test key could pass it) before any confirmatory run used it, and wrote a fix that is to be included
 in the next frozen release. Finally, every result number in this paper is a macro re-extracted from a result file at a
-pinned commit, and the build fails if the audited text contains any other decimal or any integer above ten (small integers
-such as horizons and the exponents of tolerances are exempt). We think these tools cost little and make null and
-not-resolvable outcomes as reportable as positive ones.
+pinned commit, and the build fails if the audited text contains any other decimal, any integer above ten, or any number
+word above ten (small integers such as horizons and the exponents of tolerances are exempt). The pipeline checks numbers,
+not wording; an independent audit of an earlier draft found sentences that passed it while overstating or misattaching a
+number, which we corrected. We think these tools cost little and make null and not-resolvable outcomes as reportable as
+positive ones.

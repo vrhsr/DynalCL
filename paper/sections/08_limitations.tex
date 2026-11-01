@@ -1,26 +1,29 @@
 \section{Limitations}\label{sec:limits}
 \begin{itemize}
 \item \textbf{One prior, one comparator per family.} Every map uses a single population prior and a single context-only
-comparator. The gaps depend on both: a more concentrated population prior, a vaguer or sharper context-only noise prior in
-F1, or a different comparator (least squares plug-in, a scale-agnostic prior in the known-scale family) would move the
-windows. We have not mapped this dependence; the F1 window in particular may partly reflect how vague the context-only noise
-prior is.
+comparator, and the gaps depend on both. The budgets of Section~\ref{sec:theory} bound this dependence and show that in F1
+and F2 most of the room is knowledge of the noise level, but we have not mapped the per-forecast gaps under other comparators
+or other population priors here.
 \item \textbf{Margin.} The window depends on $\delta$ (Table~\ref{tab:delta}); $\delta$ was fixed in advance as a small
-log-score difference, not derived from the seed variance of trained models.
-\item \textbf{Power.} The F3 map is underpowered at moderate noise; its estimator could be replaced by a Rao--Blackwellised
-one, as in the 1A map, or its sample size increased.
+log-score difference, not derived from the seed variance of trained models. The budget bounds what any pooling over
+forecasts can gain.
+\item \textbf{Power and grids.} The F3 map is underpowered at moderate noise; its estimator could be replaced by a
+Rao--Blackwellised one, as in the 1A map, or its sample size increased. The grids of context lengths are coarse and differ by
+map; where a window reaches the last grid point (F2, and F3 at the smallest margin) its end is not mapped.
 \item \textbf{Per-cell rules and dependence.} The maps use per-cell rules without a global correction and common random
-numbers, so a few cells per map may be mis-marked by chance and patterns across cells are descriptive. Pooled tests could
-separate references in cells where each per-cell gap is below $\delta$.
+numbers; the expected number of wrongly marked held-out population cells is below one per map, and patterns across cells are
+descriptive.
 \item \textbf{Designed sets.} Where library and continuous references separate on probe or out-of-support sets, the gap is
 not a divergence and partly reflects how well the library covers the edge of the stable region.
+\item \textbf{The long-context limits.} The nearest-system limit assumes posterior concentration and the stationary law of the
+regressor; it describes contexts longer than our library maps, and the order-of-magnitude scaling in the number of system
+parameters is a heuristic, not a theorem.
 \item \textbf{Simple families.} All results concern linear autoregressive processes with Gaussian noise, scalar or
 bivariate; nothing is claimed for nonlinear, chaotic or high-dimensional systems. Each confirmatory study ran on one platform
 with two replicates.
 \item \textbf{Monte Carlo limits in F2.} The bivariate context-only reference is not computable to our criterion at the
 shortest contexts, so the F2 population window is not mapped there. Because the cell-level Monte Carlo criterion tightens as
 the number of evaluation items falls, several in-library F2 cells with fewer items are also \textsc{mc-limited}; the sample
-sizes were fixed before this was seen. The explanation offered for the bivariate library result (sparse coverage of a
-four-coefficient space) is a hypothesis, not a tested claim.
+sizes were fixed before this was seen.
 \item \textbf{No neural result.} The one neural study ended not resolvable; this paper makes no claim about trained models.
 \end{itemize}

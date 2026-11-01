@@ -1,17 +1,21 @@
 \section{A pre-registered neural pilot that could not be resolved}\label{sec:pilot}
 We pre-registered a neural study in the known-scale family (questions: population-like versus context-only behaviour in the
-identifiable cells; library size at which memorisation gives way to generalisation), froze its code, configuration,
+separable cells; library size at which memorisation gives way to generalisation), froze its code, configuration,
 decision rules and seed table, and ran a pilot with dedicated seeds. The frozen rules chose the training budget as the
-smallest grid point at which every control passed and the validation log loss at the shortest contexts stopped improving
-by more than \ConvTol nats, then capped the number of models per arm by a compute budget, with a minimum of \MinModels
-models per arm fixed before the pilot from the bootstrap-calibrated operating characteristics. The budget was raised from
-\CapBudgetHoursOriginal to \CapBudgetHours GPU-hours by a pre-pilot amendment, made after seeing the timing benchmark and
-before any pilot data, and frozen with the rest.
+smallest grid point at which every control passed and the validation log loss at the shortest contexts, for every pilot
+model, stopped improving by more than \ConvTol nats, then capped the number of models per arm by a compute budget, with a
+minimum of \MinModels models per arm fixed before the pilot from the bootstrap-calibrated operating characteristics. The
+budget was raised from \CapBudgetHoursOriginal to \CapBudgetHours GPU-hours by a pre-pilot amendment, made after seeing the
+timing benchmark and before any pilot data, and frozen with the rest.
 
-The pilot chose \PilotB training steps: at the previous grid point the loss still improved by \PilotImprovementTwentyFive
-nats, exceeding the tolerance by less than a tenth of it, with no uncertainty attached to that comparison by the rule; at
-the chosen point it improved by \PilotImprovementFifty. At that budget the cap allowed \PilotCap models per arm, below the
-minimum, so the pre-registered outcome is \textsc{not resolvable (compute)}. This is the result of the pre-registered study.
-No effect-bearing evaluation of the pilot models was run. A further, post-pilot budget increase was prepared, labelled as
-such, and not adopted; neural effort was redirected to the unknown-noise family, whose map leaves more room
-(Section~\ref{sec:results}). A pilot that ends by its own rules is evidence about what the design can resolve.
+The pilot chose \PilotB training steps: at the first grid point a control failed, and at the second the largest improvement
+over the pilot models was still \PilotImprovementTwentyFive nats, exceeding the tolerance by less than a tenth of it, with no
+uncertainty attached to that comparison by the rule; at the chosen point it was \PilotImprovementFifty. At that budget the cap
+allowed \PilotCap models per arm, below the minimum, so the pre-registered outcome is \textsc{not resolvable (compute)}. This
+is the result of the pre-registered study. No effect-bearing evaluation of the pilot models was run. A further, post-pilot
+budget increase was prepared, labelled as such, and not adopted. A pilot that ends by its own rules is evidence about what
+the design can resolve. Section~\ref{sec:theory} also changes what a later neural study should ask: a network trained to
+convergence on the population law approximates population Bayes, because that predictor minimises the expected log loss, so
+the question whether it is population-like has a predictable answer; whether a network trained on a finite library
+reproduces the library posterior or generalises is not fixed in this way, and the nearest-system limit says in which family
+the answer is visible by score.

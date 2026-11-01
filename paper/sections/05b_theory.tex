@@ -1,0 +1,38 @@
+\section{Two quantities that bound the maps}\label{sec:theory}
+\paragraph{Population versus context-only: a fixed budget.} Let $P$ and $Q$ be the population and context-only priors over a
+system $\theta$, with the same likelihood, and let $g_n$ be the expected one-step gap at context length $n$ on held-out
+systems ($\theta\sim P$). Write $m_P^N$ and $m_Q^N$ for the two Bayes marginal laws of $x_{1:N}$ given $x_0$; because $x_0$ is
+drawn independently of $\theta$, the one-step predictives of the two references are the conditionals of these marginals. By the
+chain rule of relative entropy \citep{cover2006},
+\[
+\textstyle\sum_{n=0}^{N-1} g_n \;=\; D\!\left(m_P^N \,\middle\|\, m_Q^N\right) \;\le\; D(P\,\|\,Q),
+\]
+where the inequality holds because $m_P^N$ and $m_Q^N$ are marginals of the joint laws of $(\theta,x_{1:N})$, which share the
+likelihood and differ only in the prior, and marginalising cannot increase relative entropy. The left side is the cumulative
+log loss (redundancy) of forecasting with $Q$'s mixture when the data come from $P$'s; for a single prior, the analogous
+cumulative risk of the Bayes strategy is a mutual information \citep{haussler1997}. The bound is classical; we use it to
+predict, before any map, how much room a family leaves. It has three consequences. The per-forecast gaps of a family spend a
+fixed budget $D(P\|Q)$; contexts that are informative early (large initial states) spend it early, so their window is
+short. Observation noise known to both references leaves the budget unchanged and spreads it over more forecasts, so the
+per-forecast gaps shrink while the total population advantage does not. And because the priors in F1 are products over the
+coefficient and the noise scale, the budget splits exactly into a dynamics part and a noise-level part.
+
+The budgets (relative entropy between priors, computed numerically) are \KLoneA nats with a known noise scale (and in F3,
+whose priors over $a$ are the same); \KLFone nats in F1, of which \KLFoneSigma come from the noise-scale priors, a part set by
+the width of the context-only log-uniform range (\KLFoneSigmaNarrow nats if it spanned two orders of magnitude instead of
+four); and \KLFtwo nats in
+F2 (\KLFtwoNM if the context-only reference were given the population's noise prior). So most of the room in F1 and F2 is
+knowledge of the noise level, which any reference trained on the population's data would acquire.
+
+\paragraph{Library versus population: the nearest system.} On held-out systems, as the context grows, the population
+predictive approaches the true one-step law and the library posterior concentrates on the library system nearest to the
+truth in per-step divergence, so the gap tends to $\mathbb E[\min_k D_{\mathrm{stat}}(\theta\,\|\,\theta_k)]$, the expected
+per-step divergence under the stationary law of the regressor (a derivation that assumes posterior concentration; finite
+contexts lie before this limit). Among $K$ systems drawn from a $p$-parameter population the nearest lies at a distance of
+order $K^{-1/p}$, so the limit falls roughly like $K^{-2/p}$: fast in scalar families and slowly for the seven-parameter
+bivariate systems. By Monte Carlo, the limit is \NaKnownFour, \NaKnownEight and \NaKnownSixteen nats for libraries of
+$K=4$, $8$ and \KSixteen systems with a known noise scale; \NaUnknownSixteen and \NaUnknownThirtyTwo nats for $K=\KSixteen$
+and \KThirtyTwo when the noise scale is unknown; and \NaTwoSixtyFour nats in the bivariate family at $K=\FtwoKmax$, still
+\NaTwoThousand at $K=\KThousand$. At $\delta=\DeltaNats$, the limit therefore falls below the margin between four and eight
+systems with a known noise scale, between \KSixteen and \KThirtyTwo with an unknown one, and not within the library sizes we
+evaluated in the bivariate family.

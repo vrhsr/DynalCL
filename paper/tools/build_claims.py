@@ -61,13 +61,27 @@ def _same(got, want, tol) -> bool:
 def extract(raw: bytes, spec: dict):
     if "json" in spec:
         return _get(json.loads(raw), spec["json"])
+    if "json_keys" in spec:          # a list of keys, for JSON keys that contain dots (e.g. "0.999")
+        d = json.loads(raw)
+        for k in spec["json_keys"]:
+            d = d[k]
+        return d
     if "json_len" in spec:
         return len(_get(json.loads(raw), spec["json_len"]))
     if "yaml" in spec:
         return _get(yaml.safe_load(raw), spec["yaml"])
+    rows = lambda: _rows(raw, spec.get("where", {}), spec.get("ge"), spec.get("lt"))  # noqa: E731
     if "csv_minmax" in spec:
-        vals = [float(r[spec["csv_minmax"]]) for r in _rows(raw, spec.get("where", {}))]
+        vals = [float(r[spec["csv_minmax"]]) for r in rows()]
         return [min(vals), max(vals)]
+    if "csv_min_all" in spec:
+        # smallest value v of a column such that every row (within `where`) with column >= v matches `all`
+        col, sub = spec["csv_min_all"], rows()
+        good = [v for v in sorted({float(r[col]) for r in sub})
+                if all(all(str(r[k]) == str(w) for k, w in spec["all"].items()) for r in sub if float(r[col]) >= v)]
+        if not good:
+            raise ValueError("no value satisfies the condition")
+        return int(good[0]) if good[0].is_integer() else good[0]
     if "contains" in spec:
         return spec["contains"] in raw.decode("utf-8")
     if "regex_int" in spec:
@@ -91,11 +105,11 @@ def extract(raw: bytes, spec: dict):
         return sum(1 for k, v in d.items() if all(k.split("|")[i] == want for i, want in kf.items())
                    and ("value" not in spec or v == spec["value"]))
     if "csv_max" in spec:
-        return max(float(r[spec["csv_max"]]) for r in _rows(raw, spec.get("where", {})))
+        return max(float(r[spec["csv_max"]]) for r in rows())
     if "csv_max_int" in spec:
-        return max(int(float(r[spec["csv_max_int"]])) for r in _rows(raw, spec.get("where", {})))
+        return max(int(float(r[spec["csv_max_int"]])) for r in rows())
     if "csv_min_int" in spec:
-        return min(int(float(r[spec["csv_min_int"]])) for r in _rows(raw, spec.get("where", {})))
+        return min(int(float(r[spec["csv_min_int"]])) for r in rows())
     raise ValueError(f"unknown extractor {spec}")
 
 

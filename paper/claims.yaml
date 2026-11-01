@@ -167,7 +167,8 @@ claims:
               {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "4", decision: IDENTIFIABLE}, expect: 12},
               {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "16", decision: PARTIAL}, expect: 18},
               {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "32", decision: PARTIAL}, expect: 18},
-              {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "256", decision: UNIDENTIFIABLE}, expect: 18}]
+              {csv_count: decision, where: {set: HELD, pair: "lib|pop", K: "256", decision: UNIDENTIFIABLE}, expect: 18},
+              {csv_max_int: n, where: {set: HELD, pair: "lib|pop"}, expect: 40}]
   - id: F1-TWOSIDED
     text: "The F1 map's rule is two-sided: cells with a negative gap (the population reference scoring worse, on probe and out-of-support sets) can be IDENTIFIABLE."
     label: VERIFIED
@@ -271,3 +272,58 @@ claims:
     label: VERIFIED
     source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f1_head_floor/f1_head_floor_summary.json}
     extract: [{json: chosen_m, expect: 8}]
+  # ---------------------------------------------------------------- revision after the research audit (S40, S41)
+  - id: LIB-1A-ALL
+    text: "Stage 1A map, held-out lib vs pop: every cell with K >= 16 is UNIDENTIFIABLE (not separable), and 16 is the smallest such K."
+    label: VERIFIED
+    source: {ref: a499874cad30de8d9a20759b3ce73c62436c8408, path: results_stage1/map_1A/map_decisions.csv}
+    extract: [{csv_min_all: K, where: {set: HELD, pair: "lib|pop"}, all: {decision: UNIDENTIFIABLE}, expect: 16}]
+  - id: F2-LIB-KMAX
+    text: "The largest library size in the F2 map is K = 64."
+    label: VERIFIED
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f2_map/map_decisions.csv}
+    extract: [{csv_max_int: K, where: {set: HELD, pair: pop-lib}, expect: 64}]
+  - id: F2-LONGEST
+    text: "F2 map, held-out pop vs ctx: the longest mapped context is n = 20, where the gap is at most 0.089 nats (0.338 is at n = 10)."
+    label: VERIFIED
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: results_stage2/f2_map/map_decisions.csv}
+    extract: [{csv_max_int: n, where: {set: HELD, pair: pop-ctx}, expect: 20},
+              {csv_max: estimate, where: {set: HELD, pair: pop-ctx, n: "20"}, expect: 0.0889, tol: 0.00005},
+              {csv_max: estimate, where: {set: HELD, pair: pop-ctx, n: "10"}, expect: 0.3375, tol: 0.00005}]
+  - id: MAP-1A-HALF-DELTA
+    text: "Stage 1A map, held-out pop vs stab: at margin 0.01 the largest separable n is 10 (lower bound >= 0.01)."
+    label: VERIFIED
+    source: {ref: a499874cad30de8d9a20759b3ce73c62436c8408, path: results_stage1/map_1A/map_decisions.csv}
+    extract: [{csv_max_int: n, where: {set: HELD, pair: "pop|stab"}, ge: {lo: 0.01}, expect: 10}]
+  - id: DESIGN-DRAWS
+    text: "Design: a library cell is marked when at least 90% of library draws agree (Stage 1A map spec, kept in later maps)."
+    label: DESIGN
+    source: {ref: a499874cad30de8d9a20759b3ce73c62436c8408, path: docs/STAGE1_SEPARABILITY_MAP_SPEC.md}
+    extract: [{regex_int: 'IDENTIFIABLE if >= (\d+)% of draws', expect: 90}]
+  - id: DESIGN-F2-CTX
+    text: "Design: the F2 context-only reference is MNIW(B0 = 0, V0 = 100 I, nu0 = 1.5, Psi0 = 0.01 I) truncated to spectral radius < 0.999."
+    label: DESIGN
+    source: {ref: 77f8ad37ec6107f3d9ae42866dd168ce5efb03ce, path: dynaicl_families/stage2/f2_var.py}
+    extract: [{contains: 'MNIWPrior("C_F2", np.zeros((D, D)), 100.0 * np.eye(D), 1.5, 0.01 * np.eye(D), 0.999)', expect: true}]
+  - id: DESIGN-B5-GRID
+    text: "Design: batch 5 nearest-atom library sizes K in {1, 2, 4, 8, 16, 32, 64, 256} (scalar) and {2, 16, 64, 256, 1024} (F2)."
+    label: DESIGN
+    source: {ref: 6d8a9fd3cc4636822975b4249774035ffcc67116, path: docs/STAGE2_BATCH5_SPEC.md}
+    extract: [{regex_int: 'F2 \(K in \{2, 16, 64, 256, (\d+)\}', expect: 1024}, {regex_int: 'known sigma \(K in \{1,\s+2, 4, 8, (\d+),', expect: 16}]
+  - id: THEORY-KL
+    text: "Prior KL budgets (DERIVED, computed numerically; batch 5 section E): 1A 0.582 nats; F1 2.570 (noise part 1.989 for log-uniform [0.01, 100], 1.296 for [0.1, 10]); F2 17.37 (map comparator), 5.61 (noise-matched comparator)."
+    label: VERIFIED
+    source: {ref: cd2759f81aee7cc2f78a2248664d43fb9e038596, path: results_stage2/batch5/theory.json}
+    extract: [{json_keys: [kl_1a, "0.999"], expect: 0.5816, tol: 0.0001}, {json: kl_f1_total_map_comparator, expect: 2.5703, tol: 0.0001},
+              {json_keys: [kl_f1_sigma, "0.01_100.0", kl], expect: 1.9887, tol: 0.0001},
+              {json_keys: [kl_f1_sigma, "0.1_10.0", kl], expect: 1.2955, tol: 0.0001},
+              {json: kl_f2.ctx.kl, expect: 17.37, tol: 0.01}, {json: kl_f2.ctx_nm.kl, expect: 5.61, tol: 0.01}]
+  - id: THEORY-NA
+    text: "Large-n nearest-atom limits of the held-out library gap (DERIVED, Monte Carlo; batch 5 section E): known sigma K = 4 / 8 / 16: 0.024 / 0.011 / 0.004; unknown sigma K = 16 / 32: 0.035 / 0.018; F2 K = 64 / 1024: 0.24 / 0.09 nats."
+    label: VERIFIED
+    source: {ref: cd2759f81aee7cc2f78a2248664d43fb9e038596, path: results_stage2/batch5/theory.json}
+    extract: [{json: nearest_atom.known_sigma.4.mean, expect: 0.0242, tol: 0.0001}, {json: nearest_atom.known_sigma.8.mean, expect: 0.0108, tol: 0.0001},
+              {json: nearest_atom.known_sigma.16.mean, expect: 0.0038, tol: 0.0001},
+              {json: nearest_atom.unknown_sigma.16.mean, expect: 0.0353, tol: 0.0001},
+              {json: nearest_atom.unknown_sigma.32.mean, expect: 0.0178, tol: 0.0001},
+              {json: nearest_atom.f2.64.mean, expect: 0.237, tol: 0.001}, {json: nearest_atom.f2.1024.mean, expect: 0.0912, tol: 0.0001}]

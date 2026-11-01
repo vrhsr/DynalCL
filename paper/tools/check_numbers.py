@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[2]
 SKIP_ARGS = re.compile(r"\\(cite[tp]?|ref|eqref|label|url|href|input|include|includegraphics|begin|end|autoref|cref)"
                        r"(\[[^\]]*\])?\{[^}]*\}")
 NUMBER = re.compile(r"(?<![A-Za-z\\])(\d+\.\d+|\.\d+|\d{2,})")
+# number words above ten (same rule as digits; S40: "sixteen", "sixty-four" had bypassed the digit check)
+NUMBER_WORD = re.compile(r"\b(eleven|twelve|(?:thir|four|fif|six|seven|eigh|nine)teen|(?:twen|thir|for|fif|six|seven|"
+                         r"eigh|nine)ty(?:-\w+)?|hundred\w*|thousand\w*|million\w*|billion\w*|dozen\w*)\b", re.I)
 
 
 def scan(path: Path) -> list[str]:
@@ -29,6 +32,8 @@ def scan(path: Path) -> list[str]:
             if "." not in tok and int(tok) <= 10:
                 continue
             bad.append(f"{path.name}:{i}: bare number {tok!r}: {line.strip()[:100]}")
+        for m in NUMBER_WORD.finditer(text):
+            bad.append(f"{path.name}:{i}: number word {m.group(1)!r}: {line.strip()[:100]}")
     return bad
 
 

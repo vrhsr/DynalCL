@@ -2,27 +2,33 @@
 A transformer trained on many synthetic tasks and asked to continue a new sequence is often analysed against Bayes-optimal
 reference predictors. Below a task-diversity threshold such models track the posterior over the finite pool of training
 tasks; above it they track the Bayes predictor of the continuous task prior \citep{raventos2023,lu2025,panwar2024}. The same
-memorising-versus-generalising contrast has been drawn for discrete Markov chains \citep{gibson2026,wurgaft2025}. In each
-case the behavioural claim rests on a premise: that the candidate references predict differently on the evaluation data,
-by more than the analysis can resolve.
+memorising-versus-generalising contrast has been drawn for finite sets of discrete Markov chains \citep{gibson2026,park2025},
+and a rational-strategy account describes which reference a model follows during training \citep{wurgaft2025}. In each case
+the behavioural claim rests on a premise: that the candidate references predict differently on the evaluation data, by more
+than the analysis can resolve.
 
 We examine this premise for in-context forecasting of autoregressive dynamical systems, before any network is trained,
 and ask of the references themselves: \emph{in which cells could a model's behaviour be classified at all?} We distinguish
 three references: Bayes under the population prior from which training systems are drawn; the posterior over a finite
-library of training systems (memorisation); and a \emph{context-only} Bayes predictor that knows the noise model and generic
-structure (stability) but nothing about the population. In linear regression with a Gaussian prior, ridge regression with
-the matched penalty is the continuous-prior Bayes predictor, and the usual context-only comparator is least squares; here we
-make the context-only comparator itself a Bayes predictor with a deliberately uninformative prior over the system, so that
-the population-specific part of the advantage can be measured.
+library of training systems (the memorising reference); and a \emph{context-only} Bayes predictor that knows the noise model
+and generic structure (stability) but nothing about the population. In linear regression with a Gaussian prior, ridge
+regression with the matched penalty is the continuous-prior Bayes predictor, and the usual context-only comparator is least
+squares; here we make the context-only comparator itself a Bayes predictor with a deliberately uninformative prior over the
+system, so that the population-specific part of the advantage can be measured.
 
 \paragraph{Contributions.}
 (i) Validated reference predictors for scalar AR(1) with known noise scale, AR(1) observed through Gaussian noise (Kalman
 likelihood), AR(1) with unknown noise scale, and a bivariate VAR(1) with a stability-truncated conjugate prior, with
-measured numerical error and calibration and optimality tests, and mutation tests for the last three families. (ii) Separability maps of these references at a common margin, reported
-cell by cell with their power limits and a sensitivity analysis in $\delta$: the population-specific window is short-context
-for a known noise scale, shrinks under observation noise, and widens markedly when the noise scale is unknown or the
-system is bivariate; in scalar families libraries are distinguishable from continuous priors only when small, in the
-bivariate family also when large. (iii) Pre-registered results, including a null (\sSix: STOP)
-and a neural pilot that its own frozen rules declared not resolvable for compute reasons. (iv) The machinery that kept
-these results honest (freeze manifests, append-only disclosure logs, an authorization gate, and a claims table that
-re-derives every number in this paper from pinned commits), offered as methodology.
+measured numerical error, calibration and optimality tests, and mutation tests for the last three families.
+(ii) Two classical quantities, applied to the design of behavioural studies: the relative entropy between the population and
+context-only priors, a budget that the summed per-forecast gaps cannot exceed (the cumulative log loss, or redundancy, of one
+Bayes mixture against another), and the divergence to the nearest library system, the long-context limit of the library gap
+(Section~\ref{sec:theory}). Neither bound is new; their use to predict where references can be told apart is.
+(iii) Separability maps of these references at a common margin, reported cell by cell with their power limits and a
+sensitivity analysis in $\delta$, which check (ii) numerically: the population window is short for a known noise scale and
+narrows under observation noise; the larger gaps when the noise scale is unknown or the system is bivariate come with much
+larger budgets, mostly knowledge of the noise level; libraries are separable from continuous priors only when small in the
+scalar families, and also when large in the bivariate family. (iv) Pre-registered results, including a null (\sSix: STOP)
+and a neural pilot that its own frozen rules declared not resolvable for compute reasons, together with the machinery that
+kept these results honest (freeze manifests, append-only disclosure logs, an authorization gate, and a claims table that
+re-derives every number in this paper from pinned commits).

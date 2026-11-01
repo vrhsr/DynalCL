@@ -9,23 +9,28 @@ measures a behavioural difference rather than a divergence; we therefore report 
 them for the headline statements below.
 
 \paragraph{Rules.} The studies used different pre-registered decision rules with the same margin: Stage~0 classified each
-regime by an interval rule against a flat-prior frontier; \sHalf used intervals of $\pm$\SfiveIntervalSE standard errors with two
-replicates that had to agree; \sSix used a studentised max-$|t|$ bootstrap over all contrasts. The reference-only maps
-(1A, F1, F3) mark a cell \textsc{identifiable} if estimate $-\,3\,$SE $\ge\delta$, \textsc{unidentifiable} if
-estimate $+\,3\,$SE $<\delta$, and \textsc{borderline} otherwise; the F1 map applies this to the absolute gap (two-sided),
-which only matters on designed sets. For libraries each map draws several independent libraries per size $K$ (more in the
-1A and F1 maps than in F3), applies the cell rule per draw, and marks a cell \textsc{identifiable} or \textsc{unidentifiable}
-only if at least nine in ten draws agree, otherwise \textsc{partial}. Because a trained model sees one library, a
-\textsc{partial} cell means that some libraries are separable from the continuous prior and others are not; we report
-per-draw agreement rather than hide it. The maps use common random numbers, so their cells are dependent and patterns across
-cells are descriptive; the rule is applied per cell without a global correction, and the maps guide design rather than test
-hypotheses. Each map's specification was committed before its seed was first used.
+regime by an interval rule against a flat-prior frontier; \sHalf used intervals of $\pm$\SfiveIntervalSE standard errors with
+two replicates that had to agree; \sSix used a studentised max-$|t|$ bootstrap over all contrasts. The reference-only maps
+(1A, F1, F3, F2) mark a cell \textsc{separable} if estimate $-\,3\,$SE $\ge\delta$, \textsc{not separable} if
+estimate $+\,3\,$SE $<\delta$, and \textsc{borderline} otherwise (the released result files call the first two
+\textsc{identifiable} and \textsc{unidentifiable}); the F1 map applies this to the absolute gap (two-sided), which only matters
+on designed sets. For libraries each map draws several independent libraries per size $K$ (fewer in F3 and F2 than in the 1A
+and F1 maps), applies the cell rule per draw, and marks a cell \textsc{separable} or \textsc{not separable} only if at least
+\DrawPct per cent of draws agree, otherwise \textsc{partial}. Because a trained model sees one library, a \textsc{partial}
+cell means that some libraries are separable from the continuous prior and others are not; we report per-draw agreement
+rather than hide it. The maps use common random numbers, so their cells are dependent and patterns across cells are
+descriptive. The rule is applied per cell without a global correction: with a correct standard error, the chance that a cell
+is marked on the wrong side of $\delta$ is at most $\Phi(-3)$ whatever the dependence between cells, so the expected number of
+wrongly marked held-out population cells is below one in every map. Each map's specification was committed before its seed
+was first used.
 
-\paragraph{What ``identifiable'' does and does not mean.} Here it is a property of two reference predictors at a
-precision: their expected gap exceeds $\delta$ by more than three standard errors. It is necessary in our designs for a
-per-cell behavioural classification at margin $\delta$, but not sufficient: a trained model is a random object whose seed
-variance enters any classification. For F1, the bootstrap-calibrated operating characteristics of our pre-registered
-classification rule imply that, with \MinModels models per arm, a population-like versus context-only classification has
-at least eighty per cent power only if the between-seed standard deviation of a model's regret is at most
-\LookupQoneThirtyTwo nats (\LookupQoneSixtyFour at twice as many models). Evidence pooled over many cells, for example
-by a sequence-level test, could also separate references whose per-cell gaps are below $\delta$; our maps do not use it.
+\paragraph{What ``separable'' does and does not mean.} Here it is a property of two reference predictors at a precision:
+their expected gap exceeds $\delta$ by more than three standard errors. (We avoid ``identifiable'': in its statistical sense
+every pair of references here is identifiable, since their gaps are positive in every cell, however small.) Separability is
+needed in our designs for a per-cell behavioural classification at margin $\delta$, but it is not sufficient: a trained
+model is a random object whose seed variance enters any classification. For F1, the bootstrap-calibrated operating
+characteristics of our pre-registered classification rule imply that, with \MinModels models per arm, a population-like
+versus context-only classification has power of at least \LookupPower only if the between-seed standard deviation of a model's
+regret is at most \LookupQoneThirtyTwo nats (\LookupQoneSixtyFour at twice as many models). Evidence pooled over cells or over
+a whole sequence could separate references whose per-cell gaps are below $\delta$; Section~\ref{sec:theory} bounds how much
+such pooling can gain.
