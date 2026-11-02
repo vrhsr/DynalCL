@@ -34,7 +34,12 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     functions), relay `pilot_tooling/RELAY_stage2_cpu_batch6.md` (after batches 4 and 5). Box order: batch 4 -> 5 -> 6.
   - S45: **batch 4 verified** (`results-stage2-cpu-batch4` @ `763e82b`, provenance `6a670ca` clean) and in the paper
     (revision 2, `paper-revision` @ `3ed8c0e`: Table 3 sensitivity, 54 claims). Box: batch 5 next (relay by the user), then 6.
-  - Next on `paper-revision`: cumulative-vs-budget figure (batch 5), batch 5 results,
+  - S46-S47: **batch 5 verified** (`results-stage2-cpu-batch5` @ `e08eee8`, provenance `c991f91` clean, 8 workers) and in
+    the paper (revision 3, `7661aca`, 59 claims, 18 pages). Key: F1 gaps mostly noise-level (dynamics-only window n <= 5),
+    F2 gaps at n >= 10 mostly dynamics (corrects revision 1); F2 window ends between n = 20 and 40; F2 libraries to K = 1024
+    all separable by n = 80; 1A cumulative 0.551-0.558 vs budget 0.582. Batch 5 relay step 0 corrected (S46 deviation).
+    **Batch 6 running on the box**; verify as S48 (head floor m for F2; F2 Q2 lookup; then put both in the F2 draft).
+  - Next on `paper-revision`: batch 6 into the neural drafts (not the paper),
     restructure history into an appendix, TMLR template, anonymised artefact, then a second independent review (Phase 11) and
     the readiness report (Phase 12). Draft the seed-variance probe and Q2 pre-registrations on CPU.
 
