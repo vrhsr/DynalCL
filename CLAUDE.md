@@ -39,7 +39,11 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     F2 gaps at n >= 10 mostly dynamics (corrects revision 1); F2 window ends between n = 20 and 40; F2 libraries to K = 1024
     all separable by n = 80; 1A cumulative 0.551-0.558 vs budget 0.582. Batch 5 relay step 0 corrected (S46 deviation).
     **Batch 6 running on the box**; verify as S48 (head floor m for F2; F2 Q2 lookup; then put both in the F2 draft).
-  - Next on `paper-revision`: batch 6 into the neural drafts (not the paper),
+  - S48: **batch 6 verified** (`6ffd8fc`): F2 head m = 8; F2 Q2 lookup s* = 0.01/0.01/0.02 at M = 32/64/128 (binding cell
+    has lib and ctx only 0.045 apart). Option B needs F2 seed sd <= ~0.0074. Batch 7 relay (OC on batch 5 cells, ~1 min,
+    `pilot_tooling/RELAY_stage2_cpu_batch7.md`, code `fb3b12a`); verify as S49. Probe: `docs/PROBE_FREEZE_READINESS.md`
+    (neural code for F1/F2 not written; needs CPU-torch permission); nothing frozen or run. Priority: the paper.
+  - Next on `paper-revision`:
     restructure history into an appendix, TMLR template, anonymised artefact, then a second independent review (Phase 11) and
     the readiness report (Phase 12). Draft the seed-variance probe and Q2 pre-registrations on CPU.
 
