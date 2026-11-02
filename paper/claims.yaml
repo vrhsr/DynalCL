@@ -345,6 +345,48 @@ claims:
               {csv_count: decision, where: {analysis: f3_precision, variant: q_2.56, decision: IDENTIFIABLE}, expect: 0},
               {csv_count: decision, where: {analysis: f3_precision, variant: q_6.5, decision: IDENTIFIABLE}, expect: 0},
               {csv_count: decision, where: {analysis: f3_precision, h: "5", decision: IDENTIFIABLE}, expect: 0}]
+  - id: B5-SPLIT-F1
+    text: "Batch 5, F1 split at r = 1, n = 2: total 0.288, noise-level part 0.237, dynamics part 0.051; pop vs the noise-matched comparator separable up to n = 5 (r = 1); total window n <= 12 (r = 1) and n <= 14 (r = 0.25) on the denser grid."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/split.csv}
+    extract: [{csv_max: estimate, where: {family: F1, part: T, r: "1.0", n: "2"}, expect: 0.2884, tol: 0.0001},
+              {csv_max: estimate, where: {family: F1, part: N, r: "1.0", n: "2"}, expect: 0.2371, tol: 0.0001},
+              {csv_max: estimate, where: {family: F1, part: D, r: "1.0", n: "2"}, expect: 0.0512, tol: 0.0001},
+              {csv_max_int: n, where: {family: F1, part: D1, r: "1.0", decision: SEPARABLE}, expect: 5},
+              {csv_max_int: n, where: {family: F1, part: T, r: "1.0", decision: SEPARABLE}, expect: 12},
+              {csv_max_int: n, where: {family: F1, part: T, r: "0.25", decision: SEPARABLE}, expect: 14}]
+  - id: B5-SPLIT-F2
+    text: "Batch 5, F2 split at r = 1, n = 10: total 0.335, dynamics part 0.179, noise-level part 0.156; the total is separable up to n = 20 and BORDERLINE from n = 40 (every r), not separable at n = 80."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/split.csv}
+    extract: [{csv_max: estimate, where: {family: F2, part: T, r: "1.0", n: "10"}, expect: 0.3347, tol: 0.0001},
+              {csv_max: estimate, where: {family: F2, part: D, r: "1.0", n: "10"}, expect: 0.1789, tol: 0.0001},
+              {csv_max: estimate, where: {family: F2, part: N, r: "1.0", n: "10"}, expect: 0.1558, tol: 0.0001},
+              {csv_max_int: n, where: {family: F2, part: T, decision: SEPARABLE}, expect: 20},
+              {csv_count: decision, where: {family: F2, part: T, n: "40", decision: BORDERLINE}, expect: 3},
+              {csv_count: decision, where: {family: F2, part: T, n: "80", decision: NOT SEPARABLE}, expect: 3}]
+  - id: B5-CUM
+    text: "Batch 5 cumulative gaps: 1A summed over n = 0..160 is 0.551-0.558 nats (three r) against the 0.582-nat budget; F3 summed over n = 2..40 is at most 0.43 at q = 0 and 0.15 at q = 6.5."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/cumulative.csv}
+    extract: [{csv_minmax: estimate, where: {family: 1A, kind: cum, n: "160"}, expect: [0.5510, 0.5581], tol: 0.0001},
+              {csv_max: estimate, where: {family: F3, variant: q_0.0, kind: cum, n: "40"}, expect: 0.4343, tol: 0.0001},
+              {csv_max: estimate, where: {family: F3, variant: q_6.5, kind: cum, n: "40"}, expect: 0.1501, tol: 0.0001},
+              {csv_max_int: n, where: {family: 1A, kind: cum}, expect: 160}]
+  - id: B5-F2-LIB
+    text: "Batch 5, F2 libraries: at n = 80 every K up to 1024 is SEPARABLE at every r; the K = 1024 mean gap there is 0.067-0.082."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/f2_library.csv}
+    extract: [{csv_count: decision, where: {n: "80", decision: SEPARABLE}, expect: 15},
+              {csv_minmax: mean_estimate, where: {K: "1024", n: "80"}, expect: [0.0673, 0.0821], tol: 0.0002},
+              {csv_max_int: n, where: {family: F2}, expect: 80}]
+  - id: B5-F1-LIB
+    text: "Batch 5, F1 libraries at n = 160: K = 16 mean gap 0.032-0.037 with 59-66% of draws separable; K = 64 not separable."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/f1_library_long.csv}
+    extract: [{csv_minmax: mean_estimate, where: {K: "16", n: "160"}, expect: [0.0324, 0.0368], tol: 0.0002},
+              {csv_minmax: frac_lo_ge_delta, where: {K: "16", n: "160"}, expect: [0.59, 0.66], tol: 0.01},
+              {csv_count: decision, where: {K: "64", decision: NOT SEPARABLE}, expect: 12}]
   - id: THEORY-KL
     text: "Prior KL budgets (DERIVED, computed numerically; batch 5 section E): 1A 0.582 nats; F1 2.570 (noise part 1.989 for log-uniform [0.01, 100], 1.296 for [0.1, 10]); F2 17.37 (map comparator), 5.61 (noise-matched comparator)."
     label: VERIFIED

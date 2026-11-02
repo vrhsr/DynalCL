@@ -7,16 +7,19 @@ windows move as the budgets of Section~\ref{sec:theory} predict; we have not var
 log-score difference, not derived from the seed variance of trained models. The budget bounds what any pooling over
 forecasts can gain.
 \item \textbf{Power and grids.} The F3 map is underpowered at moderate noise; with ten times its sample size the window there
-widens (Table~\ref{tab:sensitivity}). The grids of context lengths are coarse and differ by map; where a window reaches the
-last grid point (F2, and F3 at the smallest margin) its end is not mapped.
+widens (Table~\ref{tab:sensitivity}). The grids of context lengths are coarse and differ by map; the ends of the F1 and F2
+windows were located by extensions to denser and longer grids (Section~\ref{sec:results}), and the F3 window at the smallest
+margin still reaches its last grid point.
 \item \textbf{Per-cell rules and dependence.} The maps use per-cell rules without a global correction and common random
 numbers; the expected number of wrongly marked held-out population cells is below one per map, and patterns across cells are
 descriptive.
 \item \textbf{Designed sets.} Where library and continuous references separate on probe or out-of-support sets, the gap is
 not a divergence and partly reflects how well the library covers the edge of the stable region.
 \item \textbf{The long-context limits.} The nearest-system limit assumes posterior concentration and the stationary law of the
-regressor; it describes contexts longer than our library maps, and the order-of-magnitude scaling in the number of system
-parameters is a heuristic, not a theorem.
+regressor; the extensions to long contexts agree with it in the mean, but it is an average over libraries and does not make
+every library separable. The order-of-magnitude scaling in the number of system parameters is a heuristic, not a theorem.
+The split of the gap into noise-level and dynamics parts depends on the intermediate references; in F2 the conjugate prior
+couples coefficients and noise, so the split is exact arithmetic but its labels are approximate.
 \item \textbf{Simple families.} All results concern linear autoregressive processes with Gaussian noise, scalar or
 bivariate; nothing is claimed for nonlinear, chaotic or high-dimensional systems. Each confirmatory study ran on one platform
 with two replicates.

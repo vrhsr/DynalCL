@@ -54,6 +54,19 @@ files), Track 1 PDF 14 pages with no overfull box, Track 2 PDF built.
 
 Build: claims 54 verified, 104 macros, numbers audit PASS, 17-page PDF, no overfull box.
 
+## Revision 3: batch 5 results (verified S46; pinned `e08eee8`)
+
+| # | Change | Where | Type | Approved by |
+|---|---|---|---|---|
+| 29 | **Correction of revision 1:** "the larger gaps when the noise scale is unknown or the system is bivariate ... mostly knowledge of the noise level" was true for F1 and for the F2 prior budget, but the split shows the F2 gap at the mapped contexts (n >= 10) is mostly dynamics; abstract, introduction, theory, results and conclusion corrected | 00, 01, 05b, 06, 10 | correction | S40 decision 2 (split) |
+| 30 | F1/F2 split reported (symmetric two-path parts; F1 dynamics-only window n <= 5 as in the known-scale family); F1 window on the denser grid (n <= 14 / 12); F2 window ends between n = 20 and 40 | 06_results | results | as above |
+| 31 | Cumulative gaps vs budget: new Figure (1A summed to n = 160 is 0.551-0.558 vs 0.582; noisy family spends the same budget more slowly; F1 dynamics part below its 0.582 budget) | 05b, 06, make_figures.py | results, figure | S40 decision 1 |
+| 32 | F2 libraries to K = 1024 and n = 80 (all separable at n = 80); F1 libraries to n = 160 (K = 16 mean at its limit, 59-66% of libraries separable); library figure no longer provisional, second bivariate series added, legend moved below the axes | 06, numbers.yaml figures | results, figure | user (figures; provisional until batch 5) |
+| 33 | Limitations: grids (F1/F2 window ends now located), long-context limit (mean vs per library), split labels approximate in F2 | 08 | content | - |
+| 34 | Claims B5-SPLIT-F1, B5-SPLIT-F2, B5-CUM, B5-F2-LIB, B5-F1-LIB; 25 macros | claims.yaml, numbers.yaml | pipeline | - |
+
+Build: claims 59 verified, 129 macros, numbers audit PASS, 18-page PDF, no overfull box.
+
 Not yet done (planned): figures (gap vs n with bands; library share vs K against the nearest-system limit; cumulative gap vs
 budget, after batch 5); results of batches 4 and 5; the LLM-use statement (draft awaiting approval); author names; appendices;
 restructuring of the Stage 0/0.5/0.6 history into an appendix; TMLR template.

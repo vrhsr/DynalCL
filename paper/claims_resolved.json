@@ -2307,6 +2307,381 @@
   "status": "PASS"
  },
  {
+  "id": "B5-SPLIT-F1",
+  "label": "VERIFIED",
+  "text": "Batch 5, F1 split at r = 1, n = 2: total 0.288, noise-level part 0.237, dynamics part 0.051; pop vs the noise-matched comparator separable up to n = 5 (r = 1); total window n <= 12 (r = 1) and n <= 14 (r = 0.25) on the denser grid.",
+  "ref": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "path": "results_stage2/batch5/split.csv",
+  "commit": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "sha256": "49c46c2dd9d4c4150b40eefc12cacefd69d7ec743f8aef2cfb0bcfa7dd48f21c",
+  "checks": [
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F1",
+      "part": "T",
+      "r": "1.0",
+      "n": "2"
+     }
+    },
+    "expect": 0.2884,
+    "got": 0.2883670402407796,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F1",
+      "part": "N",
+      "r": "1.0",
+      "n": "2"
+     }
+    },
+    "expect": 0.2371,
+    "got": 0.23713584656935577,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F1",
+      "part": "D",
+      "r": "1.0",
+      "n": "2"
+     }
+    },
+    "expect": 0.0512,
+    "got": 0.05123119367142381,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "family": "F1",
+      "part": "D1",
+      "r": "1.0",
+      "decision": "SEPARABLE"
+     }
+    },
+    "expect": 5,
+    "got": 5,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "family": "F1",
+      "part": "T",
+      "r": "1.0",
+      "decision": "SEPARABLE"
+     }
+    },
+    "expect": 12,
+    "got": 12,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "family": "F1",
+      "part": "T",
+      "r": "0.25",
+      "decision": "SEPARABLE"
+     }
+    },
+    "expect": 14,
+    "got": 14,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "B5-SPLIT-F2",
+  "label": "VERIFIED",
+  "text": "Batch 5, F2 split at r = 1, n = 10: total 0.335, dynamics part 0.179, noise-level part 0.156; the total is separable up to n = 20 and BORDERLINE from n = 40 (every r), not separable at n = 80.",
+  "ref": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "path": "results_stage2/batch5/split.csv",
+  "commit": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "sha256": "49c46c2dd9d4c4150b40eefc12cacefd69d7ec743f8aef2cfb0bcfa7dd48f21c",
+  "checks": [
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "T",
+      "r": "1.0",
+      "n": "10"
+     }
+    },
+    "expect": 0.3347,
+    "got": 0.33469134675110285,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "D",
+      "r": "1.0",
+      "n": "10"
+     }
+    },
+    "expect": 0.1789,
+    "got": 0.17890362842099405,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "N",
+      "r": "1.0",
+      "n": "10"
+     }
+    },
+    "expect": 0.1558,
+    "got": 0.1557877183301088,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "family": "F2",
+      "part": "T",
+      "decision": "SEPARABLE"
+     }
+    },
+    "expect": 20,
+    "got": 20,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "family": "F2",
+      "part": "T",
+      "n": "40",
+      "decision": "BORDERLINE"
+     }
+    },
+    "expect": 3,
+    "got": 3,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "family": "F2",
+      "part": "T",
+      "n": "80",
+      "decision": "NOT SEPARABLE"
+     }
+    },
+    "expect": 3,
+    "got": 3,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "B5-CUM",
+  "label": "VERIFIED",
+  "text": "Batch 5 cumulative gaps: 1A summed over n = 0..160 is 0.551-0.558 nats (three r) against the 0.582-nat budget; F3 summed over n = 2..40 is at most 0.43 at q = 0 and 0.15 at q = 6.5.",
+  "ref": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "path": "results_stage2/batch5/cumulative.csv",
+  "commit": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "sha256": "bb719055c88507159845e60e2b74cd0dfb3937fc7a9ceccf6f2bad813f6604b9",
+  "checks": [
+   {
+    "spec": {
+     "csv_minmax": "estimate",
+     "where": {
+      "family": "1A",
+      "kind": "cum",
+      "n": "160"
+     }
+    },
+    "expect": [
+     0.551,
+     0.5581
+    ],
+    "got": [
+     0.5509587156562559,
+     0.5580664276117737
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F3",
+      "variant": "q_0.0",
+      "kind": "cum",
+      "n": "40"
+     }
+    },
+    "expect": 0.4343,
+    "got": 0.43426088373688215,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F3",
+      "variant": "q_6.5",
+      "kind": "cum",
+      "n": "40"
+     }
+    },
+    "expect": 0.1501,
+    "got": 0.15005936778316692,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "family": "1A",
+      "kind": "cum"
+     }
+    },
+    "expect": 160,
+    "got": 160,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "B5-F2-LIB",
+  "label": "VERIFIED",
+  "text": "Batch 5, F2 libraries: at n = 80 every K up to 1024 is SEPARABLE at every r; the K = 1024 mean gap there is 0.067-0.082.",
+  "ref": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "path": "results_stage2/batch5/f2_library.csv",
+  "commit": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "sha256": "4ccc8ae4de26b9a03fe588a32c4d616d028cb6faeac58c5264774d7862de96b8",
+  "checks": [
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "n": "80",
+      "decision": "SEPARABLE"
+     }
+    },
+    "expect": 15,
+    "got": 15,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_minmax": "mean_estimate",
+     "where": {
+      "K": "1024",
+      "n": "80"
+     }
+    },
+    "expect": [
+     0.0673,
+     0.0821
+    ],
+    "got": [
+     0.06734013100568642,
+     0.08210543505021463
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max_int": "n",
+     "where": {
+      "family": "F2"
+     }
+    },
+    "expect": 80,
+    "got": 80,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
+  "id": "B5-F1-LIB",
+  "label": "VERIFIED",
+  "text": "Batch 5, F1 libraries at n = 160: K = 16 mean gap 0.032-0.037 with 59-66% of draws separable; K = 64 not separable.",
+  "ref": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "path": "results_stage2/batch5/f1_library_long.csv",
+  "commit": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "sha256": "3261908108cda6547c02abba7be9b915a16553e8b182706433b550c58887e1f8",
+  "checks": [
+   {
+    "spec": {
+     "csv_minmax": "mean_estimate",
+     "where": {
+      "K": "16",
+      "n": "160"
+     }
+    },
+    "expect": [
+     0.0324,
+     0.0368
+    ],
+    "got": [
+     0.032429194072561424,
+     0.036758713574092605
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_minmax": "frac_lo_ge_delta",
+     "where": {
+      "K": "16",
+      "n": "160"
+     }
+    },
+    "expect": [
+     0.59,
+     0.66
+    ],
+    "got": [
+     0.59375,
+     0.65625
+    ],
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_count": "decision",
+     "where": {
+      "K": "64",
+      "decision": "NOT SEPARABLE"
+     }
+    },
+    "expect": 12,
+    "got": 12,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
   "id": "THEORY-KL",
   "label": "VERIFIED",
   "text": "Prior KL budgets (DERIVED, computed numerically; batch 5 section E): 1A 0.582 nats; F1 2.570 (noise part 1.989 for log-uniform [0.01, 100], 1.296 for [0.1, 10]); F2 17.37 (map comparator), 5.61 (noise-matched comparator).",

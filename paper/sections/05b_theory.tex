@@ -21,8 +21,11 @@ The budgets (relative entropy between priors, computed numerically) are \KLoneA 
 whose priors over $a$ are the same); \KLFone nats in F1, of which \KLFoneSigma come from the noise-scale priors, a part set by
 the width of the context-only log-uniform range (\KLFoneSigmaNarrow nats if it spanned two orders of magnitude instead of
 four); and \KLFtwo nats in
-F2 (\KLFtwoNM if the context-only reference were given the population's noise prior). So most of the room in F1 and F2 is
-knowledge of the noise level, which any reference trained on the population's data would acquire.
+F2 (\KLFtwoNM if the context-only reference were given the population's noise prior). So most of the prior budget in F1 and
+F2 is knowledge of the noise level; how much of it is spent at the context lengths we map is measured directly in
+Section~\ref{sec:results}. The bound is nearly attained with a known noise scale: summed over $n=0,\dots,\CumNmax$, the gaps
+come to \CumOneAMin--\CumOneAMax nats at the three initial-state scales, against the \KLoneA-nat budget
+(Figure~\ref{fig:cumulative}), the same total spent at different rates.
 
 \paragraph{Library versus population: the nearest system.} On held-out systems, as the context grows, the population
 predictive approaches the true one-step law and the library posterior concentrates on the library system nearest to the

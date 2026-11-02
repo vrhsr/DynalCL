@@ -6,9 +6,9 @@ population and context-only priors, a budget that the per-forecast gaps share ou
 nearest library system, the long-context limit of the library gap. In scalar autoregressive systems with a known noise scale
 the budget is small and spent at very short contexts, observation noise spreads it more thinly, and libraries of
 \LibBigKOneA or more systems are not separable from continuous priors on held-out data in our map, while very small libraries
-are. The larger gaps when the noise scale is unknown, or in the bivariate family, come with much larger budgets that are
-mostly knowledge of the noise level; in the bivariate family libraries stay separable far beyond the scalar range because a
-seven-parameter space is covered sparsely. Population Bayes minimises the expected log loss, so a network that reached the
+are. The larger gaps when the noise scale is unknown are mostly knowledge of the noise level; in the bivariate family the gaps
+at the context lengths we can map are mostly knowledge of the dynamics, and libraries of up to \KThousand systems become
+separable at long contexts because a seven-parameter space is covered sparsely. Population Bayes minimises the expected log loss, so a network that reached the
 population-risk minimum would equal it; at finite capacity and training budget, comparing a network with population and
 context-only Bayes measures how close training gets. Whether a network trained on a finite library memorises or generalises
 is the open question, and the nearest-system limit locates where its answer would be visible by score: in our families, the

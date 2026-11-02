@@ -19,6 +19,7 @@ refs:
   theory: cd2759f81aee7cc2f78a2248664d43fb9e038596
   b5spec: 6d8a9fd3cc4636822975b4249774035ffcc67116
   batch4: 763e82bdb886d5525c81798e29102932212e2b05
+  batch5: e08eee8ad24f887b61e5683128c5525edc628f4b
 files:
   s0: {ref: main, path: runs/20261009T094047949167Z_separability_9123175bb3/results/summary.json}
   s05: {ref: main, path: runs/20261010T053729455237Z_stage05_population_advantage_51c7621b7a/results/summary.json}
@@ -49,6 +50,11 @@ files:
   mathf1: {ref: freeze, path: docs/MATH_F1.md}
   b5spec: {ref: b5spec, path: docs/STAGE2_BATCH5_SPEC.md}
   sens: {ref: batch4, path: results_stage2/sensitivity/sensitivity.csv}
+  b5split: {ref: batch5, path: results_stage2/batch5/split.csv}
+  b5cum: {ref: batch5, path: results_stage2/batch5/cumulative.csv}
+  b5f2lib: {ref: batch5, path: results_stage2/batch5/f2_library.csv}
+  b5f2libd: {ref: batch5, path: results_stage2/batch5/f2_library_draws.csv}
+  b5f1lib: {ref: batch5, path: results_stage2/batch5/f1_library_long.csv}
 numbers:
   - {macro: ItemSETarget, file: f2mapcode, claim: F2-MAP, x: {regex_float: 'ITEM_SE_TARGET = (\d+\.\d+)'}, fmt: "{:.2f}"}
   # design constants (frozen Stage 0.6 confirmatory config; the same delta was fixed in Stage 0 and kept since)
@@ -167,6 +173,32 @@ numbers:
   - {macro: SensFoneN, file: sens, claim: SENS-FRONTIER-F1, x: {csv_max_int: n, where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.1_10.0, decision: IDENTIFIABLE}}, fmt: "{:d}"}
   - {macro: FthreePrecQoneN, file: sens, claim: SENS-F3, x: {csv_max_int: n, where: {analysis: f3_precision, variant: q_0.755, h: "1", r: "0.25", decision: IDENTIFIABLE}}, fmt: "{:d}"}
   - {macro: FthreePrecQoneNr, file: sens, claim: SENS-F3, x: {csv_max_int: n, where: {analysis: f3_precision, variant: q_0.755, h: "1", r: "1.0", decision: IDENTIFIABLE}}, fmt: "{:d}"}
+  # batch 5 (results-stage2-cpu-batch5 @ e08eee8; S46)
+  - {macro: SplitFoneT, file: b5split, claim: B5-SPLIT-F1, x: {csv_max: estimate, where: {family: F1, part: T, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
+  - {macro: SplitFoneN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max: estimate, where: {family: F1, part: N, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
+  - {macro: SplitFoneD, file: b5split, claim: B5-SPLIT-F1, x: {csv_max: estimate, where: {family: F1, part: D, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
+  - {macro: SplitFoneDynN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: D1, r: "1.0", decision: SEPARABLE}}, fmt: "{:d}"}
+  - {macro: FoneDenseN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "1.0", decision: SEPARABLE}}, fmt: "{:d}"}
+  - {macro: FoneDenseNsmall, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "0.25", decision: SEPARABLE}}, fmt: "{:d}"}
+  - {macro: SplitFtwoT, file: b5split, claim: B5-SPLIT-F2, x: {csv_max: estimate, where: {family: F2, part: T, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: SplitFtwoD, file: b5split, claim: B5-SPLIT-F2, x: {csv_max: estimate, where: {family: F2, part: D, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: SplitFtwoN, file: b5split, claim: B5-SPLIT-F2, x: {csv_max: estimate, where: {family: F2, part: N, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: FtwoEndSep, file: b5split, claim: B5-SPLIT-F2, x: {csv_max_int: n, where: {family: F2, part: T, decision: SEPARABLE}}, fmt: "{:d}"}
+  - {macro: FtwoEndBorder, file: b5split, claim: B5-SPLIT-F2, x: {csv_min_int: n, where: {family: F2, part: T, decision: BORDERLINE}}, fmt: "{:d}"}
+  - {macro: CumOneAMin, file: b5cum, claim: B5-CUM, x: {csv_minmax: estimate, where: {family: 1A, kind: cum, n: "160"}}, pick: 0, fmt: "{:.3f}"}
+  - {macro: CumOneAMax, file: b5cum, claim: B5-CUM, x: {csv_minmax: estimate, where: {family: 1A, kind: cum, n: "160"}}, pick: 1, fmt: "{:.3f}"}
+  - {macro: CumNmax, file: b5cum, claim: B5-CUM, x: {csv_max_int: n, where: {family: 1A, kind: cum}}, fmt: "{:d}"}
+  - {macro: CumFthreeNmax, file: b5cum, claim: B5-CUM, x: {csv_max_int: n, where: {family: F3, kind: cum}}, fmt: "{:d}"}
+  - {macro: CumFthreeClean, file: b5cum, claim: B5-CUM, x: {csv_max: estimate, where: {family: F3, variant: q_0.0, kind: cum, n: "40"}}, fmt: "{:.2f}"}
+  - {macro: CumFthreeNoisy, file: b5cum, claim: B5-CUM, x: {csv_max: estimate, where: {family: F3, variant: q_6.5, kind: cum, n: "40"}}, fmt: "{:.2f}"}
+  - {macro: FtwoLibNlong, file: b5f2lib, claim: B5-F2-LIB, x: {csv_max_int: n, where: {family: F2}}, fmt: "{:d}"}
+  - {macro: FtwoLibThousandMin, file: b5f2lib, claim: B5-F2-LIB, x: {csv_minmax: mean_estimate, where: {K: "1024", n: "80"}}, pick: 0, fmt: "{:.3f}"}
+  - {macro: FtwoLibThousandMax, file: b5f2lib, claim: B5-F2-LIB, x: {csv_minmax: mean_estimate, where: {K: "1024", n: "80"}}, pick: 1, fmt: "{:.3f}"}
+  - {macro: FoneLibLongN, file: b5f1lib, claim: B5-F1-LIB, x: {csv_max_int: n, where: {family: F1}}, fmt: "{:d}"}
+  - {macro: FoneLibSixteenMin, file: b5f1lib, claim: B5-F1-LIB, x: {csv_minmax: mean_estimate, where: {K: "16", n: "160"}}, pick: 0, fmt: "{:.3f}"}
+  - {macro: FoneLibSixteenMax, file: b5f1lib, claim: B5-F1-LIB, x: {csv_minmax: mean_estimate, where: {K: "16", n: "160"}}, pick: 1, fmt: "{:.3f}"}
+  - {macro: FoneLibSixteenShareMin, file: b5f1lib, claim: B5-F1-LIB, x: {csv_minmax: frac_lo_ge_delta, where: {K: "16", n: "160"}}, pick: 0, fmt: "{:.2f}"}
+  - {macro: FoneLibSixteenShareMax, file: b5f1lib, claim: B5-F1-LIB, x: {csv_minmax: frac_lo_ge_delta, where: {K: "16", n: "160"}}, pick: 1, fmt: "{:.2f}"}
 # Generated tables declared from pinned files (paper/tools/make_tables.py); rows are labels + row filters (h = 1 only).
 tables:
   sensitivity:
@@ -204,13 +236,19 @@ figures:
       - {panel: 'AR(1), unknown $\sigma$ (F1 map)', file: f1map, where: {set: HELD, pair: "pop|ctx"}, series: r, label: '$r={}$', legend: sw}
       - {panel: 'bivariate VAR(1) (F2 map)', file: f2map, where: {set: HELD, pair: pop-ctx}, series: r, label: '$r={}$', legend: sw}
   library:
-    provisional: true       # until the F2 library map reaches the largest K of the theory file (batch 5)
+    provisional: false      # batch 5 extended the F2 library map to the largest K of the theory file (S46)
     share:
       - {label: 'known $\sigma$', file: map1a, where: {set: HELD, pair: "lib|pop"}, kind: frac}
       - {label: 'unknown $\sigma$', file: f1map, where: {set: HELD, pair: "lib|pop"}, kind: frac}
       - {label: 'noisy, $q=0$', file: f3rows, where: {set: HELD, pair: pop-lib, h: "1", q: "0.0"}, kind: rows}
-      - {label: 'bivariate', file: f2rows, where: {set: HELD, pair: pop-lib}, kind: rows}
+      - {label: 'bivariate (map)', file: f2rows, where: {set: HELD, pair: pop-lib}, kind: rows}
+      - {label: 'bivariate, to $n=80$', file: b5f2libd, where: {family: F2}, kind: rows_est}
     limit:
       - {label: 'known $\sigma$', file: theory, json: nearest_atom.known_sigma}
       - {label: 'unknown $\sigma$', file: theory, json: nearest_atom.unknown_sigma}
       - {label: 'bivariate', file: theory, json: nearest_atom.f2}
+  cumulative:
+    panels:
+      - {panel: 'known $\sigma$', file: b5cum, where: {family: 1A, variant: pop-stab, kind: cum}, series: r, order: ["0.25", "1.0", "4.0"], legend_labels: {"0.25": '$r=0.25$', "1.0": '$r=1$', "4.0": '$r=4$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}}
+      - {panel: 'noisy, $r=1$', file: b5cum, where: {family: F3, r: "1.0", kind: cum}, series: variant, order: [q_0.0, q_0.755, q_2.56, q_6.5], legend_labels: {q_0.0: '$q=0$', q_0.755: '$q=0.755$', q_2.56: '$q=2.56$', q_6.5: '$q=6.5$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}, legend: nw}
+      - {panel: 'unknown $\sigma$, dynamics part', file: b5cum, where: {family: F1, variant: pop-ctx_nm, kind: cum}, series: r, order: ["0.25", "1.0", "4.0"], legend_labels: {"0.25": '$r=0.25$', "1.0": '$r=1$', "4.0": '$r=4$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}}
