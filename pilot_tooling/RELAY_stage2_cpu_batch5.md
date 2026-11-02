@@ -11,8 +11,11 @@ during its run would corrupt that record).
 Task: Stage 2 CPU batch 5 (CPU only: no GPU, no torch). Stop and report if anything fails or a permission is denied.
 Do NOT write disclosure entries and do NOT commit to stage1-planning; only push the results branch.
 Never open, print, add or push anything under results_stage1/pilot/. At most 16 worker processes in total on the machine.
-0. Precondition: batch 4 is finished and pushed: `tmux ls` shows no session s2cpu4, results_stage2/BATCH4_DONE exists, and
-   `git ls-remote origin results-stage2-cpu-batch4` prints a hash. If not, STOP and report; do not start batch 5.
+0. Precondition: batch 4 is finished and pushed: `tmux ls` shows no session s2cpu4, and
+   `git ls-remote origin results-stage2-cpu-batch4` prints a hash (equivalently, after `git fetch origin`,
+   `git rev-parse --verify origin/results-stage2-cpu-batch4` succeeds). If not, STOP and report; do not start batch 5.
+   (Corrected 2026-11-02, disclosure S46: the first version also required results_stage2/BATCH4_DONE in the working tree,
+   which is tracked only on the results branch and is gone after switching back to stage1-planning.)
 1. cd /home/rama_11187/projects/dynacl && git status --porcelain --untracked-files=no   (must print nothing)
    git fetch origin && git checkout stage1-planning && git pull --ff-only && git log --oneline -1
    (HEAD must be cd2759f or later; `git merge-base --is-ancestor cd2759f HEAD && echo OK` must print OK)

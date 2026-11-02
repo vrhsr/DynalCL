@@ -33,6 +33,12 @@ Batch 5's reference-only results (F1 libraries at n up to 160; F2 libraries up t
 cell selection and the finite-n boundary. If they do, the change is written as an amendment to this draft before any freeze,
 with both versions kept and the change disclosed; this table stays as the committed pre-batch-5 prediction.
 
+**Observed after the commitment (batch 5, reference-only, `results-stage2-cpu-batch5` @ `e08eee8`, disclosure S46; the table
+above is unchanged):** F2: separability of lib_K from pop grows with n and every K up to 1024 is separable at n = 80, as
+predicted. F1: at n = 160 the mean K = 16 gap (0.032-0.037) matches its limit (0.035) and K = 32 lies below delta, as
+predicted, but only 59-66% of K = 16 libraries are individually separable: the limit is a mean over libraries, so a design
+that gates each model on its own library must expect a fraction of the K = 16 models to be unclassifiable.
+
 ## 3. Network-side hypotheses (stated, not assumed)
 * H-mem: for K well below K_sep, converged networks are lib_K-like (they reproduce the training law's Bayes predictor).
 * H-trans: there is a K_net above which networks are pop-like on held-out systems. Outcomes and their meaning, fixed now:
