@@ -20,7 +20,13 @@ UNIF-only proxy (0.0017 nats at 10k steps, size M; disclosure S20).
   Its purposes: the seed spread in the family of the planned memorisation-transition study (option B), and a **measurement of
   the F2 cost per model-step** on the shared GPU, which replaces the ASSUMED 1.5x factor in that study's costing. Prerequisite:
   the F2 head floor (bivariate mixture head size; CPU, `docs/STAGE3_F2_DESIGN_CPU_SPEC.md`).
+* Heads (VERIFIED head floors): F1 arms m = 8 univariate components (S38); F2 arm m = 8 bivariate components with full
+  covariances (S48).
 * 16 models per arm, size M (as Stage 1A), budget grid {10k, 25k, 50k}; every checkpoint is evaluated (no budget selection).
+* Decision threshold the probe informs (fixed now; S48): option B of the memorisation study needs the F2 arm's
+  between-seed sd (upper 95% interval end, any checkpoint used for the budget) <= 0.0074 nats for 32-64 models per arm
+  (<= 0.0148 for 128), from the F2 lookup on the batch 2-3 cells; the batch 7 lookup on batch 5's cells will replace this
+  threshold if it is looser, disclosed before the probe is frozen.
 
 ## 3. Measurements (per arm, per cell r in {0.25, 1, 4} x n in {2, 3, 5, 10, 20, 40}, per checkpoint)
 * Regret against the arm's own Bayes predictor on its own law: R = E[KL(ref_arm || model)] by y-quadrature (Stage 1A V-RB).

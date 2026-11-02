@@ -75,6 +75,21 @@ If the probe's seed spread requires 64 models per arm instead of 32, the confirm
 B = 50k). The cap rule (frozen Stage 1A logic) declares NOT RESOLVABLE (compute) before the confirmatory run if the budget the
 user sets cannot hold the required models. The A4000 is shared; all GPU work waits for the user's go-ahead and a free GPU.
 
+## 5b. Head and power for option B (batch 6, `results-stage2-cpu-batch6` @ `6ffd8fc`, disclosure S48)
+* **Bivariate head: m = 8** components (full covariances), the smallest m whose mean floor is <= 0.001 nats in every cell
+  (worst cell at m = 8: 0.00048 +/- 0.00007, held-out lib_1024, r = 4, n = 2; m = 4 fails in 18 library cells at n <= 3).
+* **Power lookup (Q2, frozen rule, cells of the batch 2-3 F2 map):** s*(M) = 0.01 / 0.01 / 0.02 nats at M = 32 / 64 / 128,
+  against 0.10 for F1. Every shortfall is INCONCLUSIVE (never a wrong classification), and the binding cell is r = 1, n = 10,
+  K = 16, where the library and context-only references differ by only 0.045 nats.
+* **Consequence for option B.** By the frozen pilot rule (the smallest M whose s*(M) covers 1.35 x the measured seed sd), the
+  probe's F2 arm must measure a between-seed sd of at most about 0.0074 nats for 32-64 models per arm, or 0.0148 for 128.
+  With 128 models the confirmatory part grows fourfold (6 arms x 128 x 2 replicates: 456 GPU-h at B = 50k, 228 h at 25k,
+  ASSUMED 1.5x per step), which the shared card cannot realistically absorb. So option B is feasible only if the probe's F2
+  sd is of the order the UNIF proxy suggested (0.0017 at 10k steps, scalar, S20), or if cells with a larger
+  library-vs-context-only separation loosen the tolerance. The second point is checked on CPU by re-running the operating
+  characteristics on batch 5's cells (spec `docs/STAGE3_F2_OC_B5_SPEC.md`, relay `pilot_tooling/RELAY_stage2_cpu_batch7.md`);
+  the Q2 cell set will be chosen from that result before any freeze.
+
 ## 6. Seeds (proposed, UNUSED, NOT registered)
 mt_pilot_train 87001, mt_pilot_eval 87101, mt_pilot_library 87201, mt_pilot_bootstrap 87999; mt_confirmatory_train
 88001/88002, _eval 88101/88102, _library 88201/88202, _bootstrap 88999.
