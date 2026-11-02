@@ -13,10 +13,15 @@ estimate $+\,3\,$SE $<\delta$, and \textsc{borderline} otherwise (the released r
 \textsc{identifiable} and \textsc{unidentifiable}); the F1 map applies this to the absolute gap (two-sided), which only matters
 on designed sets. For libraries each map draws several independent libraries per size $K$ (fewer in F3 and F2 than in the 1A
 and F1 maps), applies the cell rule per draw, and marks a cell \textsc{separable} or \textsc{not separable} only if at least
-\DrawPct per cent of draws agree, otherwise \textsc{partial}. Because a trained model sees one library, a \textsc{partial}
-cell means that some libraries are separable from the continuous prior and others are not; we report per-draw agreement
-rather than hide it. The maps use common random numbers, so their cells are dependent and patterns across cells are
-descriptive. The rule is applied per cell without a global correction: with a correct standard error, the chance that a cell
+\DrawPct per cent of draws agree, otherwise \textsc{partial}. A \textsc{partial} cell is one in which the draws disagree:
+some libraries may be separable and others not, or most draws may be borderline (in the F1 map every cell with
+\KThirtyTwo-system libraries is \textsc{partial} although no single draw is separable). Because a trained model sees one
+library, we report the share of separable draws rather than hide it. Each gap is a mean of paired log-score differences on
+the same contexts and targets, except the held-out gaps of the 1A map, which average the per-context divergence computed by
+quadrature (a Rao--Blackwellised version of the same quantity). Each cell uses \SizeOneAHeld (1A), \SizeFoneHeld (F1),
+\SizeFthreeHeld (F3) or \SizeFtwoHeld (F2) held-out sequences, and each library draw \SizeOneALib, \SizeFoneLib,
+\SizeFthreeLib or \SizeFtwoLib in-library sequences. The maps use common random numbers, so their cells are dependent and
+patterns across cells are descriptive. The rule is applied per cell without a global correction: with a correct standard error, the chance that a cell
 is marked on the wrong side of $\delta$ is at most $\Phi(-3)$ whatever the dependence between cells, so the expected number of
 wrongly marked held-out population cells is below one in every map. Each map's specification was committed before its seed
 was first used. The pre-registered studies that preceded the maps used other rules with the same margin
@@ -29,6 +34,9 @@ needed in our designs for a per-cell behavioural classification at margin $\delt
 model is a random object whose seed variance enters any classification. For F1, the bootstrap-calibrated operating
 characteristics of our pre-registered classification rule imply that, with \MinModels models per arm, a population-like
 versus context-only classification has power of at least \LookupPower only if the between-seed standard deviation of a model's
-regret is at most \LookupQoneThirtyTwo nats (\LookupQoneSixtyFour at twice as many models). Evidence pooled over cells or over
-a whole sequence could separate references whose per-cell gaps are below $\delta$; Section~\ref{sec:theory} bounds how much
-such pooling can gain.
+regret is at most \LookupQoneThirtyTwo nats (\LookupQoneSixtyFour at twice as many models). The margin is therefore a
+choice to be made with the planned number of models and their seed variance in mind, not a property of the references;
+Table~\ref{tab:delta} and Figure~\ref{fig:gap} show how the windows move with it. Evidence pooled over cells, sequences or
+evaluation items accumulates with their number, so with enough items and low enough seed variance it can detect references
+whose per-forecast gaps lie below any fixed $\delta$; the budget of Section~\ref{sec:theory} bounds the size of the effect per
+sequence, not the evidence accumulated across sequences.

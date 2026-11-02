@@ -47,6 +47,9 @@ files:
   theory: {ref: theory, path: results_stage2/batch5/theory.json}
   f2var: {ref: f2code, path: dynaicl_families/stage2/f2_var.py}
   spec1a: {ref: map1a, path: docs/STAGE1_SEPARABILITY_MAP_SPEC.md}
+  specf1: {ref: f1map, path: docs/STAGE1_F1_SEPARABILITY_MAP_SPEC.md}
+  specf3: {ref: batch1, path: docs/STAGE2_F3_MAP_SPEC.md}
+  specf2: {ref: batch23, path: docs/STAGE2_F2_MAP_SPEC.md}
   mathf1: {ref: freeze, path: docs/MATH_F1.md}
   b5spec: {ref: b5spec, path: docs/STAGE2_BATCH5_SPEC.md}
   sens: {ref: batch4, path: results_stage2/sensitivity/sensitivity.csv}
@@ -136,6 +139,14 @@ numbers:
   - {macro: FtwoNmax, file: f2map, claim: F2-LONGEST, x: {csv_max_int: n, where: {set: HELD, pair: pop-ctx}}, fmt: "{:d}"}
   - {macro: OneAMaxNHalfDelta, file: map1a, claim: MAP-1A-HALF-DELTA, x: {csv_max_int: n, where: {set: HELD, pair: "pop|stab"}, ge: {lo: 0.01}}, fmt: "{:d}"}
   - {macro: DrawPct, file: spec1a, claim: DESIGN-DRAWS, x: {regex_int: 'IDENTIFIABLE if >= (\d+)% of draws'}, fmt: "{:d}"}
+  - {macro: SizeOneAHeld, file: spec1a, claim: DESIGN-N-1A, x: {regex_int: 'Q1: HELD N = (\d[\d ]*\d);'}, fmt: "{:,d}"}
+  - {macro: SizeOneALib, file: spec1a, claim: DESIGN-N-1A, x: {regex_int: 'INLIB realized N = (\d[\d ]*\d);'}, fmt: "{:,d}"}
+  - {macro: SizeFoneHeld, file: specf1, claim: DESIGN-N-F1, x: {regex_int: 'Q1: (\d[\d ]*\d) systems per set'}, fmt: "{:,d}"}
+  - {macro: SizeFoneLib, file: specf1, claim: DESIGN-N-F1, x: {regex_int: 'plus (\d[\d ]*\d) fresh in-library'}, fmt: "{:,d}"}
+  - {macro: SizeFthreeHeld, file: specf3, claim: DESIGN-N-F3, x: {regex_int: 'HELD: N = (\d[\d ]*\d) contexts'}, fmt: "{:,d}"}
+  - {macro: SizeFthreeLib, file: specf3, claim: DESIGN-N-F3, x: {regex_int: 'INLIB: N = (\d[\d ]*\d) per'}, fmt: "{:,d}"}
+  - {macro: SizeFtwoHeld, file: specf2, claim: DESIGN-N-F2, x: {regex_int: 'HELD: N = (\d+) per'}, fmt: "{:,d}"}
+  - {macro: SizeFtwoLib, file: specf2, claim: DESIGN-N-F2, x: {regex_int: 'INLIB: N = (\d+) per'}, fmt: "{:,d}"}
   - {macro: LookupPower, file: lookup, claim: F1-LOOKUP, x: {json: power}, fmt: "{:.2f}"}
   - {macro: SigLo, file: mathf1, claim: DESIGN-PRIORS, x: {regex_float: 'log sigma ~ U\(log ([\d.]+), log [\d.]+\)'}, fmt: "{:.2f}"}
   - {macro: SigHi, file: mathf1, claim: DESIGN-PRIORS, x: {regex_float: 'log sigma ~ U\(log [\d.]+, log ([\d.]+)\)'}, fmt: "{:.0f}"}
@@ -181,6 +192,15 @@ numbers:
   - {macro: SplitFoneDynNsmall, file: b5split, claim: B5-SPLIT-F1-R, x: {csv_max_int: n, where: {family: F1, part: D1, r: "0.25", decision: SEPARABLE}}, fmt: "{:d}"}
   - {macro: SplitFoneDfour, file: b5split, claim: B5-SPLIT-F1-R, x: {csv_max: estimate, where: {family: F1, part: D, r: "4.0", n: "2"}}, fmt: "{:.3f}"}
   - {macro: SplitFoneTfour, file: b5split, claim: B5-SPLIT-F1-R, x: {csv_max: estimate, where: {family: F1, part: T, r: "4.0", n: "2"}}, fmt: "{:.3f}"}
+  - {macro: PathFoneDone, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F1, part: D1, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
+  - {macro: PathFoneNone, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F1, part: N1, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
+  - {macro: PathFoneNtwo, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F1, part: N2, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
+  - {macro: PathFoneDtwo, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F1, part: D2, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
+  - {macro: PathFtwoDone, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F2, part: D1, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: PathFtwoNone, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F2, part: N1, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: PathFtwoNtwo, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F2, part: N2, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: PathFtwoDtwo, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F2, part: D2, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: FoneMassOutside, file: theory, claim: THEORY-KL, x: {json_keys: [kl_f1_sigma, "0.01_100.0", pop_mass_outside]}, fmt: sci}
   - {macro: FoneDenseN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "1.0", decision: SEPARABLE}}, fmt: "{:d}"}
   - {macro: FoneDenseNsmall, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "0.25", decision: SEPARABLE}}, fmt: "{:d}"}
   - {macro: SplitFtwoT, file: b5split, claim: B5-SPLIT-F2, x: {csv_max: estimate, where: {family: F2, part: T, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
@@ -213,7 +233,7 @@ tables:
       - {label: '$\sigma$-agnostic (F1 comparator)', where: {analysis: frontier, family: known_sigma, variant: sigma_agnostic}}
       - {label: 'least-squares Student-$t$ plug-in', where: {analysis: frontier, family: known_sigma, variant: ols_t}}
       - {group: 'known $\sigma$, population prior', label: '$\tau=0.15$', where: {analysis: prior, family: known_sigma, variant: tau_0.15}}
-      - {label: '$\tau=0.3$ (the maps)', where: {analysis: prior, family: known_sigma, variant: tau_0.3}}
+      - {label: '$\tau=0.3$ (the maps; same setting as above)', where: {analysis: prior, family: known_sigma, variant: tau_0.3}}
       - {label: '$\tau=0.6$', where: {analysis: prior, family: known_sigma, variant: tau_0.6}}
       - {group: 'unknown $\sigma$, comparator', label: 'log-uniform $\sigma$ on $[0.1,10]$', where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.1_10.0}}
       - {label: 'on $[0.01,100]$ (the maps)', where: {analysis: frontier, family: unknown_sigma, variant: ctx_logunif_0.01_100.0}}

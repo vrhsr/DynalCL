@@ -13,17 +13,22 @@ log loss (redundancy) of forecasting with $Q$'s mixture when the data come from 
 cumulative risk of the Bayes strategy is a mutual information \citep{haussler1997}. The bound is classical; we use it to
 predict, before any map, how much room a family leaves. It has three consequences. The per-forecast gaps of a family spend a
 fixed budget $D(P\|Q)$; contexts that are informative early (large initial states) spend it early, so their window is
-short. Observation noise known to both references leaves the budget unchanged and spreads it over more forecasts, so the
-per-forecast gaps shrink while the total population advantage does not. And because the priors in F1 are products over the
-coefficient and the noise scale, the budget splits exactly into a dynamics part and a noise-level part.
+short. Observation noise known to both references leaves the budget unchanged: the noisy observations are a garbling of the
+latent path (the observation noise is independent of the system), so the noisy cumulative gap can never exceed the noise-free
+one at any $N$, and both approach $D(P\|Q)$ as long as $a$ remains identifiable; noise spreads the same budget over more
+forecasts. And because the priors in F1 are products over the coefficient and the noise scale, the budget splits exactly into
+a dynamics part and a noise-level part. The asymptotics of such quantities for Bayes mixtures are classical
+\citep{clarke1990}.
 
 The budgets (relative entropy between priors, computed numerically) are \KLoneA nats with a known noise scale (and in F3,
 whose priors over $a$ are the same); \KLFone nats in F1, of which \KLFoneSigma come from the noise-scale priors, a part set by
 the width of the context-only log-uniform range (\KLFoneSigmaNarrow nats if it spanned two orders of magnitude instead of
 four); and \KLFtwo nats in
-F2 (\KLFtwoNM if the context-only reference were given the population's noise prior). So most of the prior budget in F1 and
-F2 is knowledge of the noise level; how much of it is spent at the context lengths we map is measured directly in
-Section~\ref{sec:results}. The bound is nearly attained with a known noise scale: summed over $n=0,\dots,\CumNmax$, the gaps
+F2 (\KLFtwoNM if the context-only reference were given the population's noise prior). Strictly, the population's
+inverse-gamma noise prior puts mass \FoneMassOutside outside the context-only range, so $D(P\|Q)$ is infinite in F1; the value
+given is the divergence of the population prior restricted to that range, and the bound holds for that restriction up to an
+event of this probability, which no map can resolve. So most of the prior budget in F1 and F2 is knowledge of the noise
+level; how much of it is spent at the context lengths we map is measured directly in Section~\ref{sec:results}. The bound is nearly attained with a known noise scale: summed over $n=0,\dots,\CumNmax$, the gaps
 come to \CumOneAMin--\CumOneAMax nats at the three initial-state scales, against the \KLoneA-nat budget
 (Figure~\ref{fig:cumulative}), the same total spent at different rates.
 
@@ -32,8 +37,9 @@ predictive approaches the true one-step law and the library posterior concentrat
 truth in per-step divergence, so the gap tends to $\mathbb E[\min_k D_{\mathrm{stat}}(\theta\,\|\,\theta_k)]$, the expected
 per-step divergence under the stationary law of the regressor (a derivation that assumes posterior concentration; finite
 contexts lie before this limit). Among $K$ systems drawn from a $p$-parameter population the nearest lies at a distance of
-order $K^{-1/p}$, so the limit falls roughly like $K^{-2/p}$: fast in scalar families and slowly for the seven-parameter
-bivariate systems. By Monte Carlo, the limit is \NaKnownFour, \NaKnownEight and \NaKnownSixteen nats for libraries of
+order $K^{-1/p}$, so asymptotically the limit falls like $K^{-2/p}$: fast in scalar families and slowly for the
+seven-parameter bivariate systems. At the library sizes we use it decays more slowly than this rate (the prior density is low
+near the stability boundary), so we rely on the Monte Carlo values, not on the rate. By Monte Carlo, the limit is \NaKnownFour, \NaKnownEight and \NaKnownSixteen nats for libraries of
 $K=4$, $8$ and \KSixteen systems with a known noise scale; \NaUnknownSixteen and \NaUnknownThirtyTwo nats for $K=\KSixteen$
 and \KThirtyTwo when the noise scale is unknown; and \NaTwoSixtyFour nats in the bivariate family at $K=\FtwoKmax$, still
 \NaTwoThousand at $K=\KThousand$. At $\delta=\DeltaNats$, the limit therefore falls below the margin between four and eight

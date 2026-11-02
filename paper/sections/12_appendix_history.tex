@@ -18,3 +18,34 @@ confirmatory cells. These results led to the stability-only Bayes comparator of 
 population knowledge gives a meaningful advantage at long contexts under additive observation noise, using a studentised
 max-$|t|$ bootstrap over all contrasts. Every long-context gain had an adjusted upper bound below $\delta$ in both replicates,
 and the pre-registered verdict was STOP. The noisy-family map of the main text extends this to short contexts.
+
+\section{Provenance of the maps and analyses}\label{app:provenance}
+``Pre-registered'' in the title refers to the studies of Appendix~\ref{app:history} and Appendix~\ref{sec:pilot}, which were
+frozen with fixed decision rules and confirmatory seeds. The maps and analyses of the main text are reference computations:
+for each, the specification (grid, sample sizes, rules, seed role) was committed to the repository before its seed was first
+used, and the disclosure log records what had been seen at that time. Their designs were chosen after earlier results, as
+Table~\ref{tab:provenance} lists; they are therefore confirmatory only in the sense that no specification was changed after
+its own results were seen.
+
+\begin{table}[h]
+\centering\small
+\caption{What was known when each map or analysis was specified.}\label{tab:provenance}
+\begin{tabular}{>{\raggedright\arraybackslash}p{10em}>{\raggedright\arraybackslash}p{\dimexpr\linewidth-10em-4\tabcolsep\relax}}
+\toprule
+Map or analysis & Specified after seeing \\
+\midrule
+Known-noise map (1A) & the three pre-registered studies of Appendix~\ref{app:history} \\
+Unknown-noise map (F1) & the 1A map \\
+Noisy-observation map (F3) & the 1A and F1 maps \\
+Bivariate map (F2) & the three scalar maps; its Monte Carlo criterion was set after timing the context-only reference on
+test seeds \\
+Sensitivity analyses (Table~\ref{tab:sensitivity}) & all four maps and a first internal review of the manuscript \\
+Splits, cumulative gaps, library and grid extensions & all of the above, this paper's audit, and scratch numbers from an
+AI-simulated review \\
+Budgets and nearest-system limits (Section~\ref{sec:theory}) & all four maps; computed by quadrature and Monte Carlo after
+the maps \\
+F1 operating characteristics & the F1 map; the method is that of the Stage~1A operating characteristics, whose first
+version was withdrawn after an independent audit \\
+\bottomrule
+\end{tabular}
+\end{table}

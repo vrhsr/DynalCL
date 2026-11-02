@@ -5,8 +5,8 @@ Table~\ref{tab:maps} summarises them at horizon $h=1$; each map has its own grid
 context lengths these gaps cannot exceed the \KLoneA-nat budget (Section~\ref{sec:theory}). Two earlier pre-registered
 studies in this family, with other comparators and rules, agree (Appendix~\ref{app:history}). With observation noise (F3) the largest $h=1$ gap is \FthreeGapQzero, \FthreeGapQone, \FthreeGapQtwo and
 \FthreeGapQthree nats at $q=0,\QOne,\QTwo,\QThree$: the same budget spread over more forecasts (Figure~\ref{fig:cumulative};
-by $n=\CumFthreeNmax$ the noise-free family has spent up to \CumFthreeClean of its \KLoneA nats, the noisiest only
-\CumFthreeNoisy). No cell is separable at the
+summed from $n=2$ to $n=\CumFthreeNmax$, the gaps reach at most \CumFthreeClean nats without noise and \CumFthreeNoisy at the
+highest noise level, against a budget of \KLoneA that also includes the terms for $n=0,1$). No cell is separable at the
 two larger noise levels or at $h=5$, and a pre-registered study had already returned STOP for long contexts
 (Appendix~\ref{app:history}). At
 moderate noise the F3 map is underpowered: its realised-target estimator has standard errors several times those of the 1A
@@ -21,18 +21,22 @@ precise 1A map is separable for the shortest contexts.
 When the noise scale is unknown (F1) the gaps are larger, \FoneGapMin--\FoneGapMax nats, and separable up to $n=\FoneMaxN$ at
 every $r$ in the map; a denser grid places the end at $n=\FoneDenseNsmall$ (\rsmall) and $n=\FoneDenseN$ ($r=1$). Most of the
 gap is knowledge of the noise level. We split it on the same items by inserting a reference that knows the population's noise
-prior but not its dynamics prior (and, symmetrically, one that knows the dynamics prior but not the noise prior, averaging the
-two orders): at $r=1$, $n=2$, the gap of \SplitFoneT nats has a noise-level part of \SplitFoneN and a dynamics part of
-\SplitFoneD, and population Bayes is separable from the noise-matched reference only up to $n=\SplitFoneDynNsmall$ at \rsmall
+prior but not its dynamics prior (noise first), or one that knows the dynamics prior but not the noise prior (dynamics
+first): at $r=1$, $n=2$, the gap of \SplitFoneT nats has a noise-level part of \PathFoneNone and a dynamics part of
+\PathFoneDone with noise first, and \PathFoneNtwo and \PathFoneDtwo with dynamics first (\SplitFoneN and \SplitFoneD on
+average), so the conclusion does not depend on the order. Population Bayes is separable from the noise-matched reference only up to $n=\SplitFoneDynNsmall$ at \rsmall
 and $n=\SplitFoneDynN$ at $r=1$, and at no context length at $r=4$ (borderline at $n=2$ only, where the dynamics part is
 \SplitFoneDfour of \SplitFoneTfour nats), much as in the known-scale family. In the bivariate family (F2) the population gap is up to \FtwoGapMax nats at $n=10$ and
 \FtwoGapMin--\FtwoGapLongMax nats at $n=\FtwoNmax$; extending the map, it is borderline from $n=\FtwoEndBorder$ at every $r$
 and not separable at the longest context added, so the F2 window ends between $n=\FtwoEndSep$ and $n=\FtwoEndBorder$. The
 shortest grid point, $n=5$, is \textsc{mc-limited}: its gaps are large but the context-only reference cannot be estimated
-there to our Monte Carlo criterion. Unlike F1, the larger part of the F2 gap at these context lengths is dynamics: at $r=1$,
-$n=10$, \SplitFtwoT nats split into \SplitFtwoD for the dynamics and \SplitFtwoN for the noise level. The F2 budget is
-nevertheless mostly noise-level (\KLFtwo nats, \KLFtwoNM if the context-only reference is given the population's noise
-prior), which suggests that most of that part is spent at the shorter contexts we cannot map.
+there to our Monte Carlo criterion. Unlike F1, the split of the F2 gap depends on the order: at $r=1$, $n=10$, the
+\SplitFtwoT nats divide into \PathFtwoNone for the noise level and \PathFtwoDone for the dynamics with noise first, but
+\PathFtwoNtwo and \PathFtwoDtwo with dynamics first; the interaction is larger than the difference between the averaged parts
+(\SplitFtwoN and \SplitFtwoD), so neither part can be said to dominate. In a conjugate prior the coefficient prior scales with
+the noise covariance, so the dynamics-first reference does not carry the population's marginal coefficient prior; a split
+with a clean meaning would need a non-conjugate comparator. The F2 prior budget is mostly noise-level (\KLFtwo nats,
+\KLFtwoNM if the context-only reference is given the population's noise prior).
 
 \begin{figure}[t]
 \centering

@@ -20,7 +20,8 @@ two-prior analogue for one Bayes mixture scored against another, which follows f
 \citep{cover2006}. In regression with exponentially distributed coefficients, a transformer outperformed least-squares,
 ridge and $\ell_1$-based estimators for small to moderate context lengths, which the authors read as implicit prior
 inference \citep{cao2026}. Point-prediction comparisons are fragile for telling posteriors apart \citep{aswadi2026}; we score
-full predictive distributions with the log score \citep{gneiting2007}. Whether large language models are Bayesian in context
+full predictive distributions with the log score \citep{gneiting2007}; differences in expected log score between two density
+forecasts are the quantity that likelihood-ratio tests of predictive ability compare \citep{amisano2007}. Whether large language models are Bayesian in context
 has been tested through the martingale property \citep{falck2024}, a test built for exchangeable data, which autoregressive
 data are not.
 

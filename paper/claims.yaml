@@ -295,6 +295,26 @@ claims:
     label: VERIFIED
     source: {ref: a499874cad30de8d9a20759b3ce73c62436c8408, path: results_stage1/map_1A/map_decisions.csv}
     extract: [{csv_max_int: n, where: {set: HELD, pair: "pop|stab"}, ge: {lo: 0.01}, expect: 10}]
+  - id: DESIGN-N-1A
+    text: "Design: the 1A map uses 40 000 held-out contexts per cell and 20 000 per library draw (Stage 1A map spec)."
+    label: DESIGN
+    source: {ref: a499874cad30de8d9a20759b3ce73c62436c8408, path: docs/STAGE1_SEPARABILITY_MAP_SPEC.md}
+    extract: [{regex_int: 'Q1: HELD N = (\d[\d ]*\d);', expect: 40000}, {regex_int: 'INLIB realized N = (\d[\d ]*\d);', expect: 20000}]
+  - id: DESIGN-N-F1
+    text: "Design: the F1 map uses 20 000 held-out systems per cell and 10 000 fresh in-library systems per library draw (F1 map spec)."
+    label: DESIGN
+    source: {ref: 66c58460078b6a291242debfd5a783a9f54e47a4, path: docs/STAGE1_F1_SEPARABILITY_MAP_SPEC.md}
+    extract: [{regex_int: 'Q1: (\d[\d ]*\d) systems per set', expect: 20000}, {regex_int: 'plus (\d[\d ]*\d) fresh in-library', expect: 10000}]
+  - id: DESIGN-N-F3
+    text: "Design: the F3 map uses 20 000 held-out contexts per (q, r) and 10 000 per library draw (F3 map spec)."
+    label: DESIGN
+    source: {ref: 50a7664a07759c4a05d27cadc093c19787706a8c, path: docs/STAGE2_F3_MAP_SPEC.md}
+    extract: [{regex_int: 'HELD: N = (\d[\d ]*\d) contexts', expect: 20000}, {regex_int: 'INLIB: N = (\d[\d ]*\d) per', expect: 10000}]
+  - id: DESIGN-N-F2
+    text: "Design: the F2 map uses 4000 held-out contexts per (r, n) and 1000 per library draw (F2 map spec)."
+    label: DESIGN
+    source: {ref: 56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3, path: docs/STAGE2_F2_MAP_SPEC.md}
+    extract: [{regex_int: 'HELD: N = (\d+) per', expect: 4000}, {regex_int: 'INLIB: N = (\d+) per', expect: 1000}]
   - id: DESIGN-DRAWS
     text: "Design: a library cell is marked when at least 90% of library draws agree (Stage 1A map spec, kept in later maps)."
     label: DESIGN
@@ -366,6 +386,16 @@ claims:
               {csv_count: decision, where: {family: F1, part: D1, r: "4.0", n: "2", decision: BORDERLINE}, expect: 1},
               {csv_max: estimate, where: {family: F1, part: D, r: "4.0", n: "2"}, expect: 0.0315, tol: 0.0005},
               {csv_max: estimate, where: {family: F1, part: T, r: "4.0", n: "2"}, expect: 0.3264, tol: 0.0001}]
+  - id: B5-SPLIT-PATHS
+    text: "Batch 5, the two orders of the split at r = 1: F1, n = 2: noise first D1 = 0.039, N1 = 0.249; dynamics first N2 = 0.225, D2 = 0.063 (noise-dominated either way); F2, n = 10: D1 = 0.122, N1 = 0.213; N2 = 0.099, D2 = 0.236 (the larger part depends on the order)."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/split.csv}
+    extract: [{csv_max: estimate, where: {family: F1, part: D1, r: "1.0", n: "2"}, expect: 0.0393, tol: 0.0005},
+              {csv_max: estimate, where: {family: F1, part: N1, r: "1.0", n: "2"}, expect: 0.2491, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D1, r: "1.0", n: "10"}, expect: 0.1219, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: N1, r: "1.0", n: "10"}, expect: 0.2128, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: N2, r: "1.0", n: "10"}, expect: 0.0989, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D2, r: "1.0", n: "10"}, expect: 0.2358, tol: 0.0005}]
   - id: B5-SPLIT-F2
     text: "Batch 5, F2 split at r = 1, n = 10: total 0.335, dynamics part 0.179, noise-level part 0.156; the total is separable up to n = 20 and BORDERLINE from n = 40 (every r), not separable at n = 80."
     label: VERIFIED
@@ -405,7 +435,8 @@ claims:
     extract: [{json_keys: [kl_1a, "0.999"], expect: 0.5816, tol: 0.0001}, {json: kl_f1_total_map_comparator, expect: 2.5703, tol: 0.0001},
               {json_keys: [kl_f1_sigma, "0.01_100.0", kl], expect: 1.9887, tol: 0.0001},
               {json_keys: [kl_f1_sigma, "0.1_10.0", kl], expect: 1.2955, tol: 0.0001},
-              {json: kl_f2.ctx.kl, expect: 17.37, tol: 0.01}, {json: kl_f2.ctx_nm.kl, expect: 5.61, tol: 0.01}]
+              {json: kl_f2.ctx.kl, expect: 17.37, tol: 0.01}, {json: kl_f2.ctx_nm.kl, expect: 5.61, tol: 0.01},
+              {json_keys: [kl_f1_sigma, "0.01_100.0", pop_mass_outside], expect: 1.33e-12, tol: 1e-14}]
   - id: THEORY-NA
     text: "Large-n nearest-atom limits of the held-out library gap (DERIVED, Monte Carlo; batch 5 section E): known sigma K = 4 / 8 / 16: 0.024 / 0.011 / 0.004; unknown sigma K = 16 / 32: 0.035 / 0.018; F2 K = 64 / 1024: 0.24 / 0.09 nats."
     label: VERIFIED

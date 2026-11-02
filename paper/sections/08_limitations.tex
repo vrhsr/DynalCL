@@ -4,8 +4,9 @@
 depend on both. Table~\ref{tab:sensitivity} varies both in the scalar families with a known or unknown noise scale, where the
 windows move as the budgets of Section~\ref{sec:theory} predict; we have not varied them in the noisy or bivariate families.
 \item \textbf{Margin.} The window depends on $\delta$ (Table~\ref{tab:delta}); $\delta$ was fixed in advance as a small
-log-score difference, not derived from the seed variance of trained models. The budget bounds what any pooling over
-forecasts can gain.
+log-score difference, not derived from the seed variance of trained models. A test that pools evidence over many sequences
+or items can detect gaps below $\delta$; the budget bounds the per-sequence effect, not the evidence such pooling
+accumulates, so ``not separable'' here means not separable per cell at this margin and precision.
 \item \textbf{Power and grids.} The F3 map is underpowered at moderate noise; with ten times its sample size the window there
 widens (Table~\ref{tab:sensitivity}). The grids of context lengths are coarse and differ by map; the ends of the F1 and F2
 windows were located by extensions to denser and longer grids (Section~\ref{sec:results}), and the F3 window at the smallest
@@ -17,9 +18,12 @@ descriptive.
 not a divergence and partly reflects how well the library covers the edge of the stable region.
 \item \textbf{The long-context limits.} The nearest-system limit assumes posterior concentration and the stationary law of the
 regressor; the extensions to long contexts agree with it in the mean, but it is an average over libraries and does not make
-every library separable. The order-of-magnitude scaling in the number of system parameters is a heuristic, not a theorem.
-The split of the gap into noise-level and dynamics parts depends on the intermediate references; in F2 the conjugate prior
-couples coefficients and noise, so the split is exact arithmetic but its labels are approximate.
+every library separable. The $K^{-2/p}$ scaling in the number of system parameters is an asymptotic heuristic, not a
+theorem, and does not match the decay at the library sizes we evaluated. The split of the gap into noise-level and dynamics
+parts depends on the intermediate references and on their order; in F2 the two orders disagree on which part is larger, so we
+report both and draw no conclusion about which dominates.
+\item \textbf{Horizons.} The maps score one-step forecasts, except the F3 map, which also scores five-step forecasts. The
+budget argument applies to one-step forecasts only; longer horizons are not mapped.
 \item \textbf{Simple families.} All results concern linear autoregressive processes with Gaussian noise, scalar or
 bivariate; nothing is claimed for nonlinear, chaotic or high-dimensional systems. Each confirmatory study ran on one platform
 with two replicates.

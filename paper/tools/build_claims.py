@@ -89,7 +89,7 @@ def extract(raw: bytes, spec: dict):
         m = re.search(spec["regex_int"], raw.decode("utf-8"))
         if m is None:
             raise ValueError(f"pattern not found: {spec['regex_int']}")
-        return int(m.group(1))
+        return int(m.group(1).replace(" ", ""))  # specs write thousands as "40 000"
     if "regex_float" in spec:
         import re
         m = re.search(spec["regex_float"], raw.decode("utf-8"))

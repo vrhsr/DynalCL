@@ -82,3 +82,31 @@ Build: claims 60, 132 macros, numbers audit PASS (18 section files), Track 1 15 
 Not yet done (planned): figures (gap vs n with bands; library share vs K against the nearest-system limit; cumulative gap vs
 budget, after batch 5); results of batches 4 and 5; the LLM-use statement (draft awaiting approval); author names; appendices;
 restructuring of the Stage 0/0.5/0.6 history into an appendix; TMLR template.
+
+## Revision 5: corrections from the second independent (AI-simulated) review
+
+Review saved in `INDEPENDENT_SECOND_REVIEW.md`; what it found that the first audit missed is in
+`REVIEWER_DISAGREEMENT_ANALYSIS.md`.
+
+| # | Change | Where | Type | Review item |
+|---|---|---|---|---|
+| 39 | **Correction of revision 3:** "the F2 gap at the mapped contexts is mostly dynamics" depends on the order of the split (r = 1, n = 10: noise first 0.213 noise / 0.122 dynamics; dynamics first 0.099 / 0.236). Both orders now reported for F1 and F2; F1 is noise-dominated in both orders; for F2 no part is said to dominate (the conjugate prior makes the dynamics-first reference's marginal coefficient prior differ from the population's) | 00, 01, 06, 08, 10 | correction | M3 |
+| 40 | Pooling: the budget bounds the per-sequence effect, not the evidence pooled over sequences or items; the old sentences ("bounds how much such pooling can gain", "bounds what any pooling ... can gain") were wrong and are replaced; the margin is described as a design choice tied to model count and seed variance | 05_design, 08 | correction | M4, M1 (part) |
+| 41 | F1 budget: the population noise prior puts mass 1.3e-12 outside the context-only range, so D(P‖Q) is formally infinite; the reported value is for the restriction to that range (new macro from theory.json) | 05b_theory | correction | M5 |
+| 42 | New Appendix B "Provenance of the maps and analyses": "Pre-registered" in the title refers to the studies of Appendices A and C; for each map or analysis, what was seen before its specification; contributions (iii)/(iv) reworded | 01, 12_appendix_history | content | M2 |
+| 43 | PARTIAL definition corrected (draws disagree, including all-borderline cells such as F1 K = 32) | 05_design | correction | m1 |
+| 44 | K^{-2/p} stated as asymptotic only; the decay at the evaluated K is slower, so the Monte Carlo values are used | 05b_theory, 08 | correction | m2 |
+| 45 | Estimator and sample size of each map stated (four claims DESIGN-N-*, eight macros from the pinned specs; `regex_int` now accepts "40 000") | 05_design, claims.yaml, numbers.yaml, build_claims.py | content, pipeline | m3 |
+| 46 | Table 3: the repeated baseline row labelled "same setting as above" | numbers.yaml | table | m4 |
+| 47 | Cumulative noisy-family sentence: the sums start at n = 2, the budget also covers n = 0, 1 | 06 | correction | m5 |
+| 48 | F2 Monte Carlo criterion stated as in the spec (target per-item SE; at most 1% of items over target; cell MC SE below delta/100) | 04_validation | correction | m6 |
+| 49 | Limitations: horizons (one-step maps; F3 also h = 5; budget argument one-step only) | 08 | content | m7 |
+| 50 | Conclusion: "in our families, the bivariate one" -> "only the bivariate one at large library sizes" | 10 | wording | m8 |
+| 51 | Garbling argument for observation noise (noisy cumulative gap never exceeds the noise-free one) | 05b_theory | content | m9 |
+| 52 | Citations added, both checked on Crossref: Clarke and Barron 1990 (doi 10.1109/18.54897), Amisano and Giacomini 2007 (doi 10.1198/073500106000000332) | references.bib, 02, 05b | citation | m11 |
+
+Not done from the review (decisions for the user): title qualification of "Pre-Registered" (M2; the user approved the
+title), an anonymised code artefact (M6), an n*(delta) curve (M1, optional), abstract shortening and tooling condensation (m10).
+
+Build: claims 65 verified / 0 pending, 149 macros, numbers audit PASS (18 section files), Track 1 16 pages without overfull
+boxes or undefined references.
