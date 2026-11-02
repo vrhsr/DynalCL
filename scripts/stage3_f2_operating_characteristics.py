@@ -37,8 +37,13 @@ sys.path.insert(0, str(ROOT))
 
 MAP_REF, MAP_PATH = "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3", "results_stage2/f2_map/map_rows.csv.gz"
 CELL_SPEC = [(1.0, n, k) for n in (10, 20) for k in (16, 64)]
+# batch 5 cells (docs/STAGE3_F2_OC_B5_SPEC.md): library gaps from f2_library.csv, population-vs-context from split.csv
+B5_REF = "e08eee8ad24f887b61e5683128c5525edc628f4b"
+B5_LIB, B5_SPLIT = "results_stage2/batch5/f2_library.csv", "results_stage2/batch5/split.csv"
+B5_CELL_SPEC = [(1.0, n, k) for n in (20, 40, 80) for k in (16, 64, 256, 1024)]
 SOURCES = ["scripts/stage3_f2_operating_characteristics.py", "scripts/stage2_f1_operating_characteristics.py",
-           "scripts/stage1_power_lookup.py", "docs/STAGE3_F2_DESIGN_CPU_SPEC.md", "config/stage2_seed_manifest.yaml"]
+           "scripts/stage1_power_lookup.py", "docs/STAGE3_F2_DESIGN_CPU_SPEC.md", "docs/STAGE3_F2_OC_B5_SPEC.md",
+           "config/stage2_seed_manifest.yaml"]
 
 
 def _load(name: str, rel: str):
@@ -68,6 +73,24 @@ def load_cells() -> tuple[list, str]:
     return cells, hashlib.sha256(raw).hexdigest()
 
 
+def load_cells_b5() -> tuple[list, str]:
+    """Cells from batch 5: s_lp = mean library gap over draws, s_ps = total population-vs-context gap (part T)."""
+    raws = {p: subprocess.run(["git", "show", f"{B5_REF}:{p}"], cwd=ROOT, capture_output=True, check=True).stdout
+            for p in (B5_LIB, B5_SPLIT)}
+    lib = list(csv.DictReader(io.StringIO(raws[B5_LIB].decode("utf-8"))))
+    split = list(csv.DictReader(io.StringIO(raws[B5_SPLIT].decode("utf-8"))))
+    cells = []
+    for r, n, k in B5_CELL_SPEC:
+        s_lp = [float(x["mean_estimate"]) for x in lib if float(x["r"]) == r and int(x["n"]) == n and int(x["K"]) == k]
+        s_ps = [float(x["estimate"]) for x in split if x["family"] == "F2" and x["part"] == "T" and float(x["r"]) == r
+                and int(x["n"]) == n]
+        if len(s_lp) != 1 or len(s_ps) != 1:
+            raise SystemExit(f"FAIL: batch 5 cell r={r} n={n} K={k} not found")
+        cells.append((f"HELD r={r:g} n={n} K={k}", s_lp[0], abs(s_ps[0] - s_lp[0]), s_ps[0]))
+    sha = hashlib.sha256(raws[B5_LIB] + raws[B5_SPLIT]).hexdigest()
+    return cells, sha
+
+
 def _job(args):
     i, (cell, pi, e, s, m), sims, root = args
     rng = np.random.default_rng([root, i])                     # per-setting stream: independent of worker count
@@ -87,11 +110,13 @@ def main(argv=None) -> int:
     ap.add_argument("--out", required=True)
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--cells", choices=("map", "batch5"), default="map",
+                    help="map: batch 2-3 F2 map cells (role f2_oc); batch5: extended library cells (role f2_oc_b5)")
     args = ap.parse_args(argv)
     out = Path(args.out) if Path(args.out).is_absolute() else ROOT / args.out
     out.mkdir(parents=True, exist_ok=True)
-    cells, sha = load_cells()
-    root = role_seed("f2_tests" if args.smoke else "f2_oc")
+    cells, sha = load_cells() if args.cells == "map" else load_cells_b5()
+    root = role_seed("f2_tests" if args.smoke else ("f2_oc" if args.cells == "map" else "f2_oc_b5"))
     grid = list(itertools.product(cells, [0.0, 1.0], [0.0, 0.01], [0.01, 0.02, 0.05, 0.1], [16, 32, 64, 128]))
     sims = 20 if args.smoke else 300
     grid = grid[:4] if args.smoke else grid
@@ -112,9 +137,13 @@ def main(argv=None) -> int:
         w = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         w.writeheader()
         w.writerows(rows)
+    source = f"{MAP_REF}:{MAP_PATH}" if args.cells == "map" else f"{B5_REF}:{B5_LIB} + {B5_SPLIT}"
     table = {"Q2": LOOKUP.lookup(rows, {0.0, 0.01}, 32), "min_models": 32, "power": LOOKUP.POWER,
-             "cells": [c[0] for c in cells], "map": f"{MAP_REF}:{MAP_PATH}", "map_rows_sha256": sha,
+             "cells": [c[0] for c in cells], "map": source, "map_rows_sha256": sha,
              "max_P_wrong": max(r["P_wrong"] for r in rows), "settings": len(rows), "smoke": args.smoke}
+    if args.cells == "batch5":          # per-cell lookups (the pooled one is the binding cell's)
+        table["Q2_per_cell"] = {c[0]: LOOKUP.lookup([r for r in rows if r["cell"] == c[0]], {0.0, 0.01}, 32)
+                                for c in cells}
     (out / "f2_power_lookup.json").write_text(json.dumps(table, indent=1), encoding="utf-8")
     import scipy
 
