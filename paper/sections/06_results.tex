@@ -24,8 +24,9 @@ every $r$ in the map; a denser grid places the end at $n=\FoneDenseNsmall$ (\rsm
 gap is knowledge of the noise level. We split it on the same items by inserting a reference that knows the population's noise
 prior but not its dynamics prior (and, symmetrically, one that knows the dynamics prior but not the noise prior, averaging the
 two orders): at $r=1$, $n=2$, the gap of \SplitFoneT nats has a noise-level part of \SplitFoneN and a dynamics part of
-\SplitFoneD, and population Bayes is separable from the noise-matched reference only up to $n=\SplitFoneDynN$ ($r=1$), as in
-the known-scale family. In the bivariate family (F2) the population gap is up to \FtwoGapMax nats at $n=10$ and
+\SplitFoneD, and population Bayes is separable from the noise-matched reference only up to $n=\SplitFoneDynNsmall$ at \rsmall
+and $n=\SplitFoneDynN$ at $r=1$, and at no context length at $r=4$ (borderline at $n=2$ only, where the dynamics part is
+\SplitFoneDfour of \SplitFoneTfour nats), much as in the known-scale family. In the bivariate family (F2) the population gap is up to \FtwoGapMax nats at $n=10$ and
 \FtwoGapMin--\FtwoGapLongMax nats at $n=\FtwoNmax$; extending the map, it is borderline from $n=\FtwoEndBorder$ at every $r$
 and not separable at the longest context added, so the F2 window ends between $n=\FtwoEndSep$ and $n=\FtwoEndBorder$. The
 shortest grid point, $n=5$, is \textsc{mc-limited}: its gaps are large but the context-only reference cannot be estimated

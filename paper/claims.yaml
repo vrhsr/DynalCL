@@ -355,6 +355,17 @@ claims:
               {csv_max_int: n, where: {family: F1, part: D1, r: "1.0", decision: SEPARABLE}, expect: 5},
               {csv_max_int: n, where: {family: F1, part: T, r: "1.0", decision: SEPARABLE}, expect: 12},
               {csv_max_int: n, where: {family: F1, part: T, r: "0.25", decision: SEPARABLE}, expect: 14}]
+  - id: B5-SPLIT-F1-R
+    text: "Batch 5, F1 against the noise-matched reference (pop vs ctx_nm): separable up to n = 5 at r = 0.25 and r = 1, at no n at r = 4 (BORDERLINE at n = 2 only); at r = 4, n = 2 the dynamics part is 0.032 of a 0.326-nat total."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/split.csv}
+    extract: [{csv_max_int: n, where: {family: F1, part: D1, r: "0.25", decision: SEPARABLE}, expect: 5},
+              {csv_max_int: n, where: {family: F1, part: D1, r: "1.0", decision: SEPARABLE}, expect: 5},
+              {csv_count: decision, where: {family: F1, part: D1, r: "4.0", decision: SEPARABLE}, expect: 0},
+              {csv_count: decision, where: {family: F1, part: D1, r: "4.0", decision: BORDERLINE}, expect: 1},
+              {csv_count: decision, where: {family: F1, part: D1, r: "4.0", n: "2", decision: BORDERLINE}, expect: 1},
+              {csv_max: estimate, where: {family: F1, part: D, r: "4.0", n: "2"}, expect: 0.0315, tol: 0.0005},
+              {csv_max: estimate, where: {family: F1, part: T, r: "4.0", n: "2"}, expect: 0.3264, tol: 0.0001}]
   - id: B5-SPLIT-F2
     text: "Batch 5, F2 split at r = 1, n = 10: total 0.335, dynamics part 0.179, noise-level part 0.156; the total is separable up to n = 20 and BORDERLINE from n = 40 (every r), not separable at n = 80."
     label: VERIFIED

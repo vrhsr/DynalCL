@@ -65,7 +65,9 @@ Build: claims 54 verified, 104 macros, numbers audit PASS, 17-page PDF, no overf
 | 33 | Limitations: grids (F1/F2 window ends now located), long-context limit (mean vs per library), split labels approximate in F2 | 08 | content | - |
 | 34 | Claims B5-SPLIT-F1, B5-SPLIT-F2, B5-CUM, B5-F2-LIB, B5-F1-LIB; 25 macros | claims.yaml, numbers.yaml | pipeline | - |
 
-Build: claims 59 verified, 129 macros, numbers audit PASS, 18-page PDF, no overfull box.
+| 35 | (user spot-check) F1 against the noise-matched reference: window n <= 5 at r = 0.25 and r = 1, empty at r = 4 (borderline at n = 2 only; dynamics part 0.031 of 0.326 nats; the report's 0.0315 is 0.031472, so 0.031 at three decimals); abstract wording "at short contexts at most"; claim B5-SPLIT-F1-R, 3 macros | 06_results, 00_abstract | results | user |
+
+Build: claims 60 verified, 132 macros, numbers audit PASS, 18-page PDF, no overfull box.
 
 Not yet done (planned): figures (gap vs n with bands; library share vs K against the nearest-system limit; cumulative gap vs
 budget, after batch 5); results of batches 4 and 5; the LLM-use statement (draft awaiting approval); author names; appendices;

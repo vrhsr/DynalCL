@@ -178,6 +178,9 @@ numbers:
   - {macro: SplitFoneN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max: estimate, where: {family: F1, part: N, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
   - {macro: SplitFoneD, file: b5split, claim: B5-SPLIT-F1, x: {csv_max: estimate, where: {family: F1, part: D, r: "1.0", n: "2"}}, fmt: "{:.2f}"}
   - {macro: SplitFoneDynN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: D1, r: "1.0", decision: SEPARABLE}}, fmt: "{:d}"}
+  - {macro: SplitFoneDynNsmall, file: b5split, claim: B5-SPLIT-F1-R, x: {csv_max_int: n, where: {family: F1, part: D1, r: "0.25", decision: SEPARABLE}}, fmt: "{:d}"}
+  - {macro: SplitFoneDfour, file: b5split, claim: B5-SPLIT-F1-R, x: {csv_max: estimate, where: {family: F1, part: D, r: "4.0", n: "2"}}, fmt: "{:.3f}"}
+  - {macro: SplitFoneTfour, file: b5split, claim: B5-SPLIT-F1-R, x: {csv_max: estimate, where: {family: F1, part: T, r: "4.0", n: "2"}}, fmt: "{:.3f}"}
   - {macro: FoneDenseN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "1.0", decision: SEPARABLE}}, fmt: "{:d}"}
   - {macro: FoneDenseNsmall, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "0.25", decision: SEPARABLE}}, fmt: "{:d}"}
   - {macro: SplitFtwoT, file: b5split, claim: B5-SPLIT-F2, x: {csv_max: estimate, where: {family: F2, part: T, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
