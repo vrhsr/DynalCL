@@ -1,0 +1,21 @@
+{
+ "Q2": {
+  "32": 0.01,
+  "64": 0.01,
+  "128": 0.02
+ },
+ "min_models": 32,
+ "power": 0.8,
+ "cells": [
+  "HELD r=1 n=10 K=16",
+  "HELD r=1 n=10 K=64",
+  "HELD r=1 n=20 K=16",
+  "HELD r=1 n=20 K=64"
+ ],
+ "map": "56e73a864cdfe6a4ab4d63c43f55ab5aa3bd2ac3:results_stage2/f2_map/map_rows.csv.gz",
+ "map_rows_sha256": "d7f17c5634eea1a482980ed8b415657ec5160ff4c9d44cacfffa9b5c5effd5a3",
+ "max_P_wrong": 0.0,
+ "settings": 256,
+ "smoke": false
+}
+256 settings in 15 s

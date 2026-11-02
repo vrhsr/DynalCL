@@ -1,0 +1,17 @@
+{
+ "command": "python scripts/stage3_f2_head_floor.py --out results_stage2/f2_head_floor --workers 16",
+ "python": "3.13.5",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "cpu_count": 32,
+ "workers": 16,
+ "sources_sha256": {
+  "scripts/stage3_f2_head_floor.py": "315613ae0ac4329526703c17c9829f568b442359937a61e26e0e89a9d789ef55",
+  "dynaicl_families/stage2/f2_var.py": "33531841a161ba7591c686b68bac66869fa72d65fe1d6952868614d2dcb1c82e",
+  "docs/STAGE3_F2_DESIGN_CPU_SPEC.md": "19d169ae71779b449f765e9c4c8c573c598842d3fca43b271df1f22833590b78",
+  "config/stage2_seed_manifest.yaml": "85fde9b553176c902bbbea287db4ad240ef920bc6ed52727f1518df49b8265b0"
+ },
+ "git_head": "c991f91938ef68a9d182dee934772c5d5bf4ad88",
+ "git_dirty_tracked": false
+}

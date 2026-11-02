@@ -1,0 +1,53 @@
+{
+ "role": "f2n_head_floor",
+ "chosen_m": 8,
+ "rule": "smallest m with mean floor <= 0.001 in every cell",
+ "worst_cell_per_m": {
+  "1": {
+   "set": "HELD",
+   "ref": "lib64",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.05454274411191279,
+   "se": 0.008530240916316984
+  },
+  "2": {
+   "set": "HELD",
+   "ref": "lib64",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.011540400388293135,
+   "se": 0.0028255250895872553
+  },
+  "4": {
+   "set": "HELD",
+   "ref": "lib256",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.0019821652689327885,
+   "se": 0.00042288054683867497
+  },
+  "8": {
+   "set": "HELD",
+   "ref": "lib1024",
+   "r": 4.0,
+   "n": 2,
+   "mean_floor": 0.00048443484108017356,
+   "se": 7.314064789348785e-05
+  }
+ },
+ "cells_with_se_over_flag": 250,
+ "settings": {
+  "contexts": 40,
+  "J_pop": 2000,
+  "grid": 96,
+  "MS": [
+   1,
+   2,
+   4,
+   8
+  ]
+ },
+ "max_mass_err": 1.010825467773202e-08,
+ "seconds": 13743.8
+}
