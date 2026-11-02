@@ -1,10 +1,13 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb,booktabs,xspace,hyperref,natbib}
+\documentclass[10pt]{article}
+% TMLR style (paper/tmlr.sty, paper/tmlr.bst from https://github.com/JmlrOrg/tmlr-style-file, Apache-2.0 licence in
+% paper/TMLR_STYLE_LICENSE). Without options it produces the anonymous submission ("Anonymous authors"); use
+% \usepackage[accepted]{tmlr} for the camera-ready version and [preprint] for a de-anonymised preprint.
+\usepackage{tmlr}
+\usepackage{amsmath,amssymb,booktabs,xspace,hyperref,url}
 \usepackage{pgfplots}
 \usepgfplotslibrary{groupplots}
 \pgfplotsset{compat=1.16}
-\bibliographystyle{plainnat}
+\bibliographystyle{tmlr}
 
 % All result numbers come from generated/numbers.tex (re-extracted from pinned commits by tools/build_numbers.py);
 % the sections are audited by tools/check_numbers.py. Names with digits are defined here, outside the audited sections.
@@ -15,10 +18,13 @@
 \newcommand{\rsmall}{$r=0.25$\xspace}
 \newcommand{\shaname}{SHA-256\xspace}
 
-\title{Where Bayesian References Disagree: Pre-Registered Separability Maps for\\ In-Context Learning of Linear Dynamical
+\title{Where Bayesian References Disagree: Pre-Registered Separability Maps for In-Context Learning of Linear Dynamical
 Systems}
-\author{[AUTHOR NAMES AND AFFILIATIONS: placeholders, to be filled by the authors]}
-\date{Draft (Track 1, reference-side paper); not for circulation}
+% Hidden in the submission version; to be filled by the authors for the accepted / preprint versions.
+\author{\name [AUTHOR NAMES AND AFFILIATIONS: placeholders, to be filled by the authors]}
+\def\month{MM}
+\def\year{YYYY}
+\def\openreview{\url{https://openreview.net/forum?id=XXXX}}
 
 \begin{document}
 \maketitle
@@ -30,10 +36,12 @@ Systems}
 \input{sections/05_design}
 \input{sections/05b_theory}
 \input{sections/06_results}
-\input{sections/07_pilot}
 \input{sections/08_limitations}
 \input{sections/09_methodology}
 \input{sections/10_conclusion}
 \input{sections/11_llm_use}
 \bibliography{references}
+\appendix
+\input{sections/12_appendix_history}
+\input{sections/07_pilot}
 \end{document}

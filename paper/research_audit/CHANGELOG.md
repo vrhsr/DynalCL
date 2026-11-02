@@ -69,6 +69,16 @@ Build: claims 54 verified, 104 macros, numbers audit PASS, 17-page PDF, no overf
 
 Build: claims 60 verified, 132 macros, numbers audit PASS, 18-page PDF, no overfull box.
 
+## Revision 4: TMLR format, history appendix, anonymity (user go-ahead S49)
+
+| # | Change | Where | Type |
+|---|---|---|---|
+| 36 | TMLR style (official `tmlr.sty` / `tmlr.bst` from github.com/JmlrOrg/tmlr-style-file, Apache-2.0, licence copied); submission mode (anonymous authors, author-year citations); 15 pages | main.tex, main_track2.tex | format |
+| 37 | Stage 0 / 0.5 / 0.6 history moved from Sections 5-7 to Appendix A (all numbers still macros); the neural pilot moved to Appendix B, with a pointer in Section 9 | 05, 06, 09, new 12_appendix_history, main.tex | structure |
+| 38 | Anonymity: the sentence on the project's working name (which led to the public repository) removed; PDF text and metadata checked for identifying strings (none) | 02_related | anonymity |
+
+Build: claims 60, 132 macros, numbers audit PASS (18 section files), Track 1 15 pages without overfull boxes.
+
 Not yet done (planned): figures (gap vs n with bands; library share vs K against the nearest-system limit; cumulative gap vs
 budget, after batch 5); results of batches 4 and 5; the LLM-use statement (draft awaiting approval); author names; appendices;
 restructuring of the Stage 0/0.5/0.6 history into an appendix; TMLR template.

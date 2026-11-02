@@ -8,10 +8,7 @@ designed sets (probe grids, out-of-support systems) neither reference is the tru
 measures a behavioural difference rather than a divergence; we therefore report designed sets separately and do not use
 them for the headline statements below.
 
-\paragraph{Rules.} The studies used different pre-registered decision rules with the same margin: Stage~0 classified each
-regime by an interval rule against a flat-prior frontier; \sHalf used intervals of $\pm$\SfiveIntervalSE standard errors with
-two replicates that had to agree; \sSix used a studentised max-$|t|$ bootstrap over all contrasts. The reference-only maps
-(1A, F1, F3, F2) mark a cell \textsc{separable} if estimate $-\,3\,$SE $\ge\delta$, \textsc{not separable} if
+\paragraph{Rules.} The reference-only maps (1A, F1, F3, F2) mark a cell \textsc{separable} if estimate $-\,3\,$SE $\ge\delta$, \textsc{not separable} if
 estimate $+\,3\,$SE $<\delta$, and \textsc{borderline} otherwise (the released result files call the first two
 \textsc{identifiable} and \textsc{unidentifiable}); the F1 map applies this to the absolute gap (two-sided), which only matters
 on designed sets. For libraries each map draws several independent libraries per size $K$ (fewer in F3 and F2 than in the 1A
@@ -22,7 +19,8 @@ rather than hide it. The maps use common random numbers, so their cells are depe
 descriptive. The rule is applied per cell without a global correction: with a correct standard error, the chance that a cell
 is marked on the wrong side of $\delta$ is at most $\Phi(-3)$ whatever the dependence between cells, so the expected number of
 wrongly marked held-out population cells is below one in every map. Each map's specification was committed before its seed
-was first used.
+was first used. The pre-registered studies that preceded the maps used other rules with the same margin
+(Appendix~\ref{app:history}).
 
 \paragraph{What ``separable'' does and does not mean.} Here it is a property of two reference predictors at a precision:
 their expected gap exceeds $\delta$ by more than three standard errors. (We avoid ``identifiable'': in its statistical sense
