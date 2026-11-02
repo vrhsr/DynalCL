@@ -190,7 +190,8 @@ def fig_cumulative(bc, data, cfg: dict) -> list[str]:
         budget = _json_at(bc, data, p["budget"])
         ylab = ", ylabel={cumulative gap (nats)}" if k == 0 else ""
         lines.append(f"{BS}nextgroupplot[title={{{p['panel']}}}, ymax={1.15 * budget:.3f}, "
-                     f"legend style={{{pos[p.get('legend', 'se')]}}}{ylab}]")
+                     f"legend style={{{pos[p.get('legend', 'se')]}}}{ylab}"
+                     + (f", {p['opts']}" if p.get("opts") else "") + "]")
         for i, sval in enumerate(p["order"]):
             col, _ = _style(i)
             pts = sorted((int(r["n"]), float(r["estimate"])) for r in rows

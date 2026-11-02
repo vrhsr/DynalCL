@@ -273,5 +273,5 @@ figures:
   cumulative:
     panels:
       - {panel: 'known $\sigma$', file: b5cum, where: {family: 1A, variant: pop-stab, kind: cum}, series: r, order: ["0.25", "1.0", "4.0"], legend_labels: {"0.25": '$r=0.25$', "1.0": '$r=1$', "4.0": '$r=4$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}}
-      - {panel: 'noisy, $r=1$', file: b5cum, where: {family: F3, r: "1.0", kind: cum}, series: variant, order: [q_0.0, q_0.755, q_2.56, q_6.5], legend_labels: {q_0.0: '$q=0$', q_0.755: '$q=0.755$', q_2.56: '$q=2.56$', q_6.5: '$q=6.5$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}, legend: nw}
+      - {panel: 'noisy, $r=1$', file: b5cum, where: {family: F3, r: "1.0", kind: cum}, series: variant, order: [q_0.0, q_0.755, q_2.56, q_6.5], legend_labels: {q_0.0: '$q=0$', q_0.755: '$q=0.755$', q_2.56: '$q=2.56$', q_6.5: '$q=6.5$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}, legend: nw, opts: 'xtick={2,5,10,20,40}'}
       - {panel: 'unknown $\sigma$, dynamics part', file: b5cum, where: {family: F1, variant: pop-ctx_nm, kind: cum}, series: r, order: ["0.25", "1.0", "4.0"], legend_labels: {"0.25": '$r=0.25$', "1.0": '$r=1$', "4.0": '$r=4$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}}

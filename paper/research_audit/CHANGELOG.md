@@ -110,3 +110,10 @@ title), an anonymised code artefact (M6), an n*(delta) curve (M1, optional), abs
 
 Build: claims 65 verified / 0 pending, 149 macros, numbers audit PASS (18 section files), Track 1 16 pages without overfull
 boxes or undefined references.
+
+### Revision 5a
+
+| # | Change | Where | Type | Review item |
+|---|---|---|---|---|
+| 53 | Item 50 corrected: the review's point was that small scalar libraries are also separable, so the conclusion now says "at small library sizes in every family we mapped, and at large ones only in the bivariate family" | 10 | correction | m8 |
+| 54 | Cumulative figure, noisy panel: tick labels at n = 2, 5, 10, 20, 40 (optional per-panel `opts` in the cumulative figure block) | numbers.yaml, make_figures.py | figure | m5 |
