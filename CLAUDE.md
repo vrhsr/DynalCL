@@ -1,7 +1,7 @@
 # CLAUDE.md: DynaICL orientation (read this first)
 
 This file gives a new session full context in one read. Details are in the files it points to.
-Last updated: 2026-11-01. **Start with section 0 (where things stand now; the 2026-11-01 block first)**, then 2h-quater.
+Last updated: 2026-11-02. **Start with section 0 (where things stand now; the 2026-11-01 block first, its last bullets S49-S50 are newest)**, then 2h-quater.
 Sections are in chronological order; older ones (1-2g, 7-8) are historical where they say "not started / not authorised / not a git repo".
 
 ## 0. Where things stand now: read this first
@@ -36,16 +36,29 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     (revision 2, `paper-revision` @ `3ed8c0e`: Table 3 sensitivity, 54 claims). Box: batch 5 next (relay by the user), then 6.
   - S46-S47: **batch 5 verified** (`results-stage2-cpu-batch5` @ `e08eee8`, provenance `c991f91` clean, 8 workers) and in
     the paper (revision 3, `7661aca`, 59 claims, 18 pages). Key: F1 gaps mostly noise-level (dynamics-only window n <= 5),
-    F2 gaps at n >= 10 mostly dynamics (corrects revision 1); F2 window ends between n = 20 and 40; F2 libraries to K = 1024
+    F2 gaps at n >= 10 "mostly dynamics" (WITHDRAWN in S50: order-dependent); F2 window ends between n = 20 and 40; F2 libraries to K = 1024
     all separable by n = 80; 1A cumulative 0.551-0.558 vs budget 0.582. Batch 5 relay step 0 corrected (S46 deviation).
     **Batch 6 running on the box**; verify as S48 (head floor m for F2; F2 Q2 lookup; then put both in the F2 draft).
   - S48: **batch 6 verified** (`6ffd8fc`): F2 head m = 8; F2 Q2 lookup s* = 0.01/0.01/0.02 at M = 32/64/128 (binding cell
     has lib and ctx only 0.045 apart). Option B needs F2 seed sd <= ~0.0074. Batch 7 relay (OC on batch 5 cells, ~1 min,
     `pilot_tooling/RELAY_stage2_cpu_batch7.md`, code `fb3b12a`); verify as S49. Probe: `docs/PROBE_FREEZE_READINESS.md`
     (neural code for F1/F2 not written; needs CPU-torch permission); nothing frozen or run. Priority: the paper.
-  - Next on `paper-revision`:
-    restructure history into an appendix, TMLR template, anonymised artefact, then a second independent review (Phase 11) and
-    the readiness report (Phase 12). Draft the seed-variance probe and Q2 pre-registrations on CPU.
+  - S49 (user): batch 7 relayed (when back: verify as S51+, choose the Q2 cells and the option-B threshold from it BEFORE any
+    freeze, disclose that choice as made after seeing reference-only OC). **CPU torch allowed narrowly**: unit tests and
+    few-step smoke runs, CPU only, test seed roles only, nothing frozen. Probe uses the auth gate with the S28 test-key fix
+    ported from `amendment2-candidate` (`eaf4d3a`) and tested. Probe go/no-go for option B on an UPPER bound of the F2 LIB-64
+    seed sd (max of chi-square 1.437 x sd and bootstrap 95th pct); no carry-over of the K = 64 sd to other K assumed.
+  - S50: revision 4 (`73660de`, TMLR template, history to Appendix A); **second independent review** (AI-simulated, Major,
+    5/10) found interpretive errors, four introduced by my revisions: F2 split is ORDER-DEPENDENT ("mostly dynamics" withdrawn;
+    F1 noise-dominated in both orders), pooling sentences wrong (budget bounds per-sequence effect, not pooled evidence), F1
+    D(P||Q) formally infinite (mass 1.3e-12 outside ctx range), PARTIAL definition, K^{-2/p} asymptotic only. Fixed in revision
+    5/5a (`4d81899`, `6a35441`): Appendix B provenance table, per-map sample sizes, two new citations; 65 claims, 149 macros,
+    16 pages. Phase 11-12 docs done (`515ce94`): INDEPENDENT_SECOND_REVIEW.md, REVIEWER_DISAGREEMENT_ANALYSIS.md,
+    FINAL_PUBLICATION_READINESS_REPORT.md (overall 6/10, "not ready yet; close").
+  - **Next (paper):** blockers B1 anonymised code+data artefact (the LLM statement already promises released logs; user decides
+    contents/anonymisation), B2 title scope of "Pre-Registered" (user's call), B3 a short fresh review of sentences changed since
+    `73660de`. Should-do: n*(delta) curves from the pinned map files (disclose as post hoc), F2 split at n = 20, shorter
+    abstract, estimator/N in Table 1. Probe code on CPU (samplers, heads, evaluation, gate port) only within the S49 scope.
 
 ### Earlier state (2026-10-27 to 10-31)
 
