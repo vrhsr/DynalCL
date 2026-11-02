@@ -45,6 +45,10 @@ excludes until the user's go-ahead ("no torch jobs"). Estimated effort once allo
    the frozen code. [USER] issues the artifact on the box with their own key.
 7. [USER] Relay the run (detached; one waiter); results to a `results-*` branch; verification and disclosure here.
 
-## 4. Decisions needed from the user
-1. CPU torch for unit tests now, or only after the GPU go.
-2. Whether the probe uses the authorization gate (recommended: yes).
+## 4. Decisions (user, 2026-11-02, S49)
+1. CPU torch ALLOWED, narrowly: unit tests and smoke runs of a few steps only, CPU only, test seed roles only, no production
+   seeds, nothing frozen, no GPU / CUDA.
+2. The probe uses the authorization gate, with the S28 test-key fix ported from `amendment2-candidate` (`eaf4d3a`) into the
+   probe's new runner and tested (the gate test must fail on the v2 behaviour and pass on the fixed one).
+3. Go / no-go rule for option B fixed in the draft (upper confidence bound of the F2 seed sd; no carry-over assumed beyond a
+   stated screening use).

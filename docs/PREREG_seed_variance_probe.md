@@ -23,10 +23,21 @@ UNIF-only proxy (0.0017 nats at 10k steps, size M; disclosure S20).
 * Heads (VERIFIED head floors): F1 arms m = 8 univariate components (S38); F2 arm m = 8 bivariate components with full
   covariances (S48).
 * 16 models per arm, size M (as Stage 1A), budget grid {10k, 25k, 50k}; every checkpoint is evaluated (no budget selection).
-* Decision threshold the probe informs (fixed now; S48): option B of the memorisation study needs the F2 arm's
-  between-seed sd (upper 95% interval end, any checkpoint used for the budget) <= 0.0074 nats for 32-64 models per arm
-  (<= 0.0148 for 128), from the F2 lookup on the batch 2-3 cells; the batch 7 lookup on batch 5's cells will replace this
-  threshold if it is looser, disclosed before the probe is frozen.
+* **Go / no-go rule for option B (fixed before any freeze; S49).** Statistic: for the F2 LIB-64 arm, at the checkpoint the
+  memorisation study would use (the probe's own convergence record decides which; reported for all three), the between-seed
+  sd of each Q2 statistic (the model's distances to lib_64 and to population Bayes on held-out systems, and their contrast)
+  in each Q2 cell. Upper bound: for each cell and statistic, the larger of (a) the one-sided 95% chi-square bound for a normal
+  sd with 15 degrees of freedom, s x sqrt(15 / chi2_{0.05, 15}) = 1.437 s, and (b) the 95th percentile of the seed-bootstrap
+  distribution of the sd (2000 resamples of the 16 models); U = the maximum over cells and statistics. Rule: option B is a
+  GO with M models per arm, M the smallest of {32, 64, 128} whose Q2 tolerance s*(M) from the F2 lookup (the batch 7 lookup
+  if it supersedes batch 6's, chosen and disclosed before this probe is frozen) satisfies s*(M) >= U, provided the
+  confirmatory compute at that M fits the GPU budget the user sets; otherwise NO-GO, reported in advance as NOT RESOLVABLE
+  (compute), and option A (F1) is considered with the F1 arms' bound computed the same way. The point estimate is never used
+  for this decision. (The Stage 1A pilot rule, 1.35 x the pilot sd, stays the rule for the memorisation study's own pilot.)
+* **Carry-over to other library sizes: NOT assumed.** The probe measures F2 at K = 64 only. For the go / no-go decision K = 64
+  is used as a screening value for K in {16, 256} (ASSUMED, stated as such); it is not used for K = 2 or 1024. The
+  memorisation study's own pilot (8 models in every arm) re-estimates the sd per arm and sets M by its frozen rule before
+  any confirmatory run, so a K for which the screening assumption fails is caught there.
 
 ## 3. Measurements (per arm, per cell r in {0.25, 1, 4} x n in {2, 3, 5, 10, 20, 40}, per checkpoint)
 * Regret against the arm's own Bayes predictor on its own law: R = E[KL(ref_arm || model)] by y-quadrature (Stage 1A V-RB).
