@@ -14,6 +14,10 @@ file has been changed. Phases 0-8 of the audit brief (`docs/SESSION_PROMPT_paper
 | 6 No-GPU plan | NO_GPU_ACTION_PLAN.md |
 | 7 GPU roadmap (plan only) | GPU_EXPERIMENT_ROADMAP.md, GPU_EXECUTION_CHECKLIST.md |
 | 8 Figures and tables | FIGURE_TABLE_AUDIT.md |
+| 9 Manuscript reconstruction (after checkpoint 1; the manuscript on this branch has changed since) | CHANGELOG.md (revisions 1-5a) |
+| 10 Venue strategy | JOURNAL_TARGET_STRATEGY.md, LLM_USE_STATEMENT_DRAFT.md |
+| 11 Second independent review | INDEPENDENT_SECOND_REVIEW.md, REVIEWER_DISAGREEMENT_ANALYSIS.md |
+| 12 Readiness | FINAL_PUBLICATION_READINESS_REPORT.md |
 
 Audit scratch scripts (not part of the repository; audit seed 20261031, not a project seed role):
 `C:\Users\Ramana\AppData\Local\Temp\claude\e--study-buddy-DynaICL\bd3df7a4-8736-46d2-9c91-75fbaf70608c\scratchpad\audit\`
