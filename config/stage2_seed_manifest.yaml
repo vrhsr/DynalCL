@@ -23,4 +23,5 @@ roles:
   b5_theory:           {seeds: [85301], use: "batch 5 E: Monte Carlo theory quantities (F2 prior KL, nearest-atom limits) (docs/STAGE2_BATCH5_SPEC.md)", status: unused}
   b5_tests:            {seeds: [85901], use: "batch 5 smoke runs and unit tests; never results", status: tests}
   f2n_head_floor:      {seeds: [83301], use: "F2 neural design: bivariate mixture head floor against the F2 references (docs/STAGE3_F2_DESIGN_CPU_SPEC.md A); spec committed before use", status: unused}
+  f2_oc_b5:            {seeds: [83402], use: "F2 Q2 operating characteristics on the batch 5 library cells (docs/STAGE3_F2_OC_B5_SPEC.md); spec committed before use", status: unused}
   f2_oc:               {seeds: [83401], use: "F2 Q2 operating characteristics and power lookup, synthetic (docs/STAGE3_F2_DESIGN_CPU_SPEC.md B); spec committed before use", status: unused}
