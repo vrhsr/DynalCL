@@ -153,3 +153,7 @@ margin); borderline F1 cell quoted with the noise-first part (new macro `PathFon
 
 Build: claims 66 verified / 0 pending, 163 macros, numbers audit PASS, Track 1 18 pages without overfull boxes or
 undefined references.
+
+| # | Change | Where | Type |
+|---|---|---|---|
+| 81 | Archive re-built and re-verified at `6d9bf46` (zip sha256 48c119ed...): 291 files, scan PASS, `sha256sum -c` all OK, git-free build claims 66/66, 18-page PDF. **Correction to item 60:** "every generated ... macro file byte-identical" holds for every table, figure and macro definition, but `numbers.tex` also carries one comment line with the SHA-256 of `STAGE06_MUTATION_MATRIX_v2.md`, which differs because that file had a workspace path scrubbed (as MANIFEST.json records) | CHANGELOG | correction |
