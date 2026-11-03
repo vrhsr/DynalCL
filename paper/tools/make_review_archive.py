@@ -30,17 +30,16 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 
 # Generic rules (no personal data here; personal identifiers come from the identifiers file, which is never exported).
-# Order matters: whole paths before the names inside them.
+# Order matters: whole paths before the names inside them. Third-party URLs are left alone (the personal handle rule
+# covers the authors' own); third-party e-mail addresses listed under `keep_emails` (licence attributions) are kept.
 GENERIC = [
-    (r"git\+https://github\.com/[^\s\"',]+", "anon-vcs-requirement"),
-    (r"https?://(www\.)?github\.com/[A-Za-z0-9_.-]+(/[A-Za-z0-9_.-]+)?", "https://anon-repository"),
+    (r"git\+https://github\.com/[^\s\"',]+", "anon-vcs-requirement"),         # pip VCS lines name private repositories
     (r"(?<![A-Za-z])[A-Za-z]:(\\\\|\\|/)+Users(\\\\|\\|/)+[A-Za-z0-9_.-]+", "ANON-HOME"),
     (r"/home/[A-Za-z0-9_.-]+", "/home/anon-user"),
-    # e-mail addresses; top-level domains listed so that matrix products such as x@self.weight are not touched
-    (r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.(com|org|net|edu|gov|io|ai|in|uk|de|fr|ch|ca|au)\b",
-     "anon-email"),
 ]
-ANON = ("anon-", "ANON-", "/home/anon-user", "https://anon-repository")
+# e-mail addresses; top-level domains listed so that matrix products such as x@self.weight are not touched
+EMAIL = r"[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*\.(com|org|net|edu|gov|io|ai|in|uk|de|fr|ch|ca|au)\b"
+ANON = ("anon-", "ANON-", "/home/anon-user")
 
 
 def git(*args: str) -> bytes:
@@ -70,8 +69,9 @@ def scrub(raw: bytes, rules) -> tuple[bytes, int]:
         return raw, 0                                                  # binary: left as is, still scanned
     n = 0
     for pat, rep in rules:
-        text, k = pat.subn(rep, text)
-        n += k
+        new, k = pat.subn(rep, text)
+        n += k if new != text else 0                                   # kept matches (keep_emails) are not counted
+        text = new
     return text.encode("utf-8"), n
 
 
@@ -100,7 +100,10 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     cfg = yaml.safe_load((ROOT / "paper" / "review_archive.yaml").read_text(encoding="utf-8"))
     personal = load_rules(ROOT / cfg["identifiers"])
+    keep = {e.lower() for e in cfg.get("keep_emails", [])}
+    email = re.compile(EMAIL, re.IGNORECASE)
     rules = [(re.compile(p, re.IGNORECASE), r) for p, r in GENERIC] + personal
+    rules.append((email, lambda m: m.group(0) if m.group(0).lower() in keep else "anon-email"))
     never = [re.compile(p) for p in cfg["never"]]
     out = Path(args.out).resolve()
     if out.exists() and any(out.iterdir()):
@@ -139,11 +142,11 @@ def main(argv: list[str] | None = None) -> int:
     sums.append(f"{hashlib.sha256((out / 'README.md').read_bytes()).hexdigest()}  README.md")
     (out / "SHA256SUMS").write_text("\n".join(sorted(sums, key=lambda s: s.split('  ', 1)[1])) + "\n", encoding="utf-8")
 
-    rc = scan(out, [p for p, _ in personal] + [re.compile(p, re.IGNORECASE) for p, _ in GENERIC])
+    rc = scan(out, [p for p, _ in personal] + [re.compile(p, re.IGNORECASE) for p, _ in GENERIC] + [email], keep)
     if rc:
         return rc
-    total = sum(m["bytes"] for m in manifest)
-    print(f"archive: {len(manifest)} files, {total / 1e6:.1f} MB, {sum(m['replacements'] for m in manifest)} replacements "
+    total, n_rep = sum(m["bytes"] for m in manifest), sum(m["replacements"] for m in manifest)
+    print(f"archive: {len(manifest)} files, {total / 1e6:.1f} MB, {n_rep} replacements "
           f"in {sum(1 for m in manifest if m['replacements'])} files; scan PASS -> {out}")
     if args.zip:
         z = out.with_suffix(".zip")
@@ -156,7 +159,7 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
-def scan(out: Path, patterns: list[re.Pattern]) -> int:
+def scan(out: Path, patterns: list[re.Pattern], keep: set[str]) -> int:
     """Fail on any identifying string in any file name or content (gzip members decompressed)."""
     hits = []
     for f in sorted(p for p in out.rglob("*") if p.is_file()):
@@ -165,7 +168,7 @@ def scan(out: Path, patterns: list[re.Pattern]) -> int:
         for pat in patterns:
             for where in (rel, text):
                 for m in pat.finditer(where):
-                    if not m.group(0).startswith(ANON):
+                    if not m.group(0).startswith(ANON) and m.group(0).lower() not in keep:
                         hits.append(f"{rel}: {pat.pattern!r} matched {m.group(0)[:40]!r}")
                         break
     if hits:

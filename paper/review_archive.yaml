@@ -13,5 +13,7 @@ paper_paths: [paper/build.py, paper/main.tex, paper/numbers.yaml, paper/claims.y
 # Never exported, whatever the lists above say (regexes on the archive path): pilot effect files, which must stay unopened,
 # and any key or issued authorization artefact.
 never: ['results_stage1/pilot/eval/', 'PILOT_ONLY_do_not_open_effects', '(^|/)[^/]*authori[sz]ation[^/]*\.json$', '\.key$']
+# Third-party e-mail addresses kept as published (licence and author attributions in third-party files).
+keep_emails: [daly@mps.mpg.de]
 # Personal identifiers live in a separate file that is never exported (it names what it scrubs).
 identifiers: paper/review_archive_identifiers.txt
