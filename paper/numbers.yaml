@@ -200,6 +200,18 @@ numbers:
   - {macro: PathFtwoNone, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F2, part: N1, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
   - {macro: PathFtwoNtwo, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F2, part: N2, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
   - {macro: PathFtwoDtwo, file: b5split, claim: B5-SPLIT-PATHS, x: {csv_max: estimate, where: {family: F2, part: D2, r: "1.0", n: "10"}}, fmt: "{:.2f}"}
+  - {macro: PathTwentySmallNone, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: N1, r: "0.25", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentySmallDone, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: D1, r: "0.25", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentySmallNtwo, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: N2, r: "0.25", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentySmallDtwo, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: D2, r: "0.25", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyOneNone, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: N1, r: "1.0", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyOneDone, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: D1, r: "1.0", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyOneNtwo, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: N2, r: "1.0", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyOneDtwo, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: D2, r: "1.0", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyFourNone, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: N1, r: "4.0", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyFourDone, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: D1, r: "4.0", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyFourNtwo, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: N2, r: "4.0", n: "20"}}, fmt: "{:.3f}"}
+  - {macro: PathTwentyFourDtwo, file: b5split, claim: B5-SPLIT-F2-N20, x: {csv_max: estimate, where: {family: F2, part: D2, r: "4.0", n: "20"}}, fmt: "{:.3f}"}
   - {macro: FoneMassOutside, file: theory, claim: THEORY-KL, x: {json_keys: [kl_f1_sigma, "0.01_100.0", pop_mass_outside]}, fmt: sci}
   - {macro: FoneDenseN, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "1.0", decision: SEPARABLE}}, fmt: "{:d}"}
   - {macro: FoneDenseNsmall, file: b5split, claim: B5-SPLIT-F1, x: {csv_max_int: n, where: {family: F1, part: T, r: "0.25", decision: SEPARABLE}}, fmt: "{:d}"}
@@ -275,3 +287,12 @@ figures:
       - {panel: 'known $\sigma$', file: b5cum, where: {family: 1A, variant: pop-stab, kind: cum}, series: r, order: ["0.25", "1.0", "4.0"], legend_labels: {"0.25": '$r=0.25$', "1.0": '$r=1$', "4.0": '$r=4$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}}
       - {panel: 'noisy, $r=1$', file: b5cum, where: {family: F3, r: "1.0", kind: cum}, series: variant, order: [q_0.0, q_0.755, q_2.56, q_6.5], legend_labels: {q_0.0: '$q=0$', q_0.755: '$q=0.755$', q_2.56: '$q=2.56$', q_6.5: '$q=6.5$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}, legend: nw, opts: 'xtick={2,5,10,20,40}'}
       - {panel: 'unknown $\sigma$, dynamics part', file: b5cum, where: {family: F1, variant: pop-ctx_nm, kind: cum}, series: r, order: ["0.25", "1.0", "4.0"], legend_labels: {"0.25": '$r=0.25$', "1.0": '$r=1$', "4.0": '$r=4$'}, budget: {file: theory, json_keys: [kl_1a, "0.999"]}}
+  # Post hoc (S51): largest separable n against delta, from the same pinned map files as the gap figure.
+  delta_curves:
+    range: [0.003, 0.6]
+    xticks: [0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5]
+    panels:
+      - {panel: 'AR(1), known $\sigma$ (1A map)', file: map1a, where: {set: HELD, pair: "pop|stab"}, series: r, label: '$r={}$', legend: ne}
+      - {panel: 'noisy AR(1), $r=1$ (F3 map)', file: f3map, where: {pair: pop-stab, h: "1", r: "1.0"}, series: q, label: '$q={}$', legend: ne, opts: 'ytick={2,3,5,7,9}'}
+      - {panel: 'AR(1), unknown $\sigma$ (F1 map)', file: f1map, where: {set: HELD, pair: "pop|ctx"}, series: r, label: '$r={}$', legend: ne}
+      - {panel: 'bivariate VAR(1) (F2 map)', file: f2map, where: {set: HELD, pair: pop-ctx}, series: r, label: '$r={}$', legend: sw}

@@ -117,3 +117,14 @@ boxes or undefined references.
 |---|---|---|---|---|
 | 53 | Item 50 corrected: the review's point was that small scalar libraries are also separable, so the conclusion now says "at small library sizes in every family we mapped, and at large ones only in the bivariate family" | 10 | correction | m8 |
 | 54 | Cumulative figure, noisy panel: tick labels at n = 2, 5, 10, 20, 40 (optional per-panel `opts` in the cumulative figure block) | numbers.yaml, make_figures.py | figure | m5 |
+
+## Revision 6: title, margin curves, F2 split at n = 20, shorter abstract (user decisions S51)
+
+| # | Change | Where | Type | Source |
+|---|---|---|---|---|
+| 55 | Title: "Where Bayesian References Disagree: Separability Maps for In-Context Learning of Linear Dynamical Systems" ("Pre-Registered" dropped); Appendix B now says "pre-registered" in this paper means only the studies of Appendices A and C | main.tex, 12_appendix_history | title | user S51 (review M2) |
+| 56 | New Figure 3: largest separable n against the margin (240-point log grid, 0.003-0.6 nats), per map and series, from the pinned map files; MC-limited cells excluded; labelled post hoc in the text, caption and Appendix B. Agrees with Table 2 at its three margins | make_figures.py (`delta_curves`), numbers.yaml, 06_results | figure (post hoc) | user S51 (review M1(c), Q2) |
+| 57 | F2 split at n = 20 in both orders for every r (claim B5-SPLIT-F2-N20, 12 macros): dynamics larger in both orders at r = 0.25, equal parts with noise first and dynamics larger with dynamics first at r = 1, order-dependent at r = 4 | 06_results, claims.yaml, numbers.yaml | results (post hoc reading of pinned files) | user S51 (review Q4) |
+| 58 | Abstract shortened from 402 to 277 words; every number still a macro; dropped: the 1A gap range, the sentence on comparator and prior sensitivity, the noise-matched clause | 00_abstract | presentation | user S51 (review m10) |
+
+Build: claims 66 verified / 0 pending, 161 macros, numbers audit PASS, Track 1 17 pages without overfull boxes.

@@ -2722,6 +2722,186 @@
   "status": "PASS"
  },
  {
+  "id": "B5-SPLIT-F2-N20",
+  "label": "VERIFIED",
+  "text": "Batch 5, F2 split at n = 20 in both orders (noise first N1, D1; dynamics first N2, D2): r=0.25 N1=0.039; r=0.25 D1=0.058; r=0.25 N2=0.019; r=0.25 D2=0.077; r=1.0 N1=0.048; r=1.0 D1=0.048; r=1.0 N2=0.028; r=1.0 D2=0.068; r=4.0 N1=0.041; r=4.0 D1=0.028; r=4.0 N2=0.022; r=4.0 D2=0.047. Dynamics larger in both orders at r = 0.25; equal parts with noise first and dynamics larger with dynamics first at r = 1; order-dependent at r = 4.",
+  "ref": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "path": "results_stage2/batch5/split.csv",
+  "commit": "e08eee8ad24f887b61e5683128c5525edc628f4b",
+  "sha256": "49c46c2dd9d4c4150b40eefc12cacefd69d7ec743f8aef2cfb0bcfa7dd48f21c",
+  "checks": [
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "N1",
+      "r": "0.25",
+      "n": "20"
+     }
+    },
+    "expect": 0.0389,
+    "got": 0.03887497268659096,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "D1",
+      "r": "0.25",
+      "n": "20"
+     }
+    },
+    "expect": 0.0577,
+    "got": 0.05771111341882602,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "N2",
+      "r": "0.25",
+      "n": "20"
+     }
+    },
+    "expect": 0.0192,
+    "got": 0.019248228157797975,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "D2",
+      "r": "0.25",
+      "n": "20"
+     }
+    },
+    "expect": 0.0773,
+    "got": 0.077337857947619,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "N1",
+      "r": "1.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.0479,
+    "got": 0.04793932503044331,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "D1",
+      "r": "1.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.048,
+    "got": 0.04802776303343218,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "N2",
+      "r": "1.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.0284,
+    "got": 0.028420666807811912,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "D2",
+      "r": "1.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.0675,
+    "got": 0.06754642125606358,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "N1",
+      "r": "4.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.0413,
+    "got": 0.041265073384069526,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "D1",
+      "r": "4.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.0283,
+    "got": 0.0282847750530617,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "N2",
+      "r": "4.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.0221,
+    "got": 0.022091353687288533,
+    "pass": true
+   },
+   {
+    "spec": {
+     "csv_max": "estimate",
+     "where": {
+      "family": "F2",
+      "part": "D2",
+      "r": "4.0",
+      "n": "20"
+     }
+    },
+    "expect": 0.0475,
+    "got": 0.047458494749842685,
+    "pass": true
+   }
+  ],
+  "status": "PASS"
+ },
+ {
   "id": "B5-SPLIT-F2",
   "label": "VERIFIED",
   "text": "Batch 5, F2 split at r = 1, n = 10: total 0.335, dynamics part 0.179, noise-level part 0.156; the total is separable up to n = 20 and BORDERLINE from n = 40 (every r), not separable at n = 80.",

@@ -396,6 +396,22 @@ claims:
               {csv_max: estimate, where: {family: F2, part: N1, r: "1.0", n: "10"}, expect: 0.2128, tol: 0.0005},
               {csv_max: estimate, where: {family: F2, part: N2, r: "1.0", n: "10"}, expect: 0.0989, tol: 0.0005},
               {csv_max: estimate, where: {family: F2, part: D2, r: "1.0", n: "10"}, expect: 0.2358, tol: 0.0005}]
+  - id: B5-SPLIT-F2-N20
+    text: "Batch 5, F2 split at n = 20 in both orders (noise first N1, D1; dynamics first N2, D2): r=0.25 N1=0.039; r=0.25 D1=0.058; r=0.25 N2=0.019; r=0.25 D2=0.077; r=1.0 N1=0.048; r=1.0 D1=0.048; r=1.0 N2=0.028; r=1.0 D2=0.068; r=4.0 N1=0.041; r=4.0 D1=0.028; r=4.0 N2=0.022; r=4.0 D2=0.047. Dynamics larger in both orders at r = 0.25; equal parts with noise first and dynamics larger with dynamics first at r = 1; order-dependent at r = 4."
+    label: VERIFIED
+    source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/split.csv}
+    extract: [{csv_max: estimate, where: {family: F2, part: N1, r: "0.25", n: "20"}, expect: 0.0389, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D1, r: "0.25", n: "20"}, expect: 0.0577, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: N2, r: "0.25", n: "20"}, expect: 0.0192, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D2, r: "0.25", n: "20"}, expect: 0.0773, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: N1, r: "1.0", n: "20"}, expect: 0.0479, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D1, r: "1.0", n: "20"}, expect: 0.0480, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: N2, r: "1.0", n: "20"}, expect: 0.0284, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D2, r: "1.0", n: "20"}, expect: 0.0675, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: N1, r: "4.0", n: "20"}, expect: 0.0413, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D1, r: "4.0", n: "20"}, expect: 0.0283, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: N2, r: "4.0", n: "20"}, expect: 0.0221, tol: 0.0005},
+              {csv_max: estimate, where: {family: F2, part: D2, r: "4.0", n: "20"}, expect: 0.0475, tol: 0.0005}]
   - id: B5-SPLIT-F2
     text: "Batch 5, F2 split at r = 1, n = 10: total 0.335, dynamics part 0.179, noise-level part 0.156; the total is separable up to n = 20 and BORDERLINE from n = 40 (every r), not separable at n = 80."
     label: VERIFIED

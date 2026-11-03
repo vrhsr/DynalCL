@@ -33,7 +33,12 @@ shortest grid point, $n=5$, is \textsc{mc-limited}: its gaps are large but the c
 there to our Monte Carlo criterion. Unlike F1, the split of the F2 gap depends on the order: at $r=1$, $n=10$, the
 \SplitFtwoT nats divide into \PathFtwoNone for the noise level and \PathFtwoDone for the dynamics with noise first, but
 \PathFtwoNtwo and \PathFtwoDtwo with dynamics first; the interaction is larger than the difference between the averaged parts
-(\SplitFtwoN and \SplitFtwoD), so neither part can be said to dominate. In a conjugate prior the coefficient prior scales with
+(\SplitFtwoN and \SplitFtwoD), so neither part can be said to dominate. At $n=\FtwoNmax$ the order matters less but still matters.
+With noise first the noise and dynamics parts are \PathTwentySmallNone and \PathTwentySmallDone nats at \rsmall,
+\PathTwentyOneNone and \PathTwentyOneDone at $r=1$, and \PathTwentyFourNone and \PathTwentyFourDone at $r=4$; with dynamics
+first they are \PathTwentySmallNtwo and \PathTwentySmallDtwo, \PathTwentyOneNtwo and \PathTwentyOneDtwo, and
+\PathTwentyFourNtwo and \PathTwentyFourDtwo. So the dynamics part is the larger in both orders at \rsmall, at least as large
+in both orders at $r=1$, and the order still decides at $r=4$. In a conjugate prior the coefficient prior scales with
 the noise covariance, so the dynamics-first reference does not carry the population's marginal coefficient prior; a split
 with a clean meaning would need a non-conjugate comparator. The F2 prior budget is mostly noise-level (\KLFtwo nats,
 \KLFtwoNM if the context-only reference is given the population's noise prior).
@@ -73,7 +78,20 @@ margin. The window moves with $\delta$: with a known noise scale it extends to $
 and shrinks to the two shortest contexts at the larger one. At the smaller margin the known- and unknown-scale windows end at
 the same grid point (the next grid point is twice as long in both maps); the bivariate map's window reaches its last grid
 point at every margin (its end at the main margin was located above); and the two noisiest settings separate at no margin in
-this range.
+this range. Figure~\ref{fig:delta} shows the same quantity for every margin and every series of the maps: a study that fixes
+its margin from the number of models and their seed variance (Section~\ref{sec:design}) can read its window there. Because the
+grids are coarse, each curve is a step function whose steps fall on grid points, and a curve that stays at the last grid
+point is censored there. This figure was made after the maps had been seen (Appendix~\ref{app:provenance}).
+
+\begin{figure}[t]
+\centering
+\input{generated/fig_delta.tex}
+\caption{Largest context length $n$ at which population and context-only Bayes are separable (estimate $-\,3\,$SE $\ge$ the
+margin), against the margin, held-out systems, $h=1$; each curve ends at the first margin with no separable cell; dashed
+line: the margin used in this paper. \textsc{mc-limited} cells are excluded. Computed from the same pinned map files as
+Figure~\ref{fig:gap}, after the maps had been seen.}
+\label{fig:delta}
+\end{figure}
 
 \begin{table}[t]
 \centering\small
