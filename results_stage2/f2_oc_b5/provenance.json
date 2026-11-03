@@ -1,0 +1,21 @@
+{
+ "command": "python scripts/stage3_f2_operating_characteristics.py --cells batch5 --out results_stage2/f2_oc_b5 --workers 16",
+ "python": "3.13.5",
+ "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+ "numpy": "2.2.2",
+ "scipy": "1.15.1",
+ "cpu_count": 32,
+ "workers": 16,
+ "role_root": 83402,
+ "seconds": 41.2,
+ "sources_sha256": {
+  "scripts/stage3_f2_operating_characteristics.py": "2542663c85c9aefd2f73d9419083cc55b2dcd8bfc126cd56621ebe379a0b5db9",
+  "scripts/stage2_f1_operating_characteristics.py": "c85c906fed0acf33294f8158651eef00b094ba6af136f1de0e720785f652b89c",
+  "scripts/stage1_power_lookup.py": "2040af61ff8290ee191c49323a0ff8c3b391e3c0dc632797fe7893db116527c0",
+  "docs/STAGE3_F2_DESIGN_CPU_SPEC.md": "19d169ae71779b449f765e9c4c8c573c598842d3fca43b271df1f22833590b78",
+  "docs/STAGE3_F2_OC_B5_SPEC.md": "a6e13404dd2370447917f3f21377d2e906fa7f162fc736eb8856274731e46a7f",
+  "config/stage2_seed_manifest.yaml": "f555f2a662b4debe9d04409adc38809cf5cce163ed027fce49cf5c0a97536df0"
+ },
+ "git_head": "b3841a0701da8553461774d3c629125b3056de74",
+ "git_dirty_tracked": false
+}
