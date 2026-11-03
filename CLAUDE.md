@@ -62,6 +62,12 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     --out <dir> --zip` (needs clean paper/; outputs outside the repo, last one `E:\study-buddy\review-archive.zip`, 2.2 MB);
     `python paper/build.py --archive` builds from it without git. Readiness 8/10: left = user's read of the PDF, upload
     zip as supplementary, repo visibility (recommended private during review). Batch 7 relayed; verify as S52.
+  - S52: **batch 7 verified** (`results-stage2-cpu-batch7` @ `3896f37`). Values are s*(M) (largest tolerated seed sd).
+    Option-B Q2 cells chosen post hoc (disclosed): C = r 1: K16 n20/40/80, K64 & K256 n40/80, K1024 n80 -> s* 0.02 at
+    M 32/64/128; C' (no K1024, no K256 n40) -> 0.02/0.05/0.05. Probe go/no-go: U <= 0.02 -> 32 models; <= 0.05 -> 64
+    models on C' without K1024; else NO-GO. Option B needs training length 81 (Stage 1A rate at 20): if cost is linear
+    in length, 237/375/606 GPU-h (lean 154/269/462); the probe's F2 arm now trains at 81 to measure it. Open: K = 2
+    OC (none exists) or drop that arm. Drafts 0.2: PREREG_seed_variance_probe.md, PREREG_memorisation_transition.md.
   - (Superseded by S51) **Next (paper):** blockers B1 anonymised code+data artefact (the LLM statement already promises released logs; user decides
     contents/anonymisation), B2 title scope of "Pre-Registered" (user's call), B3 a short fresh review of sentences changed since
     `73660de`. Should-do: n*(delta) curves from the pinned map files (disclose as post hoc), F2 split at n = 20, shorter
