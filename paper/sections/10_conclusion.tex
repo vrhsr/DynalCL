@@ -1,16 +1,17 @@
 \section{Conclusion}
 Before asking whether a trained forecaster behaves like population Bayes, like a library posterior or like a context-only
 estimator, one should ask whether those references predict differently on the data at hand, and at what margin and
-precision. Two classical quantities answer much of this before any map is computed: the relative entropy between the
+precision. Two classical quantities can answer much of this before any map is computed: the relative entropy between the
 population and context-only priors, a budget that the per-forecast gaps share out over the context, and the divergence to the
 nearest library system, the long-context limit of the library gap. In scalar autoregressive systems with a known noise scale
 the budget is small and spent at very short contexts, observation noise spreads it more thinly, and libraries of
 \LibBigKOneA or more systems are not separable from continuous priors on held-out data in our map, while very small libraries
-are. The larger gaps when the noise scale is unknown are mostly knowledge of the noise level, in either order of the split;
-in the bivariate family the split is order-dependent, and libraries of up to \KThousand systems become separable at long
+often are. The larger gaps when the noise scale is unknown are mostly knowledge of the noise level at the short contexts
+where most of the gap lies, in either order of the split; in the bivariate family the split is order-dependent, and libraries of up to \KThousand systems become separable at long
 contexts because a seven-parameter space is covered sparsely. Population Bayes minimises the expected log loss, so a network that reached the
 population-risk minimum would equal it; at finite capacity and training budget, comparing a network with population and
 context-only Bayes measures how close training gets. Whether a network trained on a finite library memorises or generalises
 is the open question, and the nearest-system limit locates where its answer would be visible by score: at small library sizes in
-every family we mapped, and at large ones only in the bivariate family. We offer the references, the maps, the two bounds
+the noise-free scalar families (and, for some libraries, in the noisy one, where no cell is separable as a whole), and at
+large sizes only in the bivariate family. We offer the references, the maps, the two bounds
 and the pre-registration machinery as a precondition for behavioural claims about in-context learners of dynamical systems.

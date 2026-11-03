@@ -20,10 +20,13 @@ not a divergence and partly reflects how well the library covers the edge of the
 regressor; the extensions to long contexts agree with it in the mean, but it is an average over libraries and does not make
 every library separable. The $K^{-2/p}$ scaling in the number of system parameters is an asymptotic heuristic, not a
 theorem, and does not match the decay at the library sizes we evaluated. The split of the gap into noise-level and dynamics
-parts depends on the intermediate references and on their order; in F2 the two orders disagree on which part is larger, so we
-report both and draw no conclusion about which dominates.
+parts depends on the intermediate references and on their order; in F2 the two orders disagree on which part is larger in
+most cells (every $r$ at $n=10$, and $r=4$ at the next grid point), so we report both and draw no general conclusion about
+which dominates.
 \item \textbf{Horizons.} The maps score one-step forecasts, except the F3 map, which also scores five-step forecasts. The
-budget argument applies to one-step forecasts only; longer horizons are not mapped.
+budget bounds the summed one-step gaps directly; an $h$-step gap is at most the sum of $h$ consecutive one-step gaps, so the
+summed $h$-step gaps are bounded only by $h$ times the budget. Horizons beyond five steps, and five steps outside the noisy
+family, are not mapped.
 \item \textbf{Simple families.} All results concern linear autoregressive processes with Gaussian noise, scalar or
 bivariate; nothing is claimed for nonlinear, chaotic or high-dimensional systems. Each confirmatory study ran on one platform
 with two replicates.

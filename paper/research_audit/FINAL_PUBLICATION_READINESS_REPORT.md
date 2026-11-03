@@ -1,5 +1,22 @@
 # Final publication readiness report (Phase 12)
 
+## Update 2026-11-03 (revision 7; user decisions S51)
+
+All three blockers below are cleared:
+* **B1 archive:** `paper/tools/make_review_archive.py` builds an anonymised archive without git history (291 files, zip
+  2.2 MB): pinned evidence blobs, code/specifications/disclosure logs at `e5dc809`, Track 1 sources; SHA-256 manifest;
+  scrub + scan PASS. Built from an unzipped copy with git disabled: claims 66/66 and every generated file byte-identical
+  to the git build (CHANGELOG 59-60; re-verified at the final commit, item 81).
+* **B2 title:** "Where Bayesian References Disagree: Separability Maps for In-Context Learning of Linear Dynamical Systems"
+  (user decision); "pre-registered" defined in Appendix B.
+* **B3 fresh review:** `INDEPENDENT_THIRD_REVIEW.md`: 0 critical, 5 major, 15 minor, all applied in revision 7.
+* Should-do items done: margin curves (Figure 3, post hoc), F2 split at n = 20, abstract 402 -> 302 words (277 before the review's qualifications).
+
+Remaining before submission: the user's own read of the PDF; upload `review-archive.zip` as supplementary material; the
+repository visibility decision during review (see the S51 disclosure entry and the session report). Scores now: correctness
+of interpretation 8, reproducibility as submitted 8, presentation 7; **overall readiness 8/10 (ready to submit after the
+user's read)** (ASSUMED: my judgement). The original assessment follows unchanged.
+
 Manuscript: "Where Bayesian References Disagree: Pre-Registered Separability Maps for In-Context Learning of Linear Dynamical
 Systems", branch `paper-revision` @ `6a35441` (revision 5a). Target: TMLR (user decision S40), submitted without neural
 results. The original manuscript is preserved unchanged on `paper-draft` @ `bd4d390`.

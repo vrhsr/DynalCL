@@ -19,14 +19,16 @@ which is why its window at \rsmall ends later), and at $r=4$ the F3 cells are bo
 precise 1A map is separable for the shortest contexts.
 
 When the noise scale is unknown (F1) the gaps are larger, \FoneGapMin--\FoneGapMax nats, and separable up to $n=\FoneMaxN$ at
-every $r$ in the map; a denser grid places the end at $n=\FoneDenseNsmall$ (\rsmall) and $n=\FoneDenseN$ ($r=1$). Most of the
-gap is knowledge of the noise level. We split it on the same items by inserting a reference that knows the population's noise
+every $r$ in the map; a denser grid places the end at $n=\FoneDenseNsmall$ (\rsmall) and $n=\FoneDenseN$ ($r=1$). At the short
+contexts where most of the gap lies, most of it is knowledge of the noise level. We split it on the same items by inserting a reference that knows the population's noise
 prior but not its dynamics prior (noise first), or one that knows the dynamics prior but not the noise prior (dynamics
 first): at $r=1$, $n=2$, the gap of \SplitFoneT nats has a noise-level part of \PathFoneNone and a dynamics part of
 \PathFoneDone with noise first, and \PathFoneNtwo and \PathFoneDtwo with dynamics first (\SplitFoneN and \SplitFoneD on
-average), so the conclusion does not depend on the order. Population Bayes is separable from the noise-matched reference only up to $n=\SplitFoneDynNsmall$ at \rsmall
-and $n=\SplitFoneDynN$ at $r=1$, and at no context length at $r=4$ (borderline at $n=2$ only, where the dynamics part is
-\SplitFoneDfour of \SplitFoneTfour nats), much as in the known-scale family. In the bivariate family (F2) the population gap is up to \FtwoGapMax nats at $n=10$ and
+average), so at these contexts the conclusion does not depend on the order; near the end of the window the two parts are
+about equal. Population Bayes is separable from the noise-matched reference only up to $n=\SplitFoneDynNsmall$ at \rsmall
+and $n=\SplitFoneDynN$ at $r=1$, and at no context length at $r=4$ (borderline at $n=2$ only, where the dynamics part with
+noise first is \PathFoneDoneFour of \SplitFoneTfour nats; \SplitFoneDfour averaged over the two orders), much as in the
+known-scale family. In the bivariate family (F2) the population gap is up to \FtwoGapMax nats at $n=10$ and
 \FtwoGapMin--\FtwoGapLongMax nats at $n=\FtwoNmax$; extending the map, it is borderline from $n=\FtwoEndBorder$ at every $r$
 and not separable at the longest context added, so the F2 window ends between $n=\FtwoEndSep$ and $n=\FtwoEndBorder$. The
 shortest grid point, $n=5$, is \textsc{mc-limited}: its gaps are large but the context-only reference cannot be estimated
@@ -37,11 +39,11 @@ there to our Monte Carlo criterion. Unlike F1, the split of the F2 gap depends o
 With noise first the noise and dynamics parts are \PathTwentySmallNone and \PathTwentySmallDone nats at \rsmall,
 \PathTwentyOneNone and \PathTwentyOneDone at $r=1$, and \PathTwentyFourNone and \PathTwentyFourDone at $r=4$; with dynamics
 first they are \PathTwentySmallNtwo and \PathTwentySmallDtwo, \PathTwentyOneNtwo and \PathTwentyOneDtwo, and
-\PathTwentyFourNtwo and \PathTwentyFourDtwo. So the dynamics part is the larger in both orders at \rsmall, at least as large
-in both orders at $r=1$, and the order still decides at $r=4$. In a conjugate prior the coefficient prior scales with
-the noise covariance, so the dynamics-first reference does not carry the population's marginal coefficient prior; a split
-with a clean meaning would need a non-conjugate comparator. The F2 prior budget is mostly noise-level (\KLFtwo nats,
-\KLFtwoNM if the context-only reference is given the population's noise prior).
+\PathTwentyFourNtwo and \PathTwentyFourDtwo. So the dynamics part is the larger in both orders at \rsmall; at $r=1$ the two
+parts are equal with noise first and the dynamics part is larger with dynamics first; and the order decides at $r=4$. In a
+conjugate prior the coefficient prior scales with the noise covariance, so neither intermediate reference changes only one
+part of the prior; a split with a clean meaning would need a non-conjugate comparator. The F2 prior budget splits in the same
+order-dependent way (Section~\ref{sec:theory}).
 
 \begin{figure}[t]
 \centering
@@ -77,17 +79,19 @@ reaches the last grid point, so its end is not mapped. Generated from the pinned
 margin. The window moves with $\delta$: with a known noise scale it extends to $n=\OneAMaxNHalfDelta$ at the smaller margin
 and shrinks to the two shortest contexts at the larger one. At the smaller margin the known- and unknown-scale windows end at
 the same grid point (the next grid point is twice as long in both maps); the bivariate map's window reaches its last grid
-point at every margin (its end at the main margin was located above); and the two noisiest settings separate at no margin in
-this range. Figure~\ref{fig:delta} shows the same quantity for every margin and every series of the maps: a study that fixes
-its margin from the number of models and their seed variance (Section~\ref{sec:design}) can read its window there. Because the
-grids are coarse, each curve is a step function whose steps fall on grid points, and a curve that stays at the last grid
-point is censored there. This figure was made after the maps had been seen (Appendix~\ref{app:provenance}).
+point at every margin (its end at the main margin was located above); and the two noisiest settings separate at none of
+these three margins. Figure~\ref{fig:delta} shows the largest separable context length for every margin and every series of
+the maps (the noisy family at $r=1$ only): a study that fixes its margin from the number of models and their seed variance
+(Section~\ref{sec:design}) can read it there. In that figure the two noisiest settings do separate, at margins below
+half of ours. Because the grids are coarse, each curve is a step function whose steps fall on grid points; a curve that stays at
+the last grid point is censored there; and the largest separable $n$ need not end a contiguous window. This figure was made after the maps had been seen (Appendix~\ref{app:provenance}).
 
 \begin{figure}[t]
 \centering
 \input{generated/fig_delta.tex}
 \caption{Largest context length $n$ at which population and context-only Bayes are separable (estimate $-\,3\,$SE $\ge$ the
-margin), against the margin, held-out systems, $h=1$; each curve ends at the first margin with no separable cell; dashed
+margin), against the margin, held-out systems, $h=1$ (noisy family: $r=1$ only); the largest such $n$, not necessarily the
+end of a contiguous window; each curve ends at the first margin with no separable cell; dashed
 line: the margin used in this paper. \textsc{mc-limited} cells are excluded. Computed from the same pinned map files as
 Figure~\ref{fig:gap}, after the maps had been seen.}
 \label{fig:delta}

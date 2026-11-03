@@ -376,7 +376,7 @@ claims:
               {csv_max_int: n, where: {family: F1, part: T, r: "1.0", decision: SEPARABLE}, expect: 12},
               {csv_max_int: n, where: {family: F1, part: T, r: "0.25", decision: SEPARABLE}, expect: 14}]
   - id: B5-SPLIT-F1-R
-    text: "Batch 5, F1 against the noise-matched reference (pop vs ctx_nm): separable up to n = 5 at r = 0.25 and r = 1, at no n at r = 4 (BORDERLINE at n = 2 only); at r = 4, n = 2 the dynamics part is 0.032 of a 0.326-nat total."
+    text: "Batch 5, F1 against the noise-matched reference (pop vs ctx_nm): separable up to n = 5 at r = 0.25 and r = 1, at no n at r = 4 (BORDERLINE at n = 2 only); at r = 4, n = 2 the dynamics part with noise first (D1, on which the decision is made) is 0.022 and the order-averaged dynamics part 0.031 of a 0.326-nat total."
     label: VERIFIED
     source: {ref: e08eee8ad24f887b61e5683128c5525edc628f4b, path: results_stage2/batch5/split.csv}
     extract: [{csv_max_int: n, where: {family: F1, part: D1, r: "0.25", decision: SEPARABLE}, expect: 5},
@@ -385,6 +385,7 @@ claims:
               {csv_count: decision, where: {family: F1, part: D1, r: "4.0", decision: BORDERLINE}, expect: 1},
               {csv_count: decision, where: {family: F1, part: D1, r: "4.0", n: "2", decision: BORDERLINE}, expect: 1},
               {csv_max: estimate, where: {family: F1, part: D, r: "4.0", n: "2"}, expect: 0.0315, tol: 0.0005},
+              {csv_max: estimate, where: {family: F1, part: D1, r: "4.0", n: "2"}, expect: 0.0224, tol: 0.0005},
               {csv_max: estimate, where: {family: F1, part: T, r: "4.0", n: "2"}, expect: 0.3264, tol: 0.0001}]
   - id: B5-SPLIT-PATHS
     text: "Batch 5, the two orders of the split at r = 1: F1, n = 2: noise first D1 = 0.039, N1 = 0.249; dynamics first N2 = 0.225, D2 = 0.063 (noise-dominated either way); F2, n = 10: D1 = 0.122, N1 = 0.213; N2 = 0.099, D2 = 0.236 (the larger part depends on the order)."
@@ -452,6 +453,7 @@ claims:
               {json_keys: [kl_f1_sigma, "0.01_100.0", kl], expect: 1.9887, tol: 0.0001},
               {json_keys: [kl_f1_sigma, "0.1_10.0", kl], expect: 1.2955, tol: 0.0001},
               {json: kl_f2.ctx.kl, expect: 17.37, tol: 0.01}, {json: kl_f2.ctx_nm.kl, expect: 5.61, tol: 0.01},
+              {json: kl_f2.ctx_dm.kl, expect: 7.09, tol: 0.01},
               {json_keys: [kl_f1_sigma, "0.01_100.0", pop_mass_outside], expect: 1.33e-12, tol: 1e-14}]
   - id: THEORY-NA
     text: "Large-n nearest-atom limits of the held-out library gap (DERIVED, Monte Carlo; batch 5 section E): known sigma K = 4 / 8 / 16: 0.024 / 0.011 / 0.004; unknown sigma K = 16 / 32: 0.035 / 0.018; F2 K = 64 / 1024: 0.24 / 0.09 nats."

@@ -137,3 +137,19 @@ Build: claims 66 verified / 0 pending, 161 macros, numbers audit PASS, Track 1 1
 | 60 | `python paper/build.py --archive` builds from the archive's `pinned/` instead of git (one switch in `build_claims.git_blob`); Track 2 optional | build.py, build_claims.py, check_numbers.py | reproducibility |
 
 Verified (2026-11-03): archive 291 files, 4.4 MB (zip 2.2 MB, below TMLR's 100 MB supplementary limit), 7 replacements in 4 files, scan PASS; an independent grep found only anonymisation tokens; unzipped copy: `sha256sum -c` all OK; built with git disabled (`GIT_DIR=/nonexistent`): claims 66/66, every generated table, figure and macro file byte-identical to the git build, 17-page PDF. The submission PDF contains no identifying string in its text or metadata.
+
+## Revision 7: third independent review (sentences changed since revision 4)
+
+`INDEPENDENT_THIRD_REVIEW.md` holds the review verbatim and the response for each finding (items 61-80 there, numbered
+1-20). Summary of changes: F2 prior budget split reported in both orders (new macro `KLFtwoDM`, THEORY-KL check) and
+"mostly noise-level" removed for F2; library sentences in the abstract and conclusion qualified (F3, "often", "no
+held-out or in-library cell"); nearest-system decay "slower / close / faster by family"; theory says the bounds were
+computed after the maps and explain them; F1 "either order" restricted to short contexts; F2 n = 20 wording at r = 1;
+conjugate-prior confound applies to both intermediate references; limitations on order dependence and horizons
+(h-step gaps bounded by h times the budget); figure reference; sample sizes per cell type; 1A designed-set estimator;
+convexity bound for the F1 support issue; Appendix B rows (pilot outcome; batch 5 before the sensitivity results);
+margin-curve caption and text (F3 at r = 1 only; not a contiguous window; noisiest settings separate below half our
+margin); borderline F1 cell quoted with the noise-first part (new macro `PathFoneDoneFour`).
+
+Build: claims 66 verified / 0 pending, 163 macros, numbers audit PASS, Track 1 18 pages without overfull boxes or
+undefined references.

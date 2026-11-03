@@ -23,15 +23,16 @@ measured numerical error, calibration and optimality tests, and mutation tests f
 (ii) Two classical quantities, applied to the design of behavioural studies: the relative entropy between the population and
 context-only priors, a budget that the summed per-forecast gaps cannot exceed (the cumulative log loss, or redundancy, of one
 Bayes mixture against another), and the divergence to the nearest library system, the long-context limit of the library gap
-(Section~\ref{sec:theory}). Neither bound is new; their use to predict where references can be told apart is.
+(Section~\ref{sec:theory}). Neither bound is new; their use to explain, and for a new family to anticipate, where
+references can be told apart is.
 (iii) Separability maps of these references at a common margin, reported cell by cell with their power limits and a
 sensitivity analysis in $\delta$, which check (ii) numerically: the population window is short for a known noise scale and
 narrows under observation noise; the larger gaps when the noise scale is unknown are mostly knowledge of the noise level, while
 in the bivariate family their split between noise level and dynamics is order-dependent; libraries are separable from
 continuous priors only when small in the
 scalar families, and also when large in the bivariate family. The maps are reference computations whose specifications were
-committed before their seeds were used; some were chosen after earlier results were seen, and Appendix~\ref{app:provenance}
-says which. (iv) Pre-registered studies, including a null (\sSix: STOP) and a neural pilot that its own frozen rules
+committed before their seeds were used; each was chosen after earlier results were seen, and
+Appendix~\ref{app:provenance} says which. (iv) Pre-registered studies, including a null (\sSix: STOP) and a neural pilot that its own frozen rules
 declared not resolvable for compute reasons (Appendices~\ref{app:history} and~\ref{sec:pilot}), together with the machinery that
 kept these results honest (freeze manifests, append-only disclosure logs, an authorization gate, and a claims table that
 re-derives every number in this paper from pinned commits).
