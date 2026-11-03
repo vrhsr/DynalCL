@@ -43,7 +43,7 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     has lib and ctx only 0.045 apart). Option B needs F2 seed sd <= ~0.0074. Batch 7 relay (OC on batch 5 cells, ~1 min,
     `pilot_tooling/RELAY_stage2_cpu_batch7.md`, code `fb3b12a`); verify as S49. Probe: `docs/PROBE_FREEZE_READINESS.md`
     (neural code for F1/F2 not written; needs CPU-torch permission); nothing frozen or run. Priority: the paper.
-  - S49 (user): batch 7 relayed (when back: verify as S51+, choose the Q2 cells and the option-B threshold from it BEFORE any
+  - S49 (user): batch 7 relayed (when back: verify as S52+, choose the Q2 cells and the option-B threshold from it BEFORE any
     freeze, disclose that choice as made after seeing reference-only OC). **CPU torch allowed narrowly**: unit tests and
     few-step smoke runs, CPU only, test seed roles only, nothing frozen. Probe uses the auth gate with the S28 test-key fix
     ported from `amendment2-candidate` (`eaf4d3a`) and tested. Probe go/no-go for option B on an UPPER bound of the F2 LIB-64
@@ -55,7 +55,14 @@ Sections are in chronological order; older ones (1-2g, 7-8) are historical where
     5/5a (`4d81899`, `6a35441`): Appendix B provenance table, per-map sample sizes, two new citations; 65 claims, 149 macros,
     16 pages. Phase 11-12 docs done (`515ce94`): INDEPENDENT_SECOND_REVIEW.md, REVIEWER_DISAGREEMENT_ANALYSIS.md,
     FINAL_PUBLICATION_READINESS_REPORT.md (overall 6/10, "not ready yet; close").
-  - **Next (paper):** blockers B1 anonymised code+data artefact (the LLM statement already promises released logs; user decides
+  - S51 (2026-11-03): title now "Where Bayesian References Disagree: Separability Maps for In-Context Learning of Linear
+    Dynamical Systems" (no "Pre-Registered"). Revision 6-7 (`paper-revision` @ `1fb7ea4`; paper commit `6d9bf46`): margin
+    curves Figure 3 (post hoc), F2 split at n = 20, abstract 302 words, third review (0 critical/5 major/15 minor, all
+    applied; F2 prior budget split also order-dependent 5.6 vs 7.1). Review archive: `python paper/tools/make_review_archive.py
+    --out <dir> --zip` (needs clean paper/; outputs outside the repo, last one `E:\study-buddy\review-archive.zip`, 2.2 MB);
+    `python paper/build.py --archive` builds from it without git. Readiness 8/10: left = user's read of the PDF, upload
+    zip as supplementary, repo visibility (recommended private during review). Batch 7 relayed; verify as S52.
+  - (Superseded by S51) **Next (paper):** blockers B1 anonymised code+data artefact (the LLM statement already promises released logs; user decides
     contents/anonymisation), B2 title scope of "Pre-Registered" (user's call), B3 a short fresh review of sentences changed since
     `73660de`. Should-do: n*(delta) curves from the pinned map files (disclose as post hoc), F2 split at n = 20, shorter
     abstract, estimator/N in Table 1. Probe code on CPU (samplers, heads, evaluation, gate port) only within the S49 scope.
