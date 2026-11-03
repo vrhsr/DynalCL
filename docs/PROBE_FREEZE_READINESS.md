@@ -38,6 +38,9 @@ excludes until the user's go-ahead ("no torch jobs"). Estimated effort once allo
 2. Implement and test section 2; adapted mutation matrix; record tested files.
 3. [USER, GPU go] J0 timing and an engineering smoke on the box (test seed role); confirm the GPU is free first.
 4. Finalise the draft: compute from the measured timing, the F2 threshold from batch 7, everything seen so far (S40-S48).
+   (S52: the F2 threshold from batch 7 is in draft 0.2: cell set C / C', tiers U <= 0.02 -> 32 models, U <= 0.05 -> 64
+   models without K = 1024. Also needed now: the F2 arm trains at length 81, so J0 / the smoke must time the F2 model at
+   length 81 as well as the F1 models at length 20; open: K = 2 operating characteristics or drop the arm.)
 5. Freeze with a generalised freeze tool (new manifest next to the Stage 1 v1 / v2 manifests, which stay untouched),
    read-only snapshot, `verify`; [USER] stores the manifest hash outside the workspace.
 6. Authorization: a measurement-only probe makes no confirmatory decision, so the keyed gate is not strictly required;
