@@ -15,7 +15,10 @@
 \newcommand{\rsmall}{$r=0.25$\xspace}
 \newcommand{\Klarge}{$K\ge 16$\xspace}
 \newcommand{\shaname}{SHA-256\xspace}
-\newcommand{\placeholder}[1]{\fbox{\parbox{0.95\linewidth}{\color{red}\textbf{PLACEHOLDER (no result yet):} #1}}}
+% A run-in \paragraph heading is typeset only when the next paragraph starts (\if@noskipsec), so the box goes on its own line.
+\makeatletter
+\newcommand{\placeholder}[1]{\if@noskipsec\leavevmode\hfill\break\else\ifvmode\noindent\fi\fi\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\color{red}\textbf{PLACEHOLDER (no result yet):} #1}}}
+\makeatother
 
 \title{Identifiability First: Pre-Registered Reference Maps and Neural Tests of\\ In-Context Learning of Linear Dynamical Systems}
 \author{[AUTHOR NAMES AND AFFILIATIONS: placeholders, to be filled by the authors]}

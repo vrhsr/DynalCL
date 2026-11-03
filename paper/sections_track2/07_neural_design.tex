@@ -1,11 +1,19 @@
 \section{Neural studies: design}\label{sec:neural-design}
-\paragraph{Family and questions.} The unknown-noise family (F1), where the references leave the widest window
-(Section~\ref{sec:results}). Q1: do transformers pretrained on the population behave like population Bayes or like the
-context-only reference in the cells where these differ by at least $\delta$? Q2: do transformers pretrained on a library of
-systems behave like the library posterior or like a generalising reference, and from which library size on?
+\paragraph{Family and questions.} The first neural study is a seed-variance probe: it measures how much a trained model's
+distance to each reference varies between training seeds, and every power statement of the later studies rests on that
+number (Section~\ref{sec:design}). The memorisation study follows it. Q2: do transformers pretrained on a library of
+systems behave like the library posterior or like a generalising reference on held-out systems, and from which library
+size on? Its family is chosen by a rule fixed before the probe is run: the bivariate family (F2), where large libraries
+remain separable at long contexts (Section~\ref{sec:results}), if the upper bound of the probe's between-seed spread is
+within the tolerance of the pre-registered lookup and the compute budget holds the required models, and otherwise the
+unknown-noise family (F1), where the transition is classifiable only for small libraries.
+\placeholder{Q1, retained from the F1 draft and run only if the authors decide so: do transformers pretrained on the
+population behave like population Bayes or like the context-only reference in the cells where these differ by at least
+$\delta$? A network at the population-risk minimum would equal population Bayes, so Q1 measures how close training gets
+(Section~\ref{sec:theory}).}
 
 \paragraph{Pre-registration.} \placeholder{Freeze identifiers (manifest hash, snapshot hash, commit) and the pre-registration
-text, written when the F1 neural study is frozen. Arms, models, head family (from the head-floor study), training budget rule
+text, written when each neural study (the probe, then the memorisation study) is frozen. Arms, models, head family (from the head-floor study), training budget rule
 with its convergence criterion, number of models per arm (from the pilot rule and the bootstrap-calibrated power lookup),
 controls, critical checks, and the decision rules, each quoted from the frozen document.}
 
