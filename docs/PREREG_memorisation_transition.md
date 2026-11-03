@@ -2,6 +2,7 @@
 
 Changes in 0.2 (disclosure S52, made after seeing batch 7's reference-only operating characteristics): option B's Q2 cells
 and tolerance (section 5c); option B's costing now depends on the training sequence length (section 5).
+0.2a (disclosure S53; no design change): section 5d states whether option B is feasible at 32-64 models per arm.
 
 Status: CPU draft for the user's review (S40 decision 3). No GPU, no torch, no seed used; seeds below are proposals only.
 Follows the seed-variance probe (`docs/PREREG_seed_variance_probe.md`), whose result sets the number of models per arm.
@@ -135,6 +136,29 @@ wrongly, max P_wrong = 0):
   (lib-vs-pop about 0.9 nats at n >= 10). Open: add K = 2 cells by a specified CPU run before any freeze, or drop the arm.
 * Batch 6's lookup (cells n in {10, 20}, K in {16, 64}; s* = 0.01 / 0.01 / 0.02) is superseded for option B by C; it is
   kept unchanged and reported.
+
+## 5d. Is option B feasible at 32-64 models per arm? (disclosure S53; a statement of cost, not a design change)
+Recomputed from the section 5 formula (GPU-h = arms x models x 2 replicates x B x 0.0114 s x 1.25 / 3600 x per-step factor);
+confirmatory part only, then totals with the probe (14.3 / 28.7 h) and the section 5 pilot (28.5 / 115 h). Per-step factor:
+"flat" = the ASSUMED 1.5 for the bivariate family only; "linear" = 1.5 x 81/20 (ASSUMED; attention is quadratic). Both are
+replaced by the probe's F2 measurement before any freeze.
+
+| Tier (probe rule, section 5c) | Confirmatory, B = 10k / 25k / 50k, flat | linear | Total with probe and pilot, flat | linear |
+|---|---|---|---|---|
+| 1: 32 models, 6 arms (K = 2, 16, 64, 256, 1024, CONT) | 23 / 57 / 114 h | 92 / 231 / 462 h | 66 / 100 / 157 h | 237 / 375 / 606 h |
+| 2: 64 models, 5 arms (K = 1024 dropped) | 38 / 95 / 190 h | 154 / 385 / 770 h | 81 / 138 / 233 h | 298 / 528 / 913 h |
+
+(Tier-2 totals keep the six-arm pilot of section 5, which runs before the tier is known.)
+* **Verdict (DERIVED from the table, with the ASSUMED factors named).** Against the only budgets on record (Stage 1: 96 GPU-h;
+  the 128 GPU-h Amendment 2 candidate, about 5-6 days of shared GPU, was not adopted, S34): if the per-step cost grows linearly
+  with length, no tier at any B fits (smallest total 237 h). If it is length-independent, tier 1 fits only at B = 10k (66 h)
+  and tier 2 only at B = 10k (81 h). In Stage 1A the convergence rule qualified only B = 50k (S26); if the F2 models behave
+  alike (ASSUMED, not shown), the relevant totals are 157 h (tier 1) and 233 h (tier 2) even without the length factor, which
+  exceeds both budgets. So option B at 32-64 models per arm is **not feasible within 96-128 GPU-h on the present assumptions**;
+  it is feasible only with a budget of the order of 160-240 GPU-h (flat cost) or more, or with fewer arms. Whether it is
+  feasible is therefore settled by two measurements the probe makes (the F2 per-step cost at length 81 and U) and by the
+  budget the user sets; if the budget does not hold the required models, the study is reported in advance as NOT RESOLVABLE
+  (compute) and option A is considered.
 
 ## 6. Seeds (proposed, UNUSED, NOT registered)
 mt_pilot_train 87001, mt_pilot_eval 87101, mt_pilot_library 87201, mt_pilot_bootstrap 87999; mt_confirmatory_train
