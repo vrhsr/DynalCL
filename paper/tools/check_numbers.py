@@ -58,6 +58,8 @@ def main() -> int:
     # control characters in any source (a shell heredoc once turned "\textsc" into a TAB + "extsc"; disclosure S37)
     sources = files + [ROOT / "paper" / n for n in ("main.tex", "main_track2.tex", "references.bib", "numbers.yaml",
                                                      "claims.yaml")] + sorted((ROOT / "paper" / "tools").glob("*.py"))
+    # the review archive ships Track 1 only (paper/review_archive.yaml); every other source must exist
+    sources = [f for f in sources if f.name != "main_track2.tex" or f.is_file()]
     for f in sources:
         t = f.read_text(encoding="utf-8")
         for ch in set(t):
