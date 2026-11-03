@@ -1,6 +1,7 @@
 """Build paper/CLAIMS.md from paper/claims.yaml (tasks E1 and E4).
 
-For every claim: read the evidence file from git (`git show <ref>:<path>`, so a clean checkout of any branch reproduces it),
+For every claim: read the evidence file from git (`git show <ref>:<path>`, so a clean checkout of any branch reproduces it;
+with PAPER_ARCHIVE set, from <archive>/pinned/<ref>/<path> in the anonymised review archive instead),
 record the resolved commit and the file's sha256, re-extract each number and compare with `expect`. Exit 1 if any VERIFIED
 or DESIGN claim fails or its file is missing. PENDING claims are listed and never count as evidence.
 
@@ -14,6 +15,7 @@ import hashlib
 import io
 import json
 import math
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -26,6 +28,9 @@ ROOT = Path(__file__).resolve().parents[2]
 def git_blob(ref: str, path: str) -> tuple[bytes | None, str | None]:
     if ref == "none":
         return None, None
+    if os.environ.get("PAPER_ARCHIVE"):                     # review archive (no git): pinned/<commit>/<path>
+        f = Path(os.environ["PAPER_ARCHIVE"]) / "pinned" / ref / path
+        return (f.read_bytes() if f.is_file() else None), ref
     commit = subprocess.run(["git", "rev-parse", ref], cwd=ROOT, capture_output=True, text=True)
     if commit.returncode != 0:
         return None, None

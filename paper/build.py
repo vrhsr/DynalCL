@@ -2,9 +2,11 @@
 
 Steps, each fatal on failure: (1) claims table (paper/tools/build_claims.py: every claim re-extracted from a pinned commit);
 (2) number macros (tools/build_numbers.py); (3) tables (tools/make_tables.py); (4) numbers audit (tools/check_numbers.py);
-(5) PDF with pdflatex + bibtex if available. Needs git history with the pinned commits (git fetch origin).
+(5) PDF with pdflatex + bibtex if available. Needs git history with the pinned commits (git fetch origin), or, with
+--archive, the anonymised review archive (paper/tools/make_review_archive.py), whose pinned/ folder replaces git.
 
     python paper/build.py            # or: make -C paper
+    python paper/build.py --archive  # inside the review archive; Track 2 is skipped if its sources are absent
 """
 
 from __future__ import annotations
@@ -27,6 +29,11 @@ def run(cmd: list[str], cwd: Path) -> None:
 
 def main() -> int:
     py = sys.executable
+    if "--archive" in sys.argv[1:]:
+        if not (PAPER.parent / "pinned").is_dir():
+            raise SystemExit(f"FAILED: --archive but no pinned/ folder next to {PAPER}")
+        os.environ["PAPER_ARCHIVE"] = str(PAPER.parent)           # inherited by the tool subprocesses
+    track2 = (PAPER / "main_track2.tex").is_file()
     run([py, "tools/build_claims.py"], PAPER)
     run([py, "tools/build_numbers.py"], PAPER)
     run([py, "tools/make_tables.py"], PAPER)
@@ -46,14 +53,14 @@ def main() -> int:
             raise SystemExit(f"FAILED: {' '.join(cmd)} (see main.log / main.blg)")
     for cmd in (["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main_track2.tex"], ["bibtex", "main_track2"],
                 ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main_track2.tex"],
-                ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main_track2.tex"]):
+                ["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main_track2.tex"]) if track2 else ():
         print("$", " ".join(cmd), flush=True)
         if subprocess.run(cmd, cwd=PAPER, env=env, stdout=subprocess.DEVNULL).returncode != 0:
             raise SystemExit(f"FAILED: {' '.join(cmd)} (see main_track2.log)")
-    for name in ("main", "main_track2"):
+    for name in ("main", "main_track2") if track2 else ("main",):
         if "undefined" in (PAPER / f"{name}.log").read_text(encoding="latin-1"):
             raise SystemExit(f"FAILED: undefined references or citations remain (see {name}.log)")
-    print("PDFs built: paper/main.pdf (Track 1) and paper/main_track2.pdf (Track 2 skeleton)")
+    print("PDFs built: paper/main.pdf (Track 1)" + (" and paper/main_track2.pdf (Track 2 skeleton)" if track2 else ""))
     return 0
 
 

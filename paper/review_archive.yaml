@@ -1,0 +1,17 @@
+# Contents of the anonymised review archive (paper/tools/make_review_archive.py). No git history is exported.
+# pinned/ : every (commit, path) blob named in claims.yaml or numbers.yaml, at that commit.
+# code/   : the code, specifications and disclosure logs at code_ref (the commit on stage1-planning whose code produced the
+#           pinned results; later stage1-planning commits change documents only).
+# paper/  : the manuscript sources at the paper commit (HEAD of the branch the script is run from).
+code_ref: e5dc809cf44ebb2305a76777947945e25ea06bf5
+code_paths: [dynaicl, dynaicl_families, dynaicl_neural, scripts, tests, tests_stage1, tests_stage2, config,
+             requirements.txt, requirements-stage1.txt, pyproject.toml]
+docs_globs: [docs/DISCLOSURE_LOG_*.md, docs/PREREG_*.md, docs/*SPEC*.md, docs/MATH*.md, docs/*RESULTS*.md,
+             docs/FREEZE_MANIFEST*.json, docs/DECISIONS.md, docs/STAGE06_AUTHORIZATION_GATE.md]
+paper_paths: [paper/build.py, paper/main.tex, paper/numbers.yaml, paper/claims.yaml, paper/references.bib, paper/tmlr.sty,
+              paper/tmlr.bst, paper/TMLR_STYLE_LICENSE, paper/sections, paper/tools]
+# Never exported, whatever the lists above say (regexes on the archive path): pilot effect files, which must stay unopened,
+# and any key or issued authorization artefact.
+never: ['results_stage1/pilot/eval/', 'PILOT_ONLY_do_not_open_effects', '(^|/)[^/]*authori[sz]ation[^/]*\.json$', '\.key$']
+# Personal identifiers live in a separate file that is never exported (it names what it scrubs).
+identifiers: paper/review_archive_identifiers.txt

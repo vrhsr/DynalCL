@@ -1,0 +1,10 @@
+# Personal identifiers for the review archive (paper/tools/make_review_archive.py): each line is
+# "regex => replacement", matched case-insensitively after the generic path, URL and e-mail rules in the script.
+# The scan fails if any of these regexes still matches a file in the archive. This file is never exported.
+rama_11187 => anon-user
+venkat[a-z]* => anon-name
+ramana => anon-name
+pgagi => anon-org
+vrhsr => anon-user
+dynalcl => anon-repository
+study-buddy => anon-workspace
