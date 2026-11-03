@@ -128,3 +128,12 @@ boxes or undefined references.
 | 58 | Abstract shortened from 402 to 277 words; every number still a macro; dropped: the 1A gap range, the sentence on comparator and prior sensitivity, the noise-matched clause | 00_abstract | presentation | user S51 (review m10) |
 
 Build: claims 66 verified / 0 pending, 161 macros, numbers audit PASS, Track 1 17 pages without overfull boxes.
+
+### Revision 6a: anonymised review archive (user decision S51)
+
+| # | Change | Where | Type |
+|---|---|---|---|
+| 59 | `paper/tools/make_review_archive.py` + `paper/review_archive.yaml`: exports every pinned (commit, path) blob, the code, specifications, pre-registrations and disclosure logs at `code_ref` (stage1-planning `e5dc809`) and the Track 1 sources at the paper commit, with no git history; SHA-256 manifest (before and after scrubbing) and SHA256SUMS; scrubs names, user names, e-mails, home/workspace paths and the authors' repository (personal patterns in `paper/review_archive_identifiers.txt`, never exported); a scan fails on any remaining identifying string; never exports pilot effect files or authorization artefacts | paper/tools, paper/ | reproducibility |
+| 60 | `python paper/build.py --archive` builds from the archive's `pinned/` instead of git (one switch in `build_claims.git_blob`); Track 2 optional | build.py, build_claims.py, check_numbers.py | reproducibility |
+
+Verified (2026-11-03): archive 291 files, 4.4 MB (zip 2.2 MB, below TMLR's 100 MB supplementary limit), 7 replacements in 4 files, scan PASS; an independent grep found only anonymisation tokens; unzipped copy: `sha256sum -c` all OK; built with git disabled (`GIT_DIR=/nonexistent`): claims 66/66, every generated table, figure and macro file byte-identical to the git build, 17-page PDF. The submission PDF contains no identifying string in its text or metadata.
