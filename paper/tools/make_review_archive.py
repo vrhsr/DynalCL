@@ -135,12 +135,13 @@ def main(argv: list[str] | None = None) -> int:
 
     readme = README.format(n=len(manifest), code_ref=code_ref, paper_ref=paper_ref,
                            scrubbed=sum(1 for m in manifest if m["replacements"]))
-    (out / "README.md").write_text(readme, encoding="utf-8")
+    (out / "README.md").write_text(readme, encoding="utf-8", newline="\n")   # LF on every platform (sha256sum -c)
     meta = {"schema": "review-archive/v1", "paper_commit": paper_ref, "code_commit": code_ref, "files": manifest}
-    (out / "MANIFEST.json").write_text(json.dumps(meta, indent=1) + "\n", encoding="utf-8")
+    (out / "MANIFEST.json").write_text(json.dumps(meta, indent=1) + "\n", encoding="utf-8", newline="\n")
     sums = [f"{m['sha256']}  {m['path']}" for m in manifest]
     sums.append(f"{hashlib.sha256((out / 'README.md').read_bytes()).hexdigest()}  README.md")
-    (out / "SHA256SUMS").write_text("\n".join(sorted(sums, key=lambda s: s.split('  ', 1)[1])) + "\n", encoding="utf-8")
+    sums.sort(key=lambda s: s.split("  ", 1)[1])
+    (out / "SHA256SUMS").write_text("\n".join(sums) + "\n", encoding="utf-8", newline="\n")
 
     rc = scan(out, [p for p, _ in personal] + [re.compile(p, re.IGNORECASE) for p, _ in GENERIC] + [email], keep)
     if rc:
